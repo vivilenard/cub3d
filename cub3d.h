@@ -19,7 +19,9 @@ typedef struct s_data
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	mlx_texture_t	*txt;
-	int	**cs;
+	char	**co;
+	int	map_height;
+	int map_width;
 }	t_data;
 
 # endif
