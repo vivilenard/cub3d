@@ -24,4 +24,11 @@ typedef struct s_data
 	int map_width;
 }	t_data;
 
+int		mapwidth(char *map);
+int		mapheight(char *map);
+int		assign_line(char *line, t_data *s, int	y);
+t_data	init(t_data *s, char **argv);
+int		allocate_map(t_data *s);
+int	map_to_koordinate(t_data *s, char *map);
+
 # endif
