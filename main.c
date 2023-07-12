@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:42:59 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/06 14:46:00 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/12 14:55:20 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,21 @@ t_data	init(t_data *s)
 
 int	map_to_koordinate(t_data *s, char *map)
 {
-	int	fd;
+	int		fd;
+	char	line;
+	int		i;
+
 	s = NULL; //delete
 	if (access(map, F_OK == -1) || access(map, R_OK == -1))
 		full_exit();
 	fd = open(map, O_RDONLY);
+	line = get_next_line(fd);
+	while (line)
+	{
 		
+		line = get_next_line(fd);
+	}
+	
 	return (0);
 }
 
