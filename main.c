@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:42:59 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/13 10:56:24 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/13 14:19:49 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 	parser(argc);
 	printf("Height: %d, Width: %d\n", s.map_height, s.map_width);
 	print_coordinates(s);
-	//draw_minimap(&s);
+	draw_minimap(&s);
 	//raycaster();
 	mlx_loop(s.mlx);
 	mlx_terminate(s.mlx);
