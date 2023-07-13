@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 12:42:59 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/13 10:56:24 by vlenard          ###   ########.fr       */
+/*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
+/*   Updated: 2023/07/13 10:30:21 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d"
 
-void	full_exit()
+int	draw_minimap(t_data *s)
 {
-	exit(0);
-}
-
-int main(int argc, char **argv)
-{
-	t_data s;
-	s = init(&s, argv);
-	parser(argc);
-	printf("Height: %d, Width: %d\n", s.map_height, s.map_width);
-	print_coordinates(s);
-	//draw_minimap(&s);
-	//raycaster();
-	mlx_loop(s.mlx);
-	mlx_terminate(s.mlx);
-	return (0);
+	return (1);
 }

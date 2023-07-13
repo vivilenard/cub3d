@@ -19,16 +19,30 @@ typedef struct s_data
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	mlx_texture_t	*txt;
-	char	**co;
-	int	map_height;
-	int map_width;
+	char			**co;
+	int				map_height;
+	int 			map_width;
+	double			px;
+	double			py;
 }	t_data;
+
+
 
 int		mapwidth(char *map);
 int		mapheight(char *map);
-int		assign_line(char *line, t_data *s, int	y);
+
+//init
 t_data	init(t_data *s, char **argv);
+int		assign_line(char *line, t_data *s, int	y);
 int		allocate_map(t_data *s);
-int	map_to_koordinate(t_data *s, char *map);
+int		map_to_koordinate(t_data *s, char *map);
+void	print_coordinates(t_data s);
+int		map_to_koordinate(t_data *s, char *map);
+
+//utils
+void	full_exit();
+
+//parser
+int	parser(int argc);
 
 # endif

@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 18:38:49 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/12 18:39:05 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/13 10:26:03 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,26 @@ int	mapwidth(char *map)
 	}
 	close(fd);
 	return (len - 1);
+}
+
+
+void	print_coordinates(t_data s)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (s.co[x][y])
+	{
+	//	printf("y: %d\n", y);
+		while (s.co[x][y])
+		{
+			printf("%c ", s.co[x][y]);
+			x++;
+		}
+		x = 0;
+		printf("\n");
+		y++;
+	}
 }
