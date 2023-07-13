@@ -19,6 +19,7 @@ typedef struct s_data
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	mlx_image_t		*minimap;
+	int				mm_radius;
 	mlx_texture_t	*txt;
 	char			**co;
 	int				map_height;
@@ -44,6 +45,7 @@ int		scan_coordinates(t_data *s, int (*f)(t_data *s, int x, int y));
 
 //minimap
 int	draw_minimap(t_data *s);
+void print_square(mlx_image_t *img, int x, int y, int radius);
 
 //parser
 int	parser(int argc);

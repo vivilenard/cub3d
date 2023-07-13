@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/13 14:15:16 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/13 15:59:02 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,26 @@
 
 int	print_wall(t_data *s, int x, int y)
 {
-	int img_size;
+	int	square;
+	int	radius;
 
-	img_size = WIDTH / 25;
+	radius = s->map_height;
+	if (s->map_width > radius)
+		radius = s->map_width;
+
+	square = s->mm_radius / radius;
 	if (s->co[x][y] == '1')
-	{
-		mlx_image_t *img = mlx_new_image(s->mlx, img_size, img_size);
-		memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
-		if (mlx_image_to_window(s->mlx, img, x * img_size, y * img_size) < 0)
-			full_exit();
-	}
+		print_square(s->minimap, x, y, square);
 	return (0);
 }
 
 int	draw_minimap(t_data *s)
 {
+	s->mm_radius = HEIGTH;
+	s->minimap = mlx_new_image(s->mlx, s->mm_radius, s->mm_radius);
+	
 	scan_coordinates(s, print_wall);
+	if (mlx_image_to_window(s->mlx, s->minimap, 0, 0) < 0)
+			full_exit();
 	return (1);
 }
