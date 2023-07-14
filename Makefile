@@ -20,8 +20,11 @@ LIBFT = libft/libft.a
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(FLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME)
+
+$(LIBFT):
+	cd libft && make && make clean
 
 clean:
 	rm -f $(OBJ)
@@ -33,3 +36,8 @@ re: fclean all
 
 %.o: %.c
 	$(CC) $(FLAGS) -c $^ -o $@
+
+build:
+	@git submodule update --init
+	@git clone https://github.com/codam-coding-college/MLX42.git
+	@cd MLX42 && cmake -B build && cmake --build build -j4
