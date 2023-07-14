@@ -2,8 +2,8 @@
 
 # define CUB3D_H
 
-# define WIDTH 1600
-# define HEIGTH 1200
+# define WIDTH 1200
+# define HEIGTH 800
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,6 +20,7 @@ typedef struct s_data
 	mlx_image_t		*img;
 	mlx_image_t		*minimap;
 	int				mm_radius;
+	int				mm_square;
 	mlx_texture_t	*txt;
 	char			**co;
 	int				map_height;
@@ -45,7 +46,7 @@ int		scan_coordinates(t_data *s, int (*f)(t_data *s, int x, int y));
 
 //minimap
 int	draw_minimap(t_data *s);
-void print_square(mlx_image_t *img, int x, int y, int radius);
+void print_square(mlx_image_t *img, int x, int y, int radius, uint32_t color);
 
 //parser
 int	parser(int argc);

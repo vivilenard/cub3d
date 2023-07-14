@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+         #
+#    By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/05 13:44:57 by vlenard           #+#    #+#              #
-#    Updated: 2023/07/13 15:24:32 by vlenard          ###   ########.fr        #
+#    Updated: 2023/07/14 13:57:34 by karllenard       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CC = cc
 FLAGS = -Wall -Werror -Wextra
-MLX = MLX42/build/libmlx42.a -I include -lglfw -L "/Users/vlenard/.brew/opt/glfw/lib/"
+MLX = MLX42/build/libmlx42.a -I include -lglfw 
 SRC = main.c init_data.c utils.c parser.c map_to_coordinate.c minimap.c help_functions.c
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a
@@ -41,3 +41,6 @@ build:
 	@git submodule update --init
 	@git clone https://github.com/codam-coding-college/MLX42.git
 	@cd MLX42 && cmake -B build && cmake --build build -j4
+
+simple:
+	make re && make clean && ./cub3d maps/simple.cub
