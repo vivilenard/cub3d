@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+        */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:42:59 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/14 13:44:41 by karllenard       ###   ########.fr       */
+/*   Updated: 2023/07/15 11:14:33 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,6 @@
 void	full_exit()
 {
 	exit(0);
-}
-
-void	key_bindings(void *p)
-{
-	t_data *s;
-
-	s = (t_data *) p;
-	if (mlx_is_key_down(s->mlx, MLX_KEY_ESCAPE))
-	{
-		mlx_terminate(s->mlx);
-		exit(EXIT_SUCCESS);
-	}
 }
 
 int main(int argc, char **argv)

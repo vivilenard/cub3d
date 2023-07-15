@@ -27,6 +27,7 @@ typedef struct s_data
 	int 			map_width;
 	double			px;
 	double			py;
+	double			p_radius;
 }	t_data;
 
 int		mapwidth(char *map);
@@ -45,10 +46,14 @@ void	full_exit();
 int		scan_coordinates(t_data *s, int (*f)(t_data *s, int x, int y));
 
 //minimap
-int	draw_minimap(t_data *s);
-void print_square(mlx_image_t *img, int x, int y, int radius, uint32_t color);
+int		draw_minimap(t_data *s);
+void	 print_square(mlx_image_t *img, int x, int y, int radius, uint32_t color);
 
 //parser
-int	parser(int argc);
+int		parser(int argc);
+
+//key_bindings
+void	move_player(t_data *s);
+void	key_bindings(void *p);
 
 # endif
