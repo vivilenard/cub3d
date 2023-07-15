@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/15 13:50:11 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/15 17:46:17 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,39 +21,16 @@ int	print_wall(t_data *s, int x, int y)
 	return (0);
 }
 
-void	mm_put_player(t_data *s, double p_radius)
-{
-	int		a;
-	int		b;
-
-	a = (s->px - p_radius) * s->mm_square;
-	b = (s->py + p_radius) * s->mm_square;
-
-	while (a < (s->px + p_radius) * s->mm_square)
-	{
-		while (b > (s->py - p_radius) * s->mm_square)
-		{
-			mlx_put_pixel(s->minimap, a, b, 0xFF0000FF);
-			b--;
-		}
-		b = (s->py + p_radius) * s->mm_square;
-		a++;
-	}	
-}
-
 void	draw_player(t_data	*s)
 {
-	//print_square(s->minimap, s->px, s->py, s->mm_square, 0xFF0000FF);
-	printf("player pos: %f/%f\n", s->px, s->py);
-	mm_put_player(s, s->p_radius);
-	//mlx_put_pixel(s->minimap, s->px, s->py, 0xFF0000FF);
+	to_square(s, s->px, s->py, s->p_radius);
 }
 
 void	calculate_proportions(t_data *s)
 {
 	int	map_radius;
 
-	s->mm_radius = HEIGTH;
+	s->mm_radius = HEIGTH / 3;	
 
 	map_radius = s->map_height;
 	if (s->map_width > map_radius)
@@ -62,12 +39,28 @@ void	calculate_proportions(t_data *s)
 	s->mm_square = s->mm_radius / map_radius;
 }
 
+void	draw_view(t_data *s)
+{
+	double	vx;
+	double	vy;
+
+	vx = s->px + s->pdx / 2;
+	vy = s->py + s->pdy / 2;
+
+	if ((vx > 0 && vx < s->map_width)
+		&& vy > 0 && vy < s->map_height)
+		to_square(s, vx, vy, 0.03);
+}
+
 int	draw_minimap(t_data *s)
 {
+	// printf("player pos: %f/%f\n", s->px, s->py);
+	// printf("player view: %f/%f\n", s->pdx, s->pdy);
 	calculate_proportions(s);
 	s->minimap = mlx_new_image(s->mlx, s->mm_radius, s->mm_radius);
 	scan_coordinates(s, print_wall);
 	draw_player(s);
+	draw_view(s);
 	if (mlx_image_to_window(s->mlx, s->minimap, 0, 0) < 0)
 			full_exit();
 	return (1);

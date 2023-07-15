@@ -52,6 +52,7 @@ int		scan_coordinates(t_data *s, int (*f)(t_data *s, int x, int y));
 //minimap
 int		draw_minimap(t_data *s);
 void	 print_square(mlx_image_t *img, int x, int y, int radius, uint32_t color);
+void	to_square(t_data *s, double x, double y, double p_radius);
 
 //parser
 int		parser(int argc);
