@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/15 12:01:17 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/15 13:50:11 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	print_wall(t_data *s, int x, int y)
 	if (s->co[x][y] == '1')
 		print_square(s->minimap, x, y, s->mm_square, 0xFFFFFFFF);
 	else if (s->co[x][y])
-		print_square(s->minimap, x, y, s->mm_square, 0x000000FF);
+		print_square(s->minimap, x, y, s->mm_square, 0x303030FF);
 	return (0);
 }
 

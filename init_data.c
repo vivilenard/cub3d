@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:53:23 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/15 12:05:56 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/15 14:15:45 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ int	set_player(t_data *s, int x, int y)
 	printf("set player here: %d/%d\n", x, y);
 	s->px = (double)x + 0.5;
 	s->py = (double)y + 0.5;
+	s->pdx = 0;
+	s->pdy = 0;
+	s->pa = 0;
 	s->p_radius = 0.09;
 	return (1);
 }

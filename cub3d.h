@@ -4,6 +4,7 @@
 
 # define WIDTH 1200
 # define HEIGTH 800
+# define PI 3.141592653589793238462643383279502884197
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,6 +28,9 @@ typedef struct s_data
 	int 			map_width;
 	double			px;
 	double			py;
+	double			pdx;
+	double			pdy;
+	double			pa;
 	double			p_radius;
 }	t_data;
 
@@ -53,7 +57,7 @@ void	 print_square(mlx_image_t *img, int x, int y, int radius, uint32_t color);
 int		parser(int argc);
 
 //key_bindings
-void	move_player(t_data *s);
+void	move_player(t_data *s, double step);
 void	key_bindings(void *p);
 
 # endif
