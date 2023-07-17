@@ -28,10 +28,23 @@ typedef struct s_data
 	int 			map_width;
 	double			px;
 	double			py;
+	double			pa;
 	double			pdx;
 	double			pdy;
-	double			pa;
 	double			p_radius;
+	double			ra;
+	double			rdx;
+	double			rdy;
+	double			sidedist_x;
+	double			sidedist_y;
+	double			deltadist_x;
+	double			deltadist_y;
+	int				xmove;
+	int				ymove;
+	int				xmap;
+	int				ymap;
+	double			xdist;
+	double			ydist;
 }	t_data;
 
 int		mapwidth(char *map);
@@ -60,5 +73,8 @@ int		parser(int argc);
 //key_bindings
 void	move_player(t_data *s, double step);
 void	key_bindings(void *p);
+
+//raycaster
+void	raycaster(t_data *s);
 
 # endif

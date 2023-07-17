@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/15 17:17:02 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/17 12:21:11 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	move_player(t_data *s, double step)
 		if (s->px + (step + s->p_radius) < s->map_width && s->co[(int)(s->px + step)][(int)(s->py)] != '1')
 			s->px += step;
 	}
-	draw_minimap(s);
 }
 
 void	change_direction(t_data *s)
@@ -69,4 +68,6 @@ void	key_bindings(void *p)
 	}
 	move_player(s, 0.2);
 	change_direction(s);
+	draw_minimap(s);
+	raycaster(s);
 }
