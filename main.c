@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:42:59 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/17 16:15:36 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/17 17:05:22 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,13 @@ void	init_dda(t_data *s)
 	}
 }
 
-init_ray(t_data *s)
+void init_ray(t_data *s, double angle, int r)
 {
 	s->xmap = (int)s->px;
 	s->ymap = (int)s->py;
-	s->rdx = s->pdx;
-	s->rdy = s->pdy;
+	s->ra = s->pa - angle * 30 + r * angle;
+	s->rdx = cos(s->ra);//s->pdx;
+	s->rdy = sin(s->ra);//s->pdy;
 	s->deltadist_x = delta_dist(s->rdx);
 	s->deltadist_y = delta_dist(s->rdy);
 	s->hit_side = 0;
@@ -99,17 +100,25 @@ init_ray(t_data *s)
 
 void	raycaster(t_data *s)
 {
+	double angle;
 
-	init_ray(s);
-	init_dda(s);
-	dda(s);
-	ray_dist(s);
-	to_square(s, s->px + s->rdx * ray_dist(s), s->py + s->rdy * ray_dist(s), 0.05);
-	printf("walldist %f\n", ray_dist(s));
-	printf("pdx %f/%f\n", s->rdx, s->rdy);	
-	printf("map %d/%d\n", s->xmap, s->ymap);
-
+	angle = DR;
+	int	r = 1;
+	
+	while (r <= 60)
+	{
+		init_ray(s, angle, r);
+		init_dda(s);
+		dda(s);
+		ray_dist(s);
+		to_square(s, s->px + s->rdx * ray_dist(s), s->py + s->rdy * ray_dist(s), 0.05);
+		r++;
+		//angle += DR / 30;
+	}
 	//print details
+	// printf("walldist %f\n", ray_dist(s));
+	// printf("pdx %f/%f\n", s->rdx, s->rdy);	
+	// printf("map %d/%d\n", s->xmap, s->ymap);
 	// printf("player %f/%f\n", s->px, s->py);
 	// printf("move %d/%d\n", s->xmove, s->ymove);
 	printf("deltadist %f/%f\n", delta_dist(s->rdx), delta_dist(s->rdy));

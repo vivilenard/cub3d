@@ -5,6 +5,7 @@
 # define WIDTH 1200
 # define HEIGTH 800
 # define PI 3.141592653589793238462643383279502884197
+# define DR 0.0174533
 
 #include <stdio.h>
 #include <stdlib.h>
