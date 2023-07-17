@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:42:59 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/17 12:32:10 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/17 16:15:36 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,77 +17,101 @@ void	full_exit()
 	exit(0);
 }
 
-// double	calc_xdist(t_data *s)
-// {
-// 	double	xdist;
-
-// 	xdist = 0;
-// 	//xdist = sqrt(1 + exp(s->rdy / s->rdx));
-// 	xdist = fabs(1 / s->rdx);
-// 	return (xdist);
-// }
-
 double	delta_dist(double	side)
 {
-	// if (side == 0)
-	// 	return ((double)1e30);
 	return (fabs(1 / side));
 }
 
-// double	dda(t_data *s)
-// {
-// 	//init_dda(s);
-// 	while (1)
-// 	{
-// 		s->xdist = calc_xdist(s);
-// 		s->ydist = calc_ydist();
-// 		if (s->xdist < s->ydist) //? /*yes*/ xmove++ : /*no*/ ymove++);
-// 		{
-// 			if (is_wall(s->xdist))
-// 				return (ray_dist(s->xdist)) ;
-// 			s->sidedist_x += s->xmove;
-// 		}
-// 		else
-// 		{
-// 			if (is_wall(s->ydist))
-// 				break ;
-// 			s->sidedist_y += s->ymove;
-// 		}
-// 	}
-// 	return (0);
-// }
-
-int	orientation(double v)
+double	dda(t_data *s)
 {
-	if (v < 0)
-		return (-1);
-	return (1);
+	while (1)
+	{
+		if (s->sidedist_x < s->sidedist_y)
+		{
+			s->xmap += s->xmove;
+			s->hit_side = 0;
+			if (s->co[s->xmap][s->ymap] == '1')
+				break ;
+			s->sidedist_x += s->deltadist_x;
+		}
+		else
+		{
+			s->ymap += s->ymove;
+			s->hit_side = 1;
+		if (s->co[s->xmap][s->ymap] == '1')
+			break ;
+			s->sidedist_y += s->deltadist_y;
+		}
+	}
+	// if (side = 0)
+	// 	Walldist = s->sidedist_x - s->deltadist_x;
+	// else
+	// 	Walldist = s->sidedist_y - s->deltadist_y;
+	return (0);
+}
+
+
+double	ray_dist(t_data *s)
+{
+	double	walldist;
+
+	if (s->hit_side == 0)
+		walldist = s->sidedist_x;
+	else
+		walldist = s->sidedist_y;
+	return (walldist);
+}
+
+void	init_dda(t_data *s)
+{
+	if (s->rdx < 0)
+	{
+		s->xmove = -1;
+		s->sidedist_x = delta_dist(s->rdx) * ((double)(s->px - s->xmap));
+	}
+	else
+	{
+		s->xmove = 1;
+		s->sidedist_x = delta_dist(s->rdx) * ((double)(s->xmap + 1) - s->px);
+	}
+	if (s->rdy < 0)
+	{
+		s->ymove = -1;
+		s->sidedist_y = delta_dist(s->rdy) * ((double)(s->py - s->ymap));
+	}
+	else
+	{
+		s->ymove = 1;
+		s->sidedist_y = delta_dist(s->rdy) * ((double)(s->ymap + 1) - s->py);
+	}
+}
+
+init_ray(t_data *s)
+{
+	s->xmap = (int)s->px;
+	s->ymap = (int)s->py;
+	s->rdx = s->pdx;
+	s->rdy = s->pdy;
+	s->deltadist_x = delta_dist(s->rdx);
+	s->deltadist_y = delta_dist(s->rdy);
+	s->hit_side = 0;
 }
 
 void	raycaster(t_data *s)
 {
-	//double	raydist = 0;
-	//s->ra = s->pa;
-	s->rdx = s->pdx;
-	s->rdy = s->pdy;
-	s->xmap = (int)s->px;
-	s->ymap = (int)s->py;
-	s->xmove = orientation(s->rdx);
-	s->ymove = orientation(s->rdy);
-	s->deltadist_x = delta_dist(s->rdx);
-	s->deltadist_y = delta_dist(s->rdy);
-	
-	s->sidedist_x = delta_dist(s->rdx) * (((double)(s->xmap + 1) - s->px));
-	s->sidedist_y = delta_dist(s->rdy) * (((double)(s->ymap + 1)) - s->py);
 
-	//dda(s);
-
+	init_ray(s);
+	init_dda(s);
+	dda(s);
+	ray_dist(s);
+	to_square(s, s->px + s->rdx * ray_dist(s), s->py + s->rdy * ray_dist(s), 0.05);
+	printf("walldist %f\n", ray_dist(s));
+	printf("pdx %f/%f\n", s->rdx, s->rdy);	
+	printf("map %d/%d\n", s->xmap, s->ymap);
 
 	//print details
-	printf("map %d/%d\n", s->xmap, s->ymap);
-	printf("pdx %f/%f\n", s->pdx, s->pdy);	
-	printf("player %f/%f\n", s->px, s->py);
-	printf("move %d/%d\n", s->xmove, s->ymove);
+	// printf("player %f/%f\n", s->px, s->py);
+	// printf("move %d/%d\n", s->xmove, s->ymove);
 	printf("deltadist %f/%f\n", delta_dist(s->rdx), delta_dist(s->rdy));
 	printf("sidedist %f/%f\n", s->sidedist_x, s->sidedist_y);
 }
@@ -106,3 +130,20 @@ int main(int argc, char **argv)
 	mlx_terminate(s.mlx);
 	return (0);
 }
+
+	// while (1)
+	// {
+	// 	if (s->sidedist_x < s->sidedist_y) //? /*yes*/ xmove++ : /*no*/ ymove++);
+	// 	{
+	// 		if (is_wall(s->sidedist_x))
+	// 			return (ray_dist(s->sidedist_x)) ;
+	// 		s->sidedist_x += s->xmove;
+	// 	}
+	// 	else
+	// 	{
+	// 		if (is_wall(s->ydist))
+	// 			break ;
+	// 		s->sidedist_y += s->ymove;
+	// 	}
+	// }
+	// return (0);

@@ -43,8 +43,7 @@ typedef struct s_data
 	int				ymove;
 	int				xmap;
 	int				ymap;
-	double			xdist;
-	double			ydist;
+	int				hit_side;
 }	t_data;
 
 int		mapwidth(char *map);
