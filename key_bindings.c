@@ -6,22 +6,14 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/19 13:00:13 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/19 15:09:01 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	move_player(t_data *s, double step)
+void	simple_steps(t_data *s, double step)
 {
-	int	movex = 1;
-	int	movey = 1;
-
-	if (s->pdx < 0)
-		movex = -1;
-	if (s->pdx < 0)
-		movey = -1;
-		
 	if (mlx_is_key_down(s->mlx, MLX_KEY_W))
 	{
 		if (s->py - (step + s->p_radius) >= 0 && s->co[(int)s->px][(int)(s->py - step)] != '1')
@@ -41,7 +33,43 @@ void	move_player(t_data *s, double step)
 	{
 		if (s->px + (step + s->p_radius) < s->map_width && s->co[(int)(s->px + step)][(int)(s->py)] != '1')
 			s->px += step;
+	}	
+}
+void	move_player(t_data *s, double mv)
+{
+	//simple_steps(s, step);
+	double	buf;
+
+	buf = 0;
+	if (mlx_is_key_down(s->mlx, MLX_KEY_W))
+	{
+		if (s->co[(int)(s->px + mv * s->pdx)][(int)s->py] != '1')
+			s->px += mv * s->pdx;
+		if (s->co[(int)(s->px)][(int)(s->py + s->pdy * mv)] != '1')
+			s->py += mv * s->pdy;
 	}
+	if (mlx_is_key_down(s->mlx, MLX_KEY_S))
+	{
+		if (s->co[(int)(s->px - mv * s->pdx)][(int)s->py] != '1')
+			s->px -= mv * s->pdx;
+		if (s->co[(int)(s->px)][(int)(s->py - s->pdy * mv)] != '1')
+			s->py -= mv * s->pdy;
+	}
+	if (mlx_is_key_down(s->mlx, MLX_KEY_A))
+	{
+		if (s->co[(int)(s->px + mv * s->pdy)][(int)s->py] != '1')
+			s->px += mv * s->pdy;
+		if (s->co[(int)(s->px)][(int)(s->py - mv * s->pdx)] != '1')
+			s->py -= mv * s->pdx;
+	}
+	if (mlx_is_key_down(s->mlx, MLX_KEY_D))
+	{
+		if (s->co[(int)(s->px - mv * s->pdy)][(int)s->py] != '1')
+			s->px -= mv * s->pdy;
+		if (s->co[(int)(s->px)][(int)(s->py + mv * s->pdx)] != '1')
+			s->py += mv * s->pdx;
+	}
+	printf("pdx: %f,  pdy: %f\n", s->pdx, s->pdy);
 }
 
 void	change_direction(t_data *s)
