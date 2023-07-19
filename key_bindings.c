@@ -3,44 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   key_bindings.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/19 15:09:01 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/19 17:36:41 by karllenard       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	simple_steps(t_data *s, double step)
-{
-	if (mlx_is_key_down(s->mlx, MLX_KEY_W))
-	{
-		if (s->py - (step + s->p_radius) >= 0 && s->co[(int)s->px][(int)(s->py - step)] != '1')
-			s->py -= (step);
-	}
-	if (mlx_is_key_down(s->mlx, MLX_KEY_A))
-	{
-		if (s->px - (step + s->p_radius) >= 0 && s->co[(int)(s->px - step)][(int)(s->py)] != '1')
-			s->px -= step;
-	}
-	if (mlx_is_key_down(s->mlx, MLX_KEY_S))
-	{
-		if (s->py + (step + s->p_radius) < s->map_height && s->co[(int)s->px][(int)(s->py + step)] != '1')
-			s->py += step;
-	}
-	if (mlx_is_key_down(s->mlx, MLX_KEY_D))
-	{
-		if (s->px + (step + s->p_radius) < s->map_width && s->co[(int)(s->px + step)][(int)(s->py)] != '1')
-			s->px += step;
-	}	
-}
 void	move_player(t_data *s, double mv)
 {
 	//simple_steps(s, step);
-	double	buf;
-
-	buf = 0;
 	if (mlx_is_key_down(s->mlx, MLX_KEY_W))
 	{
 		if (s->co[(int)(s->px + mv * s->pdx)][(int)s->py] != '1')
@@ -102,7 +76,7 @@ void	key_bindings(void *p)
 		mlx_terminate(s->mlx);
 		exit(EXIT_SUCCESS);
 	}
-	move_player(s, 0.2);
+	move_player(s, 0.1);
 	change_direction(s);
 	draw_minimap(s);
 	raycaster(s);

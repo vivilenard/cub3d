@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:42:59 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/19 12:31:35 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/19 17:05:43 by karllenard       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,37 +35,3 @@ int main(int argc, char **argv)
 	mlx_terminate(s.mlx);
 	return (0);
 }
-// void	raycaster(t_data *s)
-// {
-// 	double angle;
-
-// 	angle = DR;
-// 	int	r = 1;
-	
-// 	while (r <= 60)
-// 	{
-// 		init_ray(s, angle, r);
-// 		init_dda(s);
-// 		dda(s);
-// 		ray_dist(s);
-// 		to_square(s, s->px + s->rdx * ray_dist(s), s->py + s->rdy * ray_dist(s), 0.05);
-// 		draw_line(ray_dist(s), 0);
-// 		r++;
-// 	}
-
-	// while (1)
-	// {
-	// 	if (s->sidedist_x < s->sidedist_y) //? /*yes*/ xmove++ : /*no*/ ymove++);
-	// 	{
-	// 		if (is_wall(s->sidedist_x))
-	// 			return (ray_dist(s->sidedist_x)) ;
-	// 		s->sidedist_x += s->xmove;
-	// 	}
-	// 	else
-	// 	{
-	// 		if (is_wall(s->ydist))
-	// 			break ;
-	// 		s->sidedist_y += s->ymove;
-	// 	}
-	// }
-	// return (0);

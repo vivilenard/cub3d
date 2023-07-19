@@ -43,9 +43,7 @@ typedef struct s_data
 	double			sidedist_x;
 	double			sidedist_y;
 	double			deltadist_x;
-	double			deltadist_y;
-	double			perp_walldist;
-	int				xmove;
+	double			deltadist_y;	int				xmove;
 	int				ymove;
 	int				xmap;
 	int				ymap;
@@ -66,6 +64,8 @@ int		map_to_koordinate(t_data *s, char *map);
 //utils
 void	full_exit();
 int		scan_coordinates(t_data *s, int (*f)(t_data *s, int x, int y));
+int		ft_torgbt(int r, int g, int b, int t);
+
 
 //minimap
 int		draw_minimap(t_data *s);
@@ -81,8 +81,8 @@ void	key_bindings(void *p);
 
 //raycaster
 void	raycaster(t_data *s);
-void	draw_line(mlx_image_t *img, double dist, int px);
-void	to_vert_line(mlx_image_t *img, int p1, int p2, int px);
+void	draw_line(t_data *s, double dist, int px);
+void	to_vert_line(t_data *s, int p1, int p2, int px);
 void	init_ray(t_data *s, double angle, int r);
 void	init_dda(t_data *s);
 double	ray_dist(t_data *s);

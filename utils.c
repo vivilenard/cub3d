@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 18:38:49 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/13 14:19:39 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/19 17:34:53 by karllenard       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,12 @@ void	print_coordinates(t_data s)
 		printf("\n");
 		y++;
 	}
+}
+
+int	ft_torgbt(int r, int g, int b, int t)
+{
+	unsigned long int	color;
+
+	color = (r << 24) + (g << 16) + (b << 8) + t;
+	return (color);
 }
