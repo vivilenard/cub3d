@@ -6,6 +6,10 @@
 # define HEIGTH 800
 # define PI 3.141592653589793238462643383279502884197
 # define DR 0.0174533
+# define RED_RGBT 0xff3800ff
+# define BLUE_RGBT 0xa7c5f9ff
+# define GREEN_RGBT 0x9acd32ff
+# define YELLOW_RGBT 0xffff00ff
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -40,6 +44,7 @@ typedef struct s_data
 	double			sidedist_y;
 	double			deltadist_x;
 	double			deltadist_y;
+	double			perp_walldist;
 	int				xmove;
 	int				ymove;
 	int				xmap;
@@ -76,5 +81,14 @@ void	key_bindings(void *p);
 
 //raycaster
 void	raycaster(t_data *s);
+void	draw_line(mlx_image_t *img, double dist, int px);
+void	to_vert_line(mlx_image_t *img, int p1, int p2, int px);
+void	init_ray(t_data *s, double angle, int r);
+void	init_dda(t_data *s);
+double	ray_dist(t_data *s);
+double	dda(t_data *s);
+double	delta_dist(double side);
+
+
 
 # endif

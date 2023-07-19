@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/15 17:46:17 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/19 12:31:11 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ int	draw_minimap(t_data *s)
 	// printf("player view: %f/%f\n", s->pdx, s->pdy);
 	calculate_proportions(s);
 	s->minimap = mlx_new_image(s->mlx, s->mm_radius, s->mm_radius);
+	if (mlx_image_to_window(s->mlx, s->minimap, 0, 0) < 0)
+		full_exit();
 	scan_coordinates(s, print_wall);
 	draw_player(s);
 	draw_view(s);
-	if (mlx_image_to_window(s->mlx, s->minimap, 0, 0) < 0)
-			full_exit();
+
 	return (1);
 }
