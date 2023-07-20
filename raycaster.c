@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 10:51:37 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/20 13:12:19 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/20 14:48:04 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ double	dda(t_data *s)
 			s->sidedist_y += s->deltadist_y;
 		}
 	}
+	s->hit_x = s->px + s->rdx * ray_dist(s);
+	s->hit_y = s->py + s->rdy * ray_dist(s);
 	return (0);
 }
 
@@ -83,6 +85,8 @@ void	init_ray(t_data *s, double angle, int r)
 	s->deltadist_x = delta_dist(s->rdx);
 	s->deltadist_y = delta_dist(s->rdy);
 	s->hit_side = 0;
+	s->hit_x = 0;
+	s->hit_y = 0;
 }
 
 void	to_vert_line(t_data *s, int p1, int p2, int px)
@@ -131,7 +135,7 @@ int	choose_texture(t_data *s)
 
 int		texture_color(mlx_texture_t *txt, int y)
 {
-	
+
 }
 
 void	print_texture(t_data *s, int p1, int p2, int px)
@@ -140,23 +144,34 @@ void	print_texture(t_data *s, int p1, int p2, int px)
 	int	color;
 	int	start = p1;
 	int	end = p2;
+	double	wall_x;
+	int	tex_x;
+	int	tex_width;
+	int	tex_height;
 
 	wall_side = choose_texture(s);
+	//tex_width = get_tex_width(s, choose_texture(s));
+	wall_x = s->hit_x - (int)s->hit_x;
+	if ((s->hit_side) == 0)
+		wall_x = s->hit_y - (int)s->hit_y;
+	tex_x = (int)wall_x * s->tex[wall_side]->width;
 	if (p2 < p1)
 	{
 		start = p2;
 		end = p1;
 	}
+	tex_height = s->tex[wall_side]->height;
+	s->tex_step = tex_height / (end - start);
+	s->tex_pos = (start - HEIGTH / 2 + (end - start) / 2) * s->tex_step ; //this is right
+	//s->tex_pos = (end - start) * 
 	while (start < end)
 	{
-		if (s->hit_side == 1)
-			color = texture_color(s->txt[wall_side], start);
-		mlx_put_pixel(s->img, px, start, color);
+		// if (s->hit_side == 1)
+		// 	color = texture_color(s->tex[wall_side], start);
+		mlx_put_pixel(s->img, px, start, s->tex[wall_side][tex_height * (int)s->tex_pos + tex_x]);
 		start++;
+		s->tex_pos += s->tex_step;
 	}
-	
-}
-		
 }
 
 void	draw_line(t_data *s, double dist, int px)
@@ -190,7 +205,7 @@ void	raycaster(t_data *s)
 		init_ray(s, angle, px);
 		init_dda(s);
 		dda(s);
-		to_square(s, s->px + s->rdx * ray_dist(s), s->py + s->rdy * ray_dist(s), 0.05);
+		to_square(s, s->hit_x, s->hit_y, 0.05);
 		draw_line(s, ray_dist(s) * cos(s->pa - s->ra) , px);
 		px++;
 	}
