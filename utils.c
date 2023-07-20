@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+        */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 18:38:49 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/19 17:34:53 by karllenard       ###   ########.fr       */
+/*   Updated: 2023/07/20 16:04:37 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	print_coordinates(t_data s)
 	}
 }
 
-int	ft_torgbt(int r, int g, int b, int t)
+int	to_rgbt(int r, int g, int b, int t)
 {
 	unsigned long int	color;
 

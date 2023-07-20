@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 10:51:37 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/20 14:48:04 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/20 18:36:05 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,87 +108,75 @@ void	to_vert_line(t_data *s, int p1, int p2, int px)
 		mlx_put_pixel(s->img, px, start, color);
 		start++;
 	}
-	
 }
 
 int	choose_texture(t_data *s)
 {
 	int	wall_side;
 	
-	if (s->hit_side = 0) //side x
+	if (s->hit_side == 0) //side x
 	{
 		if (s->pdx > 0)
 			wall_side = 3;//west
 		else
 			wall_side = 2;//east
 	}
-	else if (s->hit_side = 1)
+	else
 	{
 		if (s->pdy < 0)
 			wall_side = 0;//no
 		else
 			wall_side = 1;//so
 	}
-	
 	return (wall_side);
 }
 
-int		texture_color(mlx_texture_t *txt, int y)
+int	color_tex(t_data *s, int px, int p1)
 {
+	int	color;
+	mlx_texture_t	*tex;
 
+	tex = s->tex[choose_texture(s)];
+	px = 0; //del
+	p1 = 0; //del
+	
+	color = to_rgbt(tex->pixels[0], tex->pixels[1], tex->pixels[2], tex->pixels[3]);
+	return (color);
 }
 
-void	print_texture(t_data *s, int p1, int p2, int px)
+void	take_texture(t_data *s, int p1, int p2, int px)
 {
-	int wall_side;
-	int	color;
-	int	start = p1;
-	int	end = p2;
-	double	wall_x;
-	int	tex_x;
-	int	tex_width;
-	int	tex_height;
+	int	start;
+	int	end;
 
-	wall_side = choose_texture(s);
-	//tex_width = get_tex_width(s, choose_texture(s));
-	wall_x = s->hit_x - (int)s->hit_x;
-	if ((s->hit_side) == 0)
-		wall_x = s->hit_y - (int)s->hit_y;
-	tex_x = (int)wall_x * s->tex[wall_side]->width;
+	start = p1;
+	end = p2;
 	if (p2 < p1)
 	{
 		start = p2;
 		end = p1;
 	}
-	tex_height = s->tex[wall_side]->height;
-	s->tex_step = tex_height / (end - start);
-	s->tex_pos = (start - HEIGTH / 2 + (end - start) / 2) * s->tex_step ; //this is right
-	//s->tex_pos = (end - start) * 
 	while (start < end)
 	{
-		// if (s->hit_side == 1)
-		// 	color = texture_color(s->tex[wall_side], start);
-		mlx_put_pixel(s->img, px, start, s->tex[wall_side][tex_height * (int)s->tex_pos + tex_x]);
-		start++;
-		s->tex_pos += s->tex_step;
+		mlx_put_pixel(s->img, px, p1, color_tex(s, px, start));
+		p1++;
 	}
 }
 
 void	draw_line(t_data *s, double dist, int px)
 {
-	int	lineheight;
 	int	drawstart;
 	int drawend;
 
-	lineheight = HEIGTH / dist;
-	drawstart = HEIGTH / 2 - lineheight / 2;
+	s->lineheight = HEIGTH / dist;
+	drawstart = HEIGTH / 2 - s->lineheight / 2;
 	if (drawstart < 0)
 		drawstart = 0;
-	drawend = HEIGTH / 2 + lineheight / 2;
+	drawend = HEIGTH / 2 + s->lineheight / 2;
 	if (drawend >= HEIGTH)
 		drawend = HEIGTH - 1;
 	//to_vert_line(s, drawstart, drawend, px);
-	print_texture(s, drawstart, drawend, px);
+	take_texture(s, drawstart, drawend, px);
 	
 }
 
@@ -207,6 +195,10 @@ void	raycaster(t_data *s)
 		dda(s);
 		to_square(s, s->hit_x, s->hit_y, 0.05);
 		draw_line(s, ray_dist(s) * cos(s->pa - s->ra) , px);
+		printf("hitpointx %f\n", s->hit_x);
+		printf("tex y: %f\n", s->tex_y);
+		printf("tex x: %d\n", s->tex_x);
+		printf("tex step: %f\n", s->tex_step);
 		px++;
 	}
 	if (mlx_image_to_window(s->mlx, s->img, 0, 0) < 0)

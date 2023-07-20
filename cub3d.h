@@ -51,8 +51,12 @@ typedef struct s_data
 	int				hit_side;
 	double			hit_x;
 	double			hit_y;
+	int				lineheight;
+	int				wall_tex;
+	double			wall_x;
 	double			tex_step;
-	double			tex_pos;
+	int				tex_x;
+	double			tex_y;
 }	t_data;
 
 int		mapwidth(char *map);
@@ -69,12 +73,12 @@ int		map_to_koordinate(t_data *s, char *map);
 //utils
 void	full_exit();
 int		scan_coordinates(t_data *s, int (*f)(t_data *s, int x, int y));
-int		ft_torgbt(int r, int g, int b, int t);
+int		to_rgbt(int r, int g, int b, int t);
 
 
 //minimap
 int		draw_minimap(t_data *s);
-void	 print_square(mlx_image_t *img, int x, int y, int radius, uint32_t color);
+void	print_square(mlx_image_t *img, int x, int y, int radius, uint32_t color);
 void	to_square(t_data *s, double x, double y, double p_radius);
 
 //parser

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_bindings.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+        */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/19 17:36:41 by karllenard       ###   ########.fr       */
+/*   Updated: 2023/07/20 16:33:43 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	move_player(t_data *s, double mv)
 		if (s->co[(int)(s->px)][(int)(s->py + mv * s->pdx)] != '1')
 			s->py += mv * s->pdx;
 	}
-	printf("pdx: %f,  pdy: %f\n", s->pdx, s->pdy);
 }
 
 void	change_direction(t_data *s)
