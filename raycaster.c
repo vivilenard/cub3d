@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+        */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 10:51:37 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/19 19:07:49 by karllenard       ###   ########.fr       */
+/*   Updated: 2023/07/20 13:12:19 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,58 @@ void	to_vert_line(t_data *s, int p1, int p2, int px)
 	
 }
 
+int	choose_texture(t_data *s)
+{
+	int	wall_side;
+	
+	if (s->hit_side = 0) //side x
+	{
+		if (s->pdx > 0)
+			wall_side = 3;//west
+		else
+			wall_side = 2;//east
+	}
+	else if (s->hit_side = 1)
+	{
+		if (s->pdy < 0)
+			wall_side = 0;//no
+		else
+			wall_side = 1;//so
+	}
+	
+	return (wall_side);
+}
+
+int		texture_color(mlx_texture_t *txt, int y)
+{
+	
+}
+
+void	print_texture(t_data *s, int p1, int p2, int px)
+{
+	int wall_side;
+	int	color;
+	int	start = p1;
+	int	end = p2;
+
+	wall_side = choose_texture(s);
+	if (p2 < p1)
+	{
+		start = p2;
+		end = p1;
+	}
+	while (start < end)
+	{
+		if (s->hit_side == 1)
+			color = texture_color(s->txt[wall_side], start);
+		mlx_put_pixel(s->img, px, start, color);
+		start++;
+	}
+	
+}
+		
+}
+
 void	draw_line(t_data *s, double dist, int px)
 {
 	int	lineheight;
@@ -120,7 +172,8 @@ void	draw_line(t_data *s, double dist, int px)
 	drawend = HEIGTH / 2 + lineheight / 2;
 	if (drawend >= HEIGTH)
 		drawend = HEIGTH - 1;
-	to_vert_line(s, drawstart, drawend, px);
+	//to_vert_line(s, drawstart, drawend, px);
+	print_texture(s, drawstart, drawend, px);
 	
 }
 

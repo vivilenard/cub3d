@@ -27,7 +27,7 @@ typedef struct s_data
 	mlx_image_t		*minimap;
 	int				mm_radius;
 	int				mm_square;
-	mlx_texture_t	*txt;
+	mlx_texture_t	*txt[10];
 	char			**co;
 	int				map_height;
 	int 			map_width;
@@ -43,7 +43,8 @@ typedef struct s_data
 	double			sidedist_x;
 	double			sidedist_y;
 	double			deltadist_x;
-	double			deltadist_y;	int				xmove;
+	double			deltadist_y;
+	int				xmove;
 	int				ymove;
 	int				xmap;
 	int				ymap;

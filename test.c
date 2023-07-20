@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 13:54:58 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/06 11:02:54 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/20 12:36:48 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,18 @@ void	display_sth(void *i)
 
 int	main()
 {
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	mlx_image_t	*img2;
+	mlx_t			*mlx;
+	mlx_image_t		*img;
+	mlx_image_t		*img2;
 	mlx_texture_t	*texture = mlx_load_png("textures/wood.png");
 
 	mlx = mlx_init(WIDTH, HEIGTH, "hi", false);
 	img = mlx_new_image(mlx, 200, 200);
-	img2 = mlx_texture_to_image(mlx, texture);
-	mlx_put_pixel(img, 2, 2, 0xFFFFFFFF);
 	memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
 	mlx_image_to_window(mlx, img, 0, 0);
 	mlx_image_to_window(mlx, img2, 50, 50);
 	//mlx_loop_hook(mlx, display_sth, img);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
-	
-	printf("hi\n");
 	return (0);
 }

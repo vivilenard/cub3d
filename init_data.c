@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:53:23 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/19 12:46:02 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/20 13:04:43 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,21 @@ int	player_position(t_data *s, int x, int y)
 	return (0);
 }
 
+void	get_textures(t_data *s)
+{
+	s->txt[0] = mlx_load_png("./textures/wood.png");	//no
+	s->txt[1] = mlx_load_png("./textures/pillar.png");	//so
+	s->txt[2] = mlx_load_png("./greystone.png");	//east
+	s->txt[3] = mlx_load_png("./mossy.png");	//west
+}
+
 t_data	init(t_data *s, char **argv)
 {
 	s = malloc(sizeof(t_data));
 	s->mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
 	map_to_koordinate(s, argv[1]);
 	scan_coordinates(s, player_position);
+	get_textures(s);
 	//printf ("%d, %d\n", s->map_height, s->map_width);
 	return (*s);
 }
