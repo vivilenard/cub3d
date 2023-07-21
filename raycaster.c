@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 10:51:37 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/20 18:36:05 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/21 16:38:15 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,16 +131,28 @@ int	choose_texture(t_data *s)
 	return (wall_side);
 }
 
-int	color_tex(t_data *s, int px, int p1)
+int	color_tex(t_data *s, int py)
 {
-	int	color;
+	int				color;
 	mlx_texture_t	*tex;
+	int				pos;
+	double			wall_x;
+	int				tex_x;
+	int				tex_y;
 
 	tex = s->tex[choose_texture(s)];
-	px = 0; //del
-	p1 = 0; //del
-	
-	color = to_rgbt(tex->pixels[0], tex->pixels[1], tex->pixels[2], tex->pixels[3]);
+	s->tex_step = 1.0 * tex->height / s->lineheight;
+	if (!tex)
+		perror ("no tex");
+	wall_x = s->hit_x - (int)s->hit_x;
+	if ((s->hit_side) == 0)
+		wall_x = s->hit_y - (int)s->hit_y;
+	tex_x = (int)(wall_x * tex->width);
+	//tex_y = (int)((1.0 * py) / HEIGTH * tex->height);  //psychedelic effect
+	tex_y = (py - HEIGTH / 2 + s->lineheight / 2) * s->tex_step;
+	pos = (tex_y * tex->width + tex_x) * tex->bytes_per_pixel;
+	color = to_rgbt(tex->pixels[pos + 0], tex->pixels[pos + 1],
+		tex->pixels[pos + 2], tex->pixels[pos + 3]);
 	return (color);
 }
 
@@ -158,8 +170,8 @@ void	take_texture(t_data *s, int p1, int p2, int px)
 	}
 	while (start < end)
 	{
-		mlx_put_pixel(s->img, px, p1, color_tex(s, px, start));
-		p1++;
+		mlx_put_pixel(s->img, px, start, color_tex(s, start));
+		start++;
 	}
 }
 
@@ -186,19 +198,19 @@ void	raycaster(t_data *s)
 
 	angle = 1.15 / WIDTH;
 	int	px = 0;
-
+	//int px = WIDTH / 2;
 	memset(s->img->pixels, 255, s->img->width * s->img->height * sizeof(int32_t));
-	while (px < WIDTH)
+	while (px < (WIDTH))//WIDTH)
 	{
 		init_ray(s, angle, px);
 		init_dda(s);
 		dda(s);
 		to_square(s, s->hit_x, s->hit_y, 0.05);
 		draw_line(s, ray_dist(s) * cos(s->pa - s->ra) , px);
-		printf("hitpointx %f\n", s->hit_x);
-		printf("tex y: %f\n", s->tex_y);
-		printf("tex x: %d\n", s->tex_x);
-		printf("tex step: %f\n", s->tex_step);
+		//printf("hitpointx %f\n", s->hit_x);
+		//printf("tex y: %f\n", s->tex_y);
+		//printf("tex x: %d\n", s->tex_x);
+		//printf("tex step: %f\n", s->tex_step);
 		px++;
 	}
 	if (mlx_image_to_window(s->mlx, s->img, 0, 0) < 0)
