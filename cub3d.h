@@ -52,11 +52,6 @@ typedef struct s_data
 	double			hit_x;
 	double			hit_y;
 	int				lineheight;
-	int				wall_tex;
-	double			wall_x;
-	double			tex_step;
-	int				tex_x;
-	double			tex_y;
 }	t_data;
 
 int		mapwidth(char *map);
@@ -98,6 +93,10 @@ double	ray_dist(t_data *s);
 double	dda(t_data *s);
 double	delta_dist(double side);
 
+//texture
 
+void	take_texture(t_data *s, int p1, int p2, int px);
+int		color_tex(t_data *s, int py);
+int		choose_texture(t_data *s);
 
 # endif
