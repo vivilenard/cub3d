@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+         #
+#    By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/05 13:44:57 by vlenard           #+#    #+#              #
-#    Updated: 2023/07/28 18:33:13 by ekulichk         ###   ########.fr        #
+#    Updated: 2023/07/28 20:53:01 by karllenard       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,6 @@ re: fclean all
 
 build:
 	@git submodule update --init
-	@git clone https://github.com/codam-coding-college/MLX42.git
 	@cd MLX42 && cmake -B build && cmake --build build -j4
 
 simple:
