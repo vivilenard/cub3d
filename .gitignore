@@ -1,0 +1,6 @@
+**/*.o
+*.out
+cub3d
+MLX42/
+libft/
+obj/
