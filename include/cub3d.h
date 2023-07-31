@@ -32,7 +32,7 @@ typedef struct s_data
 	char			**co;
 	int				map_height;
 	int				map_width;
-	double			px;
+	double			px;	
 	double			py;
 	double			pa;
 	double			pdx;

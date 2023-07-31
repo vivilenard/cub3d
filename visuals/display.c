@@ -11,7 +11,7 @@ int	display(t_data *s)
 	draw_minimap(s);
 	raycaster(s);
 
-	mlx_loop_hook(s->mlx, key_bindings, &s);
+	mlx_loop_hook(s->mlx, key_bindings, s);
 	mlx_loop(s->mlx);
 	mlx_terminate(s->mlx);
 	return (0);

@@ -13,6 +13,7 @@ int	main(int argc, char **argv)
 	if (parser(argc, argv))
 		return (1);
 	s = init(&s, argv);	//can go into --> parser
+
 	display(&s);
 	return (0);
 }

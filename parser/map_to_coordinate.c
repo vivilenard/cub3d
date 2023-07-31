@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:19:19 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 13:17:01 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/31 13:51:12 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,19 @@ int	map_to_koordinate(t_data *s, char *map)
 	char	*line;
 	int		line_y;
 
+	//i assume the file only constists of the map
+	//i check how big the map is to see how big the coordinate system needs to be:
 	s->map_height = mapheight(map);
 	s->map_width = mapwidth(map);
 	line_y = 0;
 	if (access(map, F_OK == -1) || access(map, R_OK == -1))
 		full_exit();
-	allocate_map(s);
+	allocate_map(s);	//allocating the coordinate system 
 	fd = open(map, O_RDONLY);
 	line = get_next_line(fd);
 	while (line)
 	{
-		assign_line(line, s, line_y);
+		assign_line(line, s, line_y); 	//here i assign each line horizontally, meaning for each y (= number of line) is assign all x values
 		line_y++;
 		line = get_next_line(fd);
 	}

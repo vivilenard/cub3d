@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:53:23 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 13:16:58 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/31 13:36:07 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ t_data	init(t_data *s, char **argv)
 {
 	s = malloc(sizeof(t_data));
 	s->mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
+
+	//this is basically all the parsing i did before
 	map_to_koordinate(s, argv[1]);
 	scan_coordinates(s, player_position);
 	get_textures(s);
