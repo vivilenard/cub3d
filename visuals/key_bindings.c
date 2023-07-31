@@ -6,15 +6,14 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 13:16:37 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/31 17:50:10 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	move_player(t_data *s, double mv)
+void	move_player_vertical(t_map *s, double mv)
 {
-	//simple_steps(s, step);
 	if (mlx_is_key_down(s->mlx, MLX_KEY_W))
 	{
 		if (s->co[(int)(s->px + mv * s->pdx)][(int)s->py] != '1')
@@ -29,6 +28,10 @@ void	move_player(t_data *s, double mv)
 		if (s->co[(int)(s->px)][(int)(s->py - s->pdy * mv)] != '1')
 			s->py -= mv * s->pdy;
 	}
+}
+
+void	move_player_horizontal(t_map *s, double mv)
+{
 	if (mlx_is_key_down(s->mlx, MLX_KEY_A))
 	{
 		if (s->co[(int)(s->px + mv * s->pdy)][(int)s->py] != '1')
@@ -45,19 +48,19 @@ void	move_player(t_data *s, double mv)
 	}
 }
 
-void	change_direction(t_data *s)
+void	change_direction_keys(t_map *s)
 {
 	if (mlx_is_key_down(s->mlx, MLX_KEY_LEFT))
 	{
-		s->pa -= 0.1;
+		s->pa -= 0.10;
 		if (s->pa < 0)
 			s->pa += 2 * PI;
-		s->pdx = cos(s->pa);	//cos
-		s->pdy = sin(s->pa);	//sin
+		s->pdx = cos(s->pa);
+		s->pdy = sin(s->pa);
 	}
 	if (mlx_is_key_down(s->mlx, MLX_KEY_RIGHT))
 	{
-		s->pa += 0.2;
+		s->pa += 0.10;
 		if (s->pa > 2 * PI)
 			s->pa -= 2 * PI;
 		s->pdx = cos(s->pa);
@@ -67,16 +70,18 @@ void	change_direction(t_data *s)
 
 void	key_bindings(void *p)
 {
-	t_data *s;
+	t_map *s;
 
-	s = (t_data *) p;
+	s = (t_map *) p;
 	if (mlx_is_key_down(s->mlx, MLX_KEY_ESCAPE))
 	{
 		mlx_terminate(s->mlx);
 		exit(EXIT_SUCCESS);
 	}
-	move_player(s, 0.1);
-	change_direction(s);
+	move_player_vertical(s, 0.05);
+	move_player_horizontal(s, 0.05);
+	change_direction_keys(s);
+	//change_direction_mouse(s);
 	draw_minimap(s);
 	raycaster(s);
 }

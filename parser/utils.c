@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 18:38:49 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 13:17:16 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/31 17:52:12 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	mapwidth(char *map)
 	return (len - 1);
 }
 
-int	scan_coordinates(t_data *s, int (*f)(t_data *s, int x, int y))
+int	scan_coordinates(t_map *s, int (*f)(t_map *s, int x, int y))
 {
 	int	x;
 	int	y;
@@ -70,7 +70,7 @@ int	scan_coordinates(t_data *s, int (*f)(t_data *s, int x, int y))
 	return (0);
 }
 
-void	print_coordinates(t_data s)
+void	print_coordinates(t_map s)
 {
 	int	x;
 	int	y;

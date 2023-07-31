@@ -21,23 +21,29 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 
-typedef struct s_data
+typedef struct s_map
 {
+	struct s_ray	*ray;
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	mlx_image_t		*minimap;
-	int				mm_radius;
-	int				mm_square;
-	mlx_texture_t	*tex[10];
+	mlx_texture_t	*tex[10];	//space for 10 textures -- dont know how much we need
 	char			**co;
 	int				map_height;
 	int				map_width;
-	double			px;	
+	double			px;			//player position
 	double			py;
-	double			pa;
-	double			pdx;
+	double			pa;			//player angle
+	double			pdx; 		//player direction vector
 	double			pdy;
-	double			p_radius;
+	double			p_radius;	//size of player in minimap
+	int				mm_radius;	//size of minimap
+	int				mm_square;	//size of a tile
+}	t_map;
+
+
+typedef struct s_ray
+{
 	double			ra;
 	double			rdx;
 	double			rdy;
@@ -53,52 +59,51 @@ typedef struct s_data
 	double			hit_x;
 	double			hit_y;
 	int				lineheight;
-}	t_data;
+}	t_ray;
 
 int		mapwidth(char *map);
 int		mapheight(char *map);
 
 //init
-t_data	init(t_data *s, char **argv);
-int		assign_line(char *line, t_data *s, int y);
-int		allocate_map(t_data *s);
-int		map_to_koordinate(t_data *s, char *map);
-void	print_coordinates(t_data s);
-int		map_to_koordinate(t_data *s, char *map);
+t_map	init(t_map *s, char **argv);
+int		assign_line(char *line, t_map *s, int y);
+int		allocate_map(t_map *s);
+int		map_to_koordinate(t_map *s, char *map);
+void	print_coordinates(t_map s);
+int		map_to_koordinate(t_map *s, char *map);
 
 //utils
 void	full_exit();
-int		scan_coordinates(t_data *s, int (*f)(t_data *s, int x, int y));
+int		scan_coordinates(t_map *s, int (*f)(t_map *s, int x, int y));
 int		to_rgbt(int r, int g, int b, int t);
 
-
-
 //display
-int	display(t_data *s);
+int		display(t_map *s);
 
 //minimap
-int		draw_minimap(t_data *s);
+int		draw_minimap(t_map *s);
 void	print_square(mlx_image_t *img, int x, int y, int radius, uint32_t color);
-void	to_square(t_data *s, double x, double y, double p_radius);
+void	to_square(t_map *s, double x, double y, double p_radius);
 
 //key_bindings
-void	move_player(t_data *s, double step);
+void	move_player_vertical(t_map *s, double step);
+void	move_player_horizontal(t_map *s, double step);
 void	key_bindings(void *p);
 
 //raycaster
-void	raycaster(t_data *s);
-void	draw_line(t_data *s, double dist, int px);
-void	to_vert_line(t_data *s, int p1, int p2, int px);
-void	init_ray(t_data *s, double angle, int r);
-void	init_dda(t_data *s);
-double	ray_dist(t_data *s);
-double	dda(t_data *s);
+void	raycaster(t_map *s);
+void	draw_line(t_map *s, t_ray *r, double dist, int px);
+void	to_vert_line(t_map *s, int p1, int p2, int px);
+t_ray	*init_ray(t_map *s, double angle, int r);
+void	init_dda(t_map *s, t_ray *r);
+double	ray_dist(t_map *s, t_ray *r);
+double	dda(t_map *s, t_ray *r);
 double	delta_dist(double side);
 
 //texture
 
-void	take_texture(t_data *s, int p1, int p2, int px);
-int		color_tex(t_data *s, int py);
-int		choose_texture(t_data *s);
+void	take_texture(t_map *s, int p1, int p2, int px);
+int		color_tex(t_map *s, t_ray *r, int py);
+int		choose_texture(t_map *s, t_ray *r);
 
 #endif

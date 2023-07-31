@@ -8,7 +8,7 @@ void	full_exit()
 
 int	main(int argc, char **argv)
 {
-	t_data	s;
+	t_map	s;
 
 	if (parser(argc, argv))
 		return (1);

@@ -6,13 +6,13 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:19:19 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 13:51:12 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/31 17:49:02 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	assign_line(char *line, t_data *s, int	y)
+int	assign_line(char *line, t_map *s, int	y)
 {
 	int	x;
 	x = 0;
@@ -25,7 +25,7 @@ int	assign_line(char *line, t_data *s, int	y)
 	return (1);
 }
 
-int	allocate_map(t_data *s)
+int	allocate_map(t_map *s)
 {
 	int	x;
 
@@ -46,7 +46,7 @@ int	allocate_map(t_data *s)
 }
 
 
-int	map_to_koordinate(t_data *s, char *map)
+int	map_to_koordinate(t_map *s, char *map)
 {
 	int		fd;
 	char	*line;

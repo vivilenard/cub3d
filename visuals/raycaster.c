@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 10:51:37 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 13:16:51 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/31 17:50:32 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,112 +17,118 @@ double	delta_dist(double side)
 	return (fabs(1 / side));
 }
 
-double	dda(t_data *s)
+double	dda(t_map *s, t_ray *r)
 {
 	while (1)
 	{
-		if (s->sidedist_x < s->sidedist_y)
+		if (r->sidedist_x < r->sidedist_y)
 		{
-			s->xmap += s->xmove;
-			s->hit_side = 0;
-			if (s->co[s->xmap][s->ymap] == '1') //is_wall
+			r->xmap += r->xmove;
+			r->hit_side = 0;
+			if (s->co[r->xmap][r->ymap] == '1') //is_wall
 				break ;
-			s->sidedist_x += s->deltadist_x;
+			r->sidedist_x += r->deltadist_x;
 		}
 		else
 		{
-			s->ymap += s->ymove;
-			s->hit_side = 1;
-		if (s->co[s->xmap][s->ymap] == '1')
+			r->ymap += r->ymove;
+			r->hit_side = 1;
+		if (s->co[r->xmap][r->ymap] == '1')
 			break ;
-			s->sidedist_y += s->deltadist_y;
+			r->sidedist_y += r->deltadist_y;
 		}
 	}
-	s->hit_x = s->px + s->rdx * ray_dist(s);
-	s->hit_y = s->py + s->rdy * ray_dist(s);
+	r->hit_x = s->px + r->rdx * ray_dist(s, r);
+	r->hit_y = s->py + r->rdy * ray_dist(s, r);
 	return (0);
 }
 
 
-double	ray_dist(t_data *s)
+double	ray_dist(t_map *s, t_ray *r)
 {
-	if (s->hit_side == 0)
-		return (s->sidedist_x);
-	return (s->sidedist_y);
+	if (r->hit_side == 0)
+		return (r->sidedist_x);
+	return (r->sidedist_y);
 }
 
-void	init_dda(t_data *s)
+void	init_dda(t_map *s, t_ray *r)
 {
-	if (s->rdx < 0)
+	if (r->rdx < 0)
 	{
-		s->xmove = -1;
-		s->sidedist_x = delta_dist(s->rdx) * ((double)(s->px - s->xmap));
+		r->xmove = -1;
+		r->sidedist_x = delta_dist(r->rdx) * ((double)(s->px - r->xmap));
 	}
 	else
 	{
-		s->xmove = 1;
-		s->sidedist_x = delta_dist(s->rdx) * ((double)(s->xmap + 1) - s->px);
+		r->xmove = 1;
+		r->sidedist_x = delta_dist(r->rdx) * ((double)(r->xmap + 1) - s->px);
 	}
-	if (s->rdy < 0)
+	if (r->rdy < 0)
 	{
-		s->ymove = -1;
-		s->sidedist_y = delta_dist(s->rdy) * ((double)(s->py - s->ymap));
+		r->ymove = -1;
+		r->sidedist_y = delta_dist(r->rdy) * ((double)(s->py - r->ymap));
 	}
 	else
 	{
-		s->ymove = 1;
-		s->sidedist_y = delta_dist(s->rdy) * ((double)(s->ymap + 1) - s->py);
+		r->ymove = 1;
+		r->sidedist_y = delta_dist(r->rdy) * ((double)(r->ymap + 1) - s->py);
 	}
 }
 
-void	init_ray(t_data *s, double angle, int r)
+t_ray	*init_ray(t_map *s, double angle, int r)
 {
-	s->xmap = (int)s->px;
-	s->ymap = (int)s->py;
-	s->ra = s->pa - angle * WIDTH / 2 + r * angle;
-	s->rdx = cos(s->ra);
-	s->rdy = sin(s->ra);
-	s->deltadist_x = delta_dist(s->rdx);
-	s->deltadist_y = delta_dist(s->rdy);
-	s->hit_side = 0;
-	s->hit_x = 0;
-	s->hit_y = 0;
+	t_ray *ray;
+
+	ray = malloc(sizeof(t_ray));
+	s->ray = ray;
+	
+	ray->ra = s->pa - angle * WIDTH / 2 + r * angle;
+	ray->rdx = cos(ray->ra);
+	ray->rdy = sin(ray->ra);
+	ray->deltadist_x = delta_dist(ray->rdx);
+	ray->deltadist_y = delta_dist(ray->rdy);
+	ray->xmap = (int)s->px;
+	ray->ymap = (int)s->py;
+	ray->hit_side = 0;
+	ray->hit_x = 0;
+	ray->hit_y = 0;
+	ray->lineheight = 0;
+	return (ray);
 }
 
 
-void	draw_line(t_data *s, double dist, int px)
+void	draw_line(t_map *s, t_ray *r, double dist, int px)
 {
 	int	drawstart;
 	int drawend;
 
-	s->lineheight = HEIGTH / dist;
-	drawstart = HEIGTH / 2 - s->lineheight / 2;
+	r->lineheight = HEIGTH / dist;
+	drawstart = HEIGTH / 2 - r->lineheight / 2;
 	if (drawstart < 0)
 		drawstart = 0;
-	drawend = HEIGTH / 2 + s->lineheight / 2;
+	drawend = HEIGTH / 2 + r->lineheight / 2;
 	if (drawend >= HEIGTH)
 		drawend = HEIGTH - 1;
-	//to_vert_line(s, drawstart, drawend, px);
 	take_texture(s, drawstart, drawend, px);
 	
 }
 
-void	raycaster(t_data *s)
+void	raycaster(t_map *s)
 {
+	t_ray	*ray;
 	double angle;
 
-	angle = 1.15 / WIDTH;
+	angle = 1.15 / WIDTH;  //1.15 ~ 66 degree
 	int	px = 0;
 	
 	memset(s->img->pixels, 255, s->img->width * s->img->height * sizeof(int32_t));
 	while (px < WIDTH)
 	{
-		init_ray(s, angle, px);
-		init_dda(s);
-		dda(s);
-		to_square(s, s->hit_x, s->hit_y, 0.05);
-		draw_line(s, ray_dist(s) * cos(s->pa - s->ra) , px);
-
+		ray = init_ray(s, angle, px);
+		init_dda(s, ray);
+		dda(s, ray);
+		to_square(s, ray->hit_x, ray->hit_y, 0.05);
+		draw_line(s, ray, ray_dist(s, ray) * cos(s->pa - ray->ra) , px);
 		px++;
 	}
 	if (mlx_image_to_window(s->mlx, s->img, 0, 0) < 0)

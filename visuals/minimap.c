@@ -6,13 +6,13 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 13:16:48 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/07/31 17:50:19 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	print_wall(t_data *s, int x, int y)
+int	print_wall(t_map *s, int x, int y)
 {
 	if (s->co[x][y] == '1')
 		print_square(s->minimap, x, y, s->mm_square, 0xFFFFFFFF);
@@ -21,12 +21,12 @@ int	print_wall(t_data *s, int x, int y)
 	return (0);
 }
 
-void	draw_player(t_data	*s)
+void	draw_player(t_map	*s)
 {
 	to_square(s, s->px, s->py, s->p_radius);
 }
 
-void	calculate_proportions(t_data *s)
+void	calculate_proportions(t_map *s)
 {
 	int	map_radius;
 
@@ -39,7 +39,7 @@ void	calculate_proportions(t_data *s)
 	s->mm_square = s->mm_radius / map_radius;
 }
 
-void	draw_view(t_data *s)
+void	draw_view(t_map *s)
 {
 	double	vx;
 	double	vy;
@@ -52,7 +52,7 @@ void	draw_view(t_data *s)
 		to_square(s, vx, vy, 0.03);
 }
 
-int	draw_minimap(t_data *s)
+int	draw_minimap(t_map *s)
 {
 	// printf("player pos: %f/%f\n", s->px, s->py);
 	// printf("player view: %f/%f\n", s->pdx, s->pdy);
@@ -63,6 +63,5 @@ int	draw_minimap(t_data *s)
 	scan_coordinates(s, print_wall);
 	draw_player(s);
 	draw_view(s);
-
 	return (1);
 }

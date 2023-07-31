@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
+/*   init_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -25,7 +25,7 @@ double	init_player_view(char p)
 	return (0);
 }
 
-int	set_player(t_data *s, int x, int y)
+int	set_player(t_map *s, int x, int y)
 {
 	s->px = (double)x + 0.5;
 	s->py = (double)y + 0.5;
@@ -36,14 +36,14 @@ int	set_player(t_data *s, int x, int y)
 	return (1);
 }
 
-int	player_position(t_data *s, int x, int y)
+int	player_position(t_map *s, int x, int y)
 {
 	if (ft_isalpha(s->co[x][y]))
 		return (set_player(s, x, y), 1);
 	return (0);
 }
 
-void	get_textures(t_data *s)
+void	get_textures(t_map *s)
 {
 	s->tex[0] = mlx_load_png("./textures/wood.png");	//no
 	s->tex[1] = mlx_load_png("./textures/pillar.png");	//so
@@ -53,9 +53,9 @@ void	get_textures(t_data *s)
 	// check if all textures are valid
 }
 
-t_data	init(t_data *s, char **argv)
+t_map	init(t_map *s, char **argv)
 {
-	s = malloc(sizeof(t_data));
+	s = malloc(sizeof(t_map));
 	s->mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
 
 	//this is basically all the parsing i did before
