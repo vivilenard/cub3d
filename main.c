@@ -1,5 +1,5 @@
 
-#include "cub3d.h"
+#include "include/cub3d.h"
 
 void	full_exit()
 {
@@ -12,16 +12,7 @@ int	main(int argc, char **argv)
 
 	if (parser(argc, argv))
 		return (1);
-	s = init(&s, argv);
-	s.img = mlx_new_image(s.mlx, WIDTH, HEIGTH);
-	if (mlx_image_to_window(s.mlx, s.img, 0, 0) < 0)
-		perror("img to w");
-	print_coordinates(s);
-	draw_minimap(&s);
-	raycaster(&s);
-
-	mlx_loop_hook(s.mlx, key_bindings, &s);
-	mlx_loop(s.mlx);
-	mlx_terminate(s.mlx);
+	s = init(&s, argv);	//can go into --> parser
+	display(&s);
 	return (0);
 }

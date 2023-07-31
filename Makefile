@@ -13,15 +13,16 @@ MLX = MLX42/build/libmlx42.a -I include -lglfw -L "/$(HOME)/.brew/opt/glfw/lib/"
 endif
 
 SRC =	main.c\
-		raycaster.c\
-		init_data.c\
-		utils.c\
-		parser.c\
-		map_to_coordinate.c\
-		minimap.c\
-		help_functions.c\
-		key_bindings.c\
-		texture.c
+		parser/init_data.c\
+		parser/utils.c\
+		parser/parser.c\
+		parser/map_to_coordinate.c\
+		visuals/display.c \
+		visuals/raycaster.c\
+		visuals/minimap.c\
+		visuals/help_functions.c\
+		visuals/key_bindings.c\
+		visuals/texture.c
 
 OBJ_DIR = obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
@@ -31,6 +32,8 @@ all: $(NAME)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/visuals
+	@mkdir -p $(OBJ_DIR)/parser
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
 	@$(CC) $(FLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME)
