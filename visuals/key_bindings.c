@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 17:50:10 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/01 13:53:08 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,60 @@ void	move_player_horizontal(t_map *s, double mv)
 	}
 }
 
-void	change_direction_keys(t_map *s)
+void	change_direction_keys(t_map *s, double mv)
 {
-	if (mlx_is_key_down(s->mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(s->mlx, MLX_KEY_LEFT) || (mlx_is_key_down(s->mlx, MLX_KEY_Q)))
 	{
-		s->pa -= 0.10;
+		s->pa -= mv;
 		if (s->pa < 0)
 			s->pa += 2 * PI;
 		s->pdx = cos(s->pa);
 		s->pdy = sin(s->pa);
 	}
-	if (mlx_is_key_down(s->mlx, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(s->mlx, MLX_KEY_RIGHT) || (mlx_is_key_down(s->mlx, MLX_KEY_E)))
 	{
-		s->pa += 0.10;
+		s->pa += mv;
 		if (s->pa > 2 * PI)
 			s->pa -= 2 * PI;
 		s->pdx = cos(s->pa);
 		s->pdy = sin(s->pa);
 	}
+}
+
+void	adjust_view(t_map *s, int x, double mv)
+{
+	if ( x - s->mouse_pos < 0 && x >= 0 )
+	{
+		s->pa -= mv;
+		if (s->pa < 0)
+			s->pa += 2 * PI;
+		s->pdx = cos(s->pa);
+		s->pdy = sin(s->pa);
+	}
+	else if ( x - s->mouse_pos > 0 && x <= WIDTH )
+	{
+		s->pa += mv;
+		if (s->pa > 2 * PI)
+			s->pa -= 2 * PI;
+		s->pdx = cos(s->pa);
+		s->pdy = sin(s->pa);
+	}
+}
+
+void	change_direction_mouse(t_map *s, double mv)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+
+	mlx_get_mouse_pos(s->mlx, &x, &y);
+	adjust_view(s, x, mv);
+	if (s->mouse_pos >= WIDTH)
+		s->mouse_pos = WIDTH / 2;
+	else
+		s->mouse_pos = x;
 }
 
 void	key_bindings(void *p)
@@ -78,10 +114,10 @@ void	key_bindings(void *p)
 		mlx_terminate(s->mlx);
 		exit(EXIT_SUCCESS);
 	}
-	move_player_vertical(s, 0.05);
+	move_player_vertical(s, 0.08);
 	move_player_horizontal(s, 0.05);
-	change_direction_keys(s);
-	//change_direction_mouse(s);
+	change_direction_keys(s, 0.10);
+	change_direction_mouse(s, 0.08);
 	draw_minimap(s);
 	raycaster(s);
 }

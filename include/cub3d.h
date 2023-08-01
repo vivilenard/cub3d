@@ -2,8 +2,8 @@
 
 # define CUB3D_H
 
-# define WIDTH 1200
-# define HEIGTH 800
+# define WIDTH 1800
+# define HEIGTH 1200
 # define PI 3.141592653589793238462643383279502884197
 # define DR 0.0174533
 # define RED_RGBT 0xff3800ff
@@ -39,6 +39,7 @@ typedef struct s_map
 	double			p_radius;	//size of player in minimap
 	int				mm_radius;	//size of minimap
 	int				mm_square;	//size of a tile
+	int				mouse_pos;
 }	t_map;
 
 
@@ -60,6 +61,7 @@ typedef struct s_ray
 	double			hit_y;
 	int				lineheight;
 }	t_ray;
+
 
 int		mapwidth(char *map);
 int		mapheight(char *map);
