@@ -8,12 +8,13 @@ void	full_exit()
 
 int	main(int argc, char **argv)
 {
-	t_map	s;
+	int				fd;
+	t_map			s;
+	t_map_params	map_params;
 
-	if (parser(argc, argv))
-		return (1);
-	s = init(&s, argv);	//can go into --> parser
-
+	if (parser(argc, argv, &map_params, fd))
+		return (EXIT_FAILURE);
+	s = init(&s, argv);
 	display(&s);
-	return (0);
+	return (EXIT_SUCCESS);
 }

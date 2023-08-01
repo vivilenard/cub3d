@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:26:54 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 13:17:11 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/01 13:24:09 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,25 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include "../libft/libft.h"
-//#include "../cub3d.h"
 
-static int	file_path_check(char *argv)
+int	parser(int argc, char **argv, t_map_params *map_params, int fd)
+{
+	if (argc != 2)
+		return (quick_exit("Error\nexpected a map in format *.cub\n", fd));
+	fd = open(argv[1], O_RDONLY);
+	if (read(fd, NULL, 0) < 0)
+		return (quick_exit("Error\nread() failed\n", fd));
+	if (!file_path_check(argv[1]))
+		return (quick_exit("Error\nwrong file, expected a map in format *.cub\n", fd));
+	if (read_map(map_params, fd))
+	{
+		// free
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	file_path_check(char *argv)
 {
 	int		i;
 	int		len;
@@ -29,30 +45,15 @@ static int	file_path_check(char *argv)
 	while (i != 5)
 	{
 		if (argv[len + i] != cub[i])
-			return (0);
+			return (EXIT_SUCCESS);
 		i++;
 	}
-	return (1);
+	return (EXIT_FAILURE);
 }
 
-int	parser(int argc, char **argv)
+int	quick_exit(char *str, int fd)
 {
-	int	fd;
-
-	if (argc != 2)
-		return (printf("Error\nexpected a map in format *.cub\n"), 1);
-	fd = open(argv[1], O_RDONLY);
-	if (read(fd, NULL, 0) < 0)
-	{
-		close(fd);
-		return (perror("Error\nread() failed"), 1);
-	}
-	else if (!file_path_check(argv[1]))
-	{
-		close(fd);
-		return (printf("Error\nwrong file, expected a map in format *.cub\n"), 1);
-	}
-	// else
-	// 	read_map();
-	return (0);
+	printf("%s", str);
+	close(fd);
+	return (EXIT_FAILURE);
 }

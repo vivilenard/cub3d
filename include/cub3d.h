@@ -39,6 +39,8 @@ typedef struct s_map
 	double			p_radius;	//size of player in minimap
 	int				mm_radius;	//size of minimap
 	int				mm_square;	//size of a tile
+	int				floor_color;
+	int				ceiling_color;
 }	t_map;
 
 
