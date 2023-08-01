@@ -51,6 +51,7 @@ void	get_textures(t_map *s)
 	s->tex[3] = mlx_load_png("./textures/mossy.png");	//west
 	s->tex[4] = NULL;
 	// check if all textures are valid
+	// and check that mlx_load_png was successful (should return NULL if not ?)
 }
 
 t_map	init(t_map *s, char **argv)

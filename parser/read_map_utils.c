@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:55:38 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/01 13:33:35 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/01 16:19:49 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,7 @@ int	map_init(t_map_params *map_params)
 	map_params->width = 0;
 	map_params->height = 0;
 	map_params->player = 0;
-	map_params->exit = 0;
-	return (EXIT_SUCCESS);
-}
-
-int	map_fill_in(
-	t_map_params *map_params, char c, int *read_bytes, int *width)
-{
+	map_params->doors = 0;
+	map_params->identifier = 0;
 	return (EXIT_SUCCESS);
 }

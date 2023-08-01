@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 16:43:37 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 17:50:42 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/01 17:05:31 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ int	choose_texture(t_map *s, t_ray *r)
 	if (r->hit_side == 0) //side x
 	{
 		if (r->rdx > 0)
-			wall_side = 3; //west
+			wall_side = WEST;
 		else
-			wall_side = 2; //east
+			wall_side = EAST;
 	}
 	else
 	{
 		if (r->rdy < 0)
-			wall_side = 0;//no
+			wall_side = NORTH;
 		else
-			wall_side = 1;//so
+			wall_side = SOUTH;
 	}
 	return (wall_side);
 }

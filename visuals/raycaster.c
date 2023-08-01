@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 10:51:37 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 17:50:32 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/01 17:02:32 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ double	dda(t_map *s, t_ray *r)
 		{
 			r->xmap += r->xmove;
 			r->hit_side = 0;
-			if (s->co[r->xmap][r->ymap] == '1') //is_wall
+			if (s->co[r->xmap][r->ymap] == WALL)
 				break ;
 			r->sidedist_x += r->deltadist_x;
 		}
@@ -33,7 +33,7 @@ double	dda(t_map *s, t_ray *r)
 		{
 			r->ymap += r->ymove;
 			r->hit_side = 1;
-		if (s->co[r->xmap][r->ymap] == '1')
+		if (s->co[r->xmap][r->ymap] == WALL)
 			break ;
 			r->sidedist_y += r->deltadist_y;
 		}
