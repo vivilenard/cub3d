@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 10:51:37 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/01 17:20:31 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/01 17:38:11 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,29 +115,27 @@ void	draw_stripe(t_map *s, t_ray *r, double dist, int px)
 
 void	minimap_perspective(t_map *s, t_ray *ray)
 {
-	// double	x;
-	// double	y;
-	// double	pixel_x;
-	// double	pixel_y;
-	// int		pixels;
+	double	x;
+	double	y;
+	double	pixel_x;
+	double	pixel_y;
+	int		pixels;
 
-	// x = ray->hit_x - s->px;
-	// y = ray->hit_y - s->py;
-	// pixels = sqrt((x * x) + (y * y));
-	// printf("pixels %d\n", pixels);
-	// x /= pixels;
-	// y /= pixels;
-	// pixel_x = s->px;
-	// pixel_y = s->py;
-	// while (pixels)
-	// {
-	// 	mlx_put_pixel(s->minimap, (int)pixel_x, (int)pixel_y, 0xFF0000FF);
-	// 	printf("%d \\ %d \n", (int)pixel_x, (int)pixel_y);
-	// 	pixel_x += x;
-	// 	pixel_y += y;
-	// 	--pixels; 
-	// }
-	to_square(s, ray->hit_x, ray->hit_y, 0.05);
+	x = (ray->hit_x - s->px) * s->mm_square;
+	y = (ray->hit_y - s->py) * s->mm_square;
+	pixels = (sqrt((x * x) + (y * y)));
+	x /= pixels;
+	y /= pixels;
+	pixel_x = s->px * s->mm_square;
+	pixel_y = s->py * s->mm_square;
+	while (pixels)
+	{
+		mlx_put_pixel(s->minimap, (int)(pixel_x) , (int)(pixel_y), 0xFF0000FF);
+		pixel_x += x;
+		pixel_y += y;
+		--pixels; 
+	}
+	//to_square(s, ray->hit_x, ray->hit_y, 0.05);
 }
 
 void	raycaster(t_map *s)
