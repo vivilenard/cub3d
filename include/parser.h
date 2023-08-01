@@ -7,11 +7,11 @@
 
 typedef enum e_map_component
 {
-	SPACE,
-	WALL,
-	PLAYER,
-	EXIT,
-	OPEN_EXIT,
+	SPACE, // 0
+	WALL, // 1
+	PLAYER, // N, S, W, E
+	CLOSED_DOOR, // D
+	OPENED_DOOR, // 
 	ERROR,
 }	t_map_component;
 
@@ -46,9 +46,8 @@ typedef struct s_map_params
 	int				player;
 	int				player_x;
 	int				player_y;
-	int				exit;
-	int				exit_x;
-	int				exit_y;
+	int				doors;
+	int				identifier;
 	bool			*visited;
 }	t_map_params;
 
@@ -59,21 +58,15 @@ int	quick_exit(char *str, int fd);
 
 //	read_map.c
 int	read_map(t_map_params *map_params, int fd);
-int	read_bytes_check(
-		t_map_params *map_params, int *read_bytes, int *width_temp, char c);
+int	map_verify(t_map_params *map_params);
 
 //	read_map_utils.c
 int	map_init(t_map_params *map_params);
-int	map_fill_in(
-		t_map_params *map_params, char c, int *read_bytes, int *width);
 
 #endif
 /*
-- implement valid map path in main
-- 6 type identifier
-if not: add default or trow error
 - check closed walls with dfs ?
 
 commit
-"change main(), start read_map()"
+"replace with enum in choose_texture() and dda()"
 */

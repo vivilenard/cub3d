@@ -21,6 +21,16 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 
+typedef enum e_map_component	t_map_component;
+
+typedef enum e_side
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
+}	t_side;
+
 typedef struct s_map
 {
 	struct s_ray	*ray;
@@ -41,7 +51,6 @@ typedef struct s_map
 	int				mm_square;	//size of a tile
 	int				mouse_pos;
 }	t_map;
-
 
 typedef struct s_ray
 {
