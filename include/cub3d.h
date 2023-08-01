@@ -91,6 +91,8 @@ void	to_square(t_map *s, double x, double y, double p_radius);
 void	move_player_vertical(t_map *s, double step);
 void	move_player_horizontal(t_map *s, double step);
 void	key_bindings(void *p);
+void	change_direction_mouse(t_map *s, double mv);
+void	adjust_view(t_map *s, int x, double mv);
 
 //raycaster
 void	raycaster(t_map *s);

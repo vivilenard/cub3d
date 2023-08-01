@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 17:50:19 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/01 17:31:27 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	calculate_proportions(t_map *s)
 		map_radius = s->map_width;
 
 	s->mm_square = s->mm_radius / map_radius;
+	//printf("mini %d\n", s->mm_square);
 }
 
 void	draw_view(t_map *s)
@@ -62,6 +63,6 @@ int	draw_minimap(t_map *s)
 		full_exit();
 	scan_coordinates(s, print_wall);
 	draw_player(s);
-	draw_view(s);
+	//draw_view(s);
 	return (1);
 }

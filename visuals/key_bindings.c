@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/01 13:53:08 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/01 17:44:31 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,42 +66,6 @@ void	change_direction_keys(t_map *s, double mv)
 		s->pdx = cos(s->pa);
 		s->pdy = sin(s->pa);
 	}
-}
-
-void	adjust_view(t_map *s, int x, double mv)
-{
-	if ( x - s->mouse_pos < 0 && x >= 0 )
-	{
-		s->pa -= mv;
-		if (s->pa < 0)
-			s->pa += 2 * PI;
-		s->pdx = cos(s->pa);
-		s->pdy = sin(s->pa);
-	}
-	else if ( x - s->mouse_pos > 0 && x <= WIDTH )
-	{
-		s->pa += mv;
-		if (s->pa > 2 * PI)
-			s->pa -= 2 * PI;
-		s->pdx = cos(s->pa);
-		s->pdy = sin(s->pa);
-	}
-}
-
-void	change_direction_mouse(t_map *s, double mv)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-
-	mlx_get_mouse_pos(s->mlx, &x, &y);
-	adjust_view(s, x, mv);
-	if (s->mouse_pos >= WIDTH)
-		s->mouse_pos = WIDTH / 2;
-	else
-		s->mouse_pos = x;
 }
 
 void	key_bindings(void *p)

@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 10:51:37 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 17:50:32 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/01 17:38:11 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_ray	*init_ray(t_map *s, double angle, int r)
 }
 
 
-void	draw_line(t_map *s, t_ray *r, double dist, int px)
+void	draw_stripe(t_map *s, t_ray *r, double dist, int px)
 {
 	int	drawstart;
 	int drawend;
@@ -111,6 +111,31 @@ void	draw_line(t_map *s, t_ray *r, double dist, int px)
 		drawend = HEIGTH - 1;
 	take_texture(s, drawstart, drawend, px);
 	
+}
+
+void	minimap_perspective(t_map *s, t_ray *ray)
+{
+	double	x;
+	double	y;
+	double	pixel_x;
+	double	pixel_y;
+	int		pixels;
+
+	x = (ray->hit_x - s->px) * s->mm_square;
+	y = (ray->hit_y - s->py) * s->mm_square;
+	pixels = (sqrt((x * x) + (y * y)));
+	x /= pixels;
+	y /= pixels;
+	pixel_x = s->px * s->mm_square;
+	pixel_y = s->py * s->mm_square;
+	while (pixels)
+	{
+		mlx_put_pixel(s->minimap, (int)(pixel_x) , (int)(pixel_y), 0xFF0000FF);
+		pixel_x += x;
+		pixel_y += y;
+		--pixels; 
+	}
+	//to_square(s, ray->hit_x, ray->hit_y, 0.05);
 }
 
 void	raycaster(t_map *s)
@@ -127,8 +152,8 @@ void	raycaster(t_map *s)
 		ray = init_ray(s, angle, px);
 		init_dda(s, ray);
 		dda(s, ray);
-		to_square(s, ray->hit_x, ray->hit_y, 0.05);
-		draw_line(s, ray, ray_dist(s, ray) * cos(s->pa - ray->ra) , px);
+		minimap_perspective(s, ray);
+		draw_stripe(s, ray, ray_dist(s, ray) * cos(s->pa - ray->ra) , px);
 		px++;
 	}
 	if (mlx_image_to_window(s->mlx, s->img, 0, 0) < 0)

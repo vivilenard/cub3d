@@ -1,5 +1,5 @@
 
-NAME = cub3d
+NAME = cub3D
 CC = cc
 FLAGS = -Wall -Werror -Wextra
 
@@ -14,17 +14,22 @@ endif
 
 SRC =	main.c\
 		parser/init_data.c\
-		parser/utils.c\
-		parser/parser.c\
 		parser/map_to_coordinate.c\
+		parser/parser.c\
+		parser/read_map.c\
+		parser/read_map_utils.c\
+		parser/utils.c\
 		visuals/display.c \
 		visuals/raycaster.c\
 		visuals/minimap.c\
 		visuals/help_functions.c\
 		visuals/key_bindings.c\
+		visuals/mouse_bindings.c\
 		visuals/texture.c
 
 OBJ_DIR = obj
+VISUALS_DIR = /visuals
+PARSE_DIR = /parser
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 LIBFT = libft/libft.a
 
@@ -32,8 +37,8 @@ all: $(NAME)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(OBJ_DIR)/visuals
-	@mkdir -p $(OBJ_DIR)/parser
+	@mkdir -p $(OBJ_DIR)$(VISUALS_DIR)
+	@mkdir -p $(OBJ_DIR)$(PARSE_DIR)
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
 	@$(CC) $(FLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME)
@@ -62,6 +67,6 @@ build:
 	@cd MLX42 && cmake -B build && cmake --build build -j4
 
 simple:
-	make re && make clean && ./cub3d maps/simple.cub
+	make re && make clean && ./cub3D maps/simple.cub
 
 .PHONY: all clean fclean re build simple
