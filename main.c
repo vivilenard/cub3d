@@ -3,6 +3,7 @@
 
 void	full_exit()
 {
+	//system ("leaks cub3D");
 	exit(0);
 }
 
@@ -16,5 +17,6 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	s = init(&s, argv);
 	display(&s);
+
 	return (EXIT_SUCCESS);
 }

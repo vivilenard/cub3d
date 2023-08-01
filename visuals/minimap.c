@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 17:50:19 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/01 14:10:14 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int	draw_minimap(t_map *s)
 		full_exit();
 	scan_coordinates(s, print_wall);
 	draw_player(s);
-	draw_view(s);
+	//draw_view(s);
 	return (1);
 }

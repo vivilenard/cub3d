@@ -2,8 +2,8 @@
 
 # define CUB3D_H
 
-# define WIDTH 1200
-# define HEIGTH 800
+# define WIDTH 1800
+# define HEIGTH 1200
 # define PI 3.141592653589793238462643383279502884197
 # define DR 0.0174533
 # define RED_RGBT 0xff3800ff
@@ -41,6 +41,7 @@ typedef struct s_map
 	int				mm_square;	//size of a tile
 	int				floor_color;
 	int				ceiling_color;
+	int				mouse_pos;
 }	t_map;
 
 
@@ -62,6 +63,7 @@ typedef struct s_ray
 	double			hit_y;
 	int				lineheight;
 }	t_ray;
+
 
 int		mapwidth(char *map);
 int		mapheight(char *map);
@@ -91,10 +93,12 @@ void	to_square(t_map *s, double x, double y, double p_radius);
 void	move_player_vertical(t_map *s, double step);
 void	move_player_horizontal(t_map *s, double step);
 void	key_bindings(void *p);
+void	change_direction_mouse(t_map *s, double mv);
+void	adjust_view(t_map *s, int x, double mv);
 
 //raycaster
 void	raycaster(t_map *s);
-void	draw_line(t_map *s, t_ray *r, double dist, int px);
+void	draw_stripe(t_map *s, t_ray *r, double dist, int px);
 void	to_vert_line(t_map *s, int p1, int p2, int px);
 t_ray	*init_ray(t_map *s, double angle, int r);
 void	init_dda(t_map *s, t_ray *r);

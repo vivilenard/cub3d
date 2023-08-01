@@ -57,7 +57,7 @@ t_map	init(t_map *s, char **argv)
 {
 	s = malloc(sizeof(t_map));
 	s->mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
-
+	s->mouse_pos = 0;
 	//this is basically all the parsing i did before
 	map_to_koordinate(s, argv[1]);
 	scan_coordinates(s, player_position);

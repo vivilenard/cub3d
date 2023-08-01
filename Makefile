@@ -24,6 +24,7 @@ SRC =	main.c\
 		visuals/minimap.c\
 		visuals/help_functions.c\
 		visuals/key_bindings.c\
+		visuals/mouse_bindings.c\
 		visuals/texture.c
 
 OBJ_DIR = obj
@@ -66,6 +67,6 @@ build:
 	@cd MLX42 && cmake -B build && cmake --build build -j4
 
 simple:
-	make re && make clean && ./cub3d maps/simple.cub
+	make re && make clean && ./cub3D maps/simple.cub
 
 .PHONY: all clean fclean re build simple
