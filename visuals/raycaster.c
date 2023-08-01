@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   raycaster.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 10:51:37 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/01 17:47:15 by vlenard          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
@@ -25,7 +14,7 @@ double	dda(t_map *s, t_ray *r)
 		{
 			r->xmap += r->xmove;
 			r->hit_side = 0;
-			if (s->co[r->xmap][r->ymap] == WALL)
+			if (s->co[r->xmap][r->ymap] == '1')
 				break ;
 			r->sidedist_x += r->deltadist_x;
 		}
@@ -33,7 +22,7 @@ double	dda(t_map *s, t_ray *r)
 		{
 			r->ymap += r->ymove;
 			r->hit_side = 1;
-		if (s->co[r->xmap][r->ymap] == WALL)
+		if (s->co[r->xmap][r->ymap] == '1')
 			break ;
 			r->sidedist_y += r->deltadist_y;
 		}
