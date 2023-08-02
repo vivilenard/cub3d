@@ -11,6 +11,7 @@ MLX = MLX42/build/libmlx42.a -I include -lglfw -L/"opt/homebrew/Cellar/glfw/3.3.
 else
 MLX = MLX42/build/libmlx42.a -I include -lglfw -L "/$(HOME)/.brew/opt/glfw/lib/"
 endif
+SAN_LDFLAG = -L../LeakSanitizer -llsan -lc++ -Wno-gnu-include-next -I ../LeakSanitize
 
 SRC =	main.c\
 		parser/init_data.c\
@@ -41,7 +42,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(PARSE_DIR)
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
-	@$(CC) $(FLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME)
+	@$(CC) $(FLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) $(SAN_LDFLAG)
 	@printf "$(GREEN)Compiled$(RESET)\n"
 
 $(LIBFT):
