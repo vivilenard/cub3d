@@ -5,11 +5,10 @@
 # define WIDTH 1800
 # define HEIGTH 1200
 # define PI 3.141592653589793238462643383279502884197
-# define DR 0.0174533
-# define RED_RGBT 0xff3800ff
-# define BLUE_RGBT 0xa7c5f9ff
-# define GREEN_RGBT 0x9acd32ff
-# define YELLOW_RGBT 0xffff00ff
+// # define RED_RGBT 0xff3800ff
+// # define BLUE_RGBT 0xa7c5f9ff
+// # define GREEN_RGBT 0x9acd32ff
+// # define YELLOW_RGBT 0xffff00ff
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -29,6 +28,7 @@ typedef enum e_side
 	SOUTH,
 	EAST,
 	WEST,
+	DOOR,
 }	t_side;
 
 typedef struct s_map
@@ -69,6 +69,11 @@ typedef struct s_ray
 	double			hit_x;
 	double			hit_y;
 	int				lineheight;
+	int				door;
+	int				reach_door;
+	int				door_x;
+	int				door_y;
+	double			raylength;
 }	t_ray;
 
 
@@ -111,7 +116,7 @@ void	to_vert_line(t_map *s, int p1, int p2, int px);
 t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int r);
 void	init_dda(t_map *s, t_ray *r);
 double	ray_dist(t_map *s, t_ray *r);
-double	dda(t_map *s, t_ray *r);
+double	dda(t_map *s, t_ray *r, int px);
 double	delta_dist(double side);
 
 //texture

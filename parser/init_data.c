@@ -49,7 +49,8 @@ void	get_textures(t_map *s)
 	s->tex[1] = mlx_load_png("./textures/pillar.png");	//so
 	s->tex[2] = mlx_load_png("./textures/greystone.png");	//east
 	s->tex[3] = mlx_load_png("./textures/mossy.png");	//west
-	s->tex[4] = NULL;
+	s->tex[4] = mlx_load_png("./textures/redbrick.png"); //door
+	s->tex[5] = NULL;
 	// check if all textures are valid
 	// and check that mlx_load_png was successful (should return NULL if not ?)
 }

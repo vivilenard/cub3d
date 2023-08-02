@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 16:43:37 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/01 17:05:31 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/02 13:55:44 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	choose_texture(t_map *s, t_ray *r)
 {
 	int	wall_side;
 	
+	if (r->door == 1)
+		return (DOOR);
 	if (r->hit_side == 0) //side x
 	{
 		if (r->rdx > 0)

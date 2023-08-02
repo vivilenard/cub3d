@@ -43,7 +43,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(PARSE_DIR)
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
-	@$(CC) $(FLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) $(SAN_LDFLAG)
+	@$(CC) $(FLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) #$(SAN_LDFLAG)
 	@printf "$(GREEN)Compiled$(RESET)\n"
 
 $(LIBFT):

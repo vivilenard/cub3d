@@ -11,7 +11,7 @@ void	full_exit(t_map *s)
 		mlx_delete_texture(s->tex[i]);
 		i++;
 	}
-	system ("leaks cub3D");
+	//system ("leaks cub3D");
 	exit(0);
 }
 

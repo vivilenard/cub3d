@@ -14,6 +14,7 @@ t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int r)
 	ray->hit_x = 0;
 	ray->hit_y = 0;
 	ray->lineheight = 0;
+	ray->door = 0;
 	return (ray);
 }
 
@@ -61,20 +62,21 @@ void	minimap_perspective(t_map *s, t_ray *ray)
 
 void	raycaster(t_map *s, t_ray *ray)
 {
-
 	double angle;
 
 	angle = 1.15 / WIDTH;  //1.15 ~ 66 degree
 	int	px = 0;
-	
+	ray->raylength = 0;
+	ray->door_x = -1;
+	ray->door_y = -1;
 	memset(s->img->pixels, 255, s->img->width * s->img->height * sizeof(int32_t));
 	while (px < WIDTH)
 	{
 		ray = init_ray(s, ray, angle, px);
 		init_dda(s, ray);
-		dda(s, ray);
+		dda(s, ray, px);
 		minimap_perspective(s, ray);
-		draw_stripe(s, ray, ray_dist(s, ray) * cos(s->pa - ray->ra) , px);
+		draw_stripe(s, ray, ray->raylength, px);
 		px++;
 	}
 }

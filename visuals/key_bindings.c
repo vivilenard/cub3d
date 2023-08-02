@@ -6,12 +6,18 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/02 12:59:47 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/02 16:41:09 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+// int		collide(char c)
+// {
+// 	if (c == WALL || c == CLOSED_DOOR)
+// 		return (1);
+// 	return (0);
+// }
 void	move_player_vertical(t_map *s, double mv)
 {
 	if (mlx_is_key_down(s->mlx, MLX_KEY_W))
@@ -68,6 +74,18 @@ void	change_direction_keys(t_map *s, double mv)
 	}
 }
 
+void	door_mov(t_map *s)
+{
+	if (mlx_is_key_down(s->mlx, MLX_KEY_SPACE))
+	{
+		if (s->ray->door_x < 0 && s->ray->door_y < 0)
+			return ;
+		if (s->co[s->ray->door_x][s->ray->door_y] == CLOSED_DOOR)
+			s->co[s->ray->door_x][s->ray->door_y] = SPACE;
+		
+	}
+}
+
 void	key_bindings(void *p)
 {
 	t_map *s;
@@ -83,6 +101,7 @@ void	key_bindings(void *p)
 	move_player_horizontal(s, 0.05);
 	change_direction_keys(s, 0.10);
 	change_direction_mouse(s, 0.06);
+	door_mov(s);
 	draw_minimap(s);
 	raycaster(s, s->ray);
 }

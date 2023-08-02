@@ -7,11 +7,11 @@
 
 typedef enum e_map_component
 {
-	SPACE, // 0
-	WALL, // 1
+	SPACE = '0',
+	WALL = '1', // 1
 	PLAYER, // N, S, W, E
-	CLOSED_DOOR, // D
-	OPENED_DOOR, // 
+	CLOSED_DOOR = 'D', // D
+	OPENED_DOOR = 'd',
 	ERROR,
 }	t_map_component;
 
