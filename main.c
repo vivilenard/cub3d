@@ -5,7 +5,12 @@ void	full_exit(t_map *s)
 {
 	free(s->ray);
 	ft_free2d(s->co);
-	//free(s);
+	int i = 0;
+	while (s->tex[i])
+	{
+		mlx_delete_texture(s->tex[i]);
+		i++;
+	}
 	system ("leaks cub3D");
 	exit(0);
 }

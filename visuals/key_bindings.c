@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/02 12:02:59 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/02 12:59:47 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,11 @@ void	key_bindings(void *p)
 		mlx_terminate(s->mlx);
 		full_exit(s);
 	}
+	mlx_set_cursor_mode(s->mlx, MLX_MOUSE_HIDDEN);
 	move_player_vertical(s, 0.08);
 	move_player_horizontal(s, 0.05);
 	change_direction_keys(s, 0.10);
-	change_direction_mouse(s, 0.08);
+	change_direction_mouse(s, 0.06);
 	draw_minimap(s);
 	raycaster(s, s->ray);
 }

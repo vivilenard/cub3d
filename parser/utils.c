@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 18:38:49 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 17:52:12 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/02 13:24:47 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	mapheight(char *map)
 	while (line)
 	{
 		i++;
+		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
@@ -43,6 +44,7 @@ int	mapwidth(char *map)
 	{
 		if (len < ft_strlen(line))
 			len = ft_strlen(line);
+		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
