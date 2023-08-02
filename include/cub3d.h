@@ -92,6 +92,7 @@ int		to_rgbt(int r, int g, int b, int t);
 int		display(t_map *s);
 
 //minimap
+void	minimap(t_map *s);
 int		draw_minimap(t_map *s);
 void	print_square(mlx_image_t *img, int x, int y, int radius, uint32_t color);
 void	to_square(t_map *s, double x, double y, double p_radius);
@@ -104,10 +105,10 @@ void	change_direction_mouse(t_map *s, double mv);
 void	adjust_view(t_map *s, int x, double mv);
 
 //raycaster
-void	raycaster(t_map *s);
+void	raycaster(t_map *s, t_ray *ray);
 void	draw_line(t_map *s, t_ray *r, double dist, int px);
 void	to_vert_line(t_map *s, int p1, int p2, int px);
-t_ray	*init_ray(t_map *s, double angle, int r);
+t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int r);
 void	init_dda(t_map *s, t_ray *r);
 double	ray_dist(t_map *s, t_ray *r);
 double	dda(t_map *s, t_ray *r);

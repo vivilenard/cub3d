@@ -1,76 +1,8 @@
 
 #include "../include/cub3d.h"
 
-double	delta_dist(double side)
-{
-	return (fabs(1 / side));
-}
-
-double	dda(t_map *s, t_ray *r)
-{
-	while (1)
-	{
-		if (r->sidedist_x < r->sidedist_y)
-		{
-			r->xmap += r->xmove;
-			r->hit_side = 0;
-			if (s->co[r->xmap][r->ymap] == '1')
-				break ;
-			r->sidedist_x += r->deltadist_x;
-		}
-		else
-		{
-			r->ymap += r->ymove;
-			r->hit_side = 1;
-		if (s->co[r->xmap][r->ymap] == '1')
-			break ;
-			r->sidedist_y += r->deltadist_y;
-		}
-	}
-	r->hit_x = s->px + r->rdx * ray_dist(s, r);
-	r->hit_y = s->py + r->rdy * ray_dist(s, r);
-	return (0);
-}
-
-
-double	ray_dist(t_map *s, t_ray *r)
-{
-	if (r->hit_side == 0)
-		return (r->sidedist_x);
-	return (r->sidedist_y);
-}
-
-void	init_dda(t_map *s, t_ray *r)
-{
-	if (r->rdx < 0)
-	{
-		r->xmove = -1;
-		r->sidedist_x = delta_dist(r->rdx) * ((double)(s->px - r->xmap));
-	}
-	else
-	{
-		r->xmove = 1;
-		r->sidedist_x = delta_dist(r->rdx) * ((double)(r->xmap + 1) - s->px);
-	}
-	if (r->rdy < 0)
-	{
-		r->ymove = -1;
-		r->sidedist_y = delta_dist(r->rdy) * ((double)(s->py - r->ymap));
-	}
-	else
-	{
-		r->ymove = 1;
-		r->sidedist_y = delta_dist(r->rdy) * ((double)(r->ymap + 1) - s->py);
-	}
-}
-
-t_ray	*init_ray(t_map *s, double angle, int r)
-{
-	t_ray *ray;
-
-	ray = malloc(sizeof(t_ray));
-	s->ray = ray;
-	
+t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int r)
+{	
 	ray->ra = s->pa - angle * WIDTH / 2 + r * angle;
 	ray->rdx = cos(ray->ra);
 	ray->rdy = sin(ray->ra);
@@ -127,9 +59,9 @@ void	minimap_perspective(t_map *s, t_ray *ray)
 	//to_square(s, ray->hit_x, ray->hit_y, 0.05);
 }
 
-void	raycaster(t_map *s)
+void	raycaster(t_map *s, t_ray *ray)
 {
-	t_ray	*ray;
+
 	double angle;
 
 	angle = 1.15 / WIDTH;  //1.15 ~ 66 degree
@@ -138,15 +70,13 @@ void	raycaster(t_map *s)
 	memset(s->img->pixels, 255, s->img->width * s->img->height * sizeof(int32_t));
 	while (px < WIDTH)
 	{
-		ray = init_ray(s, angle, px);
+		ray = init_ray(s, ray, angle, px);
 		init_dda(s, ray);
 		dda(s, ray);
 		minimap_perspective(s, ray);
 		draw_stripe(s, ray, ray_dist(s, ray) * cos(s->pa - ray->ra) , px);
 		px++;
 	}
-	if (mlx_image_to_window(s->mlx, s->img, 0, 0) < 0)
-		perror("img to w");
 }
 
 

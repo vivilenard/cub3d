@@ -1,7 +1,7 @@
 
 NAME = cub3D
 CC = cc
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra 
 
 GREEN = \033[0;32m
 RESET = \033[0m
@@ -22,6 +22,7 @@ SRC =	main.c\
 		parser/utils.c\
 		visuals/display.c \
 		visuals/raycaster.c\
+		visuals/dda.c\
 		visuals/minimap.c\
 		visuals/help_functions.c\
 		visuals/key_bindings.c\
@@ -42,7 +43,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(PARSE_DIR)
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
-	@$(CC) $(FLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) $(SAN_LDFLAG)
+	@$(CC) $(FLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) #$(SAN_LDFLAG)
 	@printf "$(GREEN)Compiled$(RESET)\n"
 
 $(LIBFT):

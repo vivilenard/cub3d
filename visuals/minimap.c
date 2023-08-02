@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/01 17:31:27 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/02 11:22:56 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,16 @@ void	draw_view(t_map *s)
 
 int	draw_minimap(t_map *s)
 {
-	// printf("player pos: %f/%f\n", s->px, s->py);
-	// printf("player view: %f/%f\n", s->pdx, s->pdy);
+	scan_coordinates(s, print_wall);
+	draw_player(s);
+	return (1);
+}
+
+void	minimap(t_map *s)
+{
 	calculate_proportions(s);
 	s->minimap = mlx_new_image(s->mlx, s->mm_radius, s->mm_radius);
 	if (mlx_image_to_window(s->mlx, s->minimap, 0, 0) < 0)
 		full_exit();
-	scan_coordinates(s, print_wall);
-	draw_player(s);
-	//draw_view(s);
-	return (1);
+	draw_minimap(s);
 }

@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:19:19 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 17:49:02 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/02 11:10:13 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	map_to_koordinate(t_map *s, char *map)
 	while (line)
 	{
 		assign_line(line, s, line_y); 	//here i assign each line horizontally, meaning for each y (= number of line) is assign all x values
+		free(line);
 		line_y++;
 		line = get_next_line(fd);
 	}

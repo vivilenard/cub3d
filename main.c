@@ -1,9 +1,12 @@
 
 #include "include/cub3d.h"
 
-void	full_exit()
+void	full_exit(t_map *s)
 {
-	//system ("leaks cub3D");
+	free(s->ray);
+	ft_free2d(s->co);
+	//free(s);
+	system ("leaks cub3D");
 	exit(0);
 }
 
