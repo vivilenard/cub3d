@@ -2,8 +2,8 @@
 
 # define CUB3D_H
 
-# define WIDTH 1800
-# define HEIGTH 1200
+# define WIDTH 1400
+# define HEIGTH 800
 # define PI 3.141592653589793238462643383279502884197
 // # define RED_RGBT 0xff3800ff
 // # define BLUE_RGBT 0xa7c5f9ff
@@ -37,7 +37,7 @@ typedef struct s_map
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	mlx_image_t		*minimap;
-	mlx_texture_t	*tex[10];	//space for 10 textures -- dont know how much we need
+	mlx_texture_t	*tex[6];	//space for 10 textures -- dont know how much we need
 	char			**co;
 	int				map_height;
 	int				map_width;
@@ -124,5 +124,8 @@ double	delta_dist(double side);
 void	take_texture(t_map *s, int p1, int p2, int px);
 int		color_tex(t_map *s, t_ray *r, int py);
 int		choose_texture(t_map *s, t_ray *r);
+void	draw_ceiling(t_map *s, int p_end, int px);
+void	draw_floor(t_map *s, int p_start, int px);
+
 
 #endif

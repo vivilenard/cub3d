@@ -18,7 +18,6 @@ t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int r)
 	return (ray);
 }
 
-
 void	draw_stripe(t_map *s, t_ray *r, double dist, int px)
 {
 	int	drawstart;
@@ -31,7 +30,9 @@ void	draw_stripe(t_map *s, t_ray *r, double dist, int px)
 	drawend = HEIGTH / 2 + r->lineheight / 2;
 	if (drawend >= HEIGTH)
 		drawend = HEIGTH - 1;
+	draw_ceiling(s, drawstart - 1, px);
 	take_texture(s, drawstart, drawend, px);
+	draw_floor(s, drawend, px);
 	
 }
 
@@ -57,7 +58,6 @@ void	minimap_perspective(t_map *s, t_ray *ray)
 		pixel_y += y;
 		--pixels; 
 	}
-	//to_square(s, ray->hit_x, ray->hit_y, 0.05);
 }
 
 void	raycaster(t_map *s, t_ray *ray)

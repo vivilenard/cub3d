@@ -9,7 +9,7 @@ RESET = \033[0m
 ifeq ($(USER), elenakulichkova)
 MLX = MLX42/build/libmlx42.a -I include -lglfw -L/"opt/homebrew/Cellar/glfw/3.3.8/lib/"
 else
-MLX = MLX42/build/libmlx42.a -I include -lglfw -L "/$(HOME)/.brew/opt/glfw/lib/"
+MLX = MLX42/build/libmlx42.a -I include -lglfw #-L "/$(HOME)/.brew/opt/glfw/lib/"
 endif
 SAN_LDFLAG = -L../LeakSanitizer -llsan -lc++ -Wno-gnu-include-next -I ../LeakSanitize
 
