@@ -5,6 +5,8 @@
 # define WIDTH 1400
 # define HEIGTH 800
 # define PI 3.141592653589793238462643383279502884197
+# define N_ENEMIES 6
+# define N_TEX 6
 // # define RED_RGBT 0xff3800ff
 // # define BLUE_RGBT 0xa7c5f9ff
 // # define GREEN_RGBT 0x9acd32ff
@@ -34,25 +36,27 @@ typedef enum e_side
 
 typedef struct s_map
 {
-	struct s_ray	*ray;
-	mlx_t			*mlx;
-	mlx_image_t		*img;
-	mlx_image_t		*minimap;
-	mlx_texture_t	*tex[6];	//space for 10 textures -- dont know how much we need
-	color			floor;
-	color			ceiling;
-	char			**co;
-	int				map_height;
-	int				map_width;
-	double			px;			//player position
-	double			py;
-	double			pa;			//player angle
-	double			pdx; 		//player direction vector
-	double			pdy;
-	double			p_radius;	//size of player in minimap
-	int				mm_radius;	//size of minimap
-	int				mm_square;	//size of a tile
-	int				mouse_pos;
+	struct s_ray		*ray;
+	struct s_character	*enemy[N_ENEMIES];
+	mlx_t				*mlx;
+	mlx_image_t			*img;
+	mlx_image_t			*minimap;
+	mlx_texture_t		*tex[N_TEX];	//space for 10 textures -- dont know how much we need
+	mlx_texture_t		*enemy_tex;
+	color				floor;
+	color				ceiling;
+	char				**co;
+	int					map_height;
+	int					map_width;
+	double				px;			//player position
+	double				py;
+	double				pa;			//player angle
+	double				pdx; 		//player direction vector
+	double				pdy;
+	double				p_radius;	//size of player in minimap
+	int					mm_radius;	//size of minimap
+	int					mm_square;	//size of a tile
+	int					mouse_pos;
 }	t_map;
 
 typedef struct s_character
@@ -139,6 +143,12 @@ int		color_tex(t_map *s, t_ray *r, int py);
 int		choose_texture(t_map *s, t_ray *r);
 void	draw_ceiling(t_map *s, int p_end, int px);
 void	draw_floor(t_map *s, int p_start, int px);
+
+//enemies
+t_character	*create_enemy(t_map *s, int n);
+int			position_enemy(t_map *s, int x, int y);
+void		get_enemies(t_map *s);
+
 
 
 #endif

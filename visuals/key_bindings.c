@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/02 16:41:09 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/04 15:20:07 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,11 @@ void	door_mov(t_map *s)
 	}
 }
 
+// void	move_enemies(t_map *s, t_ray *ray)
+// {
+	
+// }
+
 void	key_bindings(void *p)
 {
 	t_map *s;
@@ -104,4 +109,5 @@ void	key_bindings(void *p)
 	door_mov(s);
 	draw_minimap(s);
 	raycaster(s, s->ray);
+	//move_enemies(s, s->ray);
 }

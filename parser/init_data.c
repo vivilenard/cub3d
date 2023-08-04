@@ -52,6 +52,8 @@ void	get_textures(t_map *s)
 	s->tex[3] = mlx_load_png("./textures/mossy.png");	//west
 	s->tex[4] = mlx_load_png("./textures/redbrick.png"); //door
 	s->tex[5] = NULL;
+	//s->enemy_tex = mlx_load_png("./textures/browndog/103.bmp"); //door
+
 	s->floor = 0x00000000;
 	s->ceiling = 0x00000000;
 	// check if all textures are valid
@@ -66,6 +68,7 @@ t_map	init(t_map *s, char **argv)
 	map_to_koordinate(s, argv[1]);
 	scan_coordinates(s, player_position);
 	get_textures(s);
+	get_enemies(s);
 	return (*s);
 }
 

@@ -27,11 +27,13 @@ SRC =	main.c\
 		visuals/help_functions.c\
 		visuals/key_bindings.c\
 		visuals/mouse_bindings.c\
-		visuals/texture.c
+		visuals/texture.c\
+		enemy/init_enemies.c
 
 OBJ_DIR = obj
 VISUALS_DIR = /visuals
 PARSE_DIR = /parser
+ENEMY_DIR = /enemy
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 LIBFT = libft/libft.a
 
@@ -41,9 +43,10 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)$(VISUALS_DIR)
 	@mkdir -p $(OBJ_DIR)$(PARSE_DIR)
+	@mkdir -p $(OBJ_DIR)$(ENEMY_DIR)
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
-	@$(CC) $(FLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) $(SAN_LDFLAG)
+	@$(CC) $(FLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) #$(SAN_LDFLAG)
 	@printf "$(GREEN)Compiled$(RESET)\n"
 
 $(LIBFT):
