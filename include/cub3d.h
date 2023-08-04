@@ -21,6 +21,7 @@
 # include "../libft/libft.h"
 
 typedef enum e_map_component	t_map_component;
+typedef uint32_t	color;
 
 typedef enum e_side
 {
@@ -38,6 +39,8 @@ typedef struct s_map
 	mlx_image_t		*img;
 	mlx_image_t		*minimap;
 	mlx_texture_t	*tex[6];	//space for 10 textures -- dont know how much we need
+	color			floor;
+	color			ceiling;
 	char			**co;
 	int				map_height;
 	int				map_width;
@@ -51,6 +54,17 @@ typedef struct s_map
 	int				mm_square;	//size of a tile
 	int				mouse_pos;
 }	t_map;
+
+typedef struct s_character
+{
+	double	x;
+	double	y;
+	double	a;
+	double	dx;
+	double	dy;
+	double	radius;
+} t_character;
+
 
 typedef struct s_ray
 {
@@ -70,10 +84,9 @@ typedef struct s_ray
 	double			hit_y;
 	int				lineheight;
 	int				door;
-	int				reach_door;
+	double			raylength;
 	int				door_x;
 	int				door_y;
-	double			raylength;
 }	t_ray;
 
 

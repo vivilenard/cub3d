@@ -9,7 +9,7 @@ RESET = \033[0m
 ifeq ($(USER), elenakulichkova)
 MLX = MLX42/build/libmlx42.a -I include -lglfw -L/"opt/homebrew/Cellar/glfw/3.3.8/lib/"
 else
-MLX = MLX42/build/libmlx42.a -I include -lglfw #-L "/$(HOME)/.brew/opt/glfw/lib/"
+MLX = MLX42/build/libmlx42.a -I include -lglfw -L "/$(HOME)/.brew/opt/glfw/lib/"
 endif
 SAN_LDFLAG = -L../LeakSanitizer -llsan -lc++ -Wno-gnu-include-next -I ../LeakSanitize
 
@@ -43,7 +43,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(PARSE_DIR)
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
-	@$(CC) $(FLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) #$(SAN_LDFLAG)
+	@$(CC) $(FLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) $(SAN_LDFLAG)
 	@printf "$(GREEN)Compiled$(RESET)\n"
 
 $(LIBFT):
@@ -70,5 +70,6 @@ build:
 
 simple:
 	make re && make clean && ./cub3D maps/simple.cub
-
+enemy:
+	make re && make clean && ./cub3D maps/enemy.cub
 .PHONY: all clean fclean re build simple

@@ -38,7 +38,8 @@ int	set_player(t_map *s, int x, int y)
 
 int	player_position(t_map *s, int x, int y)
 {
-	if (ft_isalpha(s->co[x][y]))
+	if (s->co[x][y] == 'N' || s->co[x][y] == 'S'
+		||s->co[x][y] == 'E' ||s->co[x][y] == 'W')
 		return (set_player(s, x, y), 1);
 	return (0);
 }
@@ -51,6 +52,8 @@ void	get_textures(t_map *s)
 	s->tex[3] = mlx_load_png("./textures/mossy.png");	//west
 	s->tex[4] = mlx_load_png("./textures/redbrick.png"); //door
 	s->tex[5] = NULL;
+	s->floor = 0x00000000;
+	s->ceiling = 0x00000000;
 	// check if all textures are valid
 	// and check that mlx_load_png was successful (should return NULL if not ?)
 }

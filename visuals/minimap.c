@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/02 13:40:31 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/04 14:28:38 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int	print_wall(t_map *s, int x, int y)
 {
+	if (!s->co[x][y])
+		return (-1);
 	if (s->co[x][y] == '1' || s->co[x][y] == 'D')
 		print_square(s->minimap, x, y, s->mm_square, 0xFFFFFFFF);
-	else if (s->co[x][y])
+	else
 		print_square(s->minimap, x, y, s->mm_square, 0x303030FF);
 	return (0);
 }
@@ -57,6 +59,7 @@ int	draw_minimap(t_map *s)
 {
 	scan_coordinates(s, print_wall);
 	draw_player(s);
+	//printf("test minimap\n");
 	return (1);
 }
 

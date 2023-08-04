@@ -32,7 +32,7 @@ void	draw_stripe(t_map *s, t_ray *r, double dist, int px)
 		drawend = HEIGTH - 1;
 	draw_ceiling(s, drawstart - 1, px);
 	take_texture(s, drawstart, drawend, px);
-	draw_floor(s, drawend, px);
+	draw_floor(s, drawend - 1, px);
 	
 }
 

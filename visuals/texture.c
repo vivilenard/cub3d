@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   texture.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/21 16:43:37 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/03 19:15:36 by karllenard       ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../include/cub3d.h"
 
 int	choose_texture(t_map *s, t_ray *r)
@@ -83,26 +71,17 @@ void	draw_ceiling(t_map *s, int p_end, int px)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	if (p_end <= 0)
 		return ;
-	while (i <= p_end)
-	{
-		mlx_put_pixel(s->img, px, i, 0x00000000);
-		i++;
-	}
+	while (++i <= p_end)
+		mlx_put_pixel(s->img, px, i, s->ceiling);
 }
 
 void	draw_floor(t_map *s, int p_start, int px)
 {
-	int	i;
-
 	if (p_start >= HEIGTH)
 		return ;
-	i = p_start;
-	while (i <= HEIGTH)
-	{
-		mlx_put_pixel(s->img, px, i, 0x00000000);
-		i++;
-	}
+	while (++p_start < HEIGTH)
+		mlx_put_pixel(s->img, px, p_start, s->floor);
 }
