@@ -67,6 +67,7 @@ typedef struct s_character
 	double	dx;
 	double	dy;
 	double	radius;
+	double	dist;
 } t_character;
 
 
@@ -148,7 +149,9 @@ void	draw_floor(t_map *s, int p_start, int px);
 t_character	*create_enemy(t_map *s, int n);
 int			position_enemy(t_map *s, int x, int y);
 void		get_enemies(t_map *s);
-
+void		loop_enemies(t_map *s, int (*f)(t_map *s, t_character *n));
+int			calibrate_enemy(t_map *s, t_character *e);
+void		loop_enemies(t_map *s, int (*f)(t_map *s, t_character *e));
 
 
 #endif

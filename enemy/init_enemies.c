@@ -25,8 +25,8 @@ int	position_enemy(t_map *s, int x, int y)
 		s->enemy[i]->x = (double)x + 0.5;
 		s->enemy[i]->y = (double)y + 0.5;
 		s->enemy[i]->a = 0;
-		s->enemy[i]->dx = 0;
-		s->enemy[i]->dy = 0;
+		s->enemy[i]->dx = s->enemy[i]->y - s->px;
+		s->enemy[i]->dy = s->enemy[i]->y - s->py;
 		s->enemy[i]->radius = 0.03;
 	}
 	return (0);

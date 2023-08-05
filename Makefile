@@ -28,7 +28,8 @@ SRC =	main.c\
 		visuals/key_bindings.c\
 		visuals/mouse_bindings.c\
 		visuals/texture.c\
-		enemy/init_enemies.c
+		enemy/init_enemies.c\
+		enemy/calibrate_enemies.c
 
 OBJ_DIR = obj
 VISUALS_DIR = /visuals
