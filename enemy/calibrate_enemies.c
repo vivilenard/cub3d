@@ -7,12 +7,11 @@ int	calibrate_enemy(t_map *s, t_character *e)
 	e->dy = s->py - e->y;
 	e->dist = sqrt(e->dx * e->dx
 		+ e->dy * e->dy);
-	printf("%f/%f, dist %f\n", e->dx, e->dy, e->dist);
+	//printf("%f/%f, dist %f\n", e->dx, e->dy, e->dist);
 	if (e->dist <= 2)
 	{
 		e->x += 0.005 * e->dx;
 		e->y += 0.005 * e->dy;
-		printf("move enemy\n");
 	}
 	return (1);
 }
