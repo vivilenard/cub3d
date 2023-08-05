@@ -6,6 +6,8 @@
 This header file consist only shared structs.
 We should rename it (probably).
 */
+# define N_ENEMIES 6
+# define N_TEX 6
 
 # include "../MLX42/include/MLX42/MLX42.h"
 
