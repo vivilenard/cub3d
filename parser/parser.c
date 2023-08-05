@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:26:54 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/01 13:24:09 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/05 21:03:39 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 #include <fcntl.h>
 #include "../libft/libft.h"
 
-int	parser(int argc, char **argv, t_map_params *map_params, int fd)
+int	parser(t_map *map, t_map_params *map_params, char **argv, int fd)
 {
-	if (argc != 2)
-		return (quick_exit("Error\nexpected a map in format *.cub\n", fd));
-	fd = open(argv[1], O_RDONLY);
-	if (read(fd, NULL, 0) < 0)
-		return (quick_exit("Error\nread() failed\n", fd));
+	// if (argc != 2)
+	// 	return (quick_exit("Error\nexpected a map in format *.cub\n", fd));
+	// fd = open(argv[1], O_RDONLY);
+	// if (read(fd, NULL, 0) < 0)
+	// 	return (quick_exit("Error\nread() failed\n", fd));
 	if (!file_path_check(argv[1]))
 		return (quick_exit("Error\nwrong file, expected a map in format *.cub\n", fd));
-	if (read_map(map_params, fd))
+	if (read_map(map, map_params, fd))
 	{
 		// free
 		return (EXIT_FAILURE);

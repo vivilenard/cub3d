@@ -1,5 +1,6 @@
 
 #include "include/cub3d.h"
+#include "include/parser.h"
 
 void	full_exit(t_map *s)
 {
@@ -30,11 +31,16 @@ int	main(int argc, char **argv)
 	t_map			s;
 	t_map_params	map_params;
 
-	// if (parser(argc, argv, &map_params, fd))
+	if (argc != 2)
+		return (quick_exit("Error\nexpected a map in format *.cub\n", fd));
+	// fd = open(argv[1], O_RDONLY);
+	// if (read(fd, NULL, 0) < 0)
+	// 	return (quick_exit("Error\nread() failed\n", fd));
+	// if (parser(&s, &map_params, argv, fd))
 	// 	return (EXIT_FAILURE);
+	// close(fd);
 	//printf("test\n");
 	s = init(&s, argv);
 	display(&s);
-
 	return (EXIT_SUCCESS);
 }

@@ -6,12 +6,12 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:55:38 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/01 17:49:43 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/06 00:36:26 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/parser.h"
 #include <stdlib.h>
+#include "../include/parser.h"
 
 int	map_init(t_map_params *map_params)
 {
@@ -20,11 +20,13 @@ int	map_init(t_map_params *map_params)
 			sizeof(t_map_component *) * map_params->map_capacity);
 	if (map_params->map == NULL)
 		return (printf("Error\nmalloc failed\n"), EXIT_FAILURE);
-	map_params->count = 0;
+	map_params->count = 0; // ?
 	map_params->orintation.no = NULL;
 	map_params->orintation.so = NULL;
 	map_params->orintation.we = NULL;
 	map_params->orintation.ea = NULL;
+	map_params->floor.is_color = false;
+	map_params->ceiling.is_color = false;
 	map_params->width = 0;
 	map_params->height = 0;
 	map_params->player = 0;
