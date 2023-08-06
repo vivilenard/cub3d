@@ -6,14 +6,6 @@
 # include <stdbool.h>
 # include "main.h"
 
-typedef struct s_orintation
-{
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-}	t_orintation;
-
 typedef struct s_color
 {
 	bool	is_color;
@@ -30,7 +22,6 @@ typedef struct s_map_params
 	t_map_component	component;
 	size_t			map_capacity;
 	size_t			count;
-	t_orintation	orintation;
 	t_color			floor;
 	t_color			ceiling;
 	int				width;
@@ -54,12 +45,20 @@ int	read_map(t_map *map, t_map_params *map_params, int fd);
 int	map_verify(t_map_params *map_params);
 
 //	read_map_utils.c
-int	map_init(t_map_params *map_params);
+int	map_params_init(t_map_params *map_params);
+
+//	dentifiers.c
+int	get_identifier(t_map *map, t_map_params *map_params, char *str);
+int	set_textures(t_map *map, t_map_params *map_params, t_side side, char *path);
+int	set_color(t_map *map, t_map_params *map_params, char side, char *str);
+int	get_channel(char *str, bool *is_default);
+int get_rgba(int r, int g, int b, int a);
 
 #endif
 /*
 - check closed walls with dfs ?
+- atoi for colors ?
 
 commit
-"change main(), add main.h, parse side's identifier"
+"make map_init(), fix get_textures(), parse color's identifier"
 */

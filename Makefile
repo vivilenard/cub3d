@@ -14,6 +14,7 @@ endif
 SAN_LDFLAG = -L../LeakSanitizer -llsan -lc++ -Wno-gnu-include-next -I ../LeakSanitize
 
 SRC =	main.c\
+		parser/identifiers.c\
 		parser/init_data.c\
 		parser/map_to_coordinate.c\
 		parser/parser.c\
