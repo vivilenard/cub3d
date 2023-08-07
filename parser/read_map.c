@@ -6,51 +6,56 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:52:17 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/01 17:51:27 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/06 15:08:28 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/parser.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdbool.h>
+#include "../include/parser.h"
+#include "../libft/libft.h"
+#include "../MLX42/include/MLX42/MLX42.h"
 
-// int	fill_in_identifier(t_map_params *map_params, char c)
-// {
-// 	;
-// }
-
-int	read_map(t_map_params *map_params, int fd)
+int get_map(t_map_params *map_params, char *str)
 {
-	int				width_temp;
-	int				read_bytes;
-	char			c;
+	return (EXIT_SUCCESS);
+}
 
-	width_temp = 0;
-	if (map_init(map_params))
+int	read_map(t_map *map, t_map_params *map_params, int fd)
+{
+	int		line_y;
+	char	*line;
+
+	if (map_params_init(map_params))
 		return (EXIT_FAILURE);
-	read_bytes = 1;
-	// while (read_bytes == 1)
-	// {
-	// 	read_bytes = read(fd, &c, 1);
-	// 	if (read_bytes == -1)
-	// 	{
-	// 		// free
-	// 		return (printf("Error\nread() failed\n"), EXIT_FAILURE);
-	// 	}
-		// if (map_params->identifier <= 6)
-		// {
-		// 	fill_in_identifier(map_params, c);
-		// }
-		// else
-		// {
-		// 	fill_in_map();
-		// }
+	line_y = 0;
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (*line == '\n')
+		{
+			line = get_next_line(fd);
+			continue;
+		}
+		 if (map_params->identifier != 6)
+		{
+			if (get_identifier(map, map_params, line))
+				return (EXIT_FAILURE);
+		}
+		else
+		{
+			get_map(map_params, line);
+		}
+		line = get_next_line(fd);
+	}
 	// }
 	// if (map_verify(map_params))
 	// {
 	// 	// free
 	// 	return (EXIT_FAILURE);
 	// }
+	// free line ?
 	return (EXIT_SUCCESS);
 }
 

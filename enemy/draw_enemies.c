@@ -15,10 +15,10 @@ void	check_enemy(t_map *s, t_ray *r)
 int	draw_enemy(t_map *s, t_character *e)
 {
 	if (e->visible == false)
-		return (printf("enemy invisible\n", 0));
+		return (0);
 	else 
 		printf("enemy visible ! \n");
 	//draw!!
-	
+
 	return (1);
 }
