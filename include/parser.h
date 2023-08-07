@@ -20,10 +20,11 @@ typedef struct s_map_params
 {
 	t_map_component	**map;
 	t_map_component	component;
-	size_t			map_capacity;
-	size_t			count;
+	int			capacity;
+	int			count;
 	t_color			floor;
 	t_color			ceiling;
+	int				*all_width;
 	int				width;
 	int				height;
 	int				player;
@@ -48,17 +49,27 @@ int	map_verify(t_map_params *map_params);
 int	map_params_init(t_map_params *map_params);
 
 //	dentifiers.c
-int	get_identifier(t_map *map, t_map_params *map_params, char *str);
+int	get_identifier(t_map *map, t_map_params *map_params, char *line);
 int	set_textures(t_map *map, t_map_params *map_params, t_side side, char *path);
 int	set_color(t_map *map, t_map_params *map_params, char side, char *str);
-int	get_channel(char *str, bool *is_default);
+int	get_channel(char *str, bool *is_default); // have to rename
 int get_rgba(int r, int g, int b, int a);
 
 #endif
 /*
 - check closed walls with dfs ?
-- atoi for colors ?
+
+ask:
+- for what colors?
+- how to implement my map
+- do we need enemies and c/o doors positions?
+- should I store players view
+- can be opened door on a map or it opens only during game
+
+test case
+- empty map
+- giant map
 
 commit
-"make map_init(), fix get_textures(), parse color's identifier"
+"parse map"
 */

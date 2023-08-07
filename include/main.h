@@ -29,6 +29,7 @@ typedef enum e_map_component
 	PLAYER, // N, S, W, E
 	CLOSED_DOOR = 'D', // H
 	OPENED_DOOR = 'd', // I
+	ENEMY, // X
 	ERROR,
 }	t_map_component;
 

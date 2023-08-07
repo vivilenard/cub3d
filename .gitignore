@@ -2,3 +2,4 @@
 *.out
 cub3d
 obj/
+.DS_Store
