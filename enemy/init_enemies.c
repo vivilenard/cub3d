@@ -22,12 +22,14 @@ int	position_enemy(t_map *s, int x, int y)
 	else
 	{
 		s->enemy[i] = create_enemy(s, i);
+		s->enemy[i]->index = i;
 		s->enemy[i]->x = (double)x + 0.5;
 		s->enemy[i]->y = (double)y + 0.5;
 		s->enemy[i]->a = 0;
 		s->enemy[i]->dx = s->enemy[i]->y - s->px;
 		s->enemy[i]->dy = s->enemy[i]->y - s->py;
 		s->enemy[i]->radius = 0.03;
+		s->enemy[i]->visible = false;
 	}
 	return (0);
 }
@@ -40,4 +42,10 @@ void	get_enemies(t_map *s)
 	while (++i < N_ENEMIES)
 		s->enemy[i] = NULL;
 	scan_coordinates(s, position_enemy);
+}
+
+int	enemy_invisible(t_map *s, t_character *e)
+{
+	e->visible = false;
+	return (1);
 }

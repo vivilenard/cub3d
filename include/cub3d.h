@@ -7,6 +7,8 @@
 # define PI 3.141592653589793238462643383279502884197
 # define N_ENEMIES 6
 # define N_TEX 6
+# define VIEW_ANGLE 1.15 //=66 degree
+# define RAY_ANGLE (VIEW_ANGLE / WIDTH)
 // # define RED_RGBT 0xff3800ff
 // # define BLUE_RGBT 0xa7c5f9ff
 // # define GREEN_RGBT 0x9acd32ff
@@ -61,6 +63,7 @@ typedef struct s_map
 
 typedef struct s_character
 {
+	int		index;
 	double	x;
 	double	y;
 	double	a;
@@ -68,6 +71,7 @@ typedef struct s_character
 	double	dy;
 	double	radius;
 	double	dist;
+	bool	visible;
 } t_character;
 
 
@@ -149,9 +153,12 @@ void	draw_floor(t_map *s, int p_start, int px);
 t_character	*create_enemy(t_map *s, int n);
 int			position_enemy(t_map *s, int x, int y);
 void		get_enemies(t_map *s);
-void		loop_enemies(t_map *s, int (*f)(t_map *s, t_character *n));
-int			calibrate_enemy(t_map *s, t_character *e);
 void		loop_enemies(t_map *s, int (*f)(t_map *s, t_character *e));
+int			calibrate_enemy(t_map *s, t_character *e);
+int			draw_mini_enemy(t_map *s, t_character *e);
+int			draw_enemy(t_map *s, t_character *e);
+int			enemy_invisible(t_map *s, t_character *e);
+void		check_enemy(t_map *s, t_ray *r);
 
 
 #endif

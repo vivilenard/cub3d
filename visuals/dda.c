@@ -21,7 +21,6 @@ void	check_door(t_map *s, t_ray *r, int px)
 	}
 }
 
-
 double	dda(t_map *s, t_ray *r, int px)
 {
 	while (1)
@@ -32,6 +31,7 @@ double	dda(t_map *s, t_ray *r, int px)
 			r->hit_side = 0;
 			if (s->co[r->xmap][r->ymap] == WALL || s->co[r->xmap][r->ymap] == CLOSED_DOOR)
 				break ;
+			check_enemy(s, s->ray);
 			r->sidedist_x += r->deltadist_x;
 		}
 		else
@@ -40,6 +40,7 @@ double	dda(t_map *s, t_ray *r, int px)
 			r->hit_side = 1;
 			if (s->co[r->xmap][r->ymap] == WALL || s->co[r->xmap][r->ymap] == CLOSED_DOOR)
 				break ;
+			check_enemy(s, s->ray);
 			r->sidedist_y += r->deltadist_y;
 		}
 	}

@@ -1,9 +1,9 @@
 
 #include "../include/cub3d.h"
 
-t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int r)
+t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int px)
 {	
-	ray->ra = s->pa - angle * WIDTH / 2 + r * angle;
+	ray->ra = s->pa - angle * WIDTH / 2 + px * angle;
 	ray->rdx = cos(ray->ra);
 	ray->rdy = sin(ray->ra);
 	ray->deltadist_x = delta_dist(ray->rdx);
@@ -62,23 +62,22 @@ void	minimap_perspective(t_map *s, t_ray *ray)
 
 void	raycaster(t_map *s, t_ray *ray)
 {
-	double angle;
-
-	angle = 1.15 / WIDTH;  //1.15 ~ 66 degree
 	int	px = 0;
 	ray->raylength = 0;
 	ray->door_x = -1;
 	ray->door_y = -1;
+	loop_enemies(s, enemy_invisible);
 	memset(s->img->pixels, 255, s->img->width * s->img->height * sizeof(int32_t));
 	while (px < WIDTH)
 	{
-		ray = init_ray(s, ray, angle, px);
+		ray = init_ray(s, ray, RAY_ANGLE, px);
 		init_dda(s, ray);
 		dda(s, ray, px);
 		minimap_perspective(s, ray);
 		draw_stripe(s, ray, ray->raylength, px);
 		px++;
 	}
+	loop_enemies(s, draw_enemy);
 }
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:26:54 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/01 13:24:09 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/05 14:58:41 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include "../libft/libft.h"
+
+/*
+parser needs to give:
+- map height and width
+- coordinate system co[x][y] or co[y][x]
+- textures + floor and ceiling color
+*/
 
 int	parser(int argc, char **argv, t_map_params *map_params, int fd)
 {

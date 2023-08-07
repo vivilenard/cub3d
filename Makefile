@@ -29,7 +29,8 @@ SRC =	main.c\
 		visuals/mouse_bindings.c\
 		visuals/texture.c\
 		enemy/init_enemies.c\
-		enemy/calibrate_enemies.c
+		enemy/calibrate_enemies.c\
+		enemy/draw_enemies.c
 
 OBJ_DIR = obj
 VISUALS_DIR = /visuals
@@ -75,5 +76,5 @@ build:
 simple:
 	make re && make clean && ./cub3D maps/simple.cub
 enemy:
-	make re && make clean && ./cub3D maps/enemy.cub
+	./cub3D maps/enemy.cub
 .PHONY: all clean fclean re build simple

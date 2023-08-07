@@ -60,11 +60,11 @@ void	get_textures(t_map *s)
 	// and check that mlx_load_png was successful (should return NULL if not ?)
 }
 
-t_map	init(t_map *s, char **argv)
+t_map	init(t_map *s, char **argv) 
 {
 	s->mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
 	s->mouse_pos = 0;
-	//this is basically all the parsing i did before
+	//this is basically all the parsing i did before: (you can overwrite it)
 	map_to_koordinate(s, argv[1]);
 	scan_coordinates(s, player_position);
 	get_textures(s);
