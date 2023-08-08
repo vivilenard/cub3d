@@ -20,8 +20,9 @@ typedef struct s_map_params
 {
 	t_map_component	**map;
 	t_map_component	component;
-	int			capacity;
-	int			count;
+	mlx_texture_t	*textures[5];
+	int				capacity;
+	int				count;
 	t_color			floor;
 	t_color			ceiling;
 	int				*all_width;
@@ -46,6 +47,7 @@ int	read_map(t_map *map, t_map_params *map_params, int fd);
 int	map_verify(t_map_params *map_params);
 
 //	read_map_utils.c
+int	map_init(t_map *map);
 int	map_params_init(t_map_params *map_params);
 
 //	dentifiers.c

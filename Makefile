@@ -1,7 +1,7 @@
 
 NAME = cub3D
 CC = cc
-FLAGS = -Wall -Werror -Wextra 
+CFLAGS =
 
 GREEN = \033[0;32m
 RESET = \033[0m
@@ -12,6 +12,14 @@ else
 MLX = MLX42/build/libmlx42.a -I include -lglfw -L "/$(HOME)/.brew/opt/glfw/lib/"
 endif
 SAN_LDFLAG = -L../LeakSanitizer -llsan -lc++ -Wno-gnu-include-next -I ../LeakSanitize
+
+ifndef LENIENT
+	CFLAGS += -Wall -Werror -Wextra
+endif
+
+ifdef DEBUG
+	CFLAGS += -g
+endif
 
 SRC =	main.c\
 		parser/identifiers.c\
@@ -49,11 +57,11 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(ENEMY_DIR)
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
-	@$(CC) $(FLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) #$(SAN_LDFLAG)
+	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) #$(SAN_LDFLAG)
 	@printf "$(GREEN)Compiled$(RESET)\n"
 
 $(LIBFT):
-	@cd libft && make && make clean
+	@cd libft && make DEBUG=$(DEBUG) && make clean
 
 $(OBJ_DIR)/%.o: %.c 
 	@cc $(CFLAGS) -c $< -o $@
@@ -63,12 +71,14 @@ clean:
 	@printf "Cleaned\n"
 
 fclean: clean
+	@cd libft && make fclean
 	@rm -f ./$(NAME)
+
 
 re: fclean all
 
 %.o: %.c
-	$(CC) $(FLAGS) -c $^ -o $@
+	$(CC) $(CFLAGS) -c $^ -o $@
 
 build:
 	@git submodule update --init

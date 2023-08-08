@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:52:17 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/08 01:18:50 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/08 17:10:11 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ void	print_map(t_map_params *map_params)
 	x = 0;
 	y = 0;
 	printf("map\n");
-	while (y != map_params->height + 1)
+	while (y != map_params->height)
 	{
 		x = 0;
 		printf("[");
-		while (x != map_params->all_width[y] + 1)
+		while (x != map_params->all_width[y])
 		{
 			printf("%c", map_params->map[y][x]);
 			x++;
@@ -109,7 +109,6 @@ int get_map(t_map_params *map_params, char *line)
 
 	i = 0;
 	len = ft_strlen(line);
-	printf("\n");
 	map_params->map[map_params->height] = malloc(sizeof(t_map_component) * len);
 	while (line[i] != '\n' && line[i] != '\0')
 	{
@@ -133,6 +132,8 @@ int	read_map(t_map *map, t_map_params *map_params, int fd)
 	char	*line;
 
 	if (map_params_init(map_params))
+		return (EXIT_FAILURE);
+	if (map_init(map))
 		return (EXIT_FAILURE);
 	line = get_next_line(fd);
 	while (line)

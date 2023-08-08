@@ -40,13 +40,13 @@ typedef struct s_map
 	mlx_t				*mlx;
 	mlx_image_t			*img;
 	mlx_image_t			*minimap;
-	mlx_texture_t		*tex[N_TEX];	//space for 10 textures -- dont know how much we need
-	mlx_texture_t		*enemy_tex;
-	color				floor;
-	color				ceiling;
-	char				**co;
-	int					map_height;
-	int					map_width;
+	mlx_texture_t		*tex[N_TEX];	//THIS		//space for 10 textures -- dont know how much we need
+	mlx_texture_t		*enemy_tex; 	//THIS
+	color				floor; 			//THIS
+	color				ceiling; 		//THIS
+	char				**co; 			//THIS
+	int					map_height; 	//THIS
+	int					map_width; 		//THIS
 	double				px;			//player position
 	double				py;
 	double				pa;			//player angle

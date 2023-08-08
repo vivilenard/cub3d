@@ -31,8 +31,8 @@ int	main(int argc, char **argv)
 	t_map			s;
 	t_map_params	map_params;
 
-	if (argc != 2)
-		return (printf("Error\nexpected a map in format *.cub\n"), EXIT_FAILURE);
+	// if (argc != 2)
+	// 	return (printf("Error\nexpected a map in format *.cub\n"), EXIT_FAILURE);
 	// fd = open(argv[1], O_RDONLY);
 	// if (read(fd, NULL, 0) < 0)
 	// 	return (quick_exit("Error\nread() failed\n", fd));

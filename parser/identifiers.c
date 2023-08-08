@@ -25,7 +25,7 @@ int	get_identifier(t_map *map, t_map_params *map_params, char *line)
 		// free map_init(), result
 		;
 	}
-	else if (ft_strncmp(result[0], "NO\0", 3) == 0 && map->tex[NORTH] == NULL)
+	else if (ft_strncmp(result[0], "NO\0", 3) == 0 && map->tex[NORTH] == NULL) // need to change for map->tex[]
 	{
 		// printf("no\n");
 		return (set_textures(map, map_params, NORTH, result[1]));
