@@ -25,10 +25,10 @@ void	enemy_angles(t_map *s, t_character *e)
 {
 	e->a = angle_vector(e->x - s->px, e->y - s->py);
 	e->a_left = angle_vector(e->left_x - s->px, e->left_y - s->py);
-	e->a_right = e->a - (e->a_left - e->a);
-	if (e->a_right > 2 * PI)
-		e->a_right /= 2 * PI;
-	//e->a_right = angle_vector(e->right_x - s->px, e->right_y - s->py);
+	// e->a_right = e->a - (e->a_left - e->a);
+	// if (e->a_right > 2 * PI)
+	// 	e->a_right /= 2 * PI;
+	e->a_right = angle_vector(e->right_x - s->px, e->right_y - s->py);
 	//printf("%d, ea: %f, pa: %f, xdir: %f, ydir: %f\n", e->index, e->a, s->pa, e->x - s->px, e->y - s->py);
 	// printf("pa %f\n", s->pa);
 	// printf("\t index: %d, ea left: %f, ea: %f, ea right: %f\n", e->index, e->a_left, e->a, e->a_right);

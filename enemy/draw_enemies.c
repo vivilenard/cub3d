@@ -21,18 +21,22 @@ int	raycast_enemy(t_map *s, t_character *e)
 	ray_a = s->ray->ra;
 	// if (e->a_left > PI && ray_a < PI)
 	// 	ray_a += 2 * PI;
-	if (e->a_left >= ray_a && e->in_view == false)
+	if (ray_a > e->a_left && ray_a < e->a_right && e->in_view == false)
 	{
 		e->in_view = true;
 		e->pix_start = s->ray->x_px;
+		//printf("i see, %f\n", e->pix_start);
 	}
-	// else if (e->a_right > PI && s->ray->ra < PI)
+	// if (e->a_right > PI && s->ray->ra < PI)
 	// 	ray_a = s->ray->ra += 2 * PI;
-	else if (e->a_right <= ray_a && e->in_view == true)
+	else if ((ray_a < e->a_left || ray_a > e->a_right) && e->in_view == true)
 	{
 		e->in_view = false;
 		e->pix_end = s->ray->x_px;
 	}
+
+	//printf("ra: %f, ea left: %f, ea: %f, ea right: %f\n", ray_a, e->a_left, e->a, e->a_right);
+	//printf("pix1: %f, pix2: %f\n", e->pix_start, e->pix_end);
 
 	return (1);
 }

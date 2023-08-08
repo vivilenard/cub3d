@@ -83,13 +83,13 @@ void	minimap_perspective(t_map *s, t_ray *ray)
 
 int	draw_enemy(t_map *s, t_character *e)
 {
-	if (!(e->pix_start && e->pix_end))
+	if ((!e->pix_start)) //!pixend
 		return (0);
 	int px = e->pix_start;
 	int	lineheight = HEIGTH / e->dist;
 	int p1 = HEIGTH / 2 - lineheight / 2;
 	int p2 = HEIGTH / 2 + lineheight / 2;
-	while (px <= e->pix_end)
+	while (px && (px < e->pix_end && px <= WIDTH))
 	{
 		to_vert_line(s, p1, p2, px);
 		px++;
@@ -115,7 +115,8 @@ void	raycaster(t_map *s, t_ray *ray)
 		loop_enemies(s, raycast_enemy);
 		px++;
 	}
-	printf("pix1: %f, pix2: %f\n", s->enemy[2]->pix_start, s->enemy[2]->pix_start);
+	//printf("pix1: %f, pix2: %f\n", s->enemy[1]->pix_start, s->enemy[1]->pix_start);
+	//printf("pa %f\n", s->pa);
 	loop_enemies(s, draw_enemy);
 }
 

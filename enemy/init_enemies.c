@@ -28,7 +28,7 @@ int	position_enemy(t_map *s, int x, int y)
 		s->enemy[i]->a = 0;
 		s->enemy[i]->dx = s->enemy[i]->y - s->px;
 		s->enemy[i]->dy = s->enemy[i]->y - s->py;
-		s->enemy[i]->radius = 0.03;
+		s->enemy[i]->radius = 0.5;
 		s->enemy[i]->visible = false;
 		s->enemy[i]->in_view = false;
 	}
@@ -48,6 +48,7 @@ void	get_enemies(t_map *s)
 int	enemy_invisible(t_map *s, t_character *e)
 {
 	e->visible = false;
+	e->in_view = false;
 	e->pix_start = 0;
 	e->pix_end = 0;
 	return (1);
