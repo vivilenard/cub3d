@@ -16,9 +16,14 @@ int	draw_enemy(t_map *s, t_character *e)
 {
 	if (e->visible == false)
 		return (0);
-	else 
-		printf("enemy visible ! \n");
+	// else 
+	// 	printf("enemy visible ! \n");
 	//draw!!
+	//if ray hits enemy plane?
+
+	//where is the hitpoint? 
+
+	//what is the distance to the player? DISTANCE I HAVE. ALWAYS THE SAME
 
 	return (1);
 }

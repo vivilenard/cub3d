@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/07 11:56:36 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/08 11:23:37 by karllenard       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,19 @@ void	draw_view(t_map *s)
 
 int	draw_mini_enemy(t_map *s, t_character *e)
 {
-	to_square(s, e->x, e->y, e->radius);
+	e->orth_x = (-1 * e->dy) / sqrtf(e->dy * e->dy + e->dx * e->dx) / 2;
+	e->orth_y =  e->dx / sqrtf(e->dy * e->dy + e->dx * e->dx) / 2;
+	e->left_x = e->x - e->orth_x;
+	e->left_y = e->y - e->orth_y;
+	e->right_x = e->x + e->orth_x;
+	e->right_y = e->y + e->orth_y;
+	to_square(s, e->x, e->y, e->radius * 2);
+
+	//draw enemy plane
+	to_square(s, e->right_x, e->right_y, e->radius);
+	to_square(s, e->left_x, e->left_y, e->radius);
+
+	//to_square(s, e->x - 0.2 * (-1 * e->dy), e->y - 0.2 * (e->dx), e->radius);
 	//to_square(s, (s->enemy[i]->x + s->enemy[i]->dx) * 0.01, (s->enemy[i]->y + s->enemy[i]->dy) * 0.01, 0.02);
 	return (1);
 }

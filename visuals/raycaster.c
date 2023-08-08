@@ -75,9 +75,9 @@ void	raycaster(t_map *s, t_ray *ray)
 		dda(s, ray, px);
 		minimap_perspective(s, ray);
 		draw_stripe(s, ray, ray->raylength, px);
+		loop_enemies(s, draw_enemy);
 		px++;
 	}
-	loop_enemies(s, draw_enemy);
 }
 
 
