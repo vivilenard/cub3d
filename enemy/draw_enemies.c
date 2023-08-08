@@ -12,18 +12,27 @@ void	check_enemy(t_map *s, t_ray *r)
 	}
 } 
 
-int	draw_enemy(t_map *s, t_character *e)
+int	raycast_enemy(t_map *s, t_character *e)
 {
 	if (e->visible == false)
 		return (0);
-	// else 
-	// 	printf("enemy visible ! \n");
-	//draw!!
-	//if ray hits enemy plane?
+	double	ray_a;
 
-	//where is the hitpoint? 
-
-	//what is the distance to the player? DISTANCE I HAVE. ALWAYS THE SAME
+	ray_a = s->ray->ra;
+	// if (e->a_left > PI && ray_a < PI)
+	// 	ray_a += 2 * PI;
+	if (e->a_left >= ray_a && e->in_view == false)
+	{
+		e->in_view = true;
+		e->pix_start = s->ray->x_px;
+	}
+	// else if (e->a_right > PI && s->ray->ra < PI)
+	// 	ray_a = s->ray->ra += 2 * PI;
+	else if (e->a_right <= ray_a && e->in_view == true)
+	{
+		e->in_view = false;
+		e->pix_end = s->ray->x_px;
+	}
 
 	return (1);
 }

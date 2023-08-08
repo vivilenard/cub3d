@@ -1,8 +1,29 @@
 
 #include "../include/cub3d.h"
 
+void	to_vert_line(t_map *s, int p1, int p2, int px)
+{
+	int	color;
+	int	start = p1;
+	int	end = p2;
+
+	color = 0xffff00ff;
+	if (p2 < p1)
+	{
+		start = p2;
+		end = p1;
+	}
+	while (start < end)
+	{
+		color = 0xff0000ff;
+		mlx_put_pixel(s->img, px, start, color);
+		start++;
+	}
+}
+
 t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int px)
 {	
+	ray->x_px = px;
 	ray->ra = s->pa - angle * WIDTH / 2 + px * angle;
 	ray->rdx = cos(ray->ra);
 	ray->rdy = sin(ray->ra);
@@ -60,6 +81,22 @@ void	minimap_perspective(t_map *s, t_ray *ray)
 	}
 }
 
+int	draw_enemy(t_map *s, t_character *e)
+{
+	if (!(e->pix_start && e->pix_end))
+		return (0);
+	int px = e->pix_start;
+	int	lineheight = HEIGTH / e->dist;
+	int p1 = HEIGTH / 2 - lineheight / 2;
+	int p2 = HEIGTH / 2 + lineheight / 2;
+	while (px <= e->pix_end)
+	{
+		to_vert_line(s, p1, p2, px);
+		px++;
+	}
+	return (1);
+}
+
 void	raycaster(t_map *s, t_ray *ray)
 {
 	int	px = 0;
@@ -75,9 +112,11 @@ void	raycaster(t_map *s, t_ray *ray)
 		dda(s, ray, px);
 		minimap_perspective(s, ray);
 		draw_stripe(s, ray, ray->raylength, px);
-		loop_enemies(s, draw_enemy);
+		loop_enemies(s, raycast_enemy);
 		px++;
 	}
+	printf("pix1: %f, pix2: %f\n", s->enemy[2]->pix_start, s->enemy[2]->pix_start);
+	loop_enemies(s, draw_enemy);
 }
 
 

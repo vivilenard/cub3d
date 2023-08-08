@@ -37,16 +37,20 @@ typedef struct s_character
 	double	radius;
 	double	dist;
 	bool	visible;
+	bool	in_view;
 	double	orth_x;
 	double	orth_y;
 	double	left_x;
 	double	left_y;
 	double	right_x;
 	double	right_y;
+	double	pix_start;
+	double	pix_end;
 } t_character;
 
 typedef struct s_ray
 {
+	int				x_px;
 	double			ra;
 	double			rdx;
 	double			rdy;
@@ -126,7 +130,7 @@ void		get_enemies(t_map *s);
 void		loop_enemies(t_map *s, int (*f)(t_map *s, t_character *e));
 int			calibrate_enemy(t_map *s, t_character *e);
 int			draw_mini_enemy(t_map *s, t_character *e);
-int			draw_enemy(t_map *s, t_character *e);
+int			raycast_enemy(t_map *s, t_character *e);
 int			enemy_invisible(t_map *s, t_character *e);
 void		check_enemy(t_map *s, t_ray *r);
 
