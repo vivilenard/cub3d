@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:52:17 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/08 17:10:11 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/08 21:19:28 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ t_map_component	convert_char(t_map_params *map_params, char c, int width_positio
 	}
 	else if (c == 'H')
 		return (CLOSED_DOOR);
-	// else if (c == 'I')
-	// 	return (OPENED_DOOR);
+	else if (c == 'I')
+		return (OPENED_DOOR);
 	else if (c == 'X')
 		return (ENEMY);
 	else
@@ -46,6 +46,7 @@ void	print_map(t_map_params *map_params)
 	int	y;
 
 	x = 0;
+	printf("hight: %d\n", map_params->height);
 	printf("all width: ");
 	while (x != map_params->height)
 	{
@@ -62,12 +63,20 @@ void	print_map(t_map_params *map_params)
 		printf("[");
 		while (x != map_params->all_width[y])
 		{
-			printf("%c", map_params->map[y][x]);
+			if (map_params->map[y][x] == PLAYER)
+				printf("\033[1;31mP\033[0;37m");
+			else if (map_params->map[y][x] == ENEMY)
+				printf("\033[1;35mX\033[0;37m");
+			else if (map_params->map[y][x] == CLOSED_DOOR)
+				printf("\033[1;36mH\033[0;37m");
+			else
+				printf("%c", map_params->map[y][x]);
 			x++;
 		}
 		printf("]\n");
 		y++;
 	}
+	printf("player pos: y %d, x %d\n", map_params->player_y, map_params->player_x);
 }
 
 void	map_extend(t_map_params *map_params)
@@ -158,13 +167,12 @@ int	read_map(t_map *map, t_map_params *map_params, int fd)
 			get_map(map_params, line);
 		}
 		line = get_next_line(fd);
-		if (line && map_params->identifier == 6)
+		if (map_params->identifier == 6)
 		{
 			map_params->height++;
 		}
 	}
 	print_map(map_params);
-	// }
 	// if (map_verify(map_params))
 	// {
 	// 	// free
@@ -179,8 +187,9 @@ int	read_map(t_map *map, t_map_params *map_params, int fd)
 // 	if (map_params->player != 1)
 // 	{
 // 		// free
-// 		return (printf("Error\nhas to be one player\n"), EXIT_FAILURE);
+// 		return (printf("Error: has to be one player\n"), EXIT_FAILURE);
 // 	}
 // 	return (EXIT_SUCCESS);
 // 	// if map is closed
+	
 // }

@@ -60,18 +60,23 @@ int get_rgba(int r, int g, int b, int a);
 #endif
 /*
 - check closed walls with dfs ?
-
-ask:
-- for what colors?
-- how to implement my map
-- do we need enemies and c/o doors positions?
-- should I store players view
-- can be opened door on a map or it opens only during game
+- store all coordinates (player, c/o doors, enemies)
+- give player's view
 
 test case
 - empty map
 - giant map
 
 commit
-"parse map"
+"fix wrong map's hight"
+
+		{
+			"name": "cub3D",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/cub3d/cub3d",
+			"args": ["maps/pars_test.cub"],
+			"cwd": "${workspaceFolder}/cub3d",
+			"MIMode": "lldb"
+		},
 */
