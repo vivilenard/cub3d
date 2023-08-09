@@ -42,9 +42,13 @@ int	file_path_check(char *argv);
 int	quick_exit(char *str, int fd);
 
 //	read_map.c
-int	set_textures(t_map *map, t_map_params *map_params, t_side side, char *path);
 int	read_map(t_map *map, t_map_params *map_params, int fd);
-int	map_verify(t_map_params *map_params);
+int get_map(t_map_params *map_params, char *line);
+void	map_push(t_map_params *map_params);
+void	map_extend(t_map_params *map_params);
+t_map_component	convert_char(t_map_params *map_params, char c, int width_position);
+// int	map_verify(t_map_params *map_params);
+void	print_map(t_map_params *map_params); // delete
 
 //	read_map_utils.c
 int	map_init(t_map *map);
