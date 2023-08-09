@@ -79,19 +79,6 @@ void	raycaster(t_map *s, t_ray *ray)
 		loop_enemies(s, raycast_enemy);
 		px++;
 	}
-	loop_enemies(s, draw_enemy);  //need to draw furthest away first
-	//printf("pix1: %f, pix2: %f\n", s->enemy[1]->pix_start, s->enemy[1]->pix_start);
-	//printf("pa %f\n", s->pa);
+	draw_enemies(s);
+	// loop_enemies(s, draw_enemy);
 }
-
-
-
-
-
-	//print details
-	// printf("pdx %f/%f\n", s->rdx, s->rdy);	
-	// printf("map %d/%d\n", s->xmap, s->ymap);
-	// printf("player %f/%f\n", s->px, s->py);
-	// printf("move %d/%d\n", s->xmove, s->ymove);
-	//printf("deltadist %f/%f\n", delta_dist(s->rdx), delta_dist(s->rdy));
-	//printf("sidedist %f/%f\n", s->sidedist_x, s->sidedist_y);

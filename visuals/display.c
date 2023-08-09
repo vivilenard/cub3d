@@ -11,7 +11,6 @@ int	display(t_map *s)
 		return (1);
 	if (mlx_image_to_window(s->mlx, s->img, 0, 0) < 0)
 		return (perror("img to window"), 2);
-	printf("test\n");
 	print_coordinates(*s);
 	minimap(s);
 	raycaster(s, ray);

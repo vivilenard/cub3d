@@ -6,7 +6,7 @@
 This header file consist only shared structs.
 We should rename it (probably).
 */
-# define N_ENEMIES 6
+# define MAX_ENEMIES 6
 # define N_TEX 6
 
 # include "../MLX42/include/MLX42/MLX42.h"
@@ -35,7 +35,7 @@ typedef enum e_map_component
 typedef struct s_map
 {
 	struct s_ray		*ray;
-	struct s_character	*enemy[N_ENEMIES];
+	struct s_character	*enemy[MAX_ENEMIES];
 	mlx_t				*mlx;
 	mlx_image_t			*img;
 	mlx_image_t			*minimap;

@@ -130,10 +130,13 @@ void		loop_enemies(t_map *s, int (*f)(t_map *s, t_character *e));
 int			calibrate_enemy(t_map *s, t_character *e);
 int			draw_mini_enemy(t_map *s, t_character *e);
 int			raycast_enemy(t_map *s, t_character *e);
+void		draw_enemies(t_map *s);
 int			draw_enemy(t_map *s, t_character *e);
 int			enemy_invisible(t_map *s, t_character *e);
 void		check_enemy(t_map *s, t_ray *r);
 void		to_vert_line(t_map *s, int p1, int p2, int px, t_character *e);
+int			number_enemies(t_map *s);
+int			highest_dist_enemy(t_map *s, int *dist);
 
 
 #endif

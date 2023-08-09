@@ -6,11 +6,10 @@ void	to_vert_line(t_map *s, int p1, int p2, int px, t_character *e)
 	int	start = p1;
 	int	end = p2;
 
-	if (e->index == 0)
-		color = 0xff0000ff;
-	else if (e->index == 1)
+	color = 0xff0000ff;
+	if (e->index == 1)
 		color = 0xffff00ff;
-	else if (e->index == 2)
+	if (e->index == 2)
 		color = 0xa7c5f9ff;
 	if (p2 < p1)
 	{
@@ -77,4 +76,24 @@ int	draw_enemy(t_map *s, t_character *e)
 		px++;
 	}
 	return (1);
+}
+
+void	draw_enemies(t_map *s)
+{
+	int	i;
+	int	e_index;
+	int	dist[MAX_ENEMIES];
+
+	e_index = 0;
+	i = -1;
+	while (s->enemy[++i])
+		dist[i] = s->enemy[i]->dist;
+	while (1)
+	{
+		e_index = highest_dist_enemy(s, dist);
+		if (e_index < 0)
+			break;
+		draw_enemy(s, s->enemy[e_index]);
+		dist[e_index] = 0;
+	}
 }

@@ -53,3 +53,30 @@ int	enemy_invisible(t_map *s, t_character *e)
 	e->pix_end = 0;
 	return (1);
 }
+
+int	number_enemies(t_map *s) //dont need
+{
+	int	i;
+
+	i = 0;
+	while (s->enemy[i])
+		i++;
+	return (i);
+}
+
+int	highest_dist_enemy(t_map *s, int *dist)
+{
+	int		i = -1;
+	double	highest_dist = 0;
+	int		index = -1;
+
+	while (s->enemy[++i])
+	{
+		if (highest_dist < dist[i])
+		{
+			highest_dist = dist[i];
+			index = i;
+		}
+	}
+	return (index);
+}
