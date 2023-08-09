@@ -1,26 +1,6 @@
 
 #include "../include/cub3d.h"
 
-void	to_vert_line(t_map *s, int p1, int p2, int px)
-{
-	int	color;
-	int	start = p1;
-	int	end = p2;
-
-	color = 0xffff00ff;
-	if (p2 < p1)
-	{
-		start = p2;
-		end = p1;
-	}
-	while (start < end)
-	{
-		color = 0xff0000ff;
-		mlx_put_pixel(s->img, px, start, color);
-		start++;
-	}
-}
-
 t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int px)
 {	
 	ray->x_px = px;
@@ -81,22 +61,6 @@ void	minimap_perspective(t_map *s, t_ray *ray)
 	}
 }
 
-int	draw_enemy(t_map *s, t_character *e)
-{
-	if ((!e->pix_start)) //!pixend
-		return (0);
-	int px = e->pix_start;
-	int	lineheight = HEIGTH / e->dist;
-	int p1 = HEIGTH / 2 - lineheight / 2;
-	int p2 = HEIGTH / 2 + lineheight / 2;
-	while (px && (px < e->pix_end && px <= WIDTH))
-	{
-		to_vert_line(s, p1, p2, px);
-		px++;
-	}
-	return (1);
-}
-
 void	raycaster(t_map *s, t_ray *ray)
 {
 	int	px = 0;
@@ -115,9 +79,9 @@ void	raycaster(t_map *s, t_ray *ray)
 		loop_enemies(s, raycast_enemy);
 		px++;
 	}
+	loop_enemies(s, draw_enemy);  //need to draw furthest away first
 	//printf("pix1: %f, pix2: %f\n", s->enemy[1]->pix_start, s->enemy[1]->pix_start);
 	//printf("pa %f\n", s->pa);
-	loop_enemies(s, draw_enemy);
 }
 
 

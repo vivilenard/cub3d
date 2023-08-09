@@ -3,7 +3,7 @@
 # define CUB3D_H
 
 # define WIDTH 1400
-# define HEIGTH 600
+# define HEIGTH 800
 # define PI 3.141592653589793238462643383279502884197
 # define N_ENEMIES 6
 # define N_TEX 6
@@ -108,7 +108,6 @@ void	adjust_view(t_map *s, int x, double mv);
 //raycaster
 void	raycaster(t_map *s, t_ray *ray);
 void	draw_line(t_map *s, t_ray *r, double dist, int px);
-void	to_vert_line(t_map *s, int p1, int p2, int px);
 t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int r);
 void	init_dda(t_map *s, t_ray *r);
 double	ray_dist(t_map *s, t_ray *r);
@@ -131,8 +130,10 @@ void		loop_enemies(t_map *s, int (*f)(t_map *s, t_character *e));
 int			calibrate_enemy(t_map *s, t_character *e);
 int			draw_mini_enemy(t_map *s, t_character *e);
 int			raycast_enemy(t_map *s, t_character *e);
+int			draw_enemy(t_map *s, t_character *e);
 int			enemy_invisible(t_map *s, t_character *e);
 void		check_enemy(t_map *s, t_ray *r);
+void		to_vert_line(t_map *s, int p1, int p2, int px, t_character *e);
 
 
 #endif
