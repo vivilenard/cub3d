@@ -85,7 +85,8 @@ int	set_textures(t_map *map, t_map_params *map_params, t_side side, char *path)
 			printf("Default texture is using\n");
 	}
 	map->tex[DOOR] = mlx_load_png("./textures/redbrick.png");
-	if (map->tex[DOOR] == NULL)
+	map->enemy_tex = mlx_load_png("./textures/zombie0.png");
+	if (map->tex[DOOR] == NULL || map->enemy_tex == NULL)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -109,7 +110,7 @@ int	set_color(t_map *map, t_map_params *map_params, char side, char *str)
 	}
 	else if (side == 'F')
 	{
-		map->floor = get_rgba(
+		map->floor = (uint32_t)get_rgba(
 			get_channel(colors[0], &is_default),
 			get_channel(colors[1], &is_default),
 			get_channel(colors[2], &is_default), 0);
@@ -117,7 +118,7 @@ int	set_color(t_map *map, t_map_params *map_params, char side, char *str)
 	}
 	else if (side == 'C')
 	{
-		map->ceiling = get_rgba(
+		map->ceiling = (uint32_t)get_rgba(
 			get_channel(colors[0], &is_default),
 			get_channel(colors[1], &is_default),
 			get_channel(colors[2], &is_default), 0);
@@ -142,7 +143,7 @@ int	get_channel(char *str, bool *is_default)
 	return (temp);
 }
 
-int get_rgba(int r, int g, int b, int a)
+int	get_rgba(int r, int g, int b, int a)
 {
-    return (r << 24 | g << 16 | b << 8 | a);
+	return (r << 24 | g << 16 | b << 8 | a);
 }

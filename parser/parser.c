@@ -5,13 +5,6 @@
 #include <fcntl.h>
 #include "../libft/libft.h"
 
-/*
-parser needs to give:
-- map height and width
-- coordinate system co[x][y] or co[y][x]
-- textures + floor and ceiling color
-*/
-
 int	parser(t_map *map, t_map_params *map_params, char **argv, int fd)
 {
 	if (!file_path_check(argv[1]))
@@ -21,6 +14,8 @@ int	parser(t_map *map, t_map_params *map_params, char **argv, int fd)
 		// free
 		return (EXIT_FAILURE);
 	}
+	map->co_map = map_params->map;
+	map_params->map = NULL;
 	return (EXIT_SUCCESS);
 }
 

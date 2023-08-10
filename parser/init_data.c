@@ -11,6 +11,45 @@
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+#include "../include/parser.h"
+
+int	map_init(t_map *map)
+{
+	int i;
+
+	i = 0;
+	while (i != 5)
+	{
+		map->tex[i] = NULL;
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	map_params_init(t_map_params *map_params)
+{
+	map_params->map = malloc(
+			sizeof(t_map_char *) * 1);
+	map_params->all_width = malloc(sizeof(int *) * 1);
+	if (map_params->map == NULL || map_params->all_width == NULL)
+		return (printf("Error: malloc failed\n"), EXIT_FAILURE);
+	map_params->textures[0] = NULL;
+	map_params->textures[1] = NULL;
+	map_params->textures[2] = NULL;
+	map_params->textures[3] = NULL;
+	map_params->textures[4] = NULL;
+	map_params->cur_width = 0;
+	map_params->max_width = 0;
+	map_params->height = 0;
+	map_params->player = 0;
+	map_params->doors = 0;
+	map_params->identifier = 0;
+	map_params->map_start = false;
+	map_params->map_end = false;
+	map_params->floor.is_color = false;
+	map_params->ceiling.is_color = false;
+	return (EXIT_SUCCESS);
+}
 
 double	init_player_view(char p)
 {

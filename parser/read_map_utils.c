@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:55:38 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/08 21:18:44 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/10 23:31:31 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,53 @@
 #include "../include/parser.h"
 #include "../libft/libft.h"
 
-int	map_init(t_map *map)
+int get_map(t_map_params *map_params, char *line)
 {
-	int i;
+	int	len;
 
-	i = 0;
-	while (i != 5)
+	len = ft_strlen(line);
+	map_params->map[map_params->height] = malloc(sizeof(t_map_char) * len);
+	if (map_params->map[map_params->height] == NULL)
 	{
-		map->tex[i] = NULL;
-		i++;
+		// free
+		return (printf("Error: malloc failed\n"), EXIT_FAILURE);
 	}
+	while (line[map_params->cur_width] != '\n' && line[map_params->cur_width] != '\0')
+	{
+		map_params->component = convert_char(map_params, line[map_params->cur_width]);
+		if (map_params->component == ERROR)
+		{
+			ft_printf("Error: wrong map component\n");
+			return (EXIT_FAILURE);
+		}
+		map_params->map[map_params->height][map_params->cur_width] = map_params->component;
+		map_params->cur_width++;
+		map_params->all_width[map_params->height]++;;
+	}
+	if (map_params->cur_width > map_params->max_width)
+		map_params->max_width = map_params->cur_width;
 	return (EXIT_SUCCESS);
 }
 
-int	map_params_init(t_map_params *map_params)
+t_map_char	convert_char(t_map_params *map_params, char c)
 {
-	map_params->capacity = 1;
-	map_params->map = malloc(
-			sizeof(t_map_component *) * map_params->capacity);
-	map_params->all_width = malloc(sizeof(int *) * map_params->capacity);
-	if (map_params->map == NULL)
-		return (printf("Error: malloc failed\n"), EXIT_FAILURE);
-	map_params->textures[0] = NULL;
-	map_params->textures[1] = NULL;
-	map_params->textures[2] = NULL;
-	map_params->textures[3] = NULL;
-	map_params->textures[4] = NULL;
-	map_params->count = 0;
-	map_params->floor.is_color = false;
-	map_params->ceiling.is_color = false;
-	map_params->width = 0;
-	map_params->height = -1;
-	map_params->player = 0;
-	map_params->doors = 0;
-	map_params->identifier = 0;
-	return (EXIT_SUCCESS);
+	if (c == '0' || c == ' ')
+		return (SPACE);
+	else if (c == '1')
+		return (WALL);
+	else if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	{
+		map_params->player += 1;
+		map_params->player_x = map_params->cur_width;
+		map_params->player_y = map_params->height;
+		return (PLAYER);
+	}
+	else if (c == 'H')
+		return (CLOSED_DOOR);
+	else if (c == 'I')
+		return (OPENED_DOOR);
+	else if (c == 'X')
+		return (ENEMY);
+	else
+		return (ERROR);
 }

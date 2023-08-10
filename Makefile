@@ -13,7 +13,7 @@ MLX = MLX42/build/libmlx42.a -I include -lglfw -L "/$(HOME)/.brew/opt/glfw/lib/"
 endif
 SAN_LDFLAG = -L../LeakSanitizer -llsan -lc++ -Wno-gnu-include-next -I ../LeakSanitize
 
-ifndef LENIENT
+ifndef LEN
 	CFLAGS += -Wall -Werror -Wextra
 endif
 
@@ -25,6 +25,7 @@ SRC =	main.c\
 		parser/identifiers.c\
 		parser/init_data.c\
 		parser/map_to_coordinate.c\
+		parser/map_verify.c\
 		parser/parser.c\
 		parser/read_map.c\
 		parser/read_map_utils.c\
