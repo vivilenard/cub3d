@@ -6,7 +6,7 @@
 # define HEIGTH 800
 # define PI 3.141592653589793238462643383279502884197
 # define N_ENEMIES 6
-# define N_TEX 6
+# define N_TEX 7
 # define VIEW_ANGLE 1.15 //=66 degree
 # define RAY_ANGLE (VIEW_ANGLE / WIDTH)
 // # define RED_RGBT 0xff3800ff
@@ -26,6 +26,7 @@
 
 typedef struct s_character
 {
+	mlx_texture_t *tex;
 	int		index;
 	double	x;
 	double	y;
@@ -46,6 +47,11 @@ typedef struct s_character
 	double	right_y;
 	double	pix_start;
 	double	pix_end;
+	int		px;
+	int		lineheight;
+	double	ray_a;
+	double	ray_start;
+	double	ray_end;
 } t_character;
 
 typedef struct s_ray

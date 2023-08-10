@@ -51,7 +51,8 @@ void	get_textures(t_map *s)
 	s->tex[2] = mlx_load_png("./textures/greystone.png");	//east
 	s->tex[3] = mlx_load_png("./textures/mossy.png");	//west
 	s->tex[4] = mlx_load_png("./textures/redbrick.png"); //door
-	s->tex[5] = NULL;
+	s->tex[5] = mlx_load_png("./textures/a7.png"); //enemy
+	s->tex[6] = NULL;
 	//s->enemy_tex = mlx_load_png("./textures/browndog/103.bmp"); //door
 
 	s->floor = 0x00000000;

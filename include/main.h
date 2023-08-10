@@ -7,7 +7,7 @@ This header file consist only shared structs.
 We should rename it (probably).
 */
 # define MAX_ENEMIES 6
-# define N_TEX 6
+# define N_TEX 7
 
 # include "../MLX42/include/MLX42/MLX42.h"
 

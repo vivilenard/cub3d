@@ -31,6 +31,7 @@ int	position_enemy(t_map *s, int x, int y)
 		s->enemy[i]->radius = 0.5;
 		s->enemy[i]->visible = false;
 		s->enemy[i]->in_view = false;
+		s->enemy[i]->tex = s->tex[5];
 	}
 	return (0);
 }
