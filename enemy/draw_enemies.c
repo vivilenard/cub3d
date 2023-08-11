@@ -1,14 +1,14 @@
 #include "../include/cub3d.h"
 
-int	raycast_enemy(t_map *s, t_character *e)
+int	raycast_enemy(t_map *s, t_character *e) //this needs work
 {
 	if (e->visible == false)
 		return (0);
 	double	ray_a;
 
 	ray_a = s->ray->ra;
-	if (((ray_a > e->a_left && !(ray_a > e->a_right))
-		|| (!(ray_a < e->a_left) && (ray_a < e->a_right)))
+	if((((ray_a >= e->a_left) && !(ray_a > e->a_right))
+		|| (!(ray_a < e->a_left) && (ray_a <= e->a_right)))
 			&& e->in_view == false)
 	{
 		e->in_view = true;
@@ -52,6 +52,10 @@ void	draw_enemy_tex(t_map *s, int p1, int p2, t_character *e)
 		perror("drawing enemy texture in wrong direction");
 		return ;
 	}
+	if (p1 < 0)
+		p1 = 0;
+	if (p2 >= HEIGTH)
+		p2 = HEIGTH - 1;
 	while (p1 < p2)
 	{
 		tex_color = color_enemy_tex(s, e, p1);
@@ -66,13 +70,15 @@ int	draw_enemy(t_map *s, t_character *e)
 	int	p1;
 	int	p2;
 
-	if ((!e->pix_start)) //!pixend
+	if ((e->pix_start < 0))
 		return (0);
+	if (e->pix_end < 0)
+		e->pix_end = WIDTH - 1;
+	e->px = e->pix_start;
 	e->lineheight = HEIGTH / e->dist;
 	p1 = HEIGTH / 2 - e->lineheight / 2;
 	p2 = HEIGTH / 2 + e->lineheight / 2;
-	e->px = e->pix_start;
-	while (e->px && (e->px < e->pix_end && e->px < WIDTH))
+	while (e->px >= 0 && (e->px < e->pix_end && e->px < WIDTH))
 	{
 		e->ray_a = s->pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE;
 		draw_enemy_tex(s, p1, p2, e);
@@ -84,12 +90,13 @@ int	draw_enemy(t_map *s, t_character *e)
 
 void	draw_enemies(t_map *s)
 {
-	int	i;
-	int	e_index;
-	int	dist[MAX_ENEMIES];
+	int		i;
+	int		e_index;
+	double	dist[MAX_ENEMIES];
 
 	e_index = 0;
 	i = -1;
+	int n_enemies = number_enemies(s);
 	while (s->enemy[++i])
 		dist[i] = s->enemy[i]->dist;
 	while (1)
@@ -98,6 +105,7 @@ void	draw_enemies(t_map *s)
 		if (e_index < 0)
 			break;
 		draw_enemy(s, s->enemy[e_index]);
-		dist[e_index] = 0;
+		dist[e_index] = -1;
+		//stops drawing at distance 0.6
 	}
 }

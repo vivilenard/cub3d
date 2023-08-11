@@ -3,7 +3,7 @@
 # define CUB3D_H
 
 # define WIDTH 1400
-# define HEIGTH 800
+# define HEIGTH 600
 # define PI 3.141592653589793238462643383279502884197
 # define N_ENEMIES 6
 # define N_TEX 7
@@ -50,8 +50,8 @@ typedef struct s_character
 	int		px;
 	int		lineheight;
 	double	ray_a;
-	double	ray_start; //dont need
-	double	ray_end;	//dont need
+	//double	ray_start; //dont need
+	//double	ray_end;	//dont need
 } t_character;
 
 typedef struct s_ray
@@ -142,7 +142,7 @@ int			enemy_invisible(t_map *s, t_character *e);
 void		check_enemy(t_map *s, t_ray *r);
 void		to_vert_line(t_map *s, int p1, int p2, int px, t_character *e);
 int			number_enemies(t_map *s);
-int			highest_dist_enemy(t_map *s, int *dist);
+int			highest_dist_enemy(t_map *s, double *dist);
 
 
 #endif

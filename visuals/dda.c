@@ -27,20 +27,20 @@ double	dda(t_map *s, t_ray *r, int px)
 	{
 		if (r->sidedist_x < r->sidedist_y)
 		{
+			check_enemy(s, s->ray);
 			r->xmap += r->xmove;
 			r->hit_side = 0;
 			if (s->co[r->xmap][r->ymap] == WALL || s->co[r->xmap][r->ymap] == CLOSED_DOOR)
 				break ;
-			check_enemy(s, s->ray);
 			r->sidedist_x += r->deltadist_x;
 		}
 		else
 		{
+			check_enemy(s, s->ray);
 			r->ymap += r->ymove;
 			r->hit_side = 1;
 			if (s->co[r->xmap][r->ymap] == WALL || s->co[r->xmap][r->ymap] == CLOSED_DOOR)
 				break ;
-			check_enemy(s, s->ray);
 			r->sidedist_y += r->deltadist_y;
 		}
 	}
@@ -54,7 +54,7 @@ double	dda(t_map *s, t_ray *r, int px)
 
 double	ray_dist(t_map *s, t_ray *r)
 {
-	if (r->hit_side == 0)
+	if (s->ray->hit_side == 0)  //unuse s struct
 		return (r->sidedist_x);
 	return (r->sidedist_y);
 }

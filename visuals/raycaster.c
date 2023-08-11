@@ -80,5 +80,5 @@ void	raycaster(t_map *s, t_ray *ray)
 		px++;
 	}
 	draw_enemies(s);
-	// loop_enemies(s, draw_enemy);
+	//loop_enemies(s, draw_enemy);
 }

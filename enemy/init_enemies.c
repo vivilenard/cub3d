@@ -50,8 +50,8 @@ int	enemy_invisible(t_map *s, t_character *e)
 {
 	e->visible = false;
 	e->in_view = false;
-	e->pix_start = 0;
-	e->pix_end = 0;
+	e->pix_start = -1;
+	e->pix_end = -1;
 	return (1);
 }
 
@@ -65,10 +65,10 @@ int	number_enemies(t_map *s) //dont need
 	return (i);
 }
 
-int	highest_dist_enemy(t_map *s, int *dist)
+int	highest_dist_enemy(t_map *s, double *dist)
 {
 	int		i = -1;
-	double	highest_dist = 0;
+	double	highest_dist = -1;
 	int		index = -1;
 
 	while (s->enemy[++i])
