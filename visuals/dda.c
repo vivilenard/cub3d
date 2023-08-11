@@ -7,7 +7,7 @@ double	delta_dist(double side)
 
 void	check_door(t_map *s, t_ray *r, int px)
 {
-	if (s->co[r->xmap][r->ymap] == CLOSED_DOOR)
+	if (s->co[r->xmap][r->ymap] == CLOSED_DOOR || s->co[r->xmap][r->ymap] == OPENED_DOOR)
 	{
 		r->door = 1;
 		if (px == WIDTH / 2)		//means player looks right at the door --> could possibly open it
@@ -28,6 +28,7 @@ double	dda(t_map *s, t_ray *r, int px)
 		if (r->sidedist_x < r->sidedist_y)
 		{
 			check_enemy(s, s->ray);
+			//check_door(s, r, px);
 			r->xmap += r->xmove;
 			r->hit_side = 0;
 			if (s->co[r->xmap][r->ymap] == WALL || s->co[r->xmap][r->ymap] == CLOSED_DOOR)
@@ -37,6 +38,7 @@ double	dda(t_map *s, t_ray *r, int px)
 		else
 		{
 			check_enemy(s, s->ray);
+			//check_door(s, r, px);
 			r->ymap += r->ymove;
 			r->hit_side = 1;
 			if (s->co[r->xmap][r->ymap] == WALL || s->co[r->xmap][r->ymap] == CLOSED_DOOR)

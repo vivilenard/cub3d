@@ -3,7 +3,7 @@
 # define CUB3D_H
 
 # define WIDTH 1400
-# define HEIGTH 600
+# define HEIGTH 800
 # define PI 3.141592653589793238462643383279502884197
 # define N_ENEMIES 6
 # define N_TEX 7
