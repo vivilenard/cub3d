@@ -2,6 +2,21 @@
 #include "include/cub3d.h"
 #include "include/parser.h"
 
+void	free_map_params(t_map_params *map_params, t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i != map_params->height)
+	{
+		free(map_params->map[i]);
+		i++;
+	}
+	free(map_params->map);
+	free(map_params->all_width);
+	// free(map->co);
+}
+
 void	full_exit(t_map *s)
 {
 	int i = 0;
@@ -33,16 +48,17 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (printf("Error\nexpected a map in format *.cub\n"), EXIT_FAILURE);
-	// fd = open(argv[1], O_RDONLY);
-	// if (read(fd, NULL, 0) < 0)
-	// 	return (quick_exit("Error\nread() failed\n", fd));
-	// if (parser(&s, &map_params, argv, fd))
-	// {
-	// 	close(fd);
-	// 	return (EXIT_FAILURE);
-	// }
+	fd = open(argv[1], O_RDONLY);
+	if (read(fd, NULL, 0) < 0)
+		return (quick_exit("Error\nread() failed\n", fd));
+	if (parser(&s, &map_params, argv, fd))
+	{
+		close(fd);
+		return (EXIT_FAILURE);
+	}
+	// free_map_params(&map_params, &s);
 	//printf("test\n");
-	s = init(&s, argv);
-	display(&s);
+	// s = init(&s, argv);
+	// display(&s);
 	return (EXIT_SUCCESS);
 }

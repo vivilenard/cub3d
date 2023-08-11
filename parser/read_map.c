@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:52:17 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/10 23:31:51 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/11 17:04:25 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,35 +20,27 @@
 int	zero_extend(t_map_params *map_params)
 {
 	int			i;
-	int			i_hight;
+	int			i_height;
 	t_map_char	*new_line;
 
 	i = 0;
-	i_hight = 0;
-	while (i_hight != map_params->height)
+	i_height = 0;
+	while (i_height != map_params->height)
 	{
-		if (map_params->all_width[i_hight] < map_params->max_width)
+		// printf("%d | %d\n", map_params->all_width[i_height], map_params->max_width);
+		if (map_params->all_width[i_height] < map_params->max_width)
 		{
-			new_line = malloc(sizeof(t_map_char) * map_params->max_width);
-			if (new_line == NULL)
-			{
-				// free
-				return (EXIT_FAILURE);
-			}
-			while (i != map_params->all_width[i_hight])
-			{
-				new_line[i] = map_params->map[i_hight][i];
-				i++;
-			}
-			while (i != map_params->max_width)
-			{
-				new_line[i] = SPACE;
-				i++;
-			}
+			new_line = ft_calloc(map_params->max_width, sizeof(t_map_char));
+			ft_memcpy(new_line, map_params->map[i_height], map_params->all_width[i_height] * sizeof(t_map_char));
+			free(map_params->map[i_height]);
+			map_params->map[i_height] = new_line;
+
+			// for(int i = 0; i < map_params->max_width; i++)
+			// 	printf("%d", new_line[i]);
+			// printf("\n");
+
 		}
-		map_params->map[i_hight] = new_line;
-		free(new_line);
-		i_hight++;
+		i_height++;
 	}
 	return (EXIT_SUCCESS);
 }
@@ -57,8 +49,14 @@ int	read_map(t_map *map, t_map_params *map_params, int fd)
 {
 	char	*line;
 
-	if (map_params_init(map_params) || map_init(map))
+	if (map_params_init(map_params))
 		return (EXIT_FAILURE);
+	if (map_init(map))
+	{
+		free(map_params->map);
+		free(map_params->all_width);
+		return (EXIT_FAILURE);
+	}
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -103,7 +101,7 @@ int	read_map(t_map *map, t_map_params *map_params, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
-	// zero_extend(map_params); // free in failure
+	zero_extend(map_params); // free in failure
 	print_map(map_params);
 	// if (map_verify(map_params))
 	// {
@@ -120,7 +118,7 @@ void	print_map(t_map_params *map_params)
 	int	y;
 
 	x = 0;
-	printf("hight: %d, widht: %d\n", map_params->height, map_params->max_width);
+	printf("height: %d, width: %d\n", map_params->height, map_params->max_width);
 	printf("all width: ");
 	while (x != map_params->height)
 	{
@@ -135,16 +133,18 @@ void	print_map(t_map_params *map_params)
 	{
 		x = 0;
 		printf("[");
-		while (x != map_params->all_width[y])
+		while (x != map_params->max_width)
 		{
 			if (map_params->map[y][x] == PLAYER)
-				printf("\033[1;31mP\033[0;37m");
+				printf("\033[1;31mP\033[0;0m");
 			else if (map_params->map[y][x] == ENEMY)
-				printf("\033[1;35mX\033[0;37m");
+				printf("\033[1;35mX\033[0;0m");
 			else if (map_params->map[y][x] == CLOSED_DOOR)
-				printf("\033[1;36mH\033[0;37m");
+				printf("\033[1;36mH\033[0;0m");
+			// else if (map_params->map[y][x] == 0)
+			// 	printf("X");
 			else
-				printf("%c", map_params->map[y][x]);
+				printf("%d", map_params->map[y][x]);
 			x++;
 		}
 		printf("]\n");

@@ -15,6 +15,7 @@ typedef struct s_color
 typedef struct s_map_params
 {
 	t_map_char		**map;
+	int				capacity;
 	t_map_char		component;
 	mlx_texture_t	*textures[5];
 	int				cur_width;

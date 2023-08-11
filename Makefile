@@ -48,23 +48,22 @@ PARSE_DIR = /parser
 ENEMY_DIR = /enemy
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 LIBFT = libft/libft.a
+HEADERS = include/cub3d.h include/main.h include/parser.h
 
 all: $(NAME)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(OBJ_DIR)$(VISUALS_DIR)
-	@mkdir -p $(OBJ_DIR)$(PARSE_DIR)
-	@mkdir -p $(OBJ_DIR)$(ENEMY_DIR)
 
-$(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) #$(SAN_LDFLAG)
+$(NAME): $(OBJ) $(LIBFT)
+	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) -fsanitize=address
 	@printf "$(GREEN)Compiled$(RESET)\n"
 
 $(LIBFT):
 	@cd libft && make DEBUG=$(DEBUG) && make clean
 
-$(OBJ_DIR)/%.o: %.c 
+$(OBJ_DIR)/%.o: %.c $(HEADERS) Makefile | $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	@cc $(CFLAGS) -c $< -o $@
 
 clean:
@@ -75,11 +74,7 @@ fclean: clean
 	@cd libft && make fclean
 	@rm -f ./$(NAME)
 
-
 re: fclean all
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $^ -o $@
 
 build:
 	@git submodule update --init

@@ -28,31 +28,37 @@ int	get_identifier(t_map *map, t_map_params *map_params, char *line)
 	else if (ft_strncmp(result[0], "NO\0", 3) == 0 && map->tex[NORTH] == NULL) // need to change for map->tex[]
 	{
 		// printf("no\n");
+		free(result);
 		return (set_textures(map, map_params, NORTH, result[1]));
 	}
 	else if (ft_strncmp(result[0], "SO\0", 3) == 0 && map->tex[SOUTH] == NULL)
 	{
 		// printf("so\n");
+		free(result);
 		return (set_textures(map, map_params, SOUTH, result[1]));
 	}
 	else if (ft_strncmp(result[0], "EA\0", 3) == 0 && map->tex[EAST] == NULL)
 	{
 		// printf("ea\n");
+		free(result);
 		return (set_textures(map, map_params, EAST, result[1]));
 	}
 	else if (ft_strncmp(result[0], "WE\0", 3) == 0 && map->tex[WEST] == NULL)
 	{
 		// printf("we\n");
+		free(result);
 		return (set_textures(map, map_params, WEST, result[1]));
 	}
 	else if (ft_strncmp(result[0], "F\0", 2) == 0 && !map_params->floor.is_color)
 	{
 		// printf("f\n");
+		free(result);
 		return (set_color(map, map_params, 'F', result[1]));
 	}
 	else if (ft_strncmp(result[0], "C\0", 2) == 0 && !map_params->ceiling.is_color)
 	{
 		// printf("c\n");
+		free(result);
 		return (set_color(map, map_params, 'C', result[1]));
 	}
 	// free map_init(), result, colors
@@ -124,6 +130,7 @@ int	set_color(t_map *map, t_map_params *map_params, char side, char *str)
 			get_channel(colors[2], &is_default), 0);
 		map_params->ceiling.is_color = true;
 	}
+	free(colors);
 	map_params->identifier++;
 	if (is_default)
 		printf("Default color is using\n");

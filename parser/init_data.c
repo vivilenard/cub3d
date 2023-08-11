@@ -28,11 +28,17 @@ int	map_init(t_map *map)
 
 int	map_params_init(t_map_params *map_params)
 {
+	map_params->capacity = 1;
 	map_params->map = malloc(
-			sizeof(t_map_char *) * 1);
-	map_params->all_width = malloc(sizeof(int *) * 1);
-	if (map_params->map == NULL || map_params->all_width == NULL)
+			sizeof(t_map_char *) * map_params->capacity);
+	if (map_params->map == NULL)
 		return (printf("Error: malloc failed\n"), EXIT_FAILURE);
+	map_params->all_width = malloc(sizeof(int *) * 1);
+	if (map_params->all_width == NULL)
+	{
+		free(map_params->map);
+		return (printf("Error: malloc failed\n"), EXIT_FAILURE);
+	}
 	map_params->textures[0] = NULL;
 	map_params->textures[1] = NULL;
 	map_params->textures[2] = NULL;
