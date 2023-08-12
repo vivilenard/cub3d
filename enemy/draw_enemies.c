@@ -32,17 +32,19 @@ int	raycast_enemy(t_map *s, t_character *e)
 	if (e->visible == false)
 		return (0);
 	ray_a = s->ray->ra;
-	if (e->a_left > e_a_right) // means we are aroud 2 PI
-		e_a_right += 2 * PI;
-	if (ray_a > 0 && ray_a < PI)
-		ray_a += 2 * PI;
-	if (e->in_view == false && (ray_a > e->a_left && ray_a < e_a_right))
+	// if (e->a_left > e_a_right) // means we are aroud 2 PI
+	// 	e_a_right += 2 * PI;
+	// if (ray_a > 0 && ray_a < PI)
+	// 	ray_a += 2 * PI;
+	if (e->in_view == false && ((ray_a > e->a_left && ray_a < e_a_right)
+		|| ((e->a_left > e_a_right) 
+		&& (ray_a < 2 * PI && ray_a >= e->a_left || ray_a >= 0 && ray_a <= e_a_right))))
 	{
 		e->in_view = true;
 		e->pix_start = s->ray->x_px;
 		printf("ea_l: %f, ra: %f ea_r: %f\n", e->a_left, ray_a, e_a_right);
 	}
-	else if (e->in_view == true && (ray_a < e->a_left || ray_a > e_a_right))
+	else if (e->in_view == true && (ray_a < e->a_left || ray_a > e_a_right)) //think about this
 	{
 		e->in_view = false;
 		e->pix_end = s->ray->x_px;
@@ -63,8 +65,8 @@ color	color_enemy_tex(t_map *s, t_character *e, int py)
 	if (!e->tex)
 		perror("no enemy texture");
 	r_a_right = e->a_right;
-	if (r_a_right < e->a_left)
-		r_a_right += 2 * PI;
+	// if (r_a_right < e->a_left)
+	// 	r_a_right += 2 * PI;
 	tex_step = 1.0 * e->tex->height / e->lineheight;
 	x_pos = (e->ray_a - e->a_left) / (r_a_right - e->a_left);
 	tex_x = (int)(x_pos * e->tex->width); //check where ray angle hits enemy plane
@@ -115,11 +117,11 @@ int	draw_enemy(t_map *s, t_character *e)
 	while (e->px >= 0 && (e->px < e->pix_end && e->px < WIDTH))
 	{
 		pa = s->pa;
-		if (s->pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE < 0)
-			pa += 2 * PI;
+		// if (s->pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE < 0)
+		// 	pa += 2 * PI;
 		e->ray_a = pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE;
-		draw_enemy_tex(s, p1, p2, e);
-		//to_vert_line(s, p1, p2, e->px, e);
+		//draw_enemy_tex(s, p1, p2, e);
+		to_vert_line(s, p1, p2, e->px, e);
 		e->px++;
 	}
 	return (1);
