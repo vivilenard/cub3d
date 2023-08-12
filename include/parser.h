@@ -41,10 +41,12 @@ int	quick_exit(char *str, int fd);
 
 //	read_map.c
 int	read_map(t_map *map, t_map_params *map_params, int fd);
+int	zero_extend(t_map_params *map_params);
 void	print_map(t_map_params *map_params); // delete
 
 //	read_map_utils.c
 int get_map(t_map_params *map_params, char *line);
+int	map_extend(t_map_params *map_params);
 t_map_char	convert_char(t_map_params *map_params, char c);
 
 //	identifiers.c
@@ -55,7 +57,7 @@ int	get_channel(char *str, bool *is_default); // have to rename
 int get_rgba(int r, int g, int b, int a);
 
 //	map_verify.c
-// int	map_verify(t_map_params *map_params);
+int	map_verify(t_map_params *map_params);
 
 //	init_data.c
 int	map_init(t_map *map);

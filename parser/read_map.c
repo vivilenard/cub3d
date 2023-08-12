@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:52:17 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/11 17:04:25 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/12 20:13:35 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,6 @@
 #include "../include/parser.h"
 #include "../libft/libft.h"
 #include "../MLX42/include/MLX42/MLX42.h"
-
-int	zero_extend(t_map_params *map_params)
-{
-	int			i;
-	int			i_height;
-	t_map_char	*new_line;
-
-	i = 0;
-	i_height = 0;
-	while (i_height != map_params->height)
-	{
-		// printf("%d | %d\n", map_params->all_width[i_height], map_params->max_width);
-		if (map_params->all_width[i_height] < map_params->max_width)
-		{
-			new_line = ft_calloc(map_params->max_width, sizeof(t_map_char));
-			ft_memcpy(new_line, map_params->map[i_height], map_params->all_width[i_height] * sizeof(t_map_char));
-			free(map_params->map[i_height]);
-			map_params->map[i_height] = new_line;
-
-			// for(int i = 0; i < map_params->max_width; i++)
-			// 	printf("%d", new_line[i]);
-			// printf("\n");
-
-		}
-		i_height++;
-	}
-	return (EXIT_SUCCESS);
-}
 
 int	read_map(t_map *map, t_map_params *map_params, int fd)
 {
@@ -103,12 +75,40 @@ int	read_map(t_map *map, t_map_params *map_params, int fd)
 	}
 	zero_extend(map_params); // free in failure
 	print_map(map_params);
-	// if (map_verify(map_params))
-	// {
-	// 	// free
-	// 	return (EXIT_FAILURE);
-	// }
+	if (map_verify(map_params))
+	{
+		// free
+		return (EXIT_FAILURE);
+	}
 	// free line ?
+	return (EXIT_SUCCESS);
+}
+
+int	zero_extend(t_map_params *map_params)
+{
+	int			i;
+	int			i_height;
+	t_map_char	*new_line;
+
+	i = 0;
+	i_height = 0;
+	while (i_height != map_params->height)
+	{
+		// printf("%d | %d\n", map_params->all_width[i_height], map_params->max_width);
+		if (map_params->all_width[i_height] < map_params->max_width)
+		{
+			new_line = ft_calloc(map_params->max_width, sizeof(t_map_char));
+			ft_memcpy(new_line, map_params->map[i_height], map_params->all_width[i_height] * sizeof(t_map_char));
+			free(map_params->map[i_height]);
+			map_params->map[i_height] = new_line;
+
+			// for(int i = 0; i < map_params->max_width; i++)
+			// 	printf("%d", new_line[i]);
+			// printf("\n");
+
+		}
+		i_height++;
+	}
 	return (EXIT_SUCCESS);
 }
 
