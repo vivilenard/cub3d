@@ -2,9 +2,12 @@
 #include "../include/cub3d.h"
 
 t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int px)
-{	
+{
+	double pa = s->pa;
 	ray->x_px = px;
-	ray->ra = s->pa - angle * WIDTH / 2 + px * angle;
+	if ((s->pa - angle * WIDTH / 2 + px * angle) < 0)
+		pa += 2 * PI;
+	ray->ra = pa - angle * WIDTH / 2 + px * angle;
 	ray->rdx = cos(ray->ra);
 	ray->rdy = sin(ray->ra);
 	ray->deltadist_x = delta_dist(ray->rdx);
@@ -61,13 +64,19 @@ void	minimap_perspective(t_map *s, t_ray *ray)
 	}
 }
 
-void	raycaster(t_map *s, t_ray *ray)
+void	init_raycaster(t_map *s, t_ray *ray)
 {
-	int	px = 0;
+	memset(s->img->pixels, 255, s->img->width * s->img->height * sizeof(int32_t));
 	ray->door_x = -1;
 	ray->door_y = -1;
-	loop_enemies(s, enemy_invisible);
-	memset(s->img->pixels, 255, s->img->width * s->img->height * sizeof(int32_t));
+}
+
+void	raycaster(t_map *s, t_ray *ray)
+{
+	int	px;
+
+	px = 0;
+	init_raycaster(s, ray);
 	while (px < WIDTH)
 	{
 		ray = init_ray(s, ray, RAY_ANGLE, px);
@@ -78,6 +87,7 @@ void	raycaster(t_map *s, t_ray *ray)
 		loop_enemies(s, raycast_enemy);
 		px++;
 	}
+	printf("hi\n");
 	draw_enemies(s);
 	//loop_enemies(s, draw_enemy);
 }

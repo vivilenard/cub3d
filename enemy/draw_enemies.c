@@ -1,20 +1,48 @@
 #include "../include/cub3d.h"
 
-int	raycast_enemy(t_map *s, t_character *e) //this needs work
+// int	raycast_enemy(t_map *s, t_character *e) //this needs work
+// {
+// 	if (e->visible == false)
+// 		return (0);
+// 	double	ray_a;
+
+// 	ray_a = s->ray->ra;
+// 	if (ray_a < 0)
+// 		ray_a = 2 * PI + ray_a;
+// 	if((((ray_a >= e->a_left) && !(ray_a > e->a_right))
+// 		|| (!(ray_a < e->a_left) && (ray_a <= e->a_right)))
+// 			&& e->in_view == false)
+// 	{
+// 		e->in_view = true;
+// 		e->pix_start = s->ray->x_px;
+// 	}
+// 	else if ((ray_a < e->a_left || ray_a > e->a_right) && e->in_view == true)
+// 	{
+// 		e->in_view = false;
+// 		e->pix_end = s->ray->x_px;
+// 	}
+// 	return (1);
+// }
+
+int	raycast_enemy(t_map *s, t_character *e)
 {
+	double	ray_a;
+	double	e_a_right = e->a_right;
+
 	if (e->visible == false)
 		return (0);
-	double	ray_a;
-
 	ray_a = s->ray->ra;
-	if((((ray_a >= e->a_left) && !(ray_a > e->a_right))
-		|| (!(ray_a < e->a_left) && (ray_a <= e->a_right)))
-			&& e->in_view == false)
+	if (e->a_left > e_a_right) // means we are aroud 2 PI
+		e_a_right += 2 * PI;
+	if (ray_a > 0 && ray_a < PI)
+		ray_a += 2 * PI;
+	if (e->in_view == false && (ray_a > e->a_left && ray_a < e_a_right))
 	{
 		e->in_view = true;
 		e->pix_start = s->ray->x_px;
+		printf("ea_l: %f, ra: %f ea_r: %f\n", e->a_left, ray_a, e_a_right);
 	}
-	else if ((ray_a < e->a_left || ray_a > e->a_right) && e->in_view == true)
+	else if (e->in_view == true && (ray_a < e->a_left || ray_a > e_a_right))
 	{
 		e->in_view = false;
 		e->pix_end = s->ray->x_px;
@@ -30,11 +58,15 @@ color	color_enemy_tex(t_map *s, t_character *e, int py)
 	int			pos;
 	int			color;
 	double		x_pos;
+	double		r_a_right;
 
 	if (!e->tex)
 		perror("no enemy texture");
+	r_a_right = e->a_right;
+	if (r_a_right < e->a_left)
+		r_a_right += 2 * PI;
 	tex_step = 1.0 * e->tex->height / e->lineheight;
-	x_pos = (e->ray_a - e->a_left) / (e->a_right - e->a_left);
+	x_pos = (e->ray_a - e->a_left) / (r_a_right - e->a_left);
 	tex_x = (int)(x_pos * e->tex->width); //check where ray angle hits enemy plane
 	tex_y = ((py - HEIGTH / 2 + e->lineheight / 2) * tex_step);
 	pos = (tex_y * e->tex->width + tex_x) * e->tex->bytes_per_pixel;
@@ -70,6 +102,7 @@ int	draw_enemy(t_map *s, t_character *e)
 	int	p1;
 	int	p2;
 
+	double pa;
 	if ((e->pix_start < 0))
 		return (0);
 	if (e->pix_end < 0)
@@ -78,9 +111,13 @@ int	draw_enemy(t_map *s, t_character *e)
 	e->lineheight = HEIGTH / e->dist;
 	p1 = HEIGTH / 2 - e->lineheight / 2;
 	p2 = HEIGTH / 2 + e->lineheight / 2;
+	printf("drawing\n");
 	while (e->px >= 0 && (e->px < e->pix_end && e->px < WIDTH))
 	{
-		e->ray_a = s->pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE;
+		pa = s->pa;
+		if (s->pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE < 0)
+			pa += 2 * PI;
+		e->ray_a = pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE;
 		draw_enemy_tex(s, p1, p2, e);
 		//to_vert_line(s, p1, p2, e->px, e);
 		e->px++;

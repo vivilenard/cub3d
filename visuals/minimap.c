@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/12 12:51:09 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/12 13:24:15 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,12 @@ int	draw_minimap(t_map *s)
 	return (1);
 }
 
-void	minimap(t_map *s)
+int	setup_minimap(t_map *s)
 {
 	calculate_proportions(s);
 	s->minimap = mlx_new_image(s->mlx, s->mm_radius, s->mm_radius);
 	if (mlx_image_to_window(s->mlx, s->minimap, 0, 0) < 0)
-		full_exit();
-	draw_minimap(s);
+		return (0);
+	//draw_minimap(s);
+	return (1);
 }

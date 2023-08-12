@@ -32,3 +32,11 @@ void	change_direction_mouse(t_map *s, double mv)
 	adjust_view(s, x, mv);
 	mlx_set_mouse_pos(s->mlx, WIDTH / 2, HEIGTH / 2);
 }
+
+void	check_keys(t_map *s)
+{
+	move_player_vertical(s, 0.08);
+	move_player_horizontal(s, 0.05);
+	change_direction_keys(s, 0.10);
+	change_direction_mouse(s, 0.06);
+}

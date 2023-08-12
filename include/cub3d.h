@@ -97,17 +97,19 @@ int		to_rgbt(int r, int g, int b, int t);
 
 //display
 int		display(t_map *s);
+void	loop_game(void *p);
+int		setup_game(t_map *s);
 
 //minimap
-void	minimap(t_map *s);
+int		setup_minimap(t_map *s);
 int		draw_minimap(t_map *s);
 void	print_square(mlx_image_t *img, int x, int y, int radius, uint32_t color);
 void	to_square(t_map *s, double x, double y, double p_radius);
 
 //key_bindings
+void	check_keys(t_map *s);
 void	move_player_vertical(t_map *s, double step);
 void	move_player_horizontal(t_map *s, double step);
-//void	key_bindings(void *p);
 void	change_direction_mouse(t_map *s, double mv);
 void	change_direction_keys(t_map *s, double mv);
 void	adjust_view(t_map *s, int x, double mv);

@@ -47,6 +47,7 @@ int	calibrate_enemy(t_map *s, t_character *e)
 	e->dist = sqrt(e->dx * e->dx
 		+ e->dy * e->dy);
 	enemy_angles(s, e);
+	enemy_invisible(s, e);
 	return (1);
 }
 
