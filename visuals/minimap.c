@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+        */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/11 08:30:27 by karllenard       ###   ########.fr       */
+/*   Updated: 2023/08/12 12:51:09 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,6 @@ int	draw_mini_enemy(t_map *s, t_character *e)
 	//draw enemy plane
 	to_square(s, e->right_x, e->right_y, 0.05);
 	to_square(s, e->left_x, e->left_y, 0.03);
-
-	//to_square(s, e->x - 0.2 * (-1 * e->dy), e->y - 0.2 * (e->dx), e->radius);
-	//to_square(s, (s->enemy[i]->x + s->enemy[i]->dx) * 0.01, (s->enemy[i]->y + s->enemy[i]->dy) * 0.01, 0.02);
 	return (1);
 }
 
@@ -79,7 +76,6 @@ int	draw_minimap(t_map *s)
 	scan_coordinates(s, print_wall);
 	draw_player(s);
 	loop_enemies(s, draw_mini_enemy);
-	//draw_enemies(s);
 	return (1);
 }
 

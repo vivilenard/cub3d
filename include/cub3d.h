@@ -72,7 +72,7 @@ typedef struct s_ray
 	double			hit_x;
 	double			hit_y;
 	int				lineheight;
-	int				door;
+	int				door_visible;
 	double			raylength;
 	int				door_x;
 	int				door_y;
@@ -107,16 +107,19 @@ void	to_square(t_map *s, double x, double y, double p_radius);
 //key_bindings
 void	move_player_vertical(t_map *s, double step);
 void	move_player_horizontal(t_map *s, double step);
-void	key_bindings(void *p);
+//void	key_bindings(void *p);
 void	change_direction_mouse(t_map *s, double mv);
+void	change_direction_keys(t_map *s, double mv);
 void	adjust_view(t_map *s, int x, double mv);
+int		collide(char **co, int x, int y);
+void	key_bindings(mlx_key_data_t keydata, void *p);
 
 //raycaster
 void	raycaster(t_map *s, t_ray *ray);
 void	draw_line(t_map *s, t_ray *r, double dist, int px);
 t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int r);
 void	init_dda(t_map *s, t_ray *r);
-double	ray_dist(t_map *s, t_ray *r);
+double	ray_dist(t_ray *r);
 double	dda(t_map *s, t_ray *r, int px);
 double	delta_dist(double side);
 

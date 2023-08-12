@@ -15,7 +15,8 @@ t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int px)
 	ray->hit_x = 0;
 	ray->hit_y = 0;
 	ray->lineheight = 0;
-	ray->door = 0;
+	ray->raylength = 0;
+	ray->door_visible = 0;
 	return (ray);
 }
 
@@ -34,7 +35,6 @@ void	draw_stripe(t_map *s, t_ray *r, double dist, int px)
 	draw_ceiling(s, drawstart - 1, px);
 	take_texture(s, drawstart, drawend, px);
 	draw_floor(s, drawend - 1, px);
-	
 }
 
 void	minimap_perspective(t_map *s, t_ray *ray)
@@ -64,7 +64,6 @@ void	minimap_perspective(t_map *s, t_ray *ray)
 void	raycaster(t_map *s, t_ray *ray)
 {
 	int	px = 0;
-	ray->raylength = 0;
 	ray->door_x = -1;
 	ray->door_y = -1;
 	loop_enemies(s, enemy_invisible);

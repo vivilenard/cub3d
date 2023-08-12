@@ -13,14 +13,6 @@ void	full_exit(t_map *s)
 	i = 0;
 	free(s->ray);
 	ft_free2d(s->co);
-	// while (s->co[i])
-	// {
-	// 	printf("%s\n", s->co[i]);
-	// 	free(s->co[i]);
-	// 	i++;
-	// }
-	// free(s->co);
-
 	//system ("leaks cub3D");
 	exit(0);
 }

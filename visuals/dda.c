@@ -7,9 +7,11 @@ double	delta_dist(double side)
 
 void	check_door(t_map *s, t_ray *r, int px)
 {
+	r->raylength = ray_dist(r) * cos(s->pa - r->ra);
 	if (s->co[r->xmap][r->ymap] == CLOSED_DOOR || s->co[r->xmap][r->ymap] == OPENED_DOOR)
 	{
-		r->door = 1;
+		if (s->co[r->xmap][r->ymap] == CLOSED_DOOR)
+			r->door_visible = 1;
 		if (px == WIDTH / 2)		//means player looks right at the door --> could possibly open it
 		{
 			if (r->raylength < 1)
@@ -28,9 +30,9 @@ double	dda(t_map *s, t_ray *r, int px)
 		if (r->sidedist_x < r->sidedist_y)
 		{
 			check_enemy(s, s->ray);
-			//check_door(s, r, px);
 			r->xmap += r->xmove;
 			r->hit_side = 0;
+			check_door(s, r, px);
 			if (s->co[r->xmap][r->ymap] == WALL || s->co[r->xmap][r->ymap] == CLOSED_DOOR)
 				break ;
 			r->sidedist_x += r->deltadist_x;
@@ -38,25 +40,25 @@ double	dda(t_map *s, t_ray *r, int px)
 		else
 		{
 			check_enemy(s, s->ray);
-			//check_door(s, r, px);
 			r->ymap += r->ymove;
 			r->hit_side = 1;
+			check_door(s, r, px);
 			if (s->co[r->xmap][r->ymap] == WALL || s->co[r->xmap][r->ymap] == CLOSED_DOOR)
 				break ;
 			r->sidedist_y += r->deltadist_y;
 		}
 	}
-	r->hit_x = s->px + r->rdx * ray_dist(s, r);
-	r->hit_y = s->py + r->rdy * ray_dist(s, r);
-	r->raylength = ray_dist(s, r) * cos(s->pa - r->ra);
+	r->hit_x = s->px + r->rdx * ray_dist(r);
+	r->hit_y = s->py + r->rdy * ray_dist(r);
+	r->raylength = ray_dist(r) * cos(s->pa - r->ra);
 	check_door(s, r, px);
 	return (0);
 }
 
 
-double	ray_dist(t_map *s, t_ray *r)
+double	ray_dist(t_ray *r)
 {
-	if (s->ray->hit_side == 0)  //unuse s struct
+	if (r->hit_side == 0)
 		return (r->sidedist_x);
 	return (r->sidedist_y);
 }

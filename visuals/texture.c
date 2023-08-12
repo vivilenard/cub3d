@@ -4,7 +4,7 @@ int	choose_texture(t_map *s, t_ray *r)
 {
 	int	wall_side;
 	
-	if (r->door == 1)
+	if (r->door_visible == 1)
 		return (DOOR);
 	if (r->hit_side == 0) //side x
 	{
