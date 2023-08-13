@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_map.c                                        :+:      :+:    :+:   */
+/*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/12 17:53:23 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 13:36:07 by vlenard          ###   ########.fr       */
+/*   Created: 2023/08/13 16:16:18 by ekulichk          #+#    #+#             */
+/*   Updated: 2023/08/13 16:16:27 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	map_init(t_map *map)
 	int i;
 
 	i = 0;
-	while (i != 5)
+	while (i != N_TEX)
 	{
 		map->tex[i] = NULL;
 		i++;
@@ -29,21 +29,19 @@ int	map_init(t_map *map)
 int	map_params_init(t_map_params *map_params)
 {
 	map_params->capacity = 1;
-	map_params->map = malloc(
-			sizeof(t_map_char *) * map_params->capacity);
-	if (map_params->map == NULL)
-		return (printf("Error: malloc failed\n"), EXIT_FAILURE);
+	if (malloc2(sizeof(t_map_char *) * map_params->capacity, (void**) &map_params->map))
+		return (print_malloc_failed());
+	// map_params->map = malloc(
+	// 		sizeof(t_map_char *) * map_params->capacity);
+	// if (map_params->map == NULL)
+	// 	return (printf("Error: malloc failed\n"), EXIT_FAILURE);
+	map_params->map[0] = NULL;
 	map_params->all_width = malloc(sizeof(int *) * 1);
 	if (map_params->all_width == NULL)
 	{
 		free(map_params->map);
 		return (printf("Error: malloc failed\n"), EXIT_FAILURE);
 	}
-	map_params->textures[0] = NULL;
-	map_params->textures[1] = NULL;
-	map_params->textures[2] = NULL;
-	map_params->textures[3] = NULL;
-	map_params->textures[4] = NULL;
 	map_params->cur_width = 0;
 	map_params->max_width = 0;
 	map_params->height = 0;

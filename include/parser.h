@@ -17,7 +17,7 @@ typedef struct s_map_params
 	t_map_char		**map;
 	int				capacity;
 	t_map_char		component;
-	mlx_texture_t	*textures[5];
+	mlx_texture_t	*textures[N_TEX];
 	int				cur_width;
 	int				max_width;
 	int				*all_width;
@@ -38,6 +38,8 @@ typedef struct s_map_params
 int	parser(t_map *map, t_map_params *map_params, char **argv, int fd);
 int	file_path_check(char *argv);
 int	quick_exit(char *str, int fd);
+int	malloc2(size_t count, void **ptr);
+int	print_malloc_failed(void);
 
 //	read_map.c
 int	read_map(t_map *map, t_map_params *map_params, int fd);
@@ -65,8 +67,9 @@ int	map_params_init(t_map_params *map_params);
 
 #endif
 /*
+- init_map make after get all map
+- check empty map (change error message)
 - enemy struct
-- check closed walls with dfs ?
 - store all coordinates (player, c/o doors, enemies)
 - give player's view
 

@@ -3,7 +3,7 @@
 #include "../include/parser.h"
 #include "../libft/libft.h"
 
-static void	set_visited(t_map_params *map_params, int y, int x)
+void	set_visited(t_map_params *map_params, int y, int x)
 {
 	map_params->visited[y * map_params->max_width + x] = 1;
 }
@@ -23,6 +23,7 @@ bool	dfs(t_map_params *map_params, int y, int x)
 	if (is_visited(map_params, y, x))
 		return (true);
 	set_visited(map_params, y, x);
+	// map_params->visited[y * map_params->max_width + x] = 1;
 	return (dfs(map_params, y + 1, x) && dfs(map_params, y, x + 1)
 	&& dfs(map_params, y - 1, x) && dfs(map_params, y, x - 1)
 	&& dfs(map_params, y + 1, x + 1) && dfs(map_params, y - 1, x - 1)
@@ -60,12 +61,20 @@ int	map_is_closed(t_map_params *map_params)
 
 int	map_verify(t_map_params *map_params)
 {
+	if (map_params->map[0] == NULL)
+	{
+		// free all
+		return (printf("Error: map is empty\n"), EXIT_FAILURE);
+	}
 	if (map_params->player != 1)
 	{
-		// free
+		// free all
 		return (printf("Error: has to be one player\n"), EXIT_FAILURE);
 	}
 	if (map_is_closed(map_params))
+	{
+		// free all + visited
 		return (printf("Error: map is not closed\n"), EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }

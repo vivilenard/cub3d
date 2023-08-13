@@ -20,6 +20,7 @@ typedef enum e_side
 	EAST,
 	WEST,
 	DOOR,
+	NONE,
 }	t_side;
 
 // typedef enum e_map_char
@@ -38,9 +39,9 @@ typedef enum e_map_char
 	SPACE, // 0
 	WALL, // 1
 	PLAYER, // N, S, W, E
-	CLOSED_DOOR,
-	OPENED_DOOR,
-	ENEMY,
+	CLOSED_DOOR, // H
+	OPENED_DOOR, // I
+	ENEMY, // X
 	ERROR,
 }	t_map_char;
 
@@ -56,7 +57,7 @@ typedef struct s_map
 	color				floor; 			//THIS
 	color				ceiling; 		//THIS
 	char				**co; 			//THIS
-	t_map_char		**co_map;
+	t_map_char			**co_map;
 	int					map_height; 	//THIS
 	int					map_width; 		//THIS
 	double				px;			//player position

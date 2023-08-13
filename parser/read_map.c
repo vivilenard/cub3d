@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:52:17 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/12 20:13:35 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/13 19:50:38 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ int	read_map(t_map *map, t_map_params *map_params, int fd)
 {
 	char	*line;
 
-	if (map_params_init(map_params))
-		return (EXIT_FAILURE);
 	if (map_init(map))
 	{
 		free(map_params->map);
 		free(map_params->all_width);
 		return (EXIT_FAILURE);
 	}
+	if (map_params_init(map_params))
+		return (EXIT_FAILURE);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -73,8 +73,8 @@ int	read_map(t_map *map, t_map_params *map_params, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
-	zero_extend(map_params); // free in failure
-	print_map(map_params);
+	zero_extend(map_params); // free if failure
+	// print_map(map_params);
 	if (map_verify(map_params))
 	{
 		// free

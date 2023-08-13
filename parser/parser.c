@@ -16,6 +16,9 @@ int	parser(t_map *map, t_map_params *map_params, char **argv, int fd)
 	}
 	map->co_map = map_params->map;
 	map_params->map = NULL;
+	map->px = (double) map_params->player_x + 0.5;
+	map->py = (double) map_params->player_y + 0.5;
+	// map->pa = init_player_view(map_params)
 	return (EXIT_SUCCESS);
 }
 
@@ -41,5 +44,17 @@ int	quick_exit(char *str, int fd)
 {
 	printf("%s", str);
 	close(fd);
+	return (EXIT_FAILURE);
+}
+
+int	malloc2(size_t count, void **ptr)
+{
+	*ptr = malloc(count);
+	return (*ptr == NULL);
+}
+
+int	print_malloc_failed(void)
+{
+	printf("Error: malloc failed\n");
 	return (EXIT_FAILURE);
 }
