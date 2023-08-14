@@ -25,9 +25,15 @@ double	angle_vector(double xv, double yv)
 
 void	enemy_angles(t_map *s, t_character *e)
 {
-	e->a = angle_vector(e->x - s->px, e->y - s->py);
 	e->a_left = angle_vector(e->left_x - s->px, e->left_y - s->py);
+	e->a = angle_vector(e->x - s->px, e->y - s->py);
+	if (e->a < e->a_left)
+		e->a = 2 * PI + e->a;
 	e->a_right = angle_vector(e->right_x - s->px, e->right_y - s->py);
+	if (e->a_right < e->a_left)
+		e->a_right = e->a + (e->a - e->a_left);
+	// if (e->visible)
+	// 	printf("enemy: left %f, a %f, right %f\n", e->a_left, e->a, e->a_right);
 }
 
 int	calibrate_enemy(t_map *s, t_character *e)

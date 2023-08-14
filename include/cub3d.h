@@ -3,7 +3,7 @@
 # define CUB3D_H
 
 # define WIDTH 1400
-# define HEIGTH 800
+# define HEIGTH 600
 # define PI 3.141592653589793238462643383279502884197
 # define N_ENEMIES 6
 # define N_TEX 7
@@ -38,7 +38,7 @@ typedef struct s_character
 	double	radius;
 	double	dist;
 	bool	visible;
-	bool	in_view;
+	int		in_view;
 	double	orth_x;
 	double	orth_y;
 	double	left_x;

@@ -5,8 +5,10 @@ t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int px)
 {
 	double pa = s->pa;
 	ray->x_px = px;
-	if ((s->pa - angle * WIDTH / 2 + px * angle) < 0)
+	if ((s->pa - angle * WIDTH / 2 + px * angle) <= 0)
 		pa += 2 * PI;
+	else if ((s->pa - angle * WIDTH / 2 + px * angle) > 2 * PI)
+		pa -= 2 * PI;
 	ray->ra = pa - angle * WIDTH / 2 + px * angle;
 	ray->rdx = cos(ray->ra);
 	ray->rdy = sin(ray->ra);
@@ -87,7 +89,7 @@ void	raycaster(t_map *s, t_ray *ray)
 		loop_enemies(s, raycast_enemy);
 		px++;
 	}
-	printf("hi\n");
+	//printf("hi\n");
 	draw_enemies(s);
 	//loop_enemies(s, draw_enemy);
 }
