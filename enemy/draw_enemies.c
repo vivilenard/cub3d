@@ -7,9 +7,11 @@ int	raycast_enemy(t_map *s, t_character *e)
 	if (e->visible == false)
 		return (0);
 	ray_a = s->ray->ra;
+	if (ray_a < e->a_right - 2 * PI)
+		ray_a += 2 * PI;
 	if (e->in_view == false && ((ray_a > e->a_left && ray_a < e->a_right)
 		|| ((e->a_left > e->a_right) 
-		&& ((ray_a < 2 * PI && ray_a >= e->a_left) || (ray_a >= 0 && ray_a <= e->a_right)))))
+		&& ((ray_a < 2 * PI && ray_a >= e->a_left) || (ray_a > 0 && ray_a <= e->a_right)))))
 	{
 		e->in_view = true;
 		e->pix_start = s->ray->x_px;
@@ -17,10 +19,10 @@ int	raycast_enemy(t_map *s, t_character *e)
 	else if (e->in_view == true && ((((e->a_left < e->a_right) && (((ray_a > e->a_right) || ray_a < e->a_left))))
 		|| ((e->a_left > e->a_right) && (((ray_a < e->a_left && ray_a > e->a_right))))))
 	{
+		printf("ea_l: %f, ra: %f ea_r: %f\n", e->a_left, ray_a, e->a_right);
 		e->in_view = 2;
 		e->pix_end = s->ray->x_px;
 	}
-	//	printf("ea_l: %f, ra: %f ea_r: %f\n", e->a_left, ray_a, e->a_right);
 	return (1);
 }
 
@@ -35,14 +37,14 @@ color	color_enemy_tex(t_map *s, t_character *e, int py)
 	double		r_a_right;
 
 	//doesnt work between eleft and ea;
+	if (e->ray_a < e->a_right - 2 * PI)
+		e->ray_a += 2 * PI;
 	if (!e->tex)
 		perror("no enemy texture");
 	tex_step = 1.0 * e->tex->height / e->lineheight;
 	x_pos = (e->ray_a - e->a_left) / (e->a_right - e->a_left);
 	tex_x = (int)(x_pos * e->tex->width); //check where ray angle hits enemy plane
 	tex_y = ((py - HEIGTH / 2 + e->lineheight / 2) * tex_step);
-	// if (e->ray_a > 29 / 15 * PI && e->ray_a < 44 / 15 * PI)
-	// 	printf("ra left: %f, ray: %f, ra right: %f\n", e->a_left, e->ray_a, e->a_right);
 	pos = (tex_y * e->tex->width + tex_x) * e->tex->bytes_per_pixel;
 	color = to_rgbt(e->tex->pixels[pos + 0], e->tex->pixels[pos + 1],
 		e->tex->pixels[pos + 2], e->tex->pixels[pos + 3]);
@@ -85,13 +87,12 @@ int	draw_enemy(t_map *s, t_character *e)
 	e->lineheight = HEIGTH / e->dist;
 	p1 = HEIGTH / 2 - e->lineheight / 2;
 	p2 = HEIGTH / 2 + e->lineheight / 2;
-	//printf("drawing\n");
 	while (e->px >= 0 && (e->px < e->pix_end && e->px < WIDTH))
 	{
 		pa = s->pa;
-		if (pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE < 0)
+		if (s->pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE <= 0)
 			pa += 2 * PI;
-		else if (pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE > 2 * PI)
+		else if (s->pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE > 2 * PI)
 			pa -= 2 * PI;
 		e->ray_a = pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE;
 		draw_enemy_tex(s, p1, p2, e);

@@ -7,7 +7,7 @@ t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int px)
 	ray->x_px = px;
 	if ((s->pa - angle * WIDTH / 2 + px * angle) <= 0)
 		pa += 2 * PI;
-	else if ((s->pa - angle * WIDTH / 2 + px * angle) > 2 * PI)
+	if ((s->pa - angle * WIDTH / 2 + px * angle) > 2 * PI)
 		pa -= 2 * PI;
 	ray->ra = pa - angle * WIDTH / 2 + px * angle;
 	ray->rdx = cos(ray->ra);
