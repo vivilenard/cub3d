@@ -18,7 +18,6 @@ typedef struct s_map_params
 	int				capacity;
 	t_map_char		component;
 	mlx_texture_t	*textures[N_TEX];
-	int				cur_width;
 	int				max_width;
 	int				*all_width;
 	int				height;
@@ -27,6 +26,7 @@ typedef struct s_map_params
 	int				player;
 	int				player_x;
 	int				player_y;
+	double			player_view;
 	int				doors;
 	int				identifier;
 	bool			map_start;
@@ -44,12 +44,12 @@ int	print_malloc_failed(void);
 //	read_map.c
 int	read_map(t_map *map, t_map_params *map_params, int fd);
 int	zero_extend(t_map_params *map_params);
-void	print_map(t_map_params *map_params); // delete
+void	print_map_params(t_map_params *map_params); // delete
 
 //	read_map_utils.c
 int get_map(t_map_params *map_params, char *line);
 int	map_extend(t_map_params *map_params);
-t_map_char	convert_char(t_map_params *map_params, char c);
+t_map_char	convert_char(t_map_params *map_params, char, int width);
 
 //	identifiers.c
 int	get_identifier(t_map *map, t_map_params *map_params, char *line);
@@ -64,6 +64,7 @@ int	map_verify(t_map_params *map_params);
 //	init_data.c
 int	map_init(t_map *map);
 int	map_params_init(t_map_params *map_params);
+double	init_player_view(char p);
 
 #endif
 /*

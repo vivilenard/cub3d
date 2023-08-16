@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <fcntl.h>
+#include <math.h>
 #include "../libft/libft.h"
 
 int	parser(t_map *map, t_map_params *map_params, char **argv, int fd)
@@ -14,11 +15,16 @@ int	parser(t_map *map, t_map_params *map_params, char **argv, int fd)
 		// free
 		return (EXIT_FAILURE);
 	}
-	map->co_map = map_params->map;
+	map->co = map_params->map;
 	map_params->map = NULL;
+	map->map_height = map_params->height;
+	map->map_width = map_params->max_width;
 	map->px = (double) map_params->player_x + 0.5;
 	map->py = (double) map_params->player_y + 0.5;
-	// map->pa = init_player_view(map_params)
+	map->pa = map_params->player_view;
+	map->pdx = cos(map->pa);
+	map->pdy = sin(map->pa);
+	map->p_radius = 0.09;
 	return (EXIT_SUCCESS);
 }
 

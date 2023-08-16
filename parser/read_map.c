@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:52:17 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/13 19:50:38 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:42:08 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ int	read_map(t_map *map, t_map_params *map_params, int fd)
 {
 	char	*line;
 
+	if (map_params_init(map_params))
+		return (EXIT_FAILURE);
 	if (map_init(map))
 	{
 		free(map_params->map);
 		free(map_params->all_width);
 		return (EXIT_FAILURE);
 	}
-	if (map_params_init(map_params))
-		return (EXIT_FAILURE);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -36,17 +36,10 @@ int	read_map(t_map *map, t_map_params *map_params, int fd)
 		{
 			if (!map_params->map_start)
 			{
-				free(line);
-				line = get_next_line(fd);
-				continue ;
+				;
 			}
 			else if (map_params->map_start && !map_params->map_end)
-			{
-				free(line);
-				line = get_next_line(fd);
 				map_params->map_end = true;
-				continue ;
-			}
 		}
 		else
 		{
@@ -57,8 +50,6 @@ int	read_map(t_map *map, t_map_params *map_params, int fd)
 			}
 			else
 			{
-				map_params->cur_width = 0;
-				map_params->all_width[map_params->height] = 0;
 				if (get_map(map_params, line))
 					return (EXIT_FAILURE);
 				map_params->map_start = true;
@@ -74,7 +65,7 @@ int	read_map(t_map *map, t_map_params *map_params, int fd)
 		line = get_next_line(fd);
 	}
 	zero_extend(map_params); // free if failure
-	// print_map(map_params);
+	// print_map_params(map_params);
 	if (map_verify(map_params))
 	{
 		// free
@@ -112,7 +103,7 @@ int	zero_extend(t_map_params *map_params)
 	return (EXIT_SUCCESS);
 }
 
-void	print_map(t_map_params *map_params)
+void	print_map_params(t_map_params *map_params)
 {
 	int	x;
 	int	y;

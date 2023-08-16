@@ -56,8 +56,8 @@ typedef struct s_map
 	mlx_texture_t		*enemy_tex; 	//THIS
 	color				floor; 			//THIS
 	color				ceiling; 		//THIS
-	char				**co; 			//THIS
-	t_map_char			**co_map;
+	// char				**co; 			//THIS
+	t_map_char			**co;
 	int					map_height; 	//THIS
 	int					map_width; 		//THIS
 	double				px;			//player position

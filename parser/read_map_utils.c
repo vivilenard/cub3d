@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:55:38 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/12 18:24:26 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:25:00 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@ int get_map(t_map_params *map_params, char *line)
 {
 	int i;
 	int	len;
+	int	cur_width;
 
 	if (map_params->capacity == map_params->height)
 		map_extend(map_params);
 	i = 0;
+	cur_width = 0;
+	map_params->all_width[map_params->height] = 0;
 	len = ft_strlen(line);
 	map_params->map[map_params->height] = malloc(sizeof(t_map_char) * len);
 	if (map_params->map[map_params->height] == NULL)
@@ -35,21 +38,21 @@ int get_map(t_map_params *map_params, char *line)
 		free(map_params->all_width);
 		return (printf("Error: malloc failed\n"), EXIT_FAILURE);
 	}
-	while (line[map_params->cur_width] != '\n' && line[map_params->cur_width] != '\0')
+	while (line[cur_width] != '\n' && line[cur_width] != '\0')
 	{
-		map_params->component = convert_char(map_params, line[map_params->cur_width]);
+		map_params->component = convert_char(map_params, line[cur_width], cur_width);
 		if (map_params->component == ERROR)
 		{
 			// free
 			ft_printf("Error: wrong map component\n");
 			return (EXIT_FAILURE);
 		}
-		map_params->map[map_params->height][map_params->cur_width] = map_params->component;
-		map_params->cur_width++;
-		map_params->all_width[map_params->height]++;;
+		map_params->map[map_params->height][cur_width] = map_params->component;
+		cur_width++;
+		map_params->all_width[map_params->height]++;
 	}
-	if (map_params->cur_width > map_params->max_width)
-		map_params->max_width = map_params->cur_width;
+	if (cur_width > map_params->max_width)
+		map_params->max_width = cur_width;
 	return (EXIT_SUCCESS);
 }
 
@@ -78,7 +81,7 @@ int	map_extend(t_map_params *map_params)
 	return (EXIT_SUCCESS);
 }
 
-t_map_char	convert_char(t_map_params *map_params, char c)
+t_map_char	convert_char(t_map_params *map_params, char c, int width)
 {
 	if (c == '0' || c == ' ')
 		return (SPACE);
@@ -87,8 +90,9 @@ t_map_char	convert_char(t_map_params *map_params, char c)
 	else if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
 		map_params->player += 1;
-		map_params->player_x = map_params->cur_width;
+		map_params->player_x = width;
 		map_params->player_y = map_params->height;
+		map_params->player_view = init_player_view(c);
 		return (PLAYER);
 	}
 	else if (c == 'H')
