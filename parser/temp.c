@@ -22,3 +22,15 @@
 // 	else
 // 		return (NONE);
 // }
+
+// int	malloc2(size_t count, void **ptr)
+// {
+// 	*ptr = malloc(count);
+// 	return (*ptr == NULL);
+// }
+
+// int	print_malloc_failed(void)
+// {
+// 	printf("Error: malloc failed\n");
+// 	return (EXIT_FAILURE);
+// }

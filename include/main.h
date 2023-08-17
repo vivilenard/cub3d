@@ -20,7 +20,6 @@ typedef enum e_side
 	EAST,
 	WEST,
 	DOOR,
-	NONE,
 }	t_side;
 
 // typedef enum e_map_char

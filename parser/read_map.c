@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:52:17 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/16 17:42:08 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:55:03 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,13 @@ int	read_map(t_map *map, t_map_params *map_params, int fd)
 
 	if (map_params_init(map_params))
 		return (EXIT_FAILURE);
-	if (map_init(map))
-	{
-		free(map_params->map);
-		free(map_params->all_width);
-		return (EXIT_FAILURE);
-	}
 	line = get_next_line(fd);
 	while (line)
 	{
 		if (*line == '\n')
 		{
 			if (!map_params->map_start)
-			{
 				;
-			}
 			else if (map_params->map_start && !map_params->map_end)
 				map_params->map_end = true;
 		}
@@ -64,42 +56,8 @@ int	read_map(t_map *map, t_map_params *map_params, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
-	zero_extend(map_params); // free if failure
-	// print_map_params(map_params);
-	if (map_verify(map_params))
-	{
-		// free
+	if (set_textures(map_params))
 		return (EXIT_FAILURE);
-	}
-	// free line ?
-	return (EXIT_SUCCESS);
-}
-
-int	zero_extend(t_map_params *map_params)
-{
-	int			i;
-	int			i_height;
-	t_map_char	*new_line;
-
-	i = 0;
-	i_height = 0;
-	while (i_height != map_params->height)
-	{
-		// printf("%d | %d\n", map_params->all_width[i_height], map_params->max_width);
-		if (map_params->all_width[i_height] < map_params->max_width)
-		{
-			new_line = ft_calloc(map_params->max_width, sizeof(t_map_char));
-			ft_memcpy(new_line, map_params->map[i_height], map_params->all_width[i_height] * sizeof(t_map_char));
-			free(map_params->map[i_height]);
-			map_params->map[i_height] = new_line;
-
-			// for(int i = 0; i < map_params->max_width; i++)
-			// 	printf("%d", new_line[i]);
-			// printf("\n");
-
-		}
-		i_height++;
-	}
 	return (EXIT_SUCCESS);
 }
 

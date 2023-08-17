@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:16:18 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/16 17:31:50 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/17 14:52:14 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ int	map_params_init(t_map_params *map_params)
 		free(map_params->map);
 		return (printf("Error: malloc failed\n"), EXIT_FAILURE);
 	}
+	tex_init(map_params);
+	map_params->floor.is_color = false;
+	map_params->ceiling.is_color = false;
 	map_params->max_width = 0;
 	map_params->height = 0;
 	map_params->player = 0;
@@ -34,22 +37,15 @@ int	map_params_init(t_map_params *map_params)
 	map_params->identifier = 0;
 	map_params->map_start = false;
 	map_params->map_end = false;
-	map_params->floor.is_color = false;
-	map_params->ceiling.is_color = false;
 	return (EXIT_SUCCESS);
 }
 
-int	map_init(t_map *map)
+void	tex_init(t_map_params *map_params)
 {
-	int i;
-
-	i = 0;
-	while (i != N_TEX)
-	{
-		map->tex[i] = NULL;
-		i++;
-	}
-	return (EXIT_SUCCESS);
+	map_params->textures.no = NULL;
+	map_params->textures.so = NULL;
+	map_params->textures.ea = NULL;
+	map_params->textures.we = NULL;
 }
 
 double	init_player_view(char c)
@@ -65,6 +61,7 @@ double	init_player_view(char c)
 	return (0);
 }
 
+// maybe
 int	set_player(t_map *s, int x, int y)
 {
 	s->px = (double)x + 0.5;
@@ -76,6 +73,7 @@ int	set_player(t_map *s, int x, int y)
 	return (1);
 }
 
+// don't need it later
 int	player_position(t_map *s, int x, int y)
 {
 	if (s->co[x][y] == 'N' || s->co[x][y] == 'S'
