@@ -6,8 +6,8 @@
 This header file consist only shared structs.
 We should rename it (probably).
 */
-# define N_ENEMIES 6
-# define N_TEX 6
+# define MAX_ENEMIES 6
+# define N_TEX 7
 
 # include "../MLX42/include/MLX42/MLX42.h"
 
@@ -22,32 +22,32 @@ typedef enum e_side
 	DOOR,
 }	t_side;
 
-// typedef enum e_map_char
-// {
-// 	SPACE = '0', // 0
-// 	WALL = '1', // 1
-// 	PLAYER, // N, S, W, E
-// 	CLOSED_DOOR = 'D', // H
-// 	OPENED_DOOR = 'd', // I
-// 	ENEMY, // X
-// 	ERROR,
-// }	t_map_char;
-
 typedef enum e_map_char
 {
-	SPACE, // 0
-	WALL, // 1
+	SPACE = '0', // 0
+	WALL = '1', // 1
 	PLAYER, // N, S, W, E
-	CLOSED_DOOR, // H
-	OPENED_DOOR, // I
+	CLOSED_DOOR = 'D', // H
+	OPENED_DOOR = 'd', // I
 	ENEMY, // X
 	ERROR,
 }	t_map_char;
 
+// typedef enum e_map_char
+// {
+// 	SPACE, // 0
+// 	WALL, // 1
+// 	PLAYER, // N, S, W, E
+// 	CLOSED_DOOR, // H
+// 	OPENED_DOOR, // I
+// 	ENEMY, // X
+// 	ERROR,
+// }	t_map_char;
+
 typedef struct s_map
 {
 	struct s_ray		*ray;
-	struct s_character	*enemy[N_ENEMIES];
+	struct s_character	*enemy[MAX_ENEMIES];
 	mlx_t				*mlx;
 	mlx_image_t			*img;
 	mlx_image_t			*minimap;
@@ -55,8 +55,8 @@ typedef struct s_map
 	mlx_texture_t		*enemy_tex; 	//THIS
 	color				floor; 			//THIS
 	color				ceiling; 		//THIS
-	// char				**co; 			//THIS
-	t_map_char			**co;
+	char				**co; 			//THIS
+	// t_map_char			**co;
 	int					map_height; 	//THIS
 	int					map_width; 		//THIS
 	double				px;			//player position

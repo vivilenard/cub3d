@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:23:10 by vlenard           #+#    #+#             */
-/*   Updated: 2023/07/31 17:49:44 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/12 11:35:31 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,11 @@ int	to_rgbt(int r, int g, int b, int t)
 
 	color = (r << 24) + (g << 16) + (b << 8) + t;
 	return (color);
+}
+
+int		collide(char **co, int x, int y)
+{
+	if (co[x][y] == WALL || co[x][y] == CLOSED_DOOR)
+		return (1);
+	return (0);
 }

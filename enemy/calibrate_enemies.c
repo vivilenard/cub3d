@@ -4,7 +4,30 @@ bool	continue_walk(char **co, int x, int y)
 {
 	if (co[x][y] == WALL || co[x][y] == CLOSED_DOOR)
 		return (false);
+	// if (x == (int)s->px && y == (int)s->py)
+	// 	return (false);
 	return (true);
+}
+
+double	angle_vector(double xv, double yv)
+{
+	double angle;
+
+	angle = acos(sqrtf(xv * xv) / sqrtf(xv * xv + yv * yv));
+	if (xv < 0 && yv > 0)
+		angle = PI - angle;
+	else if (xv < 0 && yv < 0)
+		angle = PI + angle;
+	else if (xv > 0 && yv < 0)
+		angle = 2 * PI - angle;
+	return (angle);
+}
+
+void	enemy_angles(t_map *s, t_character *e)
+{
+	e->a = angle_vector(e->x - s->px, e->y - s->py);
+	e->a_left = angle_vector(e->left_x - s->px, e->left_y - s->py);
+	e->a_right = angle_vector(e->right_x - s->px, e->right_y - s->py);
 }
 
 int	calibrate_enemy(t_map *s, t_character *e)
@@ -12,12 +35,6 @@ int	calibrate_enemy(t_map *s, t_character *e)
 	double mv;
 
 	mv = 0.005;
-	//do i need an angle?
-	e->dx = s->px - e->x;	//richtungsvektor EP = p - e
-	e->dy = s->py - e->y;
-	e->dist = sqrt(e->dx * e->dx
-		+ e->dy * e->dy);
-	//printf("%f/%f, dist %f\n", e->dx, e->dy, e->dist);
 	if (e->dist <= 2)
 	{
 		if (continue_walk(s->co, (int)(e->x + mv * e->dx), (int)e->y))
@@ -25,6 +42,12 @@ int	calibrate_enemy(t_map *s, t_character *e)
 		if (continue_walk(s->co, (int)e->x, (int)(e->y + mv * e->dy)))
 			e->y += mv * e->dy;
 	}
+	e->dx = s->px - e->x;	//richtungsvektor EP = p - e
+	e->dy = s->py - e->y;
+	e->dist = sqrt(e->dx * e->dx
+		+ e->dy * e->dy);
+	enemy_angles(s, e);
+	enemy_invisible(e);
 	return (1);
 }
 

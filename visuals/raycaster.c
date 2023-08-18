@@ -2,8 +2,12 @@
 #include "../include/cub3d.h"
 
 t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int px)
-{	
-	ray->ra = s->pa - angle * WIDTH / 2 + px * angle;
+{
+	double pa = s->pa;
+	ray->x_px = px;
+	if ((s->pa - angle * WIDTH / 2 + px * angle) < 0)
+		pa += 2 * PI;
+	ray->ra = pa - angle * WIDTH / 2 + px * angle;
 	ray->rdx = cos(ray->ra);
 	ray->rdy = sin(ray->ra);
 	ray->deltadist_x = delta_dist(ray->rdx);
@@ -14,7 +18,8 @@ t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int px)
 	ray->hit_x = 0;
 	ray->hit_y = 0;
 	ray->lineheight = 0;
-	ray->door = 0;
+	ray->raylength = 0;
+	ray->door_visible = 0;
 	return (ray);
 }
 
@@ -33,7 +38,6 @@ void	draw_stripe(t_map *s, t_ray *r, double dist, int px)
 	draw_ceiling(s, drawstart - 1, px);
 	take_texture(s, drawstart, drawend, px);
 	draw_floor(s, drawend - 1, px);
-	
 }
 
 void	minimap_perspective(t_map *s, t_ray *ray)
@@ -60,14 +64,19 @@ void	minimap_perspective(t_map *s, t_ray *ray)
 	}
 }
 
-void	raycaster(t_map *s, t_ray *ray)
+void	init_raycaster(t_map *s, t_ray *ray)
 {
-	int	px = 0;
-	ray->raylength = 0;
+	memset(s->img->pixels, 255, s->img->width * s->img->height * sizeof(int32_t));
 	ray->door_x = -1;
 	ray->door_y = -1;
-	loop_enemies(s, enemy_invisible);
-	memset(s->img->pixels, 255, s->img->width * s->img->height * sizeof(int32_t));
+}
+
+void	raycaster(t_map *s, t_ray *ray)
+{
+	int	px;
+
+	px = 0;
+	init_raycaster(s, ray);
 	while (px < WIDTH)
 	{
 		ray = init_ray(s, ray, RAY_ANGLE, px);
@@ -75,19 +84,10 @@ void	raycaster(t_map *s, t_ray *ray)
 		dda(s, ray, px);
 		minimap_perspective(s, ray);
 		draw_stripe(s, ray, ray->raylength, px);
+		loop_enemies(s, raycast_enemy);
 		px++;
 	}
-	loop_enemies(s, draw_enemy);
+	printf("hi\n");
+	draw_enemies(s);
+	//loop_enemies(s, draw_enemy);
 }
-
-
-
-
-
-	//print details
-	// printf("pdx %f/%f\n", s->rdx, s->rdy);	
-	// printf("map %d/%d\n", s->xmap, s->ymap);
-	// printf("player %f/%f\n", s->px, s->py);
-	// printf("move %d/%d\n", s->xmove, s->ymove);
-	//printf("deltadist %f/%f\n", delta_dist(s->rdx), delta_dist(s->rdy));
-	//printf("sidedist %f/%f\n", s->sidedist_x, s->sidedist_y);

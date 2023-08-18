@@ -61,7 +61,7 @@ int	map_extend(t_map_params *map_params);
 t_map_char	convert_char(t_map_params *map_params, char, int width);
 
 //	identifiers.c
-int	get_identifier(t_map *map, t_map_params *map_params, char *line);
+int	get_identifier(t_map_params *map_params, char *line);
 int	set_textures(t_map_params *map_params);
 int	set_color(t_map_params *map_params, char side, char *str);
 int	get_channel(char *str, bool *is_default); // have to rename

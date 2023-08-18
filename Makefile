@@ -40,7 +40,8 @@ SRC =	main.c\
 		visuals/texture.c\
 		enemy/init_enemies.c\
 		enemy/calibrate_enemies.c\
-		enemy/draw_enemies.c
+		enemy/draw_enemies.c\
+		enemy/enemy_utils.c
 
 OBJ_DIR = obj
 VISUALS_DIR = /visuals

@@ -13,14 +13,6 @@ void	full_exit(t_map *s)
 	i = 0;
 	// free(s->ray);
 	// ft_free2d(s->co);
-	// while (s->co[i])
-	// {
-	// 	printf("%s\n", s->co[i]);
-	// 	free(s->co[i]);
-	// 	i++;
-	// }
-	// free(s->co);
-
 	//system ("leaks cub3D");
 	exit(0);
 }
@@ -65,22 +57,22 @@ int	main(int argc, char **argv)
 {
 	int				fd;
 	t_map			s;
-	t_map_params	map_params;
+	//t_map_params	map_params;
 
 	if (argc != 2)
 		return (printf("Error\nexpected a map in format *.cub\n"), EXIT_FAILURE);
-	// fd = open(argv[1], O_RDONLY);
-	// if (read(fd, NULL, 0) < 0)
-	// 	return (quick_exit("Error\nread() failed\n", fd));
-	// if (parser(&map_params, &s, argv, fd))
-	// {
+	fd = open(argv[1], O_RDONLY);
+	// // if (read(fd, NULL, 0) < 0)
+	// // 	return (quick_exit("Error\nread() failed\n", fd));
+	// // if (parser(&map_params, &s, argv, fd))
+	// // {
 	// 	// free
-	// 	close(fd);
-	// 	return (EXIT_FAILURE);
-	// }
+	// // 	close(fd);
+	// // 	return (EXIT_FAILURE);
+	// // }
 	// print_map(&s);
 	//printf("test\n");
-	// s = init(&s, argv);
-	// display(&s);
+	s = init(&s, argv);
+	display(&s);
 	return (EXIT_SUCCESS);
 }

@@ -1,10 +1,10 @@
 #include "../include/cub3d.h"
 
-int	choose_texture(t_map *s, t_ray *r)
+int	choose_texture(t_ray *r)
 {
 	int	wall_side;
 	
-	if (r->door == 1)
+	if (r->door_visible == 1)
 		return (DOOR);
 	if (r->hit_side == 0) //side x
 	{
@@ -33,7 +33,7 @@ int	color_tex(t_map *s, t_ray *r, int py)
 	int				tex_y;
 	double			tex_step;
 
-	tex = s->tex[choose_texture(s, r)];
+	tex = s->tex[choose_texture(r)];
 	tex_step = 1.0 * tex->height / r->lineheight;
 	if (!tex)
 		perror ("no tex");

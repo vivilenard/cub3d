@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:52:17 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/17 17:55:03 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/18 13:27:37 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	read_map(t_map *map, t_map_params *map_params, int fd)
 {
 	char	*line;
 
+	(void)map;
 	if (map_params_init(map_params))
 		return (EXIT_FAILURE);
 	line = get_next_line(fd);
@@ -37,7 +38,7 @@ int	read_map(t_map *map, t_map_params *map_params, int fd)
 		{
 			if (map_params->identifier != 6)
 			{
-				if (get_identifier(map, map_params, line))
+				if (get_identifier(map_params, line))
 					return (EXIT_FAILURE);
 			}
 			else

@@ -84,7 +84,7 @@ int	set_iden(t_map_params *map_params, char **result)
 	return (EXIT_SUCCESS);
 }
 
-int	get_identifier(t_map *map, t_map_params *map_params, char *line)
+int	get_identifier(t_map_params *map_params, char *line)
 {
 	int			i;
 	int			len;
