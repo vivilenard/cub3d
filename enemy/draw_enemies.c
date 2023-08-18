@@ -19,7 +19,7 @@ int	raycast_enemy(t_map *s, t_character *e)
 	else if (e->in_view == true && ((((e->a_left < e->a_right) && (((ray_a > e->a_right) || ray_a < e->a_left))))
 		|| ((e->a_left > e->a_right) && (((ray_a < e->a_left && ray_a > e->a_right))))))
 	{
-		printf("ea_l: %f, ra: %f ea_r: %f\n", e->a_left, ray_a, e->a_right);
+		//printf("ea_l: %f, ra: %f ea_r: %f\n", e->a_left, ray_a, e->a_right);
 		e->in_view = 2;
 		e->pix_end = s->ray->x_px;
 	}
