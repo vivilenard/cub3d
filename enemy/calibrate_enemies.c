@@ -4,8 +4,6 @@ bool	continue_walk(char **co, int x, int y)
 {
 	if (co[x][y] == WALL || co[x][y] == CLOSED_DOOR)
 		return (false);
-	// if (x == (int)s->px && y == (int)s->py)
-	// 	return (false);
 	return (true);
 }
 
@@ -25,9 +23,13 @@ double	angle_vector(double xv, double yv)
 
 void	enemy_angles(t_map *s, t_character *e)
 {
-	e->a = angle_vector(e->x - s->px, e->y - s->py);
 	e->a_left = angle_vector(e->left_x - s->px, e->left_y - s->py);
+	e->a = angle_vector(e->x - s->px, e->y - s->py);
+	if (e->a < e->a_left)
+		e->a = 2 * PI + e->a;
 	e->a_right = angle_vector(e->right_x - s->px, e->right_y - s->py);
+	if (e->a_right < e->a_left)
+		e->a_right = e->a + (e->a - e->a_left);
 }
 
 int	calibrate_enemy(t_map *s, t_character *e)
@@ -35,7 +37,7 @@ int	calibrate_enemy(t_map *s, t_character *e)
 	double mv;
 
 	mv = 0.005;
-	if (e->dist <= 2)
+	if (e->dist <= 3 && e->dist > 0.6)
 	{
 		if (continue_walk(s->co, (int)(e->x + mv * e->dx), (int)e->y))
 			e->x += mv * e->dx;

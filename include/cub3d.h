@@ -38,7 +38,7 @@ typedef struct s_character
 	double	radius;
 	double	dist;
 	bool	visible;
-	bool	in_view;
+	int		in_view;
 	double	orth_x;
 	double	orth_y;
 	double	left_x;
