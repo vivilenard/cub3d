@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/12 13:31:07 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/18 14:19:38 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	door_mov(t_map *s)
 
 void key_bindings(mlx_key_data_t keydata, void *p)
 {
+	printf("keybindings\n");
 	t_map *s;
 
 	s = (t_map *) p;

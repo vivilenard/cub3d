@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:52:17 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/18 13:27:37 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/18 14:27:01 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	read_map(t_map *map, t_map_params *map_params, int fd)
 {
 	char	*line;
 
-	(void)map;
 	if (map_params_init(map_params))
 		return (EXIT_FAILURE);
 	line = get_next_line(fd);

@@ -22,27 +22,27 @@ typedef enum e_side
 	DOOR,
 }	t_side;
 
-typedef enum e_map_char
-{
-	SPACE = '0', // 0
-	WALL = '1', // 1
-	PLAYER, // N, S, W, E
-	CLOSED_DOOR = 'D', // H
-	OPENED_DOOR = 'd', // I
-	ENEMY, // X
-	ERROR,
-}	t_map_char;
-
 // typedef enum e_map_char
 // {
-// 	SPACE, // 0
-// 	WALL, // 1
+// 	SPACE = '0', // 0
+// 	WALL = '1', // 1
 // 	PLAYER, // N, S, W, E
-// 	CLOSED_DOOR, // H
-// 	OPENED_DOOR, // I
+// 	CLOSED_DOOR = 'D', // H
+// 	OPENED_DOOR = 'd', // I
 // 	ENEMY, // X
 // 	ERROR,
 // }	t_map_char;
+
+typedef enum e_map_char
+{
+	SPACE, // 0
+	WALL, // 1
+	PLAYER, // N, S, W, E
+	CLOSED_DOOR, // H
+	OPENED_DOOR, // I
+	ENEMY, // X
+	ERROR,
+}	t_map_char;
 
 typedef struct s_map
 {
@@ -55,8 +55,8 @@ typedef struct s_map
 	mlx_texture_t		*enemy_tex; 	//THIS
 	color				floor; 			//THIS
 	color				ceiling; 		//THIS
-	char				**co; 			//THIS
-	// t_map_char			**co;
+	// char				**co; 			//THIS
+	t_map_char			**co;
 	int					map_height; 	//THIS
 	int					map_width; 		//THIS
 	double				px;			//player position

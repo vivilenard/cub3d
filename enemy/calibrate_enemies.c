@@ -1,6 +1,6 @@
 #include "../include/cub3d.h"
 
-bool	continue_walk(char **co, int x, int y)
+bool	continue_walk(t_map_char **co, int x, int y)
 {
 	if (co[x][y] == WALL || co[x][y] == CLOSED_DOOR)
 		return (false);

@@ -38,6 +38,7 @@ int	position_enemy(t_map *s, int x, int y)
 
 void	get_enemies(t_map *s)
 {
+	printf("get enemy\n");
 	int	i;
 
 	i = -1;

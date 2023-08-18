@@ -4,6 +4,7 @@
 
 void	full_exit(t_map *s)
 {
+	perror("full exit\n");
 	int i = 0;
 	while (s->tex[i])
 	{
@@ -57,22 +58,22 @@ int	main(int argc, char **argv)
 {
 	int				fd;
 	t_map			s;
-	//t_map_params	map_params;
+	t_map_params	map_params;
 
 	if (argc != 2)
 		return (printf("Error\nexpected a map in format *.cub\n"), EXIT_FAILURE);
 	fd = open(argv[1], O_RDONLY);
-	// // if (read(fd, NULL, 0) < 0)
-	// // 	return (quick_exit("Error\nread() failed\n", fd));
-	// // if (parser(&map_params, &s, argv, fd))
-	// // {
-	// 	// free
-	// // 	close(fd);
-	// // 	return (EXIT_FAILURE);
-	// // }
-	// print_map(&s);
-	//printf("test\n");
-	s = init(&s, argv);
+	if (read(fd, NULL, 0) < 0)
+		return (quick_exit("Error\nread() failed\n", fd));
+	if (parser(&map_params, &s, argv, fd))
+	{
+		//free;
+		close(fd);
+		return (EXIT_FAILURE);
+	}
+	//print_map(&s);
+	printf("test\n");
+	init(&s, argv);	//need to shift some things to parser
 	display(&s);
 	return (EXIT_SUCCESS);
 }

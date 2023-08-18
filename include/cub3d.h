@@ -113,7 +113,7 @@ void	move_player_horizontal(t_map *s, double step);
 void	change_direction_mouse(t_map *s, double mv);
 void	change_direction_keys(t_map *s, double mv);
 void	adjust_view(t_map *s, int x, double mv);
-int		collide(char **co, int x, int y);
+int		collide(t_map_char **co, int x, int y);
 void	key_bindings(mlx_key_data_t keydata, void *p);
 
 //raycaster

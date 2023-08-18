@@ -2,6 +2,7 @@
 
 int	display(t_map *s)
 {
+	printf("display\n");
 	if (setup_game(s))
 		full_exit(s);
 	mlx_key_hook(s->mlx, key_bindings, s);
@@ -12,6 +13,7 @@ int	display(t_map *s)
 
 int	setup_game(t_map *s)
 {
+	printf("setup game\n");
 	s->ray = malloc(sizeof(t_ray));
 	s->img = mlx_new_image(s->mlx, WIDTH, HEIGTH);
 	if (!s->img)
@@ -29,6 +31,7 @@ void	loop_game(void *p)
 	t_map *s;
 
 	s = (t_map *) p;
+	printf("loop game\n");
 	check_keys(s);
 	loop_enemies(s, calibrate_enemy);
 	draw_minimap(s);
