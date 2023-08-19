@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 19:07:14 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/18 14:04:02 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/19 13:42:14 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	parser(t_map_params *map_params, t_map *map, char **argv, int fd)
 	if (!file_path_check(argv[1]))
 		return (quick_exit(
 				"Error: wrong file, expected a map in format *.cub\n", fd));
-	if (read_map(map, map_params, fd))
+	if (read_map(map_params, fd))
 		return (EXIT_FAILURE);
 	if (zero_extend(map_params))
 		return (EXIT_FAILURE);
 	if (map_verify(map_params))
 		return (EXIT_FAILURE);
-	print_map_params(map_params);
+	// print_map_params(map_params);
 	if (fill_in_t_map(map_params, map))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

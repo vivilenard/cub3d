@@ -52,7 +52,7 @@ int	quick_exit(char *str, int fd);
 int	zero_extend(t_map_params *map_params);
 
 //	read_map.c
-int	read_map(t_map *map, t_map_params *map_params, int fd);
+int	read_map(t_map_params *map_params, int fd);
 void	print_map_params(t_map_params *map_params); // delete
 
 //	read_map_utils.c
@@ -62,10 +62,12 @@ t_map_char	convert_char(t_map_params *map_params, char, int width);
 
 //	identifiers.c
 int	get_identifier(t_map_params *map_params, char *line);
+int	set_iden(t_map_params *map_params, char **result);
 int	set_textures(t_map_params *map_params);
 int	set_color(t_map_params *map_params, char side, char *str);
 int	get_channel(char *str, bool *is_default); // have to rename
 int get_rgba(int r, int g, int b, int a);
+void	free_split(char **str, int i);
 
 //	map_verify.c
 int	map_verify(t_map_params *map_params);
@@ -77,11 +79,11 @@ double	init_player_view(char p);
 
 #endif
 /*
+- change get_id (if have only ID)
 - init_map make after get all map
 - check empty map (change error message)
 - enemy struct
 - store all coordinates (player, c/o doors, enemies)
-- give player's view
 
 test case
 - empty map

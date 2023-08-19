@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:52:17 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/18 14:27:01 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/19 13:11:18 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "../libft/libft.h"
 #include "../MLX42/include/MLX42/MLX42.h"
 
-int	read_map(t_map *map, t_map_params *map_params, int fd)
+int	read_map(t_map_params *map_params, int fd)
 {
 	char	*line;
 

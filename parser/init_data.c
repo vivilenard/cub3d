@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:16:18 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/18 14:21:50 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/19 13:10:56 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	get_textures(t_map *s)
 
 t_map	init(t_map *s, char **argv) 
 {
+	(void) argv;
 	printf("init\n");
 	s->mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
 	if (!s->mlx)

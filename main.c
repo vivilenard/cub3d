@@ -26,7 +26,6 @@ void	print_map(t_map *map)
 	printf("height: %d, width: %d\n", map->map_height, map->map_width);
 	x = 0;
 	y = 0;
-	printf("map\n");
 	while (y != map->map_height)
 	{
 		x = 0;

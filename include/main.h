@@ -51,20 +51,20 @@ typedef struct s_map
 	mlx_t				*mlx;
 	mlx_image_t			*img;
 	mlx_image_t			*minimap;
-	mlx_texture_t		*tex[N_TEX];	//THIS		//space for 10 textures -- dont know how much we need
-	mlx_texture_t		*enemy_tex; 	//THIS
-	color				floor; 			//THIS
-	color				ceiling; 		//THIS
-	// char				**co; 			//THIS
+	mlx_texture_t		*tex[N_TEX];	// done in parser
+	mlx_texture_t		*enemy_tex; 	// done in parser
+	color				floor; 			// done in parser
+	color				ceiling; 		// done in parser
+	// char				**co; 			// done in parser
 	t_map_char			**co;
-	int					map_height; 	//THIS
-	int					map_width; 		//THIS
-	double				px;			//player position
+	int					map_height; 	// done in parser
+	int					map_width; 		// done in parser
+	double				px;				// player position done in parser
 	double				py;
-	double				pa;			//player angle
-	double				pdx; 		//player direction vector
+	double				pa;				// player angle done in parser
+	double				pdx; 			// player direction vector done in parser
 	double				pdy;
-	double				p_radius;	//size of player in minimap
+	double				p_radius;		// size of player in minimap done in parser
 	int					mm_radius;	//size of minimap
 	int					mm_square;	//size of a tile
 	int					mouse_pos;

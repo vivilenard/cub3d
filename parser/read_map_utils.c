@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:55:38 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/16 17:25:00 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/19 13:41:51 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int get_map(t_map_params *map_params, char *line)
 {
-	int i;
+	int	i;
 	int	len;
 	int	cur_width;
 
