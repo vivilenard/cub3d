@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   read_map_utils.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/01 11:55:38 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/21 17:18:14 by vlenard          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include <stdlib.h>
 #include "../include/parser.h"
@@ -40,7 +29,8 @@ int get_map(t_map_params *map_params, char *line)
 	}
 	while (line[cur_width] != '\n' && line[cur_width] != '\0')
 	{
-		map_params->component = convert_char(map_params, line[cur_width], cur_width);
+		map_params->component = convert_char(
+				map_params, line[cur_width], cur_width);
 		if (map_params->component == ERROR)
 		{
 			// free

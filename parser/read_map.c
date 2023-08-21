@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:52:17 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/21 13:32:31 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:39:05 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,6 @@
 #include "../include/parser.h"
 #include "../libft/libft.h"
 #include "../MLX42/include/MLX42/MLX42.h"
-
-int	proceed_line(t_map_params *map_params, char *line)
-{
-	if (map_params->identifier != 6)
-	{
-		if (get_identifier(map_params, line))
-			return (EXIT_FAILURE);
-	}
-	else
-	{
-		if (get_map(map_params, line))
-			return (EXIT_FAILURE);
-		map_params->map_start = true;
-		map_params->height++;
-	}
-	return (EXIT_SUCCESS);
-}
 
 int	read_map(t_map_params *map_params, int fd)
 {
@@ -55,6 +38,23 @@ int	read_map(t_map_params *map_params, int fd)
 			return (free(line), printf("Error: empty line in a map content\n"),
 				EXIT_FAILURE);
 		line = get_next_line(fd);
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	proceed_line(t_map_params *map_params, char *line)
+{
+	if (map_params->identifier != 6)
+	{
+		if (get_identifier(map_params, line))
+			return (EXIT_FAILURE);
+	}
+	else
+	{
+		if (get_map(map_params, line))
+			return (EXIT_FAILURE);
+		map_params->map_start = true;
+		map_params->height++;
 	}
 	return (EXIT_SUCCESS);
 }

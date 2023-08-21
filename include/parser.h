@@ -54,6 +54,7 @@ int	zero_extend(t_map_params *map_params);
 
 //	read_map.c
 int	read_map(t_map_params *map_params, int fd);
+int	proceed_line(t_map_params *map_params, char *line);
 void	print_map_params(t_map_params *map_params); // delete
 
 //	read_map_utils.c

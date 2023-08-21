@@ -6,12 +6,11 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 19:07:14 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/21 16:12:08 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/21 19:14:18 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parser.h"
-// #include "../include/main.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -120,5 +119,6 @@ int	zero_extend(t_map_params *map_params)
 		i_height++;
 	}
 	map_params->map[map_params->height - 1][map_params->max_width] = TERMINAL;
+	map_params->map[map_params->player_y][map_params->player_x] = SPACE;
 	return (EXIT_SUCCESS);
 }

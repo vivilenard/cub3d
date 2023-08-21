@@ -39,17 +39,6 @@ typedef enum e_side
 	DOOR,
 }	t_side;
 
-// typedef enum e_map_char
-// {
-// 	SPACE = '0', // 0
-// 	WALL = '1', // 1
-// 	PLAYER, // N, S, W, E
-// 	CLOSED_DOOR = 'D', // H
-// 	OPENED_DOOR = 'd', // I
-// 	ENEMY, // X
-// 	ERROR,
-// }	t_map_char;
-
 typedef enum e_map_char
 {
 	SPACE, // 0
