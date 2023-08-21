@@ -22,6 +22,7 @@ ifdef DEBUG
 endif
 
 SRC =	main.c\
+		parser/color.c\
 		parser/identifiers.c\
 		parser/init_data.c\
 		parser/map_to_coordinate.c\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 19:07:14 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/21 12:56:48 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/21 16:12:08 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,10 @@ int	zero_extend(t_map_params *map_params)
 	i_height = 0;
 	while (i_height != map_params->height)
 	{
-		if (map_params->all_width[i_height] < map_params->max_width)
+		if (map_params->all_width[i_height] < map_params->max_width
+			|| i_height == map_params->height)
 		{
-			new_line = ft_calloc(map_params->max_width, sizeof(t_map_char));
+			new_line = ft_calloc(map_params->max_width + 1, sizeof(t_map_char));
 			if (new_line == NULL)
 				return (EXIT_FAILURE);
 			ft_memcpy(new_line, map_params->map[i_height],
@@ -118,5 +119,6 @@ int	zero_extend(t_map_params *map_params)
 		}
 		i_height++;
 	}
+	map_params->map[map_params->height - 1][map_params->max_width] = TERMINAL;
 	return (EXIT_SUCCESS);
 }

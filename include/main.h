@@ -58,6 +58,7 @@ typedef enum e_map_char
 	CLOSED_DOOR, // H
 	OPENED_DOOR, // I
 	ENEMY, // X
+	TERMINAL,
 	ERROR,
 }	t_map_char;
 
