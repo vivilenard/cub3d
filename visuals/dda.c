@@ -10,7 +10,7 @@ void	check_door(t_map *s, t_ray *r, int px)
 	r->raylength = ray_dist(r) * cos(s->pa - r->ra);
 	if (s->co[r->ymap][r->xmap] == CLOSED_DOOR || s->co[r->ymap][r->xmap] == OPENED_DOOR)
 	{
-		if (s->co[r->xmap][r->ymap] == CLOSED_DOOR)
+		if (s->co[r->ymap][r->xmap] == CLOSED_DOOR)
 			r->door_visible = 1;
 		if (px == WIDTH / 2)		//means player looks right at the door --> could possibly open it
 		{

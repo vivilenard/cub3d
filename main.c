@@ -75,7 +75,6 @@ int	main(int argc, char **argv)
 	}
 	//print_map(&s);
 	//printf("test\n");
-	//init(&s);	//need to shift some things to parser
 	display(&s);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/21 16:16:25 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/21 16:22:34 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	print_wall(t_map *s, int x, int y)
 {
-	if (s->co[y][x] == TERMINAL)  //terminate
+	if (s->co[y][x] == TERMINAL)
 		return (printf("found no coordinate\n"), -1);
 	if (s->co[y][x] == WALL || s->co[y][x] == CLOSED_DOOR)
 		print_square(s->minimap, x, y, s->mm_square, 0xFFFFFFFF);
