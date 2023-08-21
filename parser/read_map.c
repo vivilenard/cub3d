@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:52:17 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/19 13:11:18 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:51:47 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	read_map(t_map_params *map_params, int fd)
 			free(line);
 			return (printf("Error: empty line in a map content\n"), EXIT_FAILURE);
 		}
-		free(line);
 		line = get_next_line(fd);
 	}
 	if (set_textures(map_params))

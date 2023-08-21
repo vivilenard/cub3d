@@ -97,6 +97,8 @@ int	set_color(t_map_params *map_params, char side, char *str)
 
 	i = 0;
 	colors = ft_split(str, ',');
+	if (colors == NULL)
+		return (EXIT_FAILURE);
 	is_default = false;
 	while (colors[i])
 		i++;

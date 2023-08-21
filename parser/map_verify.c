@@ -61,11 +61,6 @@ int	map_is_closed(t_map_params *map_params)
 
 int	map_verify(t_map_params *map_params)
 {
-	if (map_params->map[0] == NULL)
-	{
-		// free all
-		return (printf("Error: map is empty\n"), EXIT_FAILURE);
-	}
 	if (map_params->player != 1)
 	{
 		// free all
