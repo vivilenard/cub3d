@@ -2,14 +2,31 @@
 #ifndef MAIN_H
 # define MAIN_H
 
+# include "../MLX42/include/MLX42/MLX42.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <math.h>
+# include <fcntl.h>
+# include <string.h>
+# include "../MLX42/include/MLX42/MLX42.h"
+# include "../libft/libft.h"
+
 /*
 This header file consist only shared structs.
 We should rename it (probably).
 */
+
 # define MAX_ENEMIES 6
 # define N_TEX 7
+# define WIDTH 1200
+# define HEIGTH 600
+# define PI 3.141592653589793238462643383279502884197
+# define N_ENEMIES 6
+# define N_TEX 7
+# define VIEW_ANGLE 1.15 //=66 degree
+# define RAY_ANGLE (VIEW_ANGLE / WIDTH)
 
-# include "../MLX42/include/MLX42/MLX42.h"
 
 typedef uint32_t	color;
 
@@ -69,5 +86,7 @@ typedef struct s_map
 	int					mm_square;	//size of a tile
 	int					mouse_pos;
 }	t_map;
+
+void	print_map(t_map *map);
 
 #endif

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 19:07:14 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/21 12:47:33 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:56:48 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parser.h"
+// #include "../include/main.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -57,6 +58,7 @@ int	fill_in_t_map(t_map_params *map_params, t_map *map)
 	if (map->tex[DOOR] == NULL
 		|| map->tex[5] == NULL)
 		return (EXIT_FAILURE);
+	map->tex[6] = NULL;
 	map->map_height = map_params->height;
 	map->map_width = map_params->max_width;
 	map->px = (double) map_params->player_x + 0.5;
@@ -65,6 +67,7 @@ int	fill_in_t_map(t_map_params *map_params, t_map *map)
 	map->pdx = cos(map->pa);
 	map->pdy = sin(map->pa);
 	map->p_radius = 0.09;
+	map->mouse_pos = 0;
 	return (EXIT_SUCCESS);
 }
 

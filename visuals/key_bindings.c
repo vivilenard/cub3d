@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/18 14:19:38 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/21 10:08:30 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ void	door_mov(t_map *s)
 	{
 		if (s->ray->door_x < 0 && s->ray->door_y < 0)
 			return ;
-		if (s->co[s->ray->door_x][s->ray->door_y] == CLOSED_DOOR)
-			s->co[s->ray->door_x][s->ray->door_y] = OPENED_DOOR;
-		else if (s->co[s->ray->door_x][s->ray->door_y] == OPENED_DOOR)
-			s->co[s->ray->door_x][s->ray->door_y] = CLOSED_DOOR;
+		if (s->co[s->ray->door_y][s->ray->door_x] == CLOSED_DOOR)
+			s->co[s->ray->door_y][s->ray->door_x] = OPENED_DOOR;
+		else if (s->co[s->ray->door_y][s->ray->door_x] == OPENED_DOOR)
+			s->co[s->ray->door_y][s->ray->door_x] = CLOSED_DOOR;
 	}
 }
 

@@ -1,4 +1,5 @@
 #include "../include/cub3d.h"
+//#include "../include/parser.h"
 
 int	display(t_map *s)
 {
@@ -23,6 +24,7 @@ int	setup_game(t_map *s)
 	if (!setup_minimap(s))
 		return (3);
 	mlx_set_cursor_mode(s->mlx, MLX_MOUSE_HIDDEN);
+	//get_enemies(s);
 	return (0);
 }
 
@@ -31,9 +33,10 @@ void	loop_game(void *p)
 	t_map *s;
 
 	s = (t_map *) p;
+	s->enemy[0] = NULL;
 	printf("loop game\n");
 	check_keys(s);
-	loop_enemies(s, calibrate_enemy);
+	//loop_enemies(s, calibrate_enemy);
 	draw_minimap(s);
 	raycaster(s, s->ray);
 }

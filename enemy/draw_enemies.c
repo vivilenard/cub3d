@@ -110,6 +110,8 @@ void	draw_enemies(t_map *s)
 
 	e_index = 0;
 	i = -1;
+	if (!s->enemy[0])
+		return ;
 	//int n_enemies = number_enemies(s);
 	while (s->enemy[++i])
 		dist[i] = s->enemy[i]->dist;

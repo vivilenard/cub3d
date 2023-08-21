@@ -2,27 +2,14 @@
 
 # define CUB3D_H
 
-# define WIDTH 1400
-# define HEIGTH 800
-# define PI 3.141592653589793238462643383279502884197
-# define N_ENEMIES 6
-# define N_TEX 7
-# define VIEW_ANGLE 1.15 //=66 degree
-# define RAY_ANGLE (VIEW_ANGLE / WIDTH)
+
 // # define RED_RGBT 0xff3800ff
 // # define BLUE_RGBT 0xa7c5f9ff
 // # define GREEN_RGBT 0x9acd32ff
 // # define YELLOW_RGBT 0xffff00ff
 
 # include "main.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <math.h>
-# include <fcntl.h>
-# include <string.h>
-# include "../MLX42/include/MLX42/MLX42.h"
-# include "../libft/libft.h"
+
 
 typedef struct s_character
 {
@@ -83,7 +70,7 @@ int		mapwidth(char *map);
 int		mapheight(char *map);
 
 //init
-t_map	init(t_map *s, char **argv);
+t_map	init(t_map *s);
 int		assign_line(char *line, t_map *s, int y);
 int		allocate_map(t_map *s);
 int		map_to_koordinate(t_map *s, char *map);

@@ -23,7 +23,6 @@ void	print_map(t_map *map)
 	int	x;
 	int	y;
 
-	printf("height: %d, width: %d\n", map->map_height, map->map_width);
 	x = 0;
 	y = 0;
 	while (y != map->map_height)
@@ -47,6 +46,7 @@ void	print_map(t_map *map)
 		printf("]\n");
 		y++;
 	}
+	printf("height: %d, width: %d\n", map->map_height, map->map_width);
 	printf("player pos: y %f, x %f\n", map->py, map->px);
 	printf("player angle: %f\n", map->pa);
 	printf("player direction vector: pdx %f, pdy %f\n", map->pdx, map->pdy);
@@ -59,11 +59,14 @@ int	main(int argc, char **argv)
 	t_map			s;
 	t_map_params	map_params;
 
-	if (argc != 2)
+	if (argc < 2)
 		return (printf("Error\nexpected a map in format *.cub\n"), EXIT_FAILURE);
 	fd = open(argv[1], O_RDONLY);
 	if (read(fd, NULL, 0) < 0)
 		return (quick_exit("Error\nread() failed\n", fd));
+	s.mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
+	if (!s.mlx)
+		printf("no mlx");
 	if (parser(&map_params, &s, argv, fd))
 	{
 		//free;
@@ -71,8 +74,8 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	//print_map(&s);
-	printf("test\n");
-	init(&s, argv);	//need to shift some things to parser
+	//printf("test\n");
+	//init(&s);	//need to shift some things to parser
 	display(&s);
 	return (EXIT_SUCCESS);
 }

@@ -5,6 +5,7 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include "main.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 
 typedef struct s_color
 {

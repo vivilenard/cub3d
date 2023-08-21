@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/18 13:52:24 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/21 14:41:01 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	print_wall(t_map *s, int x, int y)
 {
-	if (!s->co[x][y])
-		return (-1);
-	if (s->co[x][y] == WALL || s->co[x][y] == CLOSED_DOOR)
+	if (s->co[y][x] == 6) //actually 0
+		return (printf("found no coordinate\n"), -1);
+	if (s->co[y][x] == WALL || s->co[y][x] == CLOSED_DOOR)
 		print_square(s->minimap, x, y, s->mm_square, 0xFFFFFFFF);
 	else
 		print_square(s->minimap, x, y, s->mm_square, 0x303030FF);
@@ -39,7 +39,7 @@ void	calculate_proportions(t_map *s)
 		map_radius = s->map_width;
 
 	s->mm_square = s->mm_radius / map_radius;
-	//printf("mini %d\n", s->mm_square);
+	printf("mini %d\n", s->mm_square);
 }
 
 void	draw_view(t_map *s)
@@ -71,20 +71,40 @@ int	draw_mini_enemy(t_map *s, t_character *e)
 	return (1);
 }
 
+int	print_co(t_map *map, int x, int y)
+{
+	if (map->co[y][x] == PLAYER)
+		printf("\033[1;31mP\033[0;0m");
+	else if (map->co[y][x] == ENEMY)
+		printf("\033[1;35mX\033[0;0m");
+	else if (map->co[y][x] == CLOSED_DOOR)
+		printf("\033[1;36mH\033[0;0m");
+	// else if (map->map[y][x] == 0)
+	// 	printf("X");
+	else
+		printf("%d", map->co[y][x]);
+	return (0);
+}
+
 int	draw_minimap(t_map *s)
 {
+	printf("draw minimap\n");
+	scan_coordinates(s, print_co);
+	print_map(s);
 	scan_coordinates(s, print_wall);
+	printf("draw player\n");
 	draw_player(s);
-	loop_enemies(s, draw_mini_enemy);
+	//loop_enemies(s, draw_mini_enemy);
 	return (1);
 }
 
 int	setup_minimap(t_map *s)
 {
+	printf("setup mm\n");
 	calculate_proportions(s);
 	s->minimap = mlx_new_image(s->mlx, s->mm_radius, s->mm_radius);
 	if (mlx_image_to_window(s->mlx, s->minimap, 0, 0) < 0)
 		return (0);
-	//draw_minimap(s);
+	draw_minimap(s);
 	return (1);
 }

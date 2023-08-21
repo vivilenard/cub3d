@@ -33,7 +33,7 @@ double	dda(t_map *s, t_ray *r, int px)
 			r->xmap += r->xmove;
 			r->hit_side = 0;
 			check_door(s, r, px);
-			if (s->co[r->xmap][r->ymap] == WALL || s->co[r->xmap][r->ymap] == CLOSED_DOOR)
+			if (s->co[r->ymap][r->xmap] == WALL || s->co[r->ymap][r->xmap] == CLOSED_DOOR)
 				break ;
 			r->sidedist_x += r->deltadist_x;
 		}
@@ -43,7 +43,7 @@ double	dda(t_map *s, t_ray *r, int px)
 			r->ymap += r->ymove;
 			r->hit_side = 1;
 			check_door(s, r, px);
-			if (s->co[r->xmap][r->ymap] == WALL || s->co[r->xmap][r->ymap] == CLOSED_DOOR)
+			if (s->co[r->ymap][r->xmap] == WALL || s->co[r->ymap][r->xmap] == CLOSED_DOOR)
 				break ;
 			r->sidedist_y += r->deltadist_y;
 		}
