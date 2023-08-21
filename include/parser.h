@@ -15,12 +15,12 @@ typedef struct s_color
 
 typedef struct s_textures
 {
-	char	*no;
-	char	*so;
-	char	*ea;
-	char	*we;
+	char			*no;
+	char			*so;
+	char			*ea;
+	char			*we;
 	mlx_texture_t	*texs[N_TEX];
-	mlx_texture_t   *enemy;
+	mlx_texture_t	*enemy;
 }	t_textures;
 
 typedef struct s_map_params
@@ -63,15 +63,22 @@ t_map_char	convert_char(t_map_params *map_params, char, int width);
 
 //	identifiers.c
 int	get_identifier(t_map_params *map_params, char *line);
-int	set_iden(t_map_params *map_params, char **result);
+int	set_identifier(t_map_params *map_params, char **result);
 int	set_textures(t_map_params *map_params);
-int	set_color(t_map_params *map_params, char side, char *str);
-int	get_channel(char *str, bool *is_default); // have to rename
-int get_rgba(int r, int g, int b, int a);
 void	free_split(char **str, int i);
+
+//	color.c
+int	get_color(t_map_params *map_params, char side, char *str);
+void	set_color(t_map_params *map_params, char side, char **colors, bool *is_default);
+int	get_channel(char *str, bool *is_default);
+int get_rgba(int r, int g, int b, int a);
 
 //	map_verify.c
 int	map_verify(t_map_params *map_params);
+int	visited_init(t_map_params *map_params);
+bool	dfs(t_map_params *map_params, int y, int x);
+bool	is_visited(t_map_params *map_params, int y, int x);
+void	set_visited(t_map_params *map_params, int y, int x);
 
 //	init_data.c
 void	tex_init(t_map_params *map_params);
