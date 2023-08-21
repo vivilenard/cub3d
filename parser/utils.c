@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 18:38:49 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/21 14:10:10 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/21 17:10:59 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	scan_coordinates(t_map *s, int (*f)(t_map *s, int x, int y))
 	
 	x = 0;
 	y = 0;
-	printf ("scan coordinates\n");
 	while (y != s->map_height)
 	{
 		x = 0;

@@ -40,4 +40,4 @@ void	check_enemy(t_map *s, t_ray *r)
 		else if (s->px == (int)s->enemy[i]->x && s->py == (int)s->enemy[i]->y)
 			s->enemy[i]->visible = true; //dont need this statement
 	}
-} 
+}

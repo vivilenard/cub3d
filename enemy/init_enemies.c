@@ -13,7 +13,7 @@ int	position_enemy(t_map *s, int x, int y)
 	int	i;
 
 	i = 0;
-	if (s->co[y][x] != 'e')
+	if (s->co[y][x] != ENEMY)
 		return (0);
 	while (s->enemy[i] != NULL)
 		i++;
@@ -38,7 +38,6 @@ int	position_enemy(t_map *s, int x, int y)
 
 void	get_enemies(t_map *s)
 {
-	printf("get enemy\n");
 	int	i;
 
 	i = -1;

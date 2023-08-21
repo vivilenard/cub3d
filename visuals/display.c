@@ -3,7 +3,7 @@
 
 int	display(t_map *s)
 {
-	printf("display\n");
+	//printf("display\n");
 	if (setup_game(s))
 		full_exit(s);
 	mlx_key_hook(s->mlx, key_bindings, s);
@@ -14,17 +14,17 @@ int	display(t_map *s)
 
 int	setup_game(t_map *s)
 {
-	printf("setup game\n");
+	//printf("setup game\n");
 	s->ray = malloc(sizeof(t_ray));
 	s->img = mlx_new_image(s->mlx, WIDTH, HEIGTH);
 	if (!s->img)
 		return (1);
 	if (mlx_image_to_window(s->mlx, s->img, 0, 0) < 0)
 		return (2);
+	get_enemies(s);
 	if (!setup_minimap(s))
 		return (3);
 	mlx_set_cursor_mode(s->mlx, MLX_MOUSE_HIDDEN);
-	//get_enemies(s);
 	return (0);
 }
 
@@ -33,10 +33,10 @@ void	loop_game(void *p)
 	t_map *s;
 
 	s = (t_map *) p;
-	s->enemy[0] = NULL;
-	printf("loop game\n");
+	//s->enemy[0] = NULL;
+	//printf("loop game\n");
 	check_keys(s);
-	//loop_enemies(s, calibrate_enemy);
+	loop_enemies(s, calibrate_enemy);
 	draw_minimap(s);
 	raycaster(s, s->ray);
 }

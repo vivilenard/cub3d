@@ -73,8 +73,7 @@ int	main(int argc, char **argv)
 		close(fd);
 		return (EXIT_FAILURE);
 	}
-	//print_map(&s);
-	//printf("test\n");
+	print_map(&s);
 	display(&s);
 	return (EXIT_SUCCESS);
 }
