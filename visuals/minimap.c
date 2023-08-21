@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/21 14:44:28 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/21 16:16:25 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	print_wall(t_map *s, int x, int y)
 {
-	if (!s->co[y][x])
+	if (s->co[y][x] == TERMINAL)  //terminate
 		return (printf("found no coordinate\n"), -1);
 	if (s->co[y][x] == WALL || s->co[y][x] == CLOSED_DOOR)
 		print_square(s->minimap, x, y, s->mm_square, 0xFFFFFFFF);
@@ -32,7 +32,7 @@ void	calculate_proportions(t_map *s)
 {
 	int	map_radius;
 
-	s->mm_radius = HEIGTH / 3;	
+	s->mm_radius = HEIGTH / 3;
 
 	map_radius = s->map_height;
 	if (s->map_width > map_radius)

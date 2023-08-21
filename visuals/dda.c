@@ -8,7 +8,7 @@ double	delta_dist(double side)
 void	check_door(t_map *s, t_ray *r, int px)
 {
 	r->raylength = ray_dist(r) * cos(s->pa - r->ra);
-	if (s->co[r->xmap][r->ymap] == CLOSED_DOOR || s->co[r->xmap][r->ymap] == OPENED_DOOR)
+	if (s->co[r->ymap][r->xmap] == CLOSED_DOOR || s->co[r->ymap][r->xmap] == OPENED_DOOR)
 	{
 		if (s->co[r->xmap][r->ymap] == CLOSED_DOOR)
 			r->door_visible = 1;
