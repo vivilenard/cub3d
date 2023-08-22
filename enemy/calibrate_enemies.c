@@ -2,7 +2,7 @@
 
 bool	continue_walk(t_map_char **co, int x, int y)
 {
-	if (co[x][y] == WALL || co[x][y] == CLOSED_DOOR)
+	if (co[y][x] == WALL || co[y][x] == CLOSED_DOOR)
 		return (false);
 	return (true);
 }

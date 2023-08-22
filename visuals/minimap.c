@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/21 17:11:54 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/22 09:20:32 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ int	print_co(t_map *map, int x, int y)
 }
 
 int	draw_minimap(t_map *s)
-{
-	//printf("draw minimap\n");
+{//printf("draw minimap\n");
 	scan_coordinates(s, print_wall);
 	draw_player(s);
 	loop_enemies(s, draw_mini_enemy);
@@ -95,8 +94,7 @@ int	draw_minimap(t_map *s)
 }
 
 int	setup_minimap(t_map *s)
-{
-	//printf("setup mm\n");
+{//printf("setup mm\n");
 	calculate_proportions(s);
 	s->minimap = mlx_new_image(s->mlx, s->mm_radius, s->mm_radius);
 	if (mlx_image_to_window(s->mlx, s->minimap, 0, 0) < 0)

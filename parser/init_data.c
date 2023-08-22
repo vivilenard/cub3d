@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:16:18 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/21 13:05:40 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/22 10:26:54 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,21 +99,21 @@ void	get_textures(t_map *s)
 	// and check that mlx_load_png was successful (should return NULL if not ?)
 }
 
-t_map	init(t_map *s) 
-{
-	printf("init\n");
-	s->mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
-	if (!s->mlx)
-		full_exit();
-	printf("after init\n");
-	//s->mouse_pos = 0;
-	//this is basically all the parsing i did before: (you can overwrite it)
-	// map_to_koordinate(s, argv[1]);
-	// scan_coordinates(s, player_position);
-	//get_textures(s);
-	get_enemies(s);
-	return (*s);
-}
+// t_map	init(t_map *s) 
+// {
+// 	printf("init\n");
+// 	s->mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
+// 	if (!s->mlx)
+// 		full_exit();
+// 	printf("after init\n");
+// 	//s->mouse_pos = 0;
+// 	//this is basically all the parsing i did before: (you can overwrite it)
+// 	// map_to_koordinate(s, argv[1]);
+// 	// scan_coordinates(s, player_position);
+// 	//get_textures(s);
+// 	get_enemies(s);
+// 	return (*s);
+// }
 
 
 

@@ -111,6 +111,7 @@ void	init_dda(t_map *s, t_ray *r);
 double	ray_dist(t_ray *r);
 double	dda(t_map *s, t_ray *r, int px);
 double	delta_dist(double side);
+void	check_door(t_map *s, t_ray *r, int px);
 
 //texture
 

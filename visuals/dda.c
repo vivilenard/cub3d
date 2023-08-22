@@ -50,8 +50,6 @@ double	dda(t_map *s, t_ray *r, int px)
 	}
 	r->hit_x = s->px + r->rdx * ray_dist(r);
 	r->hit_y = s->py + r->rdy * ray_dist(r);
-	r->raylength = ray_dist(r) * cos(s->pa - r->ra);
-	check_door(s, r, px);
 	return (0);
 }
 

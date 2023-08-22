@@ -9,8 +9,9 @@
 # include <math.h>
 # include <fcntl.h>
 # include <string.h>
-# include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
+#include <execinfo.h>
+#include <signal.h>
 
 /*
 This header file consist only shared structs.

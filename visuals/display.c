@@ -2,8 +2,13 @@
 //#include "../include/parser.h"
 
 int	display(t_map *s)
-{
-	//printf("display\n");
+{//printf("display\n");
+	// mlx_t				*mlx;
+	// mlx = mlx_init(WIDTH, HEIGTH, "cub3D", false);
+	// if (!mlx)
+	// 	return (perror("no mlx"), EXIT_FAILURE);
+	printf("after mlx init\n");
+	//s->mlx = mlx;
 	if (setup_game(s))
 		full_exit(s);
 	mlx_key_hook(s->mlx, key_bindings, s);
@@ -13,8 +18,7 @@ int	display(t_map *s)
 }
 
 int	setup_game(t_map *s)
-{
-	//printf("setup game\n");
+{//printf("setup game\n");
 	s->ray = malloc(sizeof(t_ray));
 	s->img = mlx_new_image(s->mlx, WIDTH, HEIGTH);
 	if (!s->img)
@@ -29,12 +33,10 @@ int	setup_game(t_map *s)
 }
 
 void	loop_game(void *p)
-{
+{//printf("loop game\n");
 	t_map *s;
 
 	s = (t_map *) p;
-	//s->enemy[0] = NULL;
-	//printf("loop game\n");
 	check_keys(s);
 	loop_enemies(s, calibrate_enemy);
 	draw_minimap(s);

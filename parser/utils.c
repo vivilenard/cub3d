@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 18:38:49 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/21 17:10:59 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/22 09:59:27 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,40 @@ void	print_coordinates(t_map s)
 		printf("\n");
 		y++;
 	}
+}
+
+
+void	print_map(t_map *map)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (y != map->map_height)
+	{
+		x = 0;
+		printf("[");
+		while (x != map->map_width)
+		{
+			if (map->co[y][x] == PLAYER)
+				printf("\033[1;31mP\033[0;0m");
+			else if (map->co[y][x] == ENEMY)
+				printf("\033[1;35mX\033[0;0m");
+			else if (map->co[y][x] == CLOSED_DOOR)
+				printf("\033[1;36mH\033[0;0m");
+			// else if (map->map[y][x] == 0)
+			// 	printf("X");
+			else
+				printf("%d", map->co[y][x]);
+			x++;
+		}
+		printf("]\n");
+		y++;
+	}
+	printf("height: %d, width: %d\n", map->map_height, map->map_width);
+	printf("player pos: y %f, x %f\n", map->py, map->px);
+	printf("player angle: %f\n", map->pa);
+	printf("player direction vector: pdx %f, pdy %f\n", map->pdx, map->pdy);
+	printf("p_radius %f\n", map->p_radius);
 }

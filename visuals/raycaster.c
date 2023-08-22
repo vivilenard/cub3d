@@ -84,6 +84,8 @@ void	raycaster(t_map *s, t_ray *ray)
 		ray = init_ray(s, ray, RAY_ANGLE, px);
 		init_dda(s, ray);
 		dda(s, ray, px);
+		ray->raylength = ray_dist(ray) * cos(s->pa - ray->ra);
+		check_door(s, ray, px);
 		minimap_perspective(s, ray);
 		draw_stripe(s, ray, ray->raylength, px);
 		loop_enemies(s, raycast_enemy);
