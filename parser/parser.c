@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/17 19:07:14 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/22 09:17:44 by vlenard          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../include/parser.h"
 #include <unistd.h>
@@ -23,9 +12,11 @@ int	parser(t_map_params *map_params, t_map *map, char **argv, int fd)
 		return (quick_exit(
 				"Error: wrong file, expected a map in format *.cub\n", fd));
 	if (map_params_init(map_params))
-		return (EXIT_FAILURE);
+		return (free_map_params(map_params), EXIT_FAILURE);
 	if (read_map(map_params, fd))
+	{
 		return (EXIT_FAILURE);
+	}
 	if (map_params->map[0] == NULL)
 		return (printf("Error: map is empty\n"), EXIT_FAILURE);
 	if (set_textures(map_params))

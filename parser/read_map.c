@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:52:17 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/21 16:39:05 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/22 11:42:10 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	read_map(t_map_params *map_params, int fd)
 		else
 		{
 			if (proceed_line(map_params, line))
-				return (EXIT_FAILURE);
+				return (free(line), EXIT_FAILURE);
 		}
 		if (*line != '\n' && map_params->map_end)
 			return (free(line), printf("Error: empty line in a map content\n"),
@@ -47,12 +47,19 @@ int	proceed_line(t_map_params *map_params, char *line)
 	if (map_params->identifier != 6)
 	{
 		if (get_identifier(map_params, line))
+		{
+			free(map_params->map);
+			free(map_params->all_width);
 			return (EXIT_FAILURE);
+		}
 	}
 	else
 	{
 		if (get_map(map_params, line))
+		{
+			free_map_params(map_params);
 			return (EXIT_FAILURE);
+		}
 		map_params->map_start = true;
 		map_params->height++;
 	}

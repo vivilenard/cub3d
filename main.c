@@ -50,6 +50,9 @@ int	main(int argc, char **argv)
 	s.mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
 	if (!s.mlx)
 		return (perror("no mlx"), EXIT_FAILURE);
+	// s.mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
+	// if (!s.mlx)
+	// 	printf("no mlx");
 	if (parser(&map_params, &s, argv, fd))
 		return (close(fd), EXIT_FAILURE);
 	print_map(&s);

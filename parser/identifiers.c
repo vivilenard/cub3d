@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:15:13 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/21 14:15:15 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/22 12:05:53 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@
 #include "../include/parser.h"
 #include "../libft/libft.h"
 #include "../MLX42/include/MLX42/MLX42.h"
+
+void	free_t_tex(t_map_params *map_params)
+{
+	free(map_params->textures.no);
+	free(map_params->textures.so);
+	free(map_params->textures.ea);
+	free(map_params->textures.we);
+}
 
 int	get_identifier(t_map_params *map_params, char *line)
 {
@@ -34,11 +42,11 @@ int	get_identifier(t_map_params *map_params, char *line)
 		return (printf("Error: wrong identifier\n"), EXIT_FAILURE);
 	while (result[i])
 		i++;
-	if (i != 2 || set_identifier(map_params, result))
+	if (i != 2)
 		return (free_split(result, i),
 			printf("Error: wrong identifier\n"), EXIT_FAILURE);
-	free(result[0]);
-	free(result);
+	if (set_identifier(map_params, result))
+		return (free_t_tex(map_params), printf("Error: wrong identifier\n"), EXIT_FAILURE);
 	map_params->identifier++;
 	return (EXIT_SUCCESS);
 }
@@ -59,16 +67,26 @@ int	set_identifier(t_map_params *map_params, char **result)
 	else if (ft_strncmp(result[0], "F\0", 2) == 0 && !map_params->floor.is_color)
 	{
 		if (get_color(map_params, 'F', result[1]))
+		{
+			free(result[0]);
+			free(result);
 			return (EXIT_FAILURE);
+		}
 	}
 	else if (ft_strncmp(result[0], "C\0", 2) == 0
 		&& !map_params->ceiling.is_color)
 	{
 		if (get_color(map_params, 'C', result[1]))
+		{
+			free(result);
+			free(result);
 			return (EXIT_FAILURE);
+		}
 	}
 	else
 		return (EXIT_FAILURE);
+	free(result[0]);
+	free(result);
 	return (EXIT_SUCCESS);
 }
 
@@ -108,4 +126,18 @@ void	free_split(char **str, int i)
 		i--;
 	}
 	free(str);
+}
+
+void	free_map_params(t_map_params *map_params)
+{
+	int	i;
+
+	i = 0;
+	while (i != map_params->height)
+	{
+		free(map_params->map[i]);
+		i++;
+	}
+	free(map_params->map);
+	free(map_params->all_width);
 }
