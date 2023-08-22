@@ -58,6 +58,7 @@ int	fill_in_t_map(t_map_params *map_params, t_map *map)
 	map->mouse_pos = 0;
 	map->floor = map_params->floor.color;
 	map->ceiling = map_params->ceiling.color;
+	map->co[map_params->player_y][map_params->player_x] = SPACE;
 	return (EXIT_SUCCESS);
 }
 
@@ -110,6 +111,5 @@ int	zero_extend(t_map_params *map_params)
 		i_height++;
 	}
 	map_params->map[map_params->height - 1][map_params->max_width] = TERMINAL;
-	map_params->map[map_params->player_y][map_params->player_x] = SPACE;
 	return (EXIT_SUCCESS);
 }
