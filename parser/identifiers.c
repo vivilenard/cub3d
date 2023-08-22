@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:15:13 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/22 12:05:53 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:38:50 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,6 @@
 #include "../include/parser.h"
 #include "../libft/libft.h"
 #include "../MLX42/include/MLX42/MLX42.h"
-
-void	free_t_tex(t_map_params *map_params)
-{
-	free(map_params->textures.no);
-	free(map_params->textures.so);
-	free(map_params->textures.ea);
-	free(map_params->textures.we);
-}
 
 int	get_identifier(t_map_params *map_params, char *line)
 {
@@ -43,10 +35,9 @@ int	get_identifier(t_map_params *map_params, char *line)
 	while (result[i])
 		i++;
 	if (i != 2)
-		return (free_split(result, i),
-			printf("Error: wrong identifier\n"), EXIT_FAILURE);
+		return (printf("Error: wrong identifier\n"), EXIT_FAILURE);
 	if (set_identifier(map_params, result))
-		return (free_t_tex(map_params), printf("Error: wrong identifier\n"), EXIT_FAILURE);
+		return (printf("Error: wrong identifier\n"), EXIT_FAILURE);
 	map_params->identifier++;
 	return (EXIT_SUCCESS);
 }
@@ -68,8 +59,7 @@ int	set_identifier(t_map_params *map_params, char **result)
 	{
 		if (get_color(map_params, 'F', result[1]))
 		{
-			free(result[0]);
-			free(result);
+
 			return (EXIT_FAILURE);
 		}
 	}
@@ -78,19 +68,15 @@ int	set_identifier(t_map_params *map_params, char **result)
 	{
 		if (get_color(map_params, 'C', result[1]))
 		{
-			free(result);
-			free(result);
 			return (EXIT_FAILURE);
 		}
 	}
 	else
 		return (EXIT_FAILURE);
-	free(result[0]);
-	free(result);
 	return (EXIT_SUCCESS);
 }
 
-int	set_textures(t_map_params *map_params)
+int	set_textures(t_map_params *map_params, t_map *map)
 {
 	int			i;
 	const char	*side[4];
@@ -100,21 +86,27 @@ int	set_textures(t_map_params *map_params)
 	side[SOUTH] = "textures/pillar.png";
 	side[EAST] = "textures/mossy.png";
 	side[WEST] = "textures/greystone.png";
-	map_params->textures.texs[NORTH] = mlx_load_png(map_params->textures.no);
-	map_params->textures.texs[SOUTH] = mlx_load_png(map_params->textures.so);
-	map_params->textures.texs[EAST] = mlx_load_png(map_params->textures.ea);
-	map_params->textures.texs[WEST] = mlx_load_png(map_params->textures.we);
+	map->tex[NORTH] = mlx_load_png(map_params->textures.no);
+	map->tex[SOUTH] = mlx_load_png(map_params->textures.so);
+	map->tex[EAST] = mlx_load_png(map_params->textures.ea);
+	map->tex[WEST] = mlx_load_png(map_params->textures.we);
 	while (i != 4)
 	{
-		if (map_params->textures.texs[i] == NULL)
+		if (map->tex[i] == NULL)
 		{
-			map_params->textures.texs[i] = mlx_load_png(side[i]);
-			if (map_params->textures.texs[i] == NULL)
+			map->tex[i] = mlx_load_png(side[i]);
+			if (map->tex[i] == NULL)
 				return (EXIT_FAILURE);
 			printf("Default texture is used\n");
 		}
 		i++;
 	}
+	map->tex[DOOR] = mlx_load_png("./textures/redbrick.png");
+	map->tex[5] = mlx_load_png("./textures/zombie0.png");
+	if (map->tex[DOOR] == NULL
+		|| map->tex[5] == NULL)
+		return (EXIT_FAILURE);
+	map->tex[6] = NULL;
 	return (EXIT_SUCCESS);
 }
 

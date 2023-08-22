@@ -47,16 +47,16 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (read(fd, NULL, 0) < 0)
 		return (quick_exit("Error\nread() failed\n", fd));
-	s.mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
-	if (!s.mlx)
-		return (perror("no mlx"), EXIT_FAILURE);
-	// s.mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
-	// if (!s.mlx)
-	// 	printf("no mlx");
 	if (parser(&map_params, &s, argv, fd))
 		return (close(fd), EXIT_FAILURE);
 	print_map(&s);
+	s.mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
+	if (!s.mlx)
+		return (perror("no mlx"), EXIT_FAILURE);
+	if (set_textures(&map_params, &s))
+		return (EXIT_FAILURE);
 	display(&s);
-	full_exit(&s);
+	close(fd);
+	mlx_terminate(s.mlx);
 	return (EXIT_SUCCESS);
 }

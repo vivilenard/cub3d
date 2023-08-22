@@ -12,15 +12,13 @@ int	parser(t_map_params *map_params, t_map *map, char **argv, int fd)
 		return (quick_exit(
 				"Error: wrong file, expected a map in format *.cub\n", fd));
 	if (map_params_init(map_params))
-		return (free_map_params(map_params), EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	if (read_map(map_params, fd))
 	{
 		return (EXIT_FAILURE);
 	}
 	if (map_params->map[0] == NULL)
 		return (printf("Error: map is empty\n"), EXIT_FAILURE);
-	if (set_textures(map_params))
-		return (EXIT_FAILURE);
 	if (zero_extend(map_params))
 		return (EXIT_FAILURE);
 	if (map_verify(map_params))
@@ -38,17 +36,17 @@ int	fill_in_t_map(t_map_params *map_params, t_map *map)
 	i = 0;
 	map->co = map_params->map;
 	map_params->map = NULL;
-	while (i != 4)
-	{
-		map->tex[i] = map_params->textures.texs[i];
-		i++;
-	}
-	map->tex[DOOR] = mlx_load_png("./textures/redbrick.png");
-	map->tex[5] = mlx_load_png("./textures/zombie0.png");
-	if (map->tex[DOOR] == NULL
-		|| map->tex[5] == NULL)
-		return (EXIT_FAILURE);
-	map->tex[6] = NULL;
+	// while (i != 4)
+	// {
+	// 	map->tex[i] = map_params->textures.texs[i];
+	// 	i++;
+	// }
+	// map->tex[DOOR] = mlx_load_png("./textures/redbrick.png");
+	// map->tex[5] = mlx_load_png("./textures/zombie0.png");
+	// if (map->tex[DOOR] == NULL
+	// 	|| map->tex[5] == NULL)
+	// 	return (EXIT_FAILURE);
+	// map->tex[6] = NULL;
 	map->map_height = map_params->height;
 	map->map_width = map_params->max_width;
 	map->px = (double) map_params->player_x + 0.5;
@@ -58,6 +56,8 @@ int	fill_in_t_map(t_map_params *map_params, t_map *map)
 	map->pdy = sin(map->pa);
 	map->p_radius = 0.09;
 	map->mouse_pos = 0;
+	map->floor = map_params->floor.color;
+	map->ceiling = map_params->ceiling.color;
 	return (EXIT_SUCCESS);
 }
 
@@ -94,10 +94,10 @@ int	zero_extend(t_map_params *map_params)
 
 	i = 0;
 	i_height = 0;
-	while (i_height != map_params->height)
+	while (i_height < map_params->height)
 	{
 		if (map_params->all_width[i_height] < map_params->max_width
-			|| i_height == map_params->height)
+			|| i_height + 1 >= map_params->height)
 		{
 			new_line = ft_calloc(map_params->max_width + 1, sizeof(t_map_char));
 			if (new_line == NULL)

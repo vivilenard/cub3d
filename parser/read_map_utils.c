@@ -3,6 +3,28 @@
 #include "../include/parser.h"
 #include "../libft/libft.h"
 
+int	all_width_extend(t_map_params *map_params)
+{
+	int	*new_array;
+	int	new_capacity;
+	int	i;
+
+	new_capacity = map_params->width_capacity * 2;
+	new_array = malloc(sizeof(int) * new_capacity);
+	if (new_array == NULL)
+		return (EXIT_FAILURE);
+	i = 0;
+	while (i != map_params->height)
+	{
+		new_array[i] = map_params->all_width[i];
+		i++;
+	}
+	free(map_params->all_width);
+	map_params->all_width = new_array;
+	map_params->width_capacity = new_capacity;
+	return (EXIT_SUCCESS);
+}
+
 int get_map(t_map_params *map_params, char *line)
 {
 	int	i;
@@ -13,6 +35,8 @@ int get_map(t_map_params *map_params, char *line)
 		map_extend(map_params);
 	i = 0;
 	cur_width = 0;
+	if (map_params->width_capacity == map_params->height)
+		all_width_extend(map_params);
 	map_params->all_width[map_params->height] = 0;
 	len = ft_strlen(line);
 	map_params->map[map_params->height] = malloc(sizeof(t_map_char) * len);

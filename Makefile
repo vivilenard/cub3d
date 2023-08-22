@@ -18,7 +18,7 @@ ifndef LEN
 endif
 
 ifdef DEBUG
-	CFLAGS += -g
+	CFLAGS += -g -fsanitize=address
 endif
 
 SRC =	main.c\
@@ -58,7 +58,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) #$(SAN_LDFLAG) #-fsanitize=address
+	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) #$(if $(DEBUG),-fsanitize=address, )
 	@printf "$(GREEN)Compiled$(RESET)\n"
 
 $(LIBFT):
@@ -80,7 +80,7 @@ re: fclean all
 
 build:
 	@git submodule update --init
-	@cd MLX42 && cmake -B build && cmake --build build -j4
+	@cd MLX42 && cmake $(if $(DEBUG),-DDEBUG=1, ) -B build && cmake --build build -j4
 
 simple:
 	make re && make clean && ./cub3D maps/simple.cub

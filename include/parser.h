@@ -30,6 +30,7 @@ typedef struct s_map_params
 	t_map_char		component;
 	int				max_width;
 	int				*all_width;
+	int				width_capacity;
 	int				height;
 	t_color			floor;
 	t_color			ceiling;
@@ -65,7 +66,7 @@ t_map_char	convert_char(t_map_params *map_params, char, int width);
 //	identifiers.c
 int	get_identifier(t_map_params *map_params, char *line);
 int	set_identifier(t_map_params *map_params, char **result);
-int	set_textures(t_map_params *map_params);
+int	set_textures(t_map_params *map_params, t_map *map);
 void	free_split(char **str, int i);
 void	free_map_params(t_map_params *map_params);
 
@@ -88,6 +89,7 @@ int	map_params_init(t_map_params *map_params);
 double	init_player_view(char p);
 
 #endif
+
 /*
 - change get_id (if have only ID)
 - init_map make after get all map
@@ -113,3 +115,11 @@ commit
 			"MIMode": "lldb"
 		},
 */
+
+// struct s_dynamic_array
+// {
+// 	void	*bufffer;
+// 	int		size;
+// 	int		capacity;
+// 	int		item_size;
+// };
