@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/25 12:54:07 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/25 13:12:06 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,8 @@ int	draw_mini_enemy(t_map *s, t_character *e)
 	e->left_y = e->y + e->orth_y * e->radius;
 	e->right_x = e->x - e->orth_x * e->radius;
 	e->right_y = e->y - e->orth_y * e->radius;
-	//printf("ex %f, ey %f\n", e->x, e->y);
-	//printf("ind %d\n", e->index);
 	if (e->x > 0 && e->y > 0)
 		to_square(s, e->x, e->y, 0.06);
-
-	//draw enemy plane
-	//to_square(s, e->right_x, e->right_y, 0.05);
-	//to_square(s, e->left_x, e->left_y, 0.03);
 	return (1);
 }
 

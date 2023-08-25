@@ -41,3 +41,9 @@ void	check_enemy(t_map *s, t_ray *r)
 			s->enemy[i]->visible = true; //dont need this statement
 	}
 }
+
+void	shoot_enemy(t_character *e)
+{
+	if (e->lives > 0)
+		e->lives--;
+}

@@ -1,11 +1,24 @@
 #include "../include/cub3d.h"
 //#include "../include/parser.h"
 
+
+// void mouse_bindings(int key, void *p)
+// {
+// 	t_map *s;
+
+// 	s = (t_map *) p;
+
+// 	if ()
+// 		printf("key down\n");//	s->shoot = true;
+// }
+
 int	display(t_map *s)
 {//printf("display\n");
 	if (setup_game(s))
 		full_exit(s);
+	s->shoot = false;
 	mlx_key_hook(s->mlx, key_bindings, s);
+	//mlx_mouse_hook(s->mlx, mouse_bindings, s);
 	mlx_loop_hook(s->mlx, loop_game, s);
 	mlx_loop(s->mlx);
 	return (0);
@@ -26,6 +39,20 @@ int	setup_game(t_map *s)
 	return (0);
 }
 
+void	print_cross(t_map *s, float size, int color)
+{
+	int i;
+
+	i = WIDTH / 2 - size * HEIGTH / 2 - 1;
+	while (++i <= WIDTH / 2 + size * HEIGTH / 2)
+		mlx_put_pixel(s->img, i, HEIGTH / 2, color);
+
+	i = HEIGTH / 2 - size * HEIGTH / 2 - 1;
+	while (++i <= HEIGTH / 2 + size * HEIGTH / 2)
+		mlx_put_pixel(s->img, WIDTH / 2, i, color);
+
+}
+
 void	loop_game(void *p)
 {//printf("loop game\n");
 	t_map *s;
@@ -35,4 +62,6 @@ void	loop_game(void *p)
 	loop_enemies(s, calibrate_enemy);
 	draw_minimap(s);
 	raycaster(s, s->ray);
+	print_cross(s, 0.1, 0xFFFFFFAA);
+	s->shoot = false;
 }

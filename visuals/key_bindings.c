@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/21 17:11:05 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/25 15:49:27 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,13 @@ void key_bindings(mlx_key_data_t keydata, void *p)
 		mlx_terminate(s->mlx);
 		full_exit(s);
 	}
-	if (keydata.key == MLX_KEY_SPACE)
+	if (mlx_is_key_down(s->mlx, MLX_KEY_SPACE))
 		door_mov(s);
+	//int i;
+	// for(i = 0; s->enemy[i]; i++)
+	// {
+	// 	printf("index: %d, lives: %d\n", s->enemy[i]->index, s->enemy[i]->lives);
+	// }
+	if (mlx_is_key_down(s->mlx, MLX_KEY_ENTER))
+		s->shoot = true;
 }

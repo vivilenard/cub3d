@@ -17,12 +17,13 @@ int	position_enemy(t_map *s, int x, int y)
 		return (0);
 	while (s->enemy[i] != NULL)
 		i++;
-	if (i >= N_ENEMIES)
+	if (i >= MAX_ENEMIES)
 		return (0);
 	else
 	{
 		s->enemy[i] = create_enemy();
 		s->enemy[i]->index = i;
+		s->enemy[i]->lives = ENEMY_LIVES;
 		s->enemy[i]->x = (double)x + 0.5;
 		s->enemy[i]->y = (double)y + 0.5;
 		s->enemy[i]->a = 0;
@@ -41,7 +42,7 @@ void	get_enemies(t_map *s)
 	int	i;
 
 	i = -1;
-	while (++i <= N_ENEMIES)
+	while (++i <= MAX_ENEMIES)
 		s->enemy[i] = NULL;
 	scan_coordinates(s, position_enemy);
 }

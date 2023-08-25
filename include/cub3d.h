@@ -15,6 +15,7 @@ typedef struct s_character
 {
 	mlx_texture_t *tex;
 	int		index;
+	int		lives;
 	double	x;
 	double	y;
 	double	a;
@@ -102,6 +103,7 @@ void	change_direction_keys(t_map *s, double mv);
 void	adjust_view(t_map *s, int x, double mv);
 int		collide(t_map_char **co, int x, int y);
 void	key_bindings(mlx_key_data_t keydata, void *p);
+//void	mouse_bindings(void *p);
 
 //raycaster
 void	raycaster(t_map *s, t_ray *ray);
@@ -136,6 +138,7 @@ void		check_enemy(t_map *s, t_ray *r);
 void		to_vert_line(t_map *s, int p1, int p2, int px, t_character *e);
 int			number_enemies(t_map *s);
 int			highest_dist_enemy(t_map *s, double *dist);
+void		shoot_enemy(t_character *e);
 
 
 #endif

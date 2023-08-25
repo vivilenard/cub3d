@@ -23,6 +23,11 @@ int	raycast_enemy(t_map *s, t_character *e)
 		e->in_view = 2;
 		e->pix_end = s->ray->x_px;
 	}
+	if (s->ray->x_px == WIDTH / 2 && e->in_view == 1 && s->shoot == true)
+	{
+		shoot_enemy(e);
+	}
+
 	return (1);
 }
 
@@ -34,9 +39,7 @@ color	color_enemy_tex(t_character *e, int py)
 	int			pos;
 	int			color;
 	double		x_pos;
-	//double		r_a_right;
 
-	//doesnt work between eleft and ea;
 	if (e->ray_a < e->a_right - 2 * PI)
 		e->ray_a += 2 * PI;
 	if (!e->tex)
@@ -120,7 +123,8 @@ void	draw_enemies(t_map *s)
 		e_index = highest_dist_enemy(s, dist);
 		if (e_index < 0)
 			break;
-		draw_enemy(s, s->enemy[e_index]);
+		if (s->enemy[e_index]->lives > 0)
+			draw_enemy(s, s->enemy[e_index]);
 		dist[e_index] = -1;
 		//stops drawing at distance 0.6
 	}

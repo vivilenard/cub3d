@@ -23,7 +23,7 @@ We should rename it (probably).
 # define WIDTH 1200
 # define HEIGTH 600
 # define PI 3.141592653589793238462643383279502884197
-# define N_ENEMIES 6
+# define ENEMY_LIVES 3
 # define N_TEX 7
 # define VIEW_ANGLE 1.15 //=66 degree
 # define RAY_ANGLE (VIEW_ANGLE / WIDTH)
@@ -76,6 +76,7 @@ typedef struct s_map
 	int					mm_radius;	//size of minimap
 	int					mm_square;	//size of a tile
 	int					mouse_pos;
+	bool				shoot;
 }	t_map;
 
 void	print_map(t_map *map);
