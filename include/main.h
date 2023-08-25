@@ -18,7 +18,7 @@ This header file consist only shared structs.
 We should rename it (probably).
 */
 
-# define MAX_ENEMIES 6
+# define MAX_ENEMIES 10
 # define N_TEX 7
 # define WIDTH 1200
 # define HEIGTH 600
@@ -55,7 +55,7 @@ typedef enum e_map_char
 typedef struct s_map
 {
 	struct s_ray		*ray;
-	struct s_character	*enemy[MAX_ENEMIES];
+	struct s_character	*enemy[MAX_ENEMIES + 1];
 	mlx_t				*mlx;
 	mlx_image_t			*img;
 	mlx_image_t			*minimap;

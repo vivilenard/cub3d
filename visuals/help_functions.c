@@ -26,11 +26,14 @@ void	to_square(t_map *s, double x, double y, double p_radius)
 	int		a;
 	int		b;
 
+	//printf("tosq\n");
 	a = (x - p_radius) * s->mm_square;
 	b = (y + p_radius) * s->mm_square;
-	while (a < (x + p_radius) * s->mm_square)
+	//printf("x %f\n, radius %f\n", x, p_radius);
+	//printf("a %d, a2 %d\n", a, (int)(x + p_radius) * s->mm_square);
+	while (a < (int)((x + p_radius) * s->mm_square))
 	{
-		while (b > (y - p_radius) * s->mm_square)
+		while (b > (int)((y - p_radius) * s->mm_square))
 		{
 			mlx_put_pixel(s->minimap, a, b, 0xFF0000FF);
 			b--;

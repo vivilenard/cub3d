@@ -41,7 +41,7 @@ void	get_enemies(t_map *s)
 	int	i;
 
 	i = -1;
-	while (++i < N_ENEMIES)
+	while (++i <= N_ENEMIES)
 		s->enemy[i] = NULL;
 	scan_coordinates(s, position_enemy);
 }

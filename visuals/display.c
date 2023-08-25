@@ -3,12 +3,6 @@
 
 int	display(t_map *s)
 {//printf("display\n");
-	// mlx_t				*mlx;
-	// mlx = mlx_init(WIDTH, HEIGTH, "cub3D", false);
-	// if (!mlx)
-	// 	return (perror("no mlx"), EXIT_FAILURE);
-	printf("after mlx init\n");
-	//s->mlx = mlx;
 	if (setup_game(s))
 		full_exit(s);
 	mlx_key_hook(s->mlx, key_bindings, s);
