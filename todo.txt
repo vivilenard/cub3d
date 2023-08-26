@@ -1,0 +1,4 @@
+- include 5 enemy textures in enemy struct
+- design maps
+- how to write in mlx e.g player lives, etc??
+- free everything that was allocated

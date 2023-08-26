@@ -12,7 +12,6 @@ void	full_exit(t_map *s)
 	// }
 	// system ("leaks cub3D");
 	s = NULL; //dangerous!
-	//mlx_terminate(s->mlx);
 	exit(0);
 }
 

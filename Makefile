@@ -25,12 +25,10 @@ SRC =	main.c\
 		parser/color.c\
 		parser/identifiers.c\
 		parser/init_data.c\
-		parser/map_to_coordinate.c\
 		parser/map_verify.c\
 		parser/parser.c\
 		parser/read_map.c\
 		parser/read_map_utils.c\
-		parser/utils.c\
 		visuals/display.c \
 		visuals/raycaster.c\
 		visuals/dda.c\
@@ -39,6 +37,8 @@ SRC =	main.c\
 		visuals/key_bindings.c\
 		visuals/mouse_bindings.c\
 		visuals/texture.c\
+		visuals/attacks.c\
+		visuals/utils.c\
 		enemy/init_enemies.c\
 		enemy/calibrate_enemies.c\
 		enemy/draw_enemies.c\

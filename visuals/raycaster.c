@@ -78,6 +78,8 @@ void	raycaster(t_map *s, t_ray *ray)
 	int	px;
 
 	px = 0;
+	if (get_shot(s))
+		return ;
 	init_raycaster(s, ray);
 	while (px < WIDTH)
 	{
@@ -90,7 +92,5 @@ void	raycaster(t_map *s, t_ray *ray)
 		loop_enemies(s, raycast_enemy);
 		px++;
 	}
-	//printf("hi\n");
 	draw_enemies(s);
-	//loop_enemies(s, draw_enemy);
 }

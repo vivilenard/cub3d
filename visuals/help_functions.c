@@ -21,16 +21,13 @@ void	print_square(mlx_image_t *img, int x, int y, int radius, u_int32_t color)
 	}
 }
 
-void	to_square(t_map *s, double x, double y, double p_radius)
+void	to_red_square(t_map *s, double x, double y, double p_radius)
 {
 	int		a;
 	int		b;
 
-	//printf("tosq\n");
 	a = (x - p_radius) * s->mm_square;
 	b = (y + p_radius) * s->mm_square;
-	//printf("x %f\n, radius %f\n", x, p_radius);
-	//printf("a %d, a2 %d\n", a, (int)(x + p_radius) * s->mm_square);
 	while (a < (int)((x + p_radius) * s->mm_square))
 	{
 		while (b > (int)((y - p_radius) * s->mm_square))
@@ -43,12 +40,23 @@ void	to_square(t_map *s, double x, double y, double p_radius)
 	}	
 }
 
-int	to_rgbt(int r, int g, int b, int t)
+void	to_square(t_map *s, double x, double y, double p_radius)
 {
-	unsigned long int	color;
+	int		a;
+	int		b;
 
-	color = (r << 24) + (g << 16) + (b << 8) + t;
-	return (color);
+	a = (x - p_radius) * s->mm_square;
+	b = (y + p_radius) * s->mm_square;
+	while (a < (int)((x + p_radius) * s->mm_square))
+	{
+		while (b > (int)((y - p_radius) * s->mm_square))
+		{
+			mlx_put_pixel(s->minimap, a, b, 0xFFFFFFFF);
+			b--;
+		}
+		b = (y + p_radius) * s->mm_square;
+		a++;
+	}	
 }
 
 int		collide(t_map_char **co, int x, int y)

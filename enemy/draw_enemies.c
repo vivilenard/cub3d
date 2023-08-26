@@ -24,9 +24,7 @@ int	raycast_enemy(t_map *s, t_character *e)
 		e->pix_end = s->ray->x_px;
 	}
 	if (s->ray->x_px == WIDTH / 2 && e->in_view == 1 && s->shoot == true)
-	{
-		shoot_enemy(e);
-	}
+		shoot_enemy(s, e);
 
 	return (1);
 }

@@ -19,6 +19,7 @@ We should rename it (probably).
 */
 
 # define MAX_ENEMIES 10
+# define LIVES 2
 # define N_TEX 7
 # define WIDTH 1200
 # define HEIGTH 600
@@ -54,29 +55,30 @@ typedef enum e_map_char
 
 typedef struct s_map
 {
+	unsigned int		frame;
 	struct s_ray		*ray;
 	struct s_character	*enemy[MAX_ENEMIES + 1];
 	mlx_t				*mlx;
 	mlx_image_t			*img;
 	mlx_image_t			*minimap;
-	mlx_texture_t		*tex[N_TEX];	// done in parser
-	mlx_texture_t		*enemy_tex; 	// done in parser
-	color				floor; 			// done in parser
-	color				ceiling; 		// done in parser
-	// char				**co; 			// done in parser
+	mlx_texture_t		*tex[N_TEX];
+	mlx_texture_t		*enemy_tex;
+	color				floor;
+	color				ceiling;
 	t_map_char			**co;
-	int					map_height; 	// done in parser
-	int					map_width; 		// done in parser
-	double				px;				// player position done in parser
+	int					map_height;
+	int					map_width;
+	double				px;
 	double				py;
-	double				pa;				// player angle done in parser
-	double				pdx; 			// player direction vector done in parser
+	double				pa;
+	double				pdx;
 	double				pdy;
-	double				p_radius;		// size of player in minimap done in parser
-	int					mm_radius;	//size of minimap
-	int					mm_square;	//size of a tile
+	double				p_radius;
+	int					mm_radius;
+	int					mm_square;
 	int					mouse_pos;
 	bool				shoot;
+	int					lives;
 }	t_map;
 
 void	print_map(t_map *map);

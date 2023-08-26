@@ -1,24 +1,13 @@
 #include "../include/cub3d.h"
 //#include "../include/parser.h"
 
-
-// void mouse_bindings(int key, void *p)
-// {
-// 	t_map *s;
-
-// 	s = (t_map *) p;
-
-// 	if ()
-// 		printf("key down\n");//	s->shoot = true;
-// }
-
 int	display(t_map *s)
 {//printf("display\n");
 	if (setup_game(s))
 		full_exit(s);
 	s->shoot = false;
 	mlx_key_hook(s->mlx, key_bindings, s);
-	//mlx_mouse_hook(s->mlx, mouse_bindings, s);
+	mlx_mouse_hook(s->mlx, mouse_bindings, s);
 	mlx_loop_hook(s->mlx, loop_game, s);
 	mlx_loop(s->mlx);
 	return (0);
@@ -58,10 +47,13 @@ void	loop_game(void *p)
 	t_map *s;
 
 	s = (t_map *) p;
+	if (die(s))
+		return ;
 	check_keys(s);
 	loop_enemies(s, calibrate_enemy);
+	raycaster(s, s->ray);  //exchanged ray and minimap
 	draw_minimap(s);
-	raycaster(s, s->ray);
 	print_cross(s, 0.1, 0xFFFFFFAA);
+	frame_count(s);
 	s->shoot = false;
 }

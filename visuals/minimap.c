@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/25 13:12:06 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/26 18:48:21 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	draw_view(t_map *s)
 
 int	draw_mini_enemy(t_map *s, t_character *e)
 {
+	if (!e->lives)
+		return (1);
 	e->orth_x = (-1 * e->dy) / sqrtf(e->dy * e->dy + e->dx * e->dx) / 2;
 	e->orth_y =  e->dx / sqrtf(e->dy * e->dy + e->dx * e->dx) / 2;
 	e->left_x = e->x + e->orth_x * e->radius;
@@ -63,7 +65,7 @@ int	draw_mini_enemy(t_map *s, t_character *e)
 	e->right_x = e->x - e->orth_x * e->radius;
 	e->right_y = e->y - e->orth_y * e->radius;
 	if (e->x > 0 && e->y > 0)
-		to_square(s, e->x, e->y, 0.06);
+		to_red_square(s, e->x, e->y, 0.06);
 	return (1);
 }
 

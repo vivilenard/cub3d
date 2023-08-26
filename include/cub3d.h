@@ -19,14 +19,14 @@ typedef struct s_character
 	double	x;
 	double	y;
 	double	a;
-	double	a_left;
-	double	a_right;
 	double	dx;
 	double	dy;
 	double	radius;
 	double	dist;
 	bool	visible;
 	int		in_view;
+	double	a_left;
+	double	a_right;
 	double	orth_x;
 	double	orth_y;
 	double	left_x;
@@ -66,18 +66,6 @@ typedef struct s_ray
 	int				door_y;
 }	t_ray;
 
-
-int		mapwidth(char *map);
-int		mapheight(char *map);
-
-//init
-t_map	init(t_map *s);
-int		assign_line(char *line, t_map *s, int y);
-int		allocate_map(t_map *s);
-int		map_to_koordinate(t_map *s, char *map);
-void	print_coordinates(t_map s);
-int		map_to_koordinate(t_map *s, char *map);
-
 //utils
 void	full_exit();
 int		scan_coordinates(t_map *s, int (*f)(t_map *s, int x, int y));
@@ -93,6 +81,8 @@ int		setup_minimap(t_map *s);
 int		draw_minimap(t_map *s);
 void	print_square(mlx_image_t *img, int x, int y, int radius, uint32_t color);
 void	to_square(t_map *s, double x, double y, double p_radius);
+void	to_red_square(t_map *s, double x, double y, double p_radius);
+
 
 //key_bindings
 void	check_keys(t_map *s);
@@ -103,7 +93,7 @@ void	change_direction_keys(t_map *s, double mv);
 void	adjust_view(t_map *s, int x, double mv);
 int		collide(t_map_char **co, int x, int y);
 void	key_bindings(mlx_key_data_t keydata, void *p);
-//void	mouse_bindings(void *p);
+void	mouse_bindings(mouse_key_t button, action_t action, modifier_key_t mods, void *p);
 
 //raycaster
 void	raycaster(t_map *s, t_ray *ray);
@@ -138,7 +128,16 @@ void		check_enemy(t_map *s, t_ray *r);
 void		to_vert_line(t_map *s, int p1, int p2, int px, t_character *e);
 int			number_enemies(t_map *s);
 int			highest_dist_enemy(t_map *s, double *dist);
-void		shoot_enemy(t_character *e);
+void		shoot_enemy(t_map *s, t_character *e);
+
+//utils
+void		frame_count(t_map *s);
+void		color_full_screen(mlx_image_t *img, uint32_t color);
+
+//attacks
+int			get_shot(t_map *s);
+int			attack_player(t_map *s, t_character *e);
+int 		die(t_map *s);
 
 
 #endif

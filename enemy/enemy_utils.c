@@ -42,8 +42,20 @@ void	check_enemy(t_map *s, t_ray *r)
 	}
 }
 
-void	shoot_enemy(t_character *e)
+void	shoot_enemy(t_map *s, t_character *e)
 {
-	if (e->lives > 0)
-		e->lives--;
+	float	shift_x;
+	float	shift_y;
+
+	if (e->lives <= 0)
+		return ;
+	e->lives--;
+	shift_x = e->x - e->dx / sqrtf((e->dx * e->dx + e->dy * e->dy)) * 0.2;
+	shift_y = e->y - e->dy / sqrtf((e->dx * e->dx + e->dy * e->dy)) * 0.2;
+	if (s->co[(int)shift_y][(int)shift_x] != WALL
+		&& s->co[(int)shift_y][(int)shift_x] != CLOSED_DOOR)
+	{
+		e->x = shift_x;
+		e->y = shift_y;
+	}
 }

@@ -59,6 +59,7 @@ int	fill_in_t_map(t_map_params *map_params, t_map *map)
 	map->floor = map_params->floor.color;
 	map->ceiling = map_params->ceiling.color;
 	map->co[map_params->player_y][map_params->player_x] = SPACE;
+	map->lives = LIVES;
 	return (EXIT_SUCCESS);
 }
 

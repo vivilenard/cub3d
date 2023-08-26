@@ -27,7 +27,7 @@ int	position_enemy(t_map *s, int x, int y)
 		s->enemy[i]->x = (double)x + 0.5;
 		s->enemy[i]->y = (double)y + 0.5;
 		s->enemy[i]->a = 0;
-		s->enemy[i]->dx = s->enemy[i]->x - s->px;  //changed s->enemy[i]->y
+		s->enemy[i]->dx = s->enemy[i]->x - s->px;
 		s->enemy[i]->dy = s->enemy[i]->y - s->py;
 		s->enemy[i]->radius = 0.5;
 		s->enemy[i]->visible = false;
@@ -56,7 +56,7 @@ int	enemy_invisible(t_character *e)
 	return (1);
 }
 
-int	number_enemies(t_map *s) //dont need
+int	number_enemies(t_map *s)
 {
 	int	i;
 
