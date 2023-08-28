@@ -4,15 +4,15 @@
 
 void	full_exit(t_map *s)
 {
-	// int i = 0;
-	// while (s->tex[i])
-	// {
-	// 	mlx_delete_texture(s->tex[i]);
-	// 	i++;
-	// }
-	// system ("leaks cub3D");
+	//free all
 	s = NULL; //dangerous!
 	exit(0);
+}
+
+void	init_frame(t_map *s, t_frame *frame)
+{
+	s->frame = frame;
+	frame->counter = 0;
 }
 
 int	main(int argc, char **argv)
@@ -20,6 +20,7 @@ int	main(int argc, char **argv)
 	int				fd;
 	t_map			s;
 	t_map_params	map_params;
+	t_frame			frame;
 
 	if (argc < 2)
 		return (printf("Error\nexpected a map in format *.cub\n"), EXIT_FAILURE);
@@ -28,7 +29,8 @@ int	main(int argc, char **argv)
 		return (quick_exit("Error\nread() failed\n", fd));
 	if (parser(&map_params, &s, argv, fd))
 		return (close(fd), EXIT_FAILURE);
-	print_map(&s);
+	//print_map(&s);
+	init_frame(&s, &frame);
 	s.mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
 	if (!s.mlx)
 		return (perror("no mlx"), EXIT_FAILURE);

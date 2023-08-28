@@ -85,7 +85,7 @@ int	draw_enemy(t_map *s, t_character *e)
 	if (e->pix_end < 0)
 		e->pix_end = WIDTH - 1;
 	e->px = e->pix_start;
-	e->lineheight = HEIGTH / e->dist;
+	e->lineheight = calculate_lineheight(e->dist);
 	p1 = HEIGTH / 2 - e->lineheight / 2;
 	p2 = HEIGTH / 2 + e->lineheight / 2;
 	while (e->px >= 0 && (e->px < e->pix_end && e->px < WIDTH))

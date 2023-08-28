@@ -2,6 +2,8 @@
 
 int	attack_player(t_map *s, t_character *e)
 {
+	if (!e->lives)
+		return (1);
 	if (e->dist < 0.8 && s->lives > 0)
 		s->lives--;
 	return (1);
@@ -12,11 +14,11 @@ int	get_shot(t_map *s)
 	int	lives_tmp;
 
 	lives_tmp = s->lives;
-	if (s->frame % 50 != 0)
+	if (s->frame->counter % 50 != 0)
 		return (0);
 	loop_enemies(s, attack_player);
 	if (lives_tmp > s->lives)
-		return (color_full_screen(s->img, 0xFF0000FF), 1);
+		return (printf("shoot %u\n", s->frame->counter), color_full_screen(s->img, 0xFF0000FF), 1);
 	return (0);
 }
 

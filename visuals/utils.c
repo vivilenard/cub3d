@@ -1,10 +1,11 @@
 #include "../include/cub3d.h"
 
-void	frame_count(t_map *s)
+void	frame_count(t_frame *frames)
 {
-	s->frame++;
-	if (s->frame == 1000000)
-		s->frame = 0;
+	if (frames->counter == 4294967295)
+		frames->counter = 0;
+	frames->counter++;
+//	printf("%u\n", frames->counter);
 }
 
 

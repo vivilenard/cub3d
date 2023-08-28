@@ -25,12 +25,22 @@ t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int px)
 	return (ray);
 }
 
+int	calculate_lineheight(double distance)
+{
+	int	lineheight;
+
+	lineheight = (int)(HEIGTH / distance);// * 66 / VIEW_ANGLE);
+	// if (lineheight == 0)
+	// 	lineheight = 1;
+	return (lineheight);
+}
+
 void	draw_stripe(t_map *s, t_ray *r, double dist, int px)
 {
 	int	drawstart;
 	int drawend;
 
-	r->lineheight = HEIGTH / dist;
+	r->lineheight = calculate_lineheight(dist);
 	drawstart = HEIGTH / 2 - r->lineheight / 2;
 	if (drawstart < 0)
 		drawstart = 0;

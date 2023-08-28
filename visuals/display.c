@@ -51,9 +51,9 @@ void	loop_game(void *p)
 		return ;
 	check_keys(s);
 	loop_enemies(s, calibrate_enemy);
-	raycaster(s, s->ray);  //exchanged ray and minimap
 	draw_minimap(s);
+	raycaster(s, s->ray);  //exchanged ray and minimap
 	print_cross(s, 0.1, 0xFFFFFFAA);
-	frame_count(s);
+	frame_count(s->frame);
 	s->shoot = false;
 }

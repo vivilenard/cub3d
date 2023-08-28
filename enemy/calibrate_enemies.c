@@ -36,6 +36,8 @@ int	calibrate_enemy(t_map *s, t_character *e)
 {
 	double mv;
 
+	if (!e->lives)
+		return (1);
 	mv = 0.005;
 	if (e->dist <= 3 && e->dist > 0.6)
 	{

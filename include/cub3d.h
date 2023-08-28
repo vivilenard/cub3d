@@ -10,7 +10,6 @@
 
 # include "main.h"
 
-
 typedef struct s_character
 {
 	mlx_texture_t *tex;
@@ -104,14 +103,15 @@ double	ray_dist(t_ray *r);
 double	dda(t_map *s, t_ray *r, int px);
 double	delta_dist(double side);
 void	check_door(t_map *s, t_ray *r, int px);
+int		calculate_lineheight(double distance);
 
 //texture
 
-void	take_texture(t_map *s, int p1, int p2, int px);
-int		color_tex(t_map *s, t_ray *r, int py);
-int		choose_texture(t_ray *r);
-void	draw_ceiling(t_map *s, int p_end, int px);
-void	draw_floor(t_map *s, int p_start, int px);
+void		take_texture(t_map *s, int p1, int p2, int px);
+int			color_tex(t_map *s, t_ray *r, int py);
+int			choose_texture(t_ray *r);
+void		draw_ceiling(t_map *s, int p_end, int px);
+void		draw_floor(t_map *s, int p_start, int px);
 
 //enemies
 t_character	*create_enemy();
@@ -131,7 +131,7 @@ int			highest_dist_enemy(t_map *s, double *dist);
 void		shoot_enemy(t_map *s, t_character *e);
 
 //utils
-void		frame_count(t_map *s);
+void		frame_count(t_frame *frames);
 void		color_full_screen(mlx_image_t *img, uint32_t color);
 
 //attacks
