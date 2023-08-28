@@ -7,29 +7,25 @@ bool	continue_walk(t_map_char **co, int x, int y)
 	return (true);
 }
 
-double	angle_vector(double xv, double yv)
-{
-	double angle;
-
-	angle = acos(sqrtf(xv * xv) / sqrtf(xv * xv + yv * yv));
-	if (xv < 0 && yv > 0)
-		angle = PI - angle;
-	else if (xv < 0 && yv < 0)
-		angle = PI + angle;
-	else if (xv > 0 && yv < 0)
-		angle = 2 * PI - angle;
-	return (angle);
-}
-
 void	enemy_angles(t_map *s, t_character *e)
 {
-	e->a_left = angle_vector(e->left_x - s->px, e->left_y - s->py);
-	e->a = angle_vector(e->x - s->px, e->y - s->py);
+	e->a_left = angle_of_vector(e->left_x - s->px, e->left_y - s->py);
+	e->a = angle_of_vector(e->x - s->px, e->y - s->py);
 	if (e->a < e->a_left)
 		e->a = 2 * PI + e->a;
-	e->a_right = angle_vector(e->right_x - s->px, e->right_y - s->py);
+	e->a_right = angle_of_vector(e->right_x - s->px, e->right_y - s->py);
 	if (e->a_right < e->a_left)
 		e->a_right = e->a + (e->a - e->a_left);
+}
+
+void	enemy_borderpoints(t_character *e)
+{
+	e->orth_x = (-1 * e->dy) / sqrtf(e->dy * e->dy + e->dx * e->dx) / 2;
+	e->orth_y =  e->dx / sqrtf(e->dy * e->dy + e->dx * e->dx) / 2;
+	e->left_x = e->x + e->orth_x * e->radius;
+	e->left_y = e->y + e->orth_y * e->radius;
+	e->right_x = e->x - e->orth_x * e->radius;
+	e->right_y = e->y - e->orth_y * e->radius;
 }
 
 int	calibrate_enemy(t_map *s, t_character *e)
@@ -50,16 +46,8 @@ int	calibrate_enemy(t_map *s, t_character *e)
 	e->dy = s->py - e->y;
 	e->dist = sqrt(e->dx * e->dx
 		+ e->dy * e->dy);
+	enemy_borderpoints(e);
 	enemy_angles(s, e);
 	enemy_invisible(e);
 	return (1);
-}
-
-void	loop_enemies(t_map *s, int (*f)(t_map *s, t_character *e))
-{
-	int	i;
-
-	i = -1;
-	while (s->enemy[++i])
-		f(s, s->enemy[i]);
 }

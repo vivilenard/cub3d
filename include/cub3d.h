@@ -3,10 +3,10 @@
 # define CUB3D_H
 
 
-// # define RED_RGBT 0xff3800ff
-// # define BLUE_RGBT 0xa7c5f9ff
-// # define GREEN_RGBT 0x9acd32ff
-// # define YELLOW_RGBT 0xffff00ff
+# define RED_RGBT 0xff3800ff
+# define BLUE_RGBT 0xa7c5f9ff
+# define GREEN_RGBT 0x9acd32ff
+# define YELLOW_RGBT 0xffff00ff
 
 # include "main.h"
 
@@ -69,6 +69,8 @@ typedef struct s_ray
 void	full_exit();
 int		scan_coordinates(t_map *s, int (*f)(t_map *s, int x, int y));
 int		to_rgbt(int r, int g, int b, int t);
+void	print_cross(t_map *s, float size, int color);
+void	door_mov(t_map *s);
 
 //display
 int		display(t_map *s);
@@ -129,6 +131,7 @@ void		to_vert_line(t_map *s, int p1, int p2, int px, t_character *e);
 int			number_enemies(t_map *s);
 int			highest_dist_enemy(t_map *s, double *dist);
 void		shoot_enemy(t_map *s, t_character *e);
+double		angle_of_vector(double xv, double yv);
 
 //utils
 void		frame_count(t_frame *frames);

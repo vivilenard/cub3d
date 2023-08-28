@@ -28,20 +28,6 @@ int	setup_game(t_map *s)
 	return (0);
 }
 
-void	print_cross(t_map *s, float size, int color)
-{
-	int i;
-
-	i = WIDTH / 2 - size * HEIGTH / 2 - 1;
-	while (++i <= WIDTH / 2 + size * HEIGTH / 2)
-		mlx_put_pixel(s->img, i, HEIGTH / 2, color);
-
-	i = HEIGTH / 2 - size * HEIGTH / 2 - 1;
-	while (++i <= HEIGTH / 2 + size * HEIGTH / 2)
-		mlx_put_pixel(s->img, WIDTH / 2, i, color);
-
-}
-
 void	loop_game(void *p)
 {//printf("loop game\n");
 	t_map *s;

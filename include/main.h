@@ -20,6 +20,9 @@ We should rename it (probably).
 
 # define MAX_ENEMIES 10
 # define LIVES 1000
+# define WALKING_SPEED 5
+# define SIDEWALK_SPEED 3
+# define CHANGE_DIRECTION 3
 # define N_TEX 7
 # define WIDTH 1200
 # define HEIGTH 600

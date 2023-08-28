@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/25 15:49:27 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/28 15:02:22 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,12 @@ void	change_direction_keys(t_map *s, double mv)
 
 void	door_mov(t_map *s)
 {
-	if (mlx_is_key_down(s->mlx, MLX_KEY_SPACE))
-	{
-		if (s->ray->door_x < 0 && s->ray->door_y < 0)
-			return ;
-		if (s->co[s->ray->door_y][s->ray->door_x] == CLOSED_DOOR)
-			s->co[s->ray->door_y][s->ray->door_x] = OPENED_DOOR;
-		else if (s->co[s->ray->door_y][s->ray->door_x] == OPENED_DOOR)
-			s->co[s->ray->door_y][s->ray->door_x] = CLOSED_DOOR;
-	}
+	if (s->ray->door_x < 0 && s->ray->door_y < 0)
+		return ;
+	if (s->co[s->ray->door_y][s->ray->door_x] == CLOSED_DOOR)
+		s->co[s->ray->door_y][s->ray->door_x] = OPENED_DOOR;
+	else if (s->co[s->ray->door_y][s->ray->door_x] == OPENED_DOOR)
+		s->co[s->ray->door_y][s->ray->door_x] = CLOSED_DOOR;
 }
 
 void key_bindings(mlx_key_data_t keydata, void *p)
@@ -93,11 +90,14 @@ void key_bindings(mlx_key_data_t keydata, void *p)
 	}
 	if (mlx_is_key_down(s->mlx, MLX_KEY_SPACE))
 		door_mov(s);
-	//int i;
-	// for(i = 0; s->enemy[i]; i++)
-	// {
-	// 	printf("index: %d, lives: %d\n", s->enemy[i]->index, s->enemy[i]->lives);
-	// }
 	if (mlx_is_key_down(s->mlx, MLX_KEY_ENTER))
 		s->shoot = true;
+}
+
+void	check_keys(t_map *s)
+{
+	move_player_vertical(s, (float) WALKING_SPEED / 100);
+	move_player_horizontal(s, (float) SIDEWALK_SPEED / 100);
+	change_direction_keys(s, (float) CHANGE_DIRECTION / 100);
+	change_direction_mouse(s, (float) CHANGE_DIRECTION / 100);
 }
