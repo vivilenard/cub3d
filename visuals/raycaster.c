@@ -29,7 +29,7 @@ int	calculate_lineheight(double distance)
 {
 	int	lineheight;
 
-	lineheight = (int)(HEIGTH / distance);// * 66 / VIEW_ANGLE);
+	lineheight = (int)(HEIGTH / distance) * 66 / VIEW_ANGLE;
 	// if (lineheight == 0)
 	// 	lineheight = 1;
 	return (lineheight);
@@ -88,8 +88,6 @@ void	raycaster(t_map *s, t_ray *ray)
 	int	px;
 
 	px = 0;
-	if (get_shot(s))
-		return ;
 	init_raycaster(s, ray);
 	while (px < WIDTH)
 	{
@@ -103,4 +101,5 @@ void	raycaster(t_map *s, t_ray *ray)
 		px++;
 	}
 	draw_enemies(s);
+	get_shot(s);
 }

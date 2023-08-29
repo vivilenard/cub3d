@@ -19,7 +19,7 @@ We should rename it (probably).
 */
 
 # define MAX_ENEMIES 10
-# define LIVES 1000
+# define LIVES 10
 # define WALKING_SPEED 5
 # define SIDEWALK_SPEED 3
 # define CHANGE_DIRECTION 3
@@ -29,7 +29,7 @@ We should rename it (probably).
 # define PI 3.141592653589793238462643383279502884197
 # define ENEMY_LIVES 3
 # define N_TEX 7
-# define VIEW_ANGLE 66
+# define VIEW_ANGLE 40
 # define RAY_ANGLE (VIEW_ANGLE * PI / 180 / WIDTH)
 
 

@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/28 15:02:22 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/28 16:44:15 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	change_direction_keys(t_map *s, double mv)
 		s->pa -= mv;
 		if (s->pa < 0)
 			s->pa += 2 * PI;
-		s->pdx = cos(s->pa);
+		s->pdx = cos(s->pa);  
 		s->pdy = sin(s->pa);
 	}
 	if (mlx_is_key_down(s->mlx, MLX_KEY_RIGHT) || (mlx_is_key_down(s->mlx, MLX_KEY_E)))

@@ -37,8 +37,6 @@ typedef struct s_character
 	int		px;
 	int		lineheight;
 	double	ray_a;
-	//double	ray_start; //dont need
-	//double	ray_end;	//dont need
 } t_character;
 
 typedef struct s_ray

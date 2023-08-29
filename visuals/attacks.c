@@ -4,7 +4,7 @@ int	attack_player(t_map *s, t_character *e)
 {
 	if (!e->lives)
 		return (1);
-	if (e->dist < 0.8 && s->lives > 0)
+	if (e->visible && e->dist < 0.8 && s->lives > 0)
 		s->lives--;
 	return (1);
 }
