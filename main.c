@@ -14,6 +14,7 @@ void	init_frame(t_map *s, t_frame *frame)
 	s->frame = frame;
 	frame->counter = 0;
 	frame->n_backstep = 0;
+	frame->e_tex = 0;
 }
 
 int	main(int argc, char **argv)

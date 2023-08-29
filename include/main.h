@@ -23,6 +23,7 @@ We should rename it (probably).
 # define WALKING_SPEED 5
 # define SIDEWALK_SPEED 3
 # define CHANGE_DIRECTION 3
+# define E_START_WALK_DIST 5
 # define N_TEX 7
 # define WIDTH 1200
 # define HEIGTH 600
@@ -31,6 +32,7 @@ We should rename it (probably).
 # define N_TEX 7
 # define VIEW_ANGLE 40
 # define RAY_ANGLE (VIEW_ANGLE * PI / 180 / WIDTH)
+# define E_TEX_ITER 3
 
 
 typedef uint32_t	color;
@@ -88,6 +90,7 @@ typedef struct s_frame
 {
 	unsigned int	counter;
 	int	n_backstep;
+	int	e_tex;
 } t_frame;
 
 void	print_map(t_map *map);

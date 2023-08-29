@@ -33,6 +33,7 @@ int	position_enemy(t_map *s, int x, int y)
 		s->enemy[i]->visible = false;
 		s->enemy[i]->in_view = false;
 		s->enemy[i]->tex = s->tex[5];
+		s->enemy[i]->tex_iter = 0;
 	}
 	return (0);
 }

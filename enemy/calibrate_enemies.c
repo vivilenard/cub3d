@@ -28,6 +28,16 @@ void	enemy_borderpoints(t_character *e)
 	e->right_y = e->y - e->orth_y * e->radius;
 }
 
+void	enemy_change_texture(t_map *s, t_character *e)
+{
+	if (s->frame->counter % 10 == 0)
+	{
+		if (e->tex_iter >= E_TEX_ITER)
+			e->tex_iter = -1;
+		e->tex_iter++;
+	}
+}
+
 int	calibrate_enemy(t_map *s, t_character *e)
 {
 	double mv;
@@ -35,7 +45,7 @@ int	calibrate_enemy(t_map *s, t_character *e)
 	if (!e->lives)
 		return (1);
 	mv = 0.005;
-	if (e->dist <= 3 && e->dist > 0.6)
+	if (e->dist <= E_START_WALK_DIST && e->dist > 0.6)
 	{
 		if (continue_walk(s->co, (int)(e->x + mv * e->dx), (int)e->y))
 			e->x += mv * e->dx;
@@ -46,6 +56,7 @@ int	calibrate_enemy(t_map *s, t_character *e)
 	e->dy = s->py - e->y;
 	e->dist = sqrt(e->dx * e->dx
 		+ e->dy * e->dy);
+	enemy_change_texture(s, e);
 	enemy_borderpoints(e);
 	enemy_angles(s, e);
 	enemy_invisible(e);

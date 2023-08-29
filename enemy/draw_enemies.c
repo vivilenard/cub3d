@@ -29,6 +29,29 @@ int	raycast_enemy(t_map *s, t_character *e)
 	return (1);
 }
 
+// color	color_enemy_tex(t_character *e, int py)
+// {
+// 	int			tex_x;
+// 	int			tex_y;
+// 	double		tex_step;
+// 	int			pos;
+// 	int			color;
+// 	double		x_pos;
+
+// 	if (e->ray_a < e->a_right - 2 * PI)
+// 		e->ray_a += 2 * PI;
+// 	if (!e->tex)
+// 		perror("no enemy texture");
+// 	tex_step = 1.0 * e->tex->height / e->lineheight;
+// 	x_pos = (e->ray_a - e->a_left) / (e->a_right - e->a_left);
+// 	tex_x = (int)(x_pos * e->tex->width); //original
+// 	tex_y = ((py - HEIGTH / 2 + e->lineheight / 2) * tex_step);
+// 	pos = (tex_y * e->tex->width + tex_x) * e->tex->bytes_per_pixel;
+// 	color = to_rgbt(e->tex->pixels[pos + 0], e->tex->pixels[pos + 1],
+// 		e->tex->pixels[pos + 2], e->tex->pixels[pos + 3]);
+// 	return (color);
+// }
+
 color	color_enemy_tex(t_character *e, int py)
 {
 	int			tex_x;
@@ -37,20 +60,21 @@ color	color_enemy_tex(t_character *e, int py)
 	int			pos;
 	int			color;
 	double		x_pos;
+	int			tex_width;
 
 	if (e->ray_a < e->a_right - 2 * PI)
 		e->ray_a += 2 * PI;
 	if (!e->tex)
 		perror("no enemy texture");
+	tex_width = e->tex->width;
 	tex_step = 1.0 * e->tex->height / e->lineheight;
 	x_pos = (e->ray_a - e->a_left) / (e->a_right - e->a_left);
-	tex_x = (int)(x_pos * e->tex->width); //check where ray angle hits enemy plane
+	tex_x = e->tex_iter * tex_width / 3 + (int)(x_pos * (tex_width / 3)); //original
 	tex_y = ((py - HEIGTH / 2 + e->lineheight / 2) * tex_step);
-	pos = (tex_y * e->tex->width + tex_x) * e->tex->bytes_per_pixel;
+	pos = ((tex_y * e->tex->width + tex_x) * e->tex->bytes_per_pixel);
 	color = to_rgbt(e->tex->pixels[pos + 0], e->tex->pixels[pos + 1],
 		e->tex->pixels[pos + 2], e->tex->pixels[pos + 3]);
 	return (color);
-
 }
 
 void	draw_enemy_tex(t_map *s, int p1, int p2, t_character *e)

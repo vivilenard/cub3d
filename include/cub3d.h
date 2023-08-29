@@ -37,6 +37,7 @@ typedef struct s_character
 	int		px;
 	int		lineheight;
 	double	ray_a;
+	int		tex_iter;
 } t_character;
 
 typedef struct s_ray
