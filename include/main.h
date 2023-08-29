@@ -32,7 +32,7 @@ We should rename it (probably).
 # define N_TEX 7
 # define VIEW_ANGLE 40
 # define RAY_ANGLE (VIEW_ANGLE * PI / 180 / WIDTH)
-# define E_TEX_ITER 3
+# define E_TEX_ITER 8
 
 
 typedef uint32_t	color;

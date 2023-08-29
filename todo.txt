@@ -1,4 +1,5 @@
-- include 5 enemy textures in enemy struct
+- make enemies smaller
 - design maps
 - make sound when shoot
+- window resize
 - free everything that was allocated
