@@ -94,7 +94,7 @@ double	init_player_view(char p);
 - find a gun texture
 
 commit
-"fix colors, add new enemy texture ('enemy_769x100.png'), add new textures for walls, hearts"
+""
 
 
 		{
