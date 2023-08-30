@@ -71,7 +71,7 @@ typedef enum e_wallside
 }	t_wallside;
 
 //utils
-void		full_exit();
+void		full_exit(t_map *s);
 int			scan_coordinates(t_map *s, int (*f)(t_map *s, int x, int y));
 color		to_rgbt(int r, int g, int b, int t);
 void		print_cross(t_map *s, float size, int color);

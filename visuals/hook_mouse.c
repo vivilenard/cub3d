@@ -37,6 +37,7 @@ void	mouse_bindings(mouse_key_t button, action_t action,
 {
 	t_map	*s;
 
+	(void)mods; // error: parameter 'mods' set but not used [-Werror,-Wunused-but-set-parameter]
 	s = (t_map *) p;
 	mods = 0;
 	if (action == MLX_PRESS && button == MLX_MOUSE_BUTTON_LEFT)

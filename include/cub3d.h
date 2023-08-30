@@ -23,26 +23,39 @@ This header file consist only shared structs.
 # define SIDEWALK_SPEED 3
 # define CHANGE_DIRECTION 3
 # define E_START_WALK_DIST 5
-# define N_TEX 7
 # define WIDTH 1200
 # define HEIGTH 600
 # define PI 3.141592653589793238462643383279502884197
 # define ENEMY_LIVES 3
-# define N_TEX 7
+# define N_TEX 10
 # define VIEW_ANGLE 45
 # define RAY_ANGLE (VIEW_ANGLE * PI / 180 / WIDTH)
 # define E_TEX_ITER 8
 
 typedef uint32_t	color;
 
-typedef enum e_side
+// typedef enum e_side
+// {
+// 	NORTH,
+// 	SOUTH,
+// 	EAST,
+// 	WEST,
+// 	DOOR,
+// }	t_side;
+
+typedef enum e_tex
 {
-	NORTH,
-	SOUTH,
-	EAST,
-	WEST,
-	DOOR,
-}	t_side;
+	NORTH_T,
+	SOUTH_T,
+	EAST_T,
+	WEST_T,
+	DOOR_T,
+	ENEMY_T,
+	HEART_RED_T,
+	HEART_RED_BLACK_T,
+	HEART_BLACK_T,
+	GUN_T,
+}	t_tex;
 
 /*
 For building a map, please, use:
@@ -74,7 +87,7 @@ typedef struct s_map
 	mlx_image_t			*img;
 	mlx_image_t			*minimap;
 	mlx_texture_t		*tex[N_TEX];
-	mlx_texture_t		*enemy_tex;
+	// mlx_texture_t		*enemy_tex;
 	color				floor;
 	color				ceiling;
 	t_map_char			**co;

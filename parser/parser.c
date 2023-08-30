@@ -32,9 +32,6 @@ int	parser(t_map_params *map_params, t_map *map, char **argv, int fd)
 
 int	fill_in_t_map(t_map_params *map_params, t_map *map)
 {
-	int	i;
-
-	i = 0;
 	map->co = map_params->map;
 	map_params->map = NULL;
 	// while (i != 4)
@@ -91,11 +88,9 @@ int	quick_exit(char *str, int fd)
 
 int	zero_extend(t_map_params *map_params)
 {
-	int			i;
 	int			i_height;
 	t_map_char	*new_line;
 
-	i = 0;
 	i_height = 0;
 	while (i_height < map_params->height)
 	{

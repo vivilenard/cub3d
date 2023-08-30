@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_verify.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:16:23 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/28 16:44:25 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/30 18:42:33 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@
 
 int	map_verify(t_map_params *map_params)
 {
-	int	y;
-	int	x;
-
-	y = 0;
-	x = 0;
 	if (map_params->player != 1)
 		return (printf("Error: has to be one player\n"), EXIT_FAILURE);
 	if (visited_init(map_params))

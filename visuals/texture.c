@@ -5,20 +5,20 @@ int	choose_texture(t_ray *r)
 	int	wall_side;
 
 	if (r->door_visible == 1)
-		return (DOOR);
+		return (DOOR_T);
 	if (r->hit_side == XSIDE)
 	{
 		if (r->rdx > 0)
-			wall_side = WEST;
+			wall_side = WEST_T;
 		else
-			wall_side = EAST;
+			wall_side = EAST_T;
 	}
 	else
 	{
 		if (r->rdy < 0)
-			wall_side = NORTH;
+			wall_side = NORTH_T;
 		else
-			wall_side = SOUTH;
+			wall_side = SOUTH_T;
 	}
 	return (wall_side);
 }
