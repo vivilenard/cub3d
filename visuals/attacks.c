@@ -11,9 +11,10 @@ int	attack_player(t_map *s, t_character *e)
 
 int	get_shot(t_map *s)
 {
-	int	lives_tmp;
-	float	mv = 0.05;
+	int		lives_tmp;
+	float	mv;
 
+	mv = 0.05;
 	lives_tmp = s->lives;
 	if (s->frame->counter % 70 == 0)
 		loop_enemies(s, attack_player);
@@ -34,7 +35,7 @@ int	get_shot(t_map *s)
 	return (0);
 }
 
-int die(t_map *s)
+int	die(t_map *s)
 {
 	if (s->lives > 0)
 		return (0);

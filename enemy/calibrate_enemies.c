@@ -1,12 +1,5 @@
 #include "../include/cub3d.h"
 
-bool	continue_walk(t_map_char **co, int x, int y)
-{
-	if (co[y][x] == WALL || co[y][x] == CLOSED_DOOR)
-		return (false);
-	return (true);
-}
-
 void	enemy_angles(t_map *s, t_character *e)
 {
 	e->a_left = angle_of_vector(e->left_x - s->px, e->left_y - s->py);
@@ -21,7 +14,7 @@ void	enemy_angles(t_map *s, t_character *e)
 void	enemy_borderpoints(t_character *e)
 {
 	e->orth_x = (-1 * e->dy) / sqrtf(e->dy * e->dy + e->dx * e->dx) / 2;
-	e->orth_y =  e->dx / sqrtf(e->dy * e->dy + e->dx * e->dx) / 2;
+	e->orth_y = e->dx / sqrtf(e->dy * e->dy + e->dx * e->dx) / 2;
 	e->left_x = e->x + e->orth_x * e->radius;
 	e->left_y = e->y + e->orth_y * e->radius;
 	e->right_x = e->x - e->orth_x * e->radius;
@@ -40,7 +33,7 @@ void	enemy_change_texture(t_map *s, t_character *e)
 
 int	calibrate_enemy(t_map *s, t_character *e)
 {
-	double mv;
+	double	mv;
 
 	if (!e->lives)
 		return (1);
@@ -52,10 +45,10 @@ int	calibrate_enemy(t_map *s, t_character *e)
 		if (continue_walk(s->co, (int)e->x, (int)(e->y + mv * e->dy)))
 			e->y += mv * e->dy;
 	}
-	e->dx = s->px - e->x;	//richtungsvektor EP = p - e
+	e->dx = s->px - e->x;
 	e->dy = s->py - e->y;
 	e->dist = sqrt(e->dx * e->dx
-		+ e->dy * e->dy);
+			+ e->dy * e->dy);
 	enemy_change_texture(s, e);
 	enemy_borderpoints(e);
 	enemy_angles(s, e);

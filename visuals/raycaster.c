@@ -1,9 +1,10 @@
-
 #include "../include/cub3d.h"
 
 t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int px)
 {
-	double pa = s->pa;
+	double	pa;
+
+	pa = s->pa;
 	ray->x_px = px;
 	if ((s->pa - angle * WIDTH / 2 + px * angle) <= 0)
 		pa += 2 * PI;
@@ -25,20 +26,10 @@ t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int px)
 	return (ray);
 }
 
-int	calculate_lineheight(double distance)
-{
-	int	lineheight;
-
-	lineheight = (int)(HEIGTH / distance) * 66 / VIEW_ANGLE;
-	// if (lineheight == 0)
-	// 	lineheight = 1;
-	return (lineheight);
-}
-
 void	draw_stripe(t_map *s, t_ray *r, double dist, int px)
 {
 	int	drawstart;
-	int drawend;
+	int	drawend;
 
 	r->lineheight = calculate_lineheight(dist);
 	drawstart = HEIGTH / 2 - r->lineheight / 2;
@@ -52,47 +43,15 @@ void	draw_stripe(t_map *s, t_ray *r, double dist, int px)
 	draw_floor(s, drawend - 1, px);
 }
 
-void	minimap_perspective(t_map *s, t_ray *ray)
-{
-	double	x;
-	double	y;
-	double	pixel_x;
-	double	pixel_y;
-	int		pixels;
-
-	x = (ray->hit_x - s->px) * s->mm_square;
-	y = (ray->hit_y - s->py) * s->mm_square;
-	pixels = (sqrt((x * x) + (y * y)));
-	x /= pixels;
-	y /= pixels;
-	pixel_x = s->px * s->mm_square;
-	pixel_y = s->py * s->mm_square;
-	while (pixels)
-	{
-		mlx_put_pixel(s->minimap, (int)(pixel_x) , (int)(pixel_y), 0xFF0000FF);
-		pixel_x += x;
-		pixel_y += y;
-		--pixels; 
-	}
-}
-
-void	init_raycaster(t_map *s, t_ray *ray)
-{
-	memset(s->img->pixels, 255, s->img->width * s->img->height * sizeof(int32_t));
-	ray->door_x = -1;
-	ray->door_y = -1;
-}
-
 void	raycaster(t_map *s, t_ray *ray)
 {
 	int	px;
 
 	px = 0;
-	init_raycaster(s, ray);
+	door_inaccessible(ray);
 	while (px < WIDTH)
 	{
 		ray = init_ray(s, ray, RAY_ANGLE, px);
-		init_dda(s, ray);
 		dda(s, ray, px);
 		check_door(s, ray, px);
 		minimap_perspective(s, ray);

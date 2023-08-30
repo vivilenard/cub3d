@@ -10,8 +10,8 @@ int	raycast_enemy(t_map *s, t_character *e)
 	if (ray_a < e->a_right - 2 * PI)
 		ray_a += 2 * PI;
 	if (e->in_view == false && ((ray_a > e->a_left && ray_a < e->a_right)
-		|| ((e->a_left > e->a_right) 
-		&& ((ray_a < 2 * PI && ray_a >= e->a_left) || (ray_a > 0 && ray_a <= e->a_right)))))
+		|| ((e->a_left > e->a_right) && ((ray_a < 2 * PI && ray_a >= e->a_left)
+			|| (ray_a > 0 && ray_a <= e->a_right)))))
 	{
 		e->in_view = true;
 		e->pix_start = s->ray->x_px;
@@ -19,13 +19,11 @@ int	raycast_enemy(t_map *s, t_character *e)
 	else if (e->in_view == true && ((((e->a_left < e->a_right) && (((ray_a > e->a_right) || ray_a < e->a_left))))
 		|| ((e->a_left > e->a_right) && (((ray_a < e->a_left && ray_a > e->a_right))))))
 	{
-		//printf("ea_l: %f, ra: %f ea_r: %f\n", e->a_left, ray_a, e->a_right);
 		e->in_view = 2;
 		e->pix_end = s->ray->x_px;
 	}
 	if (s->ray->x_px == WIDTH / 2 && e->in_view == 1 && s->shoot == true)
 		shoot_enemy(s, e);
-
 	return (1);
 }
 
@@ -98,7 +96,6 @@ int	draw_enemy(t_map *s, t_character *e)
 			pa -= 2 * PI;
 		e->ray_a = pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE;
 		draw_enemy_tex(s, p1, p2, e);
-		//to_vert_line(s, p1, p2, e->px, e);
 		e->px++;
 	}
 	return (1);

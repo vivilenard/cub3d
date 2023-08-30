@@ -64,52 +64,58 @@ typedef struct s_ray
 	int				door_y;
 }	t_ray;
 
+typedef enum e_wallside
+{
+	XSIDE,
+	YSIDE,
+}	t_wallside;
+
 //utils
-void	full_exit();
-int		scan_coordinates(t_map *s, int (*f)(t_map *s, int x, int y));
-int		to_rgbt(int r, int g, int b, int t);
-void	print_cross(t_map *s, float size, int color);
-void	door_mov(t_map *s);
+void		full_exit();
+int			scan_coordinates(t_map *s, int (*f)(t_map *s, int x, int y));
+int			to_rgbt(int r, int g, int b, int t);
+void		print_cross(t_map *s, float size, int color);
+void		door_mov(t_map *s);
 
 //display
-int		display(t_map *s);
-void	loop_game(void *p);
-int		setup_game(t_map *s);
+int			display(t_map *s);
+void		loop_game(void *p);
+int			setup_game(t_map *s);
 
 //minimap
-int		setup_minimap(t_map *s);
-int		draw_minimap(t_map *s);
-void	print_square(mlx_image_t *img, int x, int y, int radius, uint32_t color);
-void	to_square(t_map *s, double x, double y, double p_radius);
-void	to_red_square(t_map *s, double x, double y, double p_radius);
+int			setup_minimap(t_map *s);
+int			draw_minimap(t_map *s);
+void		print_square(t_map *s, int x, int y, uint32_t color);
+void		to_square(t_map *s, double x, double y, double p_radius);
+void		to_red_square(t_map *s, double x, double y, double p_radius);
 
 
 //key_bindings
-void	check_keys(t_map *s);
-void	move_player_vertical(t_map *s, double step);
-void	move_player_horizontal(t_map *s, double step);
-void	change_direction_mouse(t_map *s, double mv);
-void	change_direction_keys(t_map *s, double mv);
-void	adjust_view(t_map *s, int x, double mv);
-int		collide(t_map_char **co, int x, int y);
-void	key_bindings(mlx_key_data_t keydata, void *p);
-void	mouse_bindings(mouse_key_t button, action_t action, modifier_key_t mods, void *p);
+void		check_keys(t_map *s);
+void		move_player_vertical(t_map *s, double step);
+void		move_player_horizontal(t_map *s, double step);
+void		change_direction_mouse(t_map *s, double mv);
+void		change_direction_keys(t_map *s, double mv);
+void		adjust_view(t_map *s, int x, double mv);
+int			collide(t_map_char **co, int x, int y);
+void		key_bindings(mlx_key_data_t keydata, void *p);
+void		mouse_bindings(mouse_key_t button, action_t action, modifier_key_t mods, void *p);
 
 //raycaster
-void	raycaster(t_map *s, t_ray *ray);
-void	draw_line(t_map *s, t_ray *r, double dist, int px);
-t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int r);
-void	init_dda(t_map *s, t_ray *r);
-double	ray_dist(t_ray *r);
-double	dda(t_map *s, t_ray *r, int px);
-double	delta_dist(double side);
-void	check_door(t_map *s, t_ray *r, int px);
-int		calculate_lineheight(double distance);
+void		raycaster(t_map *s, t_ray *ray);
+void		draw_line(t_map *s, t_ray *r, double dist, int px);
+t_ray		*init_ray(t_map *s, t_ray *ray, double angle, int r);
+void		init_dda(t_map *s, t_ray *r);
+double		ray_dist(t_ray *r);
+double		dda(t_map *s, t_ray *r, int px);
+double		delta_dist(double side);
+void		check_door(t_map *s, t_ray *r, int px);
+int			calculate_lineheight(double distance);
 
 //texture
 
 void		take_texture(t_map *s, int p1, int p2, int px);
-int			color_tex(t_map *s, t_ray *r, int py);
+int			color_tex(t_ray *r, mlx_texture_t *tex, int py);
 int			choose_texture(t_ray *r);
 void		draw_ceiling(t_map *s, int p_end, int px);
 void		draw_floor(t_map *s, int p_start, int px);
@@ -117,6 +123,7 @@ void		draw_floor(t_map *s, int p_start, int px);
 //enemies
 t_character	*create_enemy();
 int			position_enemy(t_map *s, int x, int y);
+bool		continue_walk(t_map_char **co, int x, int y);
 void		get_enemies(t_map *s);
 void		loop_enemies(t_map *s, int (*f)(t_map *s, t_character *e));
 int			calibrate_enemy(t_map *s, t_character *e);
@@ -140,6 +147,16 @@ void		color_full_screen(mlx_image_t *img, uint32_t color);
 int			get_shot(t_map *s);
 int			attack_player(t_map *s, t_character *e);
 int 		die(t_map *s);
+
+//display_extras
+void		display_extras(t_map *s);
+color		tex_color(mlx_texture_t *tex, int x, int y);
+void		put_texture(t_map *s, mlx_texture_t *tex, double x_pos, double y_pos);
+void		display_lives(t_map *s);
+void		minimap_perspective(t_map *s, t_ray *ray);
+int	print_wall(t_map *s, int x, int y);
+void	draw_player(t_map	*s);
+void	door_inaccessible(t_ray *ray);
 
 
 #endif

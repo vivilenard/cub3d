@@ -30,7 +30,7 @@ We should rename it (probably).
 # define PI 3.141592653589793238462643383279502884197
 # define ENEMY_LIVES 3
 # define N_TEX 7
-# define VIEW_ANGLE 40
+# define VIEW_ANGLE 45
 # define RAY_ANGLE (VIEW_ANGLE * PI / 180 / WIDTH)
 # define E_TEX_ITER 8
 

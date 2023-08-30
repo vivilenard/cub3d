@@ -31,13 +31,18 @@ SRC =	main.c\
 		parser/read_map_utils.c\
 		visuals/display.c \
 		visuals/raycaster.c\
+		visuals/math.c\
 		visuals/dda.c\
 		visuals/minimap.c\
+		visuals/door.c\
+		visuals/draw_functions.c\
+		visuals/draw_minimap.c\
 		visuals/help_functions.c\
 		visuals/key_bindings.c\
 		visuals/mouse_bindings.c\
 		visuals/texture.c\
 		visuals/attacks.c\
+		visuals/display_extras.c\
 		visuals/utils.c\
 		enemy/init_enemies.c\
 		enemy/calibrate_enemies.c\

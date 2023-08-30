@@ -3,10 +3,10 @@
 int	choose_texture(t_ray *r)
 {
 	int	wall_side;
-	
+
 	if (r->door_visible == 1)
 		return (DOOR);
-	if (r->hit_side == 0) //side x
+	if (r->hit_side == XSIDE)
 	{
 		if (r->rdx > 0)
 			wall_side = WEST;
@@ -23,35 +23,32 @@ int	choose_texture(t_ray *r)
 	return (wall_side);
 }
 
-int	color_tex(t_map *s, t_ray *r, int py)
+int	color_tex(t_ray *r, mlx_texture_t *tex, int py)
 {
-	int				color;
-	mlx_texture_t	*tex;
 	int				pos;
 	double			wall_x;
 	int				tex_x;
 	int				tex_y;
 	double			tex_step;
 
-	tex = s->tex[choose_texture(r)];
-	tex_step = 1.0 * tex->height / r->lineheight;
 	if (!tex)
-		perror ("no tex");
+		perror ("no texture for walls");
+	tex_step = 1.0 * tex->height / r->lineheight;
 	wall_x = r->hit_x - (int)r->hit_x;
 	if ((r->hit_side) == 0)
 		wall_x = r->hit_y - (int)r->hit_y;
 	tex_x = (int)(wall_x * tex->width);
 	tex_y = (py - HEIGTH / 2 + r->lineheight / 2) * tex_step;
 	pos = (tex_y * tex->width + tex_x) * tex->bytes_per_pixel;
-	color = to_rgbt(tex->pixels[pos + 0], tex->pixels[pos + 1],
-		tex->pixels[pos + 2], tex->pixels[pos + 3]);
-	return (color);
+	return (to_rgbt(tex->pixels[pos + 0], tex->pixels[pos + 1],
+			tex->pixels[pos + 2], tex->pixels[pos + 3]));
 }
 
 void	take_texture(t_map *s, int p1, int p2, int px)
 {
-	int	start;
-	int	end;
+	mlx_texture_t	*tex;
+	int				start;
+	int				end;
 
 	start = p1;
 	end = p2;
@@ -60,9 +57,10 @@ void	take_texture(t_map *s, int p1, int p2, int px)
 		start = p2;
 		end = p1;
 	}
+	tex = s->tex[choose_texture(s->ray)];
 	while (start < end)
 	{
-		mlx_put_pixel(s->img, px, start, color_tex(s, s->ray, start));
+		mlx_put_pixel(s->img, px, start, color_tex(s->ray, tex, start));
 		start++;
 	}
 }

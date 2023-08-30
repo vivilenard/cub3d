@@ -1,64 +1,55 @@
 #include "../include/cub3d.h"
 
-double	delta_dist(double side)
+double	ray_dist(t_ray *r)
 {
-	return (fabs(1 / side));
+	if (r->hit_side == XSIDE)
+		return (r->sidedist_x);
+	return (r->sidedist_y);
 }
 
-void	check_door(t_map *s, t_ray *r, int px)
+int	move_side(t_map *s, t_ray *r, int px, int side)
 {
-	r->raylength = ray_dist(r) * cos(s->pa - r->ra);
-	if (s->co[r->ymap][r->xmap] == CLOSED_DOOR || s->co[r->ymap][r->xmap] == OPENED_DOOR)
+	check_enemy(s, s->ray);
+	if (side == XSIDE)
 	{
-		if (s->co[r->ymap][r->xmap] == CLOSED_DOOR)
-			r->door_visible = 1;
-		if (px == WIDTH / 2)		//means player looks right at the door --> could possibly open it
-		{
-			if (r->raylength < 1)
-			{
-				r->door_x = r->xmap;
-				r->door_y = r->ymap;
-			}
-		}
+		r->xmap += r->xmove;
+		r->hit_side = XSIDE;
 	}
+	else if (side == YSIDE)
+	{
+		r->ymap += r->ymove;
+		r->hit_side = YSIDE;
+	}
+	check_door(s, r, px);
+	if (s->co[r->ymap][r->xmap] == WALL
+		|| s->co[r->ymap][r->xmap] == CLOSED_DOOR)
+		return (0);
+	if (side == XSIDE)
+		r->sidedist_x += r->deltadist_x;
+	else if (side == YSIDE)
+		r->sidedist_y += r->deltadist_y;
+	return (1);
 }
 
 double	dda(t_map *s, t_ray *r, int px)
 {
+	init_dda(s, r);
 	while (1)
 	{
 		if (r->sidedist_x < r->sidedist_y)
 		{
-			check_enemy(s, s->ray);
-			r->xmap += r->xmove;
-			r->hit_side = 0;
-			check_door(s, r, px);
-			if (s->co[r->ymap][r->xmap] == WALL || s->co[r->ymap][r->xmap] == CLOSED_DOOR)
+			if (!move_side(s, r, px, XSIDE))
 				break ;
-			r->sidedist_x += r->deltadist_x;
 		}
-		else
+		else if (r->sidedist_y < r->sidedist_x)
 		{
-			check_enemy(s, s->ray);
-			r->ymap += r->ymove;
-			r->hit_side = 1;
-			check_door(s, r, px);
-			if (s->co[r->ymap][r->xmap] == WALL || s->co[r->ymap][r->xmap] == CLOSED_DOOR)
+			if (!move_side(s, r, px, YSIDE))
 				break ;
-			r->sidedist_y += r->deltadist_y;
 		}
 	}
 	r->hit_x = s->px + r->rdx * ray_dist(r);
 	r->hit_y = s->py + r->rdy * ray_dist(r);
 	return (0);
-}
-
-
-double	ray_dist(t_ray *r)
-{
-	if (r->hit_side == 0)
-		return (r->sidedist_x);
-	return (r->sidedist_y);
 }
 
 void	init_dda(t_map *s, t_ray *r)

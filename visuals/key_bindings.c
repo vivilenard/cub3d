@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/28 16:44:15 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/30 14:34:19 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,17 @@ void	move_player_horizontal(t_map *s, double mv)
 
 void	change_direction_keys(t_map *s, double mv)
 {
-	if (mlx_is_key_down(s->mlx, MLX_KEY_LEFT) || (mlx_is_key_down(s->mlx, MLX_KEY_Q)))
+	if (mlx_is_key_down(s->mlx, MLX_KEY_LEFT)
+		|| (mlx_is_key_down(s->mlx, MLX_KEY_Q)))
 	{
 		s->pa -= mv;
 		if (s->pa < 0)
 			s->pa += 2 * PI;
-		s->pdx = cos(s->pa);  
+		s->pdx = cos(s->pa);
 		s->pdy = sin(s->pa);
 	}
-	if (mlx_is_key_down(s->mlx, MLX_KEY_RIGHT) || (mlx_is_key_down(s->mlx, MLX_KEY_E)))
+	if (mlx_is_key_down(s->mlx, MLX_KEY_RIGHT)
+		|| (mlx_is_key_down(s->mlx, MLX_KEY_E)))
 	{
 		s->pa += mv;
 		if (s->pa > 2 * PI)
@@ -68,19 +70,9 @@ void	change_direction_keys(t_map *s, double mv)
 	}
 }
 
-void	door_mov(t_map *s)
+void	key_bindings(mlx_key_data_t keydata, void *p)
 {
-	if (s->ray->door_x < 0 && s->ray->door_y < 0)
-		return ;
-	if (s->co[s->ray->door_y][s->ray->door_x] == CLOSED_DOOR)
-		s->co[s->ray->door_y][s->ray->door_x] = OPENED_DOOR;
-	else if (s->co[s->ray->door_y][s->ray->door_x] == OPENED_DOOR)
-		s->co[s->ray->door_y][s->ray->door_x] = CLOSED_DOOR;
-}
-
-void key_bindings(mlx_key_data_t keydata, void *p)
-{
-	t_map *s;
+	t_map	*s;
 
 	s = (t_map *) p;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
