@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:15:13 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/30 15:46:09 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:33:09 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	set_textures(t_map_params *map_params, t_map *map)
 		}
 		i++;
 	}
-	map->tex[DOOR] = mlx_load_png("./textures/Blue_Nebula_01.png");
+	map->tex[DOOR] = mlx_load_png("./textures/door_nebula.png");
 	map->tex[5] = mlx_load_png("./textures/enemy_769x110.png");
 	if (map->tex[DOOR] == NULL
 		|| map->tex[5] == NULL)
