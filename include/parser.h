@@ -91,18 +91,10 @@ double	init_player_view(char p);
 #endif
 
 /*
-- change get_id (if have only ID)
-- init_map make after get all map
-- check empty map (change error message)
-- enemy struct
-- store all coordinates (player, c/o doors, enemies)
-
-test case
-- empty map
-- giant map
+- find a gun texture
 
 commit
-""
+"fix colors, add new enemy texture ('enemy_769x100.png'), add new textures for walls, hearts"
 
 
 		{

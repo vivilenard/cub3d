@@ -57,10 +57,8 @@ int	fill_in_t_map(t_map_params *map_params, t_map *map)
 	map->pdy = sin(map->pa);
 	map->p_radius = 0.09;
 	map->mouse_pos = 0;
-	// map->floor = map_params->floor.color;
-	// map->ceiling = map_params->ceiling.color;
-	map->floor = 0xFF0000FF;
-	map->ceiling = 0xFF0000FF;
+	map->floor = map_params->floor.color;
+	map->ceiling = map_params->ceiling.color;
 	map->co[map_params->player_y][map_params->player_x] = SPACE;
 	map->lives = LIVES;
 	return (EXIT_SUCCESS);

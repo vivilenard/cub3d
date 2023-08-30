@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:14:50 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/21 14:20:57 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:54:31 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ void	set_color(
 	{
 		map_params->floor.color = get_rgba(get_channel(colors[0], is_default),
 				get_channel(colors[1], is_default),
-				get_channel(colors[2], is_default), 0);
+				get_channel(colors[2], is_default), 255);
 		map_params->floor.is_color = true;
 	}
 	else if (side == 'C')
 	{
 		map_params->ceiling.color = get_rgba(get_channel(colors[0], is_default),
 				get_channel(colors[1], is_default),
-				get_channel(colors[2], is_default), 0);
+				get_channel(colors[2], is_default), 255);
 		map_params->ceiling.is_color = true;
 	}
 }
@@ -61,7 +61,7 @@ int	get_channel(char *str, bool *is_default)
 	int	temp;
 
 	temp = ft_atoi(str);
-	if (temp > 250 || temp < 0)
+	if (temp > 255 || temp < 0)
 	{
 		*is_default = true;
 		return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   identifiers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:15:13 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/29 17:51:12 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/30 12:31:14 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	set_textures(t_map_params *map_params, t_map *map)
 		i++;
 	}
 	map->tex[DOOR] = mlx_load_png("./textures/redbrick.png");
-	map->tex[5] = mlx_load_png("./textures/en_8_im.png");
+	map->tex[5] = mlx_load_png("./textures/enemy_769x110.png");
 	if (map->tex[DOOR] == NULL
 		|| map->tex[5] == NULL)
 		return (EXIT_FAILURE);

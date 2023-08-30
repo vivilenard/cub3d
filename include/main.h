@@ -18,7 +18,7 @@ This header file consist only shared structs.
 We should rename it (probably).
 */
 
-# define MAX_ENEMIES 10
+# define MAX_ENEMIES 100
 # define LIVES 10
 # define WALKING_SPEED 5
 # define SIDEWALK_SPEED 3
