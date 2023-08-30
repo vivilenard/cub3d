@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:25:30 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/30 14:36:04 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:46:31 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/display.h"
 
 void	calculate_proportions(t_map *s)
 {

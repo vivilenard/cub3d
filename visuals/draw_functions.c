@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../include/display.h"
 
 void	print_square(t_map *s, int x, int y, u_int32_t color)
 {

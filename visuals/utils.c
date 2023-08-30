@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../include/display.h"
 
 void	print_map(t_map *map)
 {

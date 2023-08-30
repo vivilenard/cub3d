@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../include/display.h"
 
 double	delta_dist(double side)
 {

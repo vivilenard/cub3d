@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../include/display.h"
 
 int	attack_player(t_map *s, t_character *e)
 {

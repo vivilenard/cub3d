@@ -111,8 +111,6 @@ t_map_char	convert_char(t_map_params *map_params, char c, int width)
 	}
 	else if (c == 'H')
 		return (CLOSED_DOOR);
-	else if (c == 'I')
-		return (OPENED_DOOR);
 	else if (c == 'X')
 		return (ENEMY);
 	else

@@ -1,5 +1,5 @@
 
-#include "include/cub3d.h"
+#include "include/display.h"
 #include "include/parser.h"
 
 void	full_exit(t_map *s)

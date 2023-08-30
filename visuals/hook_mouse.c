@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../include/display.h"
 
 void	adjust_view(t_map *s, int x, double mv)
 {

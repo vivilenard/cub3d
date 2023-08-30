@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../include/display.h"
 
 int	raycast_enemy(t_map *s, t_character *e)
 {

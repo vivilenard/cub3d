@@ -55,7 +55,7 @@ PARSE_DIR = /parser
 ENEMY_DIR = /enemy
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 LIBFT = libft/libft.a
-HEADERS = include/cub3d.h include/main.h include/parser.h
+HEADERS = include/cub3d.h include/display.h include/parser.h
 
 all: $(NAME)
 
