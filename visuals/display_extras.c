@@ -17,7 +17,7 @@ color	tex_color(mlx_texture_t *tex, int x, int y)
 	return (color);
 }
 
-void	put_texture(t_map *s, mlx_texture_t *tex, double x_pos, double y_pos)
+void	put_texture_heart(t_map *s, mlx_texture_t *tex, double x_pos, double y_pos)
 {
 	double		tex_step;
 	int			tex_radius;
@@ -56,7 +56,7 @@ void	display_lives(t_map *s)
 	i = 0;
 	while (i < s->lives && i < 15)
 	{
-		put_texture(s, heart, x_pos, 0.01);
+		put_texture_heart(s, heart, x_pos, 0.01);
 		x_pos -= 0.03;
 		i++;
 	}

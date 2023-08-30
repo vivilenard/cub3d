@@ -25,7 +25,6 @@ int	choose_texture(t_ray *r)
 
 int	color_tex(t_ray *r, mlx_texture_t *tex, int py)
 {
-	int				pos;
 	double			wall_x;
 	int				tex_x;
 	int				tex_y;
@@ -39,9 +38,7 @@ int	color_tex(t_ray *r, mlx_texture_t *tex, int py)
 		wall_x = r->hit_y - (int)r->hit_y;
 	tex_x = (int)(wall_x * tex->width);
 	tex_y = (py - HEIGTH / 2 + r->lineheight / 2) * tex_step;
-	pos = (tex_y * tex->width + tex_x) * tex->bytes_per_pixel;
-	return (to_rgbt(tex->pixels[pos + 0], tex->pixels[pos + 1],
-			tex->pixels[pos + 2], tex->pixels[pos + 3]));
+	return (tex_color(tex, tex_x, tex_y));
 }
 
 void	take_texture(t_map *s, int p1, int p2, int px)

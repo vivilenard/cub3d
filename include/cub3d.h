@@ -73,7 +73,7 @@ typedef enum e_wallside
 //utils
 void		full_exit();
 int			scan_coordinates(t_map *s, int (*f)(t_map *s, int x, int y));
-int			to_rgbt(int r, int g, int b, int t);
+color		to_rgbt(int r, int g, int b, int t);
 void		print_cross(t_map *s, float size, int color);
 void		door_mov(t_map *s);
 
@@ -154,9 +154,9 @@ color		tex_color(mlx_texture_t *tex, int x, int y);
 void		put_texture(t_map *s, mlx_texture_t *tex, double x_pos, double y_pos);
 void		display_lives(t_map *s);
 void		minimap_perspective(t_map *s, t_ray *ray);
-int	print_wall(t_map *s, int x, int y);
-void	draw_player(t_map	*s);
-void	door_inaccessible(t_ray *ray);
+int			print_wall(t_map *s, int x, int y);
+void		draw_player(t_map	*s);
+void		door_inaccessible(t_ray *ray);
 
 
 #endif

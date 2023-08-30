@@ -38,8 +38,8 @@ SRC =	main.c\
 		visuals/draw_functions.c\
 		visuals/draw_minimap.c\
 		visuals/help_functions.c\
-		visuals/key_bindings.c\
-		visuals/mouse_bindings.c\
+		visuals/hook_keys.c\
+		visuals/hook_mouse.c\
 		visuals/texture.c\
 		visuals/attacks.c\
 		visuals/display_extras.c\

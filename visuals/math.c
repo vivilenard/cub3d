@@ -7,16 +7,10 @@ double	delta_dist(double side)
 
 int	calculate_lineheight(double distance)
 {
-	int	lineheight;
-
-	lineheight = (int)((HEIGTH / distance) * (90 / VIEW_ANGLE));
-	return (lineheight);
+	return ((int)((HEIGTH / distance) * (90 / VIEW_ANGLE)));
 }
 
-int	to_rgbt(int r, int g, int b, int t)
+color	to_rgbt(int r, int g, int b, int t)
 {
-	unsigned long int	color;
-
-	color = (r << 24) + (g << 16) + (b << 8) + t;
-	return (color);
+	return ((r << 24) + (g << 16) + (b << 8) + t);
 }
