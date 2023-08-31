@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:15:13 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/30 19:17:00 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:53:07 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 #include "../include/parser.h"
 #include "../libft/libft.h"
 #include "../MLX42/include/MLX42/MLX42.h"
+
+char *ft_strcpy(char *src)
+{
+	char *res;
+	
+}
 
 int	get_identifier(t_map_params *map_params, char *line)
 {
@@ -109,7 +115,7 @@ int	set_textures(t_map_params *map_params, t_map *map)
 	map->tex[HEART_RED_T] = mlx_load_png("./textures/heart_red.png");
 	map->tex[HEART_RED_BLACK_T] = mlx_load_png("./textures/heart_red_black.png");
 	map->tex[HEART_BLACK_T] = mlx_load_png("./textures/heart_black.png");
-	map->tex[GUN_T] = NULL;
+	map->tex[GUN_T] = mlx_load_png("./textures/gun.png");;
 	return (EXIT_SUCCESS);
 }
 

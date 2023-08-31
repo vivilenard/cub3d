@@ -1,7 +1,7 @@
 
 NAME = cub3D
 CC = cc 
-CFLAGS = -Wall -Werror -Wextra #-g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra
 
 GREEN = \033[0;32m
 RESET = \033[0m

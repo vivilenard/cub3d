@@ -13,6 +13,7 @@ void	free_texture(t_map *map)
 	mlx_delete_texture(map->tex[HEART_RED_T]);
 	mlx_delete_texture(map->tex[HEART_RED_BLACK_T]);
 	mlx_delete_texture(map->tex[HEART_BLACK_T]);
+	mlx_delete_texture(map->tex[GUN_T]);
 }
 
 void	free_map(t_map *map)
