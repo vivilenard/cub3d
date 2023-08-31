@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../include/display.h"
 
 void	play_music(t_map *s)
 {
@@ -16,7 +16,7 @@ void	play_music(t_map *s)
 		if (!execve(path, cmd, NULL))
 		{
 			free(cmd);
-			full_exit(); //free all and exit child
+			full_exit(s); //free all and exit child
 		}
 	}
 }

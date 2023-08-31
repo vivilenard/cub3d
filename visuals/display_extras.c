@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../include/display.h"
 
 void	display_extras(t_map *s)
 {
@@ -47,16 +47,18 @@ void	put_texture_heart(t_map *s, mlx_texture_t *tex, double x_pos, double y_pos)
 
 void	display_lives(t_map *s)
 {
-	mlx_texture_t		*heart;
+	// mlx_texture_t		*heart;
+
 	double				x_pos;
 	int					i;
 
 	x_pos = 0.97;
-	heart = mlx_load_png("./textures/Vivi_heart.png");
+	// heart = mlx_load_png("./textures/Vivi_heart.png");
 	i = 0;
 	while (i < s->lives && i < 15)
 	{
-		put_texture_heart(s, heart, x_pos, 0.01);
+		// put_texture_heart(s, heart, x_pos, 0.01);
+		put_texture_heart(s, s->tex[HEART_RED_T], x_pos, 0.01);
 		x_pos -= 0.03;
 		i++;
 	}

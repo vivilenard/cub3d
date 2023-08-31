@@ -1,7 +1,7 @@
 
 NAME = cub3D
 CC = cc 
-CFLAGS = -Wall -Werror -Wextra #-g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra
 
 GREEN = \033[0;32m
 RESET = \033[0m
@@ -55,7 +55,7 @@ PARSE_DIR = /parser
 ENEMY_DIR = /enemy
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 LIBFT = libft/libft.a
-HEADERS = include/cub3d.h include/main.h include/parser.h
+HEADERS = include/cub3d.h include/display.h include/parser.h
 
 all: $(NAME)
 
@@ -63,7 +63,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) #$(if $(DEBUG),-fsanitize=address, )
+	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) #$(SAN_LDFLAG) #$(if $(DEBUG),-fsanitize=address, )
 	@printf "$(GREEN)Compiled$(RESET)\n"
 
 $(LIBFT):

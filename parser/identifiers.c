@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:15:13 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/30 15:46:09 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:54:57 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 #include "../include/parser.h"
 #include "../libft/libft.h"
 #include "../MLX42/include/MLX42/MLX42.h"
+
+// char *ft_strcpy(char *src)
+// {
+// 	char *res;
+	
+// }
 
 int	get_identifier(t_map_params *map_params, char *line)
 {
@@ -82,14 +88,14 @@ int	set_textures(t_map_params *map_params, t_map *map)
 	const char	*side[4];
 
 	i = 0;
-	side[NORTH] = "textures/wood.png";
-	side[SOUTH] = "textures/pillar.png";
-	side[EAST] = "textures/mossy.png";
-	side[WEST] = "textures/greystone.png";
-	map->tex[NORTH] = mlx_load_png(map_params->textures.no);
-	map->tex[SOUTH] = mlx_load_png(map_params->textures.so);
-	map->tex[EAST] = mlx_load_png(map_params->textures.ea);
-	map->tex[WEST] = mlx_load_png(map_params->textures.we);
+	side[NORTH_T] = "textures/wood.png";
+	side[SOUTH_T] = "textures/pillar.png";
+	side[EAST_T] = "textures/mossy.png";
+	side[WEST_T] = "textures/greystone.png";
+	map->tex[NORTH_T] = mlx_load_png(map_params->textures.no);
+	map->tex[SOUTH_T] = mlx_load_png(map_params->textures.so);
+	map->tex[EAST_T] = mlx_load_png(map_params->textures.ea);
+	map->tex[WEST_T] = mlx_load_png(map_params->textures.we);
 	while (i != 4)
 	{
 		if (map->tex[i] == NULL)
@@ -101,12 +107,15 @@ int	set_textures(t_map_params *map_params, t_map *map)
 		}
 		i++;
 	}
-	map->tex[DOOR] = mlx_load_png("./textures/Blue_Nebula_01.png");
-	map->tex[5] = mlx_load_png("./textures/enemy_769x110.png");
-	if (map->tex[DOOR] == NULL
-		|| map->tex[5] == NULL)
+	map->tex[DOOR_T] = mlx_load_png("./textures/door_nebula.png");
+	map->tex[ENEMY_T] = mlx_load_png("./textures/enemy_769x110.png");
+	if (map->tex[DOOR_T] == NULL
+		|| map->tex[ENEMY_T] == NULL)
 		return (EXIT_FAILURE);
-	map->tex[6] = NULL;
+	map->tex[HEART_RED_T] = mlx_load_png("./textures/heart_red.png");
+	map->tex[HEART_RED_BLACK_T] = mlx_load_png("./textures/heart_red_black.png");
+	map->tex[HEART_BLACK_T] = mlx_load_png("./textures/heart_black.png");
+	map->tex[GUN_T] = mlx_load_png("./textures/gun.png");;
 	return (EXIT_SUCCESS);
 }
 

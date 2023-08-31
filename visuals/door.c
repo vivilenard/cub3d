@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../include/display.h"
 
 void	door_inaccessible(t_ray *ray) //deleted memset
 {

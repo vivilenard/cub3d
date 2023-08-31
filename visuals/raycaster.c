@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../include/display.h"
 
 t_ray	*init_ray(t_map *s, t_ray *ray, double angle, int px)
 {

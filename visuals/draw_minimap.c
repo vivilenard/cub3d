@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../include/display.h"
 
 int	print_wall(t_map *s, int x, int y)
 {

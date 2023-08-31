@@ -6,11 +6,11 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/31 12:46:13 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/31 14:11:47 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/display.h"
 
 void	move_player_vertical(t_map *s, double mv)
 {

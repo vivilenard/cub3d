@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../include/display.h"
 
 void	loop_enemies(t_map *s, int (*f)(t_map *s, t_character *e))
 {

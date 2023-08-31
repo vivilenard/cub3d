@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "../include/display.h"
 
 int	collide(t_map_char **co, int x, int y)
 {
