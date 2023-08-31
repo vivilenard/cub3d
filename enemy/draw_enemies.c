@@ -1,5 +1,32 @@
 #include "../include/display.h"
 
+void	to_vert_line(t_map *s, int p1, int p2, int px, t_character *e)
+{
+	int	color;
+	int	start = p1;
+	int	end = p2;
+
+	color = 0xff0000ff;
+	if (e->index == 1)
+		color = 0xffff00ff;
+	if (e->index == 2)
+		color = 0xa7c5f9ff;
+	if (p2 < p1)
+	{
+		start = p2;
+		end = p1;
+	}
+	if (start < 0)
+		start = 0;
+	if (end >= HEIGTH)
+		end = HEIGTH - 1;
+	while (start < end)
+	{
+		mlx_put_pixel(s->img, px, start, color);
+		start++;
+	}
+}
+
 int	raycast_enemy(t_map *s, t_character *e)
 {
 	double	ray_a;
@@ -84,7 +111,7 @@ int	draw_enemy(t_map *s, t_character *e)
 	if (e->pix_end < 0)
 		e->pix_end = WIDTH - 1;
 	e->px = e->pix_start;
-	e->lineheight = calculate_lineheight(e->dist);
+	e->lineheight = calculate_lineheight(e->dist) * ENEMY_HEIGHT;
 	p1 = HEIGTH / 2 - e->lineheight / 2;
 	p2 = HEIGTH / 2 + e->lineheight / 2;
 	while (e->px >= 0 && (e->px < e->pix_end && e->px < WIDTH))
@@ -95,7 +122,8 @@ int	draw_enemy(t_map *s, t_character *e)
 		else if (s->pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE > 2 * PI)
 			pa -= 2 * PI;
 		e->ray_a = pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE;
-		draw_enemy_tex(s, p1, p2, e);
+		//draw_enemy_tex(s, p1, p2, e);
+		to_vert_line(s, p1, p2, e->px, e);
 		e->px++;
 	}
 	return (1);

@@ -16,17 +16,28 @@ bool	continue_walk(t_map_char **co, int x, int y)
 	return (true);
 }
 
-void	check_enemy(t_map *s, t_ray *r)
+void	check_enemy(t_map *s, t_ray *r) //problem is here
 {
 	int	i;
+	// int	e_x;
+	// int	e_y;
 
 	i = -1;
 	while (s->enemy[++i])
 	{
+		// e_x = (int)s->enemy[i]->x;
+		// e_y = (int)s->enemy[i]->y;
+		// if ((int)s->enemy[i]->x - s->enemy[i]->x < 0.5)
+		// 	e_x = e_x - 1;
+		// if ((int)s->enemy[i]->y - s->enemy[i]->y < 0.5)
+		// 	e_y = e_y - 1;
 		if ((r->xmap == (int)s->enemy[i]->x) && r->ymap == (int)s->enemy[i]->y)
 			s->enemy[i]->visible = true;
+		//s->enemy[i]->visible = true;
 	}
 }
+
+
 
 double	angle_of_vector(double xv, double yv)
 {

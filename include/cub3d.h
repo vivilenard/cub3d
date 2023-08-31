@@ -32,6 +32,7 @@ This header file consist only shared structs.
 # define VIEW_ANGLE 45
 # define RAY_ANGLE (VIEW_ANGLE * PI / 180 / WIDTH)
 # define E_TEX_ITER 8
+# define ENEMY_HEIGHT 0.8f
 
 typedef uint32_t	color;
 
