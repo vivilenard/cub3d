@@ -2,10 +2,10 @@
 #include "include/cub3d.h"
 #include "include/parser.h"
 
-void	full_exit(t_map *s)
+void	full_exit()
 {
 	//free all
-	s = NULL; //dangerous!
+	//s = NULL; //dangerous!
 	exit(0);
 }
 

@@ -1,5 +1,2 @@
 - make enemies smaller
-- window resize
-- make sound when shoot
-- design maps
 - free everything that was allocated

@@ -18,6 +18,7 @@ This header file consist only shared structs.
 We should rename it (probably).
 */
 
+# define BACKGROUND_MUSIC false
 # define MAX_ENEMIES 100
 # define LIVES 10
 # define WALKING_SPEED 5
@@ -66,11 +67,11 @@ typedef struct s_map
 	mlx_t				*mlx;
 	mlx_image_t			*img;
 	mlx_image_t			*minimap;
-	mlx_texture_t		*tex[N_TEX];
+	mlx_texture_t		*tex[N_TEX]; //free
 	mlx_texture_t		*enemy_tex;
 	color				floor;
 	color				ceiling;
-	t_map_char			**co;
+	t_map_char			**co;	//free
 	int					map_height;
 	int					map_width;
 	double				px;
@@ -84,6 +85,7 @@ typedef struct s_map
 	int					mouse_pos;
 	bool				shoot;
 	int					lives;
+	int					pid;
 }	t_map;
 
 typedef struct s_frame

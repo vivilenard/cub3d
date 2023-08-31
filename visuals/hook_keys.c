@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_bindings.c                                     :+:      :+:    :+:   */
+/*   hook_keys.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/30 14:34:19 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/31 12:46:13 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,18 @@ void	key_bindings(mlx_key_data_t keydata, void *p)
 	s = (t_map *) p;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
+		if (BACKGROUND_MUSIC)
+			kill(s->pid, SIGKILL);
 		mlx_terminate(s->mlx);
 		full_exit(s);
 	}
 	if (mlx_is_key_down(s->mlx, MLX_KEY_SPACE))
 		door_mov(s);
 	if (mlx_is_key_down(s->mlx, MLX_KEY_ENTER))
+	{
 		s->shoot = true;
+		system("afplay sounds/GunShot.wav&");
+	}
 }
 
 void	check_keys(t_map *s)

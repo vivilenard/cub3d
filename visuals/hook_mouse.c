@@ -40,7 +40,10 @@ void	mouse_bindings(mouse_key_t button, action_t action,
 	s = (t_map *) p;
 	mods = 0;
 	if (action == MLX_PRESS && button == MLX_MOUSE_BUTTON_LEFT)
+	{
 		s->shoot = true;
+		system("afplay sounds/GunShot.wav&");
+	}
 	if (action == MLX_PRESS && button == MLX_MOUSE_BUTTON_RIGHT)
 		door_mov(s);
 }

@@ -22,6 +22,7 @@ int	get_shot(t_map *s)
 		return (0);
 	if (lives_tmp > s->lives)
 	{
+		system("afplay sounds/Kick.wav&");
 		color_full_screen(s->img, 0xFF0000FF);
 		s->frame->n_backstep = 10;
 		return (1);

@@ -1,5 +1,26 @@
 #include "../include/cub3d.h"
 
+void	play_music(t_map *s)
+{
+	char	*path;
+	char	**cmd;
+	
+	cmd = malloc(sizeof(char **));
+	cmd[0] = "afplay";
+	cmd[1] = "sounds/Enlightened_Mind.wav";
+	cmd[2] = NULL;
+	path = "/usr/bin/afplay";
+	s->pid = fork();
+	if (!s->pid)
+	{
+		if (!execve(path, cmd, NULL))
+		{
+			free(cmd);
+			full_exit(); //free all and exit child
+		}
+	}
+}
+
 int	display(t_map *s)
 {
 	if (setup_game(s))
@@ -7,6 +28,8 @@ int	display(t_map *s)
 	s->shoot = false;
 	mlx_key_hook(s->mlx, key_bindings, s);
 	mlx_mouse_hook(s->mlx, mouse_bindings, s);
+	if (BACKGROUND_MUSIC)
+		play_music(s);
 	mlx_loop_hook(s->mlx, loop_game, s);
 	mlx_loop(s->mlx);
 	return (0);
