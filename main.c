@@ -33,7 +33,9 @@ void	free_map(t_map *map)
 void	full_exit(t_map *s)
 {
 	//free all
-	s = NULL; //dangerous!
+	free_map(s);
+	free_texture(s);
+	mlx_terminate(s->mlx);
 	exit(0);
 }
 
@@ -66,10 +68,11 @@ int	main(int argc, char **argv)
 		return (perror("no mlx"), EXIT_FAILURE);
 	if (set_textures(&map_params, &map))
 		return (EXIT_FAILURE);
-	display(&map);
 	close(fd);
-	mlx_terminate(map.mlx);
-	free_map(&map);
-	free_texture(&map);
+	display(&map);
+	// mlx_terminate(map.mlx);
+	// free_map(&map);
+	// free_texture(&map);
+	full_exit(&map);
 	return (EXIT_SUCCESS);
 }

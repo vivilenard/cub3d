@@ -122,8 +122,8 @@ int	draw_enemy(t_map *s, t_character *e)
 		else if (s->pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE > 2 * PI)
 			pa -= 2 * PI;
 		e->ray_a = pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE;
-		//draw_enemy_tex(s, p1, p2, e);
-		to_vert_line(s, p1, p2, e->px, e);
+		draw_enemy_tex(s, p1, p2, e);
+		//to_vert_line(s, p1, p2, e->px, e);
 		e->px++;
 	}
 	return (1);
