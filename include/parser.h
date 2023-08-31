@@ -69,6 +69,7 @@ int	set_identifier(t_map_params *map_params, char **result);
 int	set_textures(t_map_params *map_params, t_map *map);
 void	free_split(char **str, int i);
 void	free_map_params(t_map_params *map_params);
+void	free_sides(t_map_params *map_params);
 
 //	color.c
 int	get_color(t_map_params *map_params, char side, char *str);

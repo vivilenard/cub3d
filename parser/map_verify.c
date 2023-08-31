@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:16:23 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/30 18:42:33 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/31 17:04:49 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	map_verify(t_map_params *map_params)
 	if (visited_init(map_params))
 		return (EXIT_FAILURE);
 	if (!dfs(map_params, map_params->player_y, map_params->player_x))
-		return (printf("Error: map is not closed\n"), EXIT_FAILURE);
+		return (free(map_params->visited), printf("Error: map is not closed\n"), EXIT_FAILURE);
+	free(map_params->visited);
 	return (EXIT_SUCCESS);
 }
 

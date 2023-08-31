@@ -16,17 +16,28 @@ int	parser(t_map_params *map_params, t_map *map, char **argv, int fd)
 		return (EXIT_FAILURE);
 	if (read_map(map_params, fd))
 	{
+		free_sides(map_params);
+		free_map_params(map_params);
 		return (EXIT_FAILURE);
 	}
 	if (map_params->map[0] == NULL)
+	{
+		free_sides(map_params);
+		free_map_params(map_params);
 		return (printf("Error: map is empty\n"), EXIT_FAILURE);
+	}
 	if (zero_extend(map_params))
+	{
+		free_sides(map_params);
+		free_map_params(map_params);
 		return (EXIT_FAILURE);
+	}
 	if (map_verify(map_params))
 		return (EXIT_FAILURE);
 	// print_map_params(map_params);
 	if (fill_in_t_map(map_params, map))
 		return (EXIT_FAILURE);
+	free(map_params->all_width);
 	return (EXIT_SUCCESS);
 }
 

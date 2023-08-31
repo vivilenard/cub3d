@@ -67,6 +67,8 @@ int	main(int argc, char **argv)
 	if (set_textures(&map_params, &map))
 		return (EXIT_FAILURE);
 	display(&map);
+	// if user press ESC, we exit in key_bindings()
+	// then we do nothing after this comment:
 	close(fd);
 	mlx_terminate(map.mlx);
 	free_map(&map);

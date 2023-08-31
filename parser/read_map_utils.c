@@ -12,7 +12,7 @@ int	all_width_extend(t_map_params *map_params)
 	new_capacity = map_params->width_capacity * 2;
 	new_array = malloc(sizeof(int) * new_capacity);
 	if (new_array == NULL)
-		return (EXIT_FAILURE);
+		return (printf("Error: malloc failed\n"), EXIT_FAILURE);
 	i = 0;
 	while (i != map_params->height)
 	{
@@ -32,35 +32,28 @@ int get_map(t_map_params *map_params, char *line)
 	int	cur_width;
 
 	if (map_params->capacity == map_params->height)
-		map_extend(map_params);
+	{
+		if (map_extend(map_params))
+			return (EXIT_FAILURE);
+	}
 	i = 0;
 	cur_width = 0;
 	if (map_params->width_capacity == map_params->height)
-		all_width_extend(map_params);
+	{
+		if (all_width_extend(map_params))
+			return (EXIT_FAILURE);
+	}
 	map_params->all_width[map_params->height] = 0;
 	len = ft_strlen(line);
 	map_params->map[map_params->height] = malloc(sizeof(t_map_char) * len);
 	if (map_params->map[map_params->height] == NULL)
-	{
-		// free map_init()
-		while (i != map_params->height)
-		{
-			free(map_params->map[i]);
-			i++;
-		}
-		free(map_params->all_width);
 		return (printf("Error: malloc failed\n"), EXIT_FAILURE);
-	}
 	while (line[cur_width] != '\n' && line[cur_width] != '\0')
 	{
 		map_params->component = convert_char(
 				map_params, line[cur_width], cur_width);
 		if (map_params->component == ERROR)
-		{
-			// free
-			ft_printf("Error: wrong map component\n");
-			return (EXIT_FAILURE);
-		}
+			return (ft_printf("Error: wrong map component\n"), EXIT_FAILURE);
 		map_params->map[map_params->height][cur_width] = map_params->component;
 		cur_width++;
 		map_params->all_width[map_params->height]++;
@@ -79,10 +72,7 @@ int	map_extend(t_map_params *map_params)
 	new_capacity = map_params->height * 2;
 	new_map = malloc(sizeof(t_map_char *) * new_capacity);
 	if (new_map == NULL)
-	{
-		// free
-		return (EXIT_FAILURE);
-	}
+		return (printf("Error: malloc failed\n"), EXIT_FAILURE);
 	i = 0;
 	while (i != map_params->height)
 	{

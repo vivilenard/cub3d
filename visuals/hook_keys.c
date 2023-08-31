@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_keys.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/31 14:11:47 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/08/31 18:09:54 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void	key_bindings(mlx_key_data_t keydata, void *p)
 		if (BACKGROUND_MUSIC)
 			kill(s->pid, SIGKILL);
 		mlx_terminate(s->mlx);
-		full_exit(s);
+		full_exit(s); // we shouldn't terminate here
+		// should use mlx_close_window
 	}
 	if (mlx_is_key_down(s->mlx, MLX_KEY_SPACE))
 		door_mov(s);
