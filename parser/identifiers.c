@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:15:13 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/31 12:53:07 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:54:57 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 #include "../libft/libft.h"
 #include "../MLX42/include/MLX42/MLX42.h"
 
-char *ft_strcpy(char *src)
-{
-	char *res;
+// char *ft_strcpy(char *src)
+// {
+// 	char *res;
 	
-}
+// }
 
 int	get_identifier(t_map_params *map_params, char *line)
 {
