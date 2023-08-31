@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/15 11:14:39 by vlenard           #+#    #+#             */
-/*   Updated: 2023/08/31 18:24:27 by karllenard       ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/08/31 18:32:09 by karllenard       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../include/display.h"
 
@@ -79,7 +80,9 @@ void	key_bindings(mlx_key_data_t keydata, void *p)
 	{
 		if (BACKGROUND_MUSIC)
 			kill(s->pid, SIGKILL);
-		full_exit(s);
+		//full_exit(s); // we shouldn't terminate here
+		// should use mlx_close_window
+		mlx_close_window(s->mlx);
 	}
 	if (mlx_is_key_down(s->mlx, MLX_KEY_SPACE))
 		door_mov(s);
