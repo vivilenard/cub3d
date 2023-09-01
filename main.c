@@ -29,6 +29,8 @@ int	main(int argc, char **argv)
 	map.mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
 	if (map.mlx == NULL)
 		return (perror("no mlx"), free_map(&map), EXIT_FAILURE);
+	if (set_textures(&map_set, &map))
+		return (full_exit(&map), EXIT_FAILURE);
 	display(&map);
 	close(fd);
 	full_exit(&map);

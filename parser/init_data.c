@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:16:18 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/09/01 18:30:27 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/09/01 18:52:44 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	set_textures(t_map_set *map_set, t_map *map)
 	map->tex[EAST_T] = mlx_load_png(map_set->textures.ea);
 	map->tex[WEST_T] = mlx_load_png(map_set->textures.we);
 	if (check_textures(map))
-		return (EXIT_FAILURE);
+		return (free_sides(map_set), EXIT_FAILURE);
 	map->tex[DOOR_T] = mlx_load_png("./textures/door_nebula.png");
 	map->tex[ENEMY_T] = mlx_load_png("./textures/enemy_769x110.png");
 	map->tex[HEART_RED_T] = mlx_load_png("./textures/heart_red.png");
@@ -80,7 +80,7 @@ int	set_textures(t_map_set *map_set, t_map *map)
 	while (i != N_TEX)
 	{
 		if (map->tex[i] == NULL)
-			return (EXIT_FAILURE);
+			return (free_sides(map_set), EXIT_FAILURE);
 		i++;
 	}
 	free_sides(map_set);

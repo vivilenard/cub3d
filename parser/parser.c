@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:58:58 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/09/01 18:27:10 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/09/01 18:42:57 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	parser(t_map_set *map_set, t_map *map, char **argv, int fd)
 		return (EXIT_FAILURE);
 	if (read_map(map_set, fd))
 		return (free_if_error(map_set));
-	if (set_textures(map_set, map))
-		return (free_if_error(map_set), free_texture(map), EXIT_FAILURE);
 	if (map_set->map[0] == NULL)
 		return (printf("Error: map is empty\n"), free_if_error(map_set));
 	if (zero_extend(map_set))
