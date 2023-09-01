@@ -3,50 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:16:18 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/29 15:26:49 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/01 16:55:03 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include "../include/parser.h"
 
-int	map_params_init(t_map_params *map_params)
+int	map_set_init(t_map_set *map_set)
 {
-	map_params->capacity = 1;
-	map_params->width_capacity = 1;
-	map_params->map = malloc(
-			sizeof(t_map_char *) * map_params->capacity);
-	if (map_params->map == NULL)
-		return (printf("Error: malloc failed\n"), EXIT_FAILURE);
-	map_params->map[0] = NULL;
-	map_params->all_width = malloc(sizeof(int) * map_params->width_capacity);
-	if (map_params->all_width == NULL)
+	map_set->map_capacity = 1;
+	map_set->width_capacity = 1;
+	map_set->map = malloc(
+			sizeof(t_map_char *) * map_set->map_capacity);
+	if (map_set->map == NULL)
+		return (print_malloc_failed());
+	map_set->all_width = malloc(sizeof(int) * map_set->width_capacity);
+	if (map_set->all_width == NULL)
 	{
-		free(map_params->map);
-		return (printf("Error: malloc failed\n"), EXIT_FAILURE);
+		free(map_set->map);
+		return (print_malloc_failed());
 	}
-	tex_init(map_params);
-	map_params->floor.is_color = false;
-	map_params->ceiling.is_color = false;
-	map_params->max_width = 0;
-	map_params->height = 0;
-	map_params->player = 0;
-	map_params->doors = 0;
-	map_params->identifier = 0;
-	map_params->map_start = false;
-	map_params->map_end = false;
+	tex_init(map_set);
+	map_set->map[0] = NULL;
+	map_set->floor.is_color = false;
+	map_set->ceiling.is_color = false;
+	map_set->max_width = 0;
+	map_set->height = 0;
+	map_set->player = 0;
+	map_set->doors = 0; // ?
+	map_set->identifier = 0;
+	map_set->map_start = false;
+	map_set->map_end = false;
 	return (EXIT_SUCCESS);
 }
 
-void	tex_init(t_map_params *map_params)
+void	tex_init(t_map_set *map_set)
 {
-	map_params->textures.no = NULL;
-	map_params->textures.so = NULL;
-	map_params->textures.ea = NULL;
-	map_params->textures.we = NULL;
+	map_set->textures.no = NULL;
+	map_set->textures.so = NULL;
+	map_set->textures.ea = NULL;
+	map_set->textures.we = NULL;
 }
 
 double	init_player_view(char c)

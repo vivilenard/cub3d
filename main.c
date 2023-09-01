@@ -28,6 +28,13 @@ void	free_map(t_map *map)
 	}
 	free(map->co);
 	map->co = NULL;
+	i = 0;
+	while (map->enemy[i] != NULL)
+	{
+		free(map->enemy[i]);
+		i++;
+	}
+	free(map->ray);
 }
 
 void	full_exit(t_map *s)
@@ -51,7 +58,7 @@ int	main(int argc, char **argv)
 {
 	int				fd;
 	t_map			map;
-	t_map_params	map_params;
+	t_map_set	map_set;
 	t_frame			frame;
 
 	if (argc < 2)
@@ -59,14 +66,14 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (read(fd, NULL, 0) < 0)
 		return (quick_exit("Error\nread() failed\n", fd));
-	if (parser(&map_params, &map, argv, fd))
+	if (parser(&map_set, &map, argv, fd))
 		return (close(fd), EXIT_FAILURE);
 	//print_map(&map);
 	init_frame(&map, &frame);
 	map.mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
 	if (!map.mlx)
 		return (perror("no mlx"), EXIT_FAILURE);
-	if (set_textures(&map_params, &map))
+	if (set_textures(&map_set, &map))
 		return (EXIT_FAILURE);
 	display(&map);
 	// if user press ESC, we exit in key_bindings()

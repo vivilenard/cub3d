@@ -18,7 +18,7 @@ This header file consist only shared structs.
 #include <signal.h>
 
 # define BACKGROUND_MUSIC false
-# define MAX_ENEMIES 100
+# define MAX_ENEMIES 100 // remove later
 # define LIVES 10
 # define WALKING_SPEED 5
 # define SIDEWALK_SPEED 3
@@ -28,7 +28,7 @@ This header file consist only shared structs.
 # define HEIGTH 600
 # define PI 3.141592653589793238462643383279502884197
 # define ENEMY_LIVES 3
-# define N_TEX 10
+# define N_TEX 10 // recount
 # define VIEW_ANGLE 45
 # define RAY_ANGLE (VIEW_ANGLE * PI / 180 / WIDTH)
 # define E_TEX_ITER 8
@@ -80,7 +80,6 @@ typedef struct s_map
 	mlx_image_t			*img;
 	mlx_image_t			*minimap;
 	mlx_texture_t		*tex[N_TEX];
-	// mlx_texture_t		*enemy_tex;
 	color				floor;
 	color				ceiling;
 	t_map_char			**co;

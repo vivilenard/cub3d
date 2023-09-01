@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:14:50 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/08/30 13:54:31 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/09/01 14:45:44 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../include/parser.h"
 #include "../libft/libft.h"
 
-int	get_color(t_map_params *map_params, char side, char *str)
+int	get_color(t_map_set *map_set, char side, char *str)
 {
 	int		i;
 	char	**colors;
@@ -30,7 +30,7 @@ int	get_color(t_map_params *map_params, char side, char *str)
 	if (i != 3)
 		return (free_split(colors, i), EXIT_FAILURE);
 	else
-		set_color(map_params, side, colors, &is_default);
+		set_color(map_set, side, colors, &is_default);
 	free_split(colors, i);
 	if (is_default)
 		printf("Default color is using\n");
@@ -38,21 +38,21 @@ int	get_color(t_map_params *map_params, char side, char *str)
 }
 
 void	set_color(
-	t_map_params *map_params, char side, char **colors, bool *is_default)
+	t_map_set *map_set, char side, char **colors, bool *is_default)
 {
 	if (side == 'F')
 	{
-		map_params->floor.color = get_rgba(get_channel(colors[0], is_default),
+		map_set->floor.color = get_rgba(get_channel(colors[0], is_default),
 				get_channel(colors[1], is_default),
 				get_channel(colors[2], is_default), 255);
-		map_params->floor.is_color = true;
+		map_set->floor.is_color = true;
 	}
 	else if (side == 'C')
 	{
-		map_params->ceiling.color = get_rgba(get_channel(colors[0], is_default),
+		map_set->ceiling.color = get_rgba(get_channel(colors[0], is_default),
 				get_channel(colors[1], is_default),
 				get_channel(colors[2], is_default), 255);
-		map_params->ceiling.is_color = true;
+		map_set->ceiling.is_color = true;
 	}
 }
 

@@ -23,12 +23,13 @@ endif
 
 SRC =	main.c\
 		parser/color.c\
+		parser/create_map.c\
 		parser/identifiers.c\
 		parser/init_data.c\
 		parser/map_verify.c\
+		parser/parser_utils.c\
 		parser/parser.c\
 		parser/read_map.c\
-		parser/read_map_utils.c\
 		visuals/display.c \
 		visuals/raycaster.c\
 		visuals/math.c\
@@ -63,7 +64,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) #$(SAN_LDFLAG) $(if $(DEBUG),-fsanitize=address, )
+	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) $(SAN_LDFLAG) $(if $(DEBUG),-fsanitize=address, )
 	@printf "$(GREEN)Compiled$(RESET)\n"
 
 $(LIBFT):
