@@ -1,7 +1,61 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/01 17:23:15 by ekulichk          #+#    #+#             */
+/*   Updated: 2023/09/01 17:25:12 by ekulichk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdlib.h>
 #include "../include/parser.h"
 #include "../libft/libft.h"
+
+int	create_map(t_map_set *map_set, char *line)
+{
+	int	len;
+	int	cur_width;
+
+	if (extention(map_set))
+		return (EXIT_FAILURE);
+	cur_width = 0;
+	map_set->all_width[map_set->height] = 0;
+	len = ft_strlen(line);
+	map_set->map[map_set->height] = malloc(sizeof(t_map_char) * len);
+	if (map_set->map[map_set->height] == NULL)
+		return (print_malloc_failed());
+	while (line[cur_width] != '\n' && line[cur_width] != '\0')
+	{
+		map_set->component = convert_char(
+				map_set, line[cur_width], cur_width);
+		if (map_set->component == ERROR)
+			return (ft_printf("Error: wrong map component\n"), EXIT_FAILURE);
+		map_set->map[map_set->height][cur_width] = map_set->component;
+		cur_width++;
+		map_set->all_width[map_set->height]++;
+	}
+	if (cur_width > map_set->max_width)
+		map_set->max_width = cur_width;
+	return (EXIT_SUCCESS);
+}
+
+int	extention(t_map_set *map_set)
+{
+	if (map_set->map_capacity == map_set->height)
+	{
+		if (map_extend(map_set))
+			return (EXIT_FAILURE);
+	}
+	if (map_set->width_capacity == map_set->height)
+	{
+		if (all_width_extend(map_set))
+			return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
 
 int	all_width_extend(t_map_set *map_set)
 {
@@ -22,42 +76,6 @@ int	all_width_extend(t_map_set *map_set)
 	free(map_set->all_width);
 	map_set->all_width = new_array;
 	map_set->width_capacity = new_capacity;
-	return (EXIT_SUCCESS);
-}
-
-int get_map(t_map_set *map_set, char *line)
-{
-	int	len;
-	int	cur_width;
-
-	if (map_set->map_capacity == map_set->height)
-	{
-		if (map_extend(map_set))
-			return (EXIT_FAILURE);
-	}
-	cur_width = 0;
-	if (map_set->width_capacity == map_set->height)
-	{
-		if (all_width_extend(map_set))
-			return (EXIT_FAILURE);
-	}
-	map_set->all_width[map_set->height] = 0;
-	len = ft_strlen(line);
-	map_set->map[map_set->height] = malloc(sizeof(t_map_char) * len);
-	if (map_set->map[map_set->height] == NULL)
-		return (print_malloc_failed());
-	while (line[cur_width] != '\n' && line[cur_width] != '\0')
-	{
-		map_set->component = convert_char(
-				map_set, line[cur_width], cur_width);
-		if (map_set->component == ERROR)
-			return (ft_printf("Error: wrong map component\n"), EXIT_FAILURE);
-		map_set->map[map_set->height][cur_width] = map_set->component;
-		cur_width++;
-		map_set->all_width[map_set->height]++;
-	}
-	if (cur_width > map_set->max_width)
-		map_set->max_width = cur_width;
 	return (EXIT_SUCCESS);
 }
 

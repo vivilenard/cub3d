@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:16:23 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/09/01 14:45:44 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/09/01 17:13:09 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	map_verify(t_map_set *map_set)
 	if (visited_init(map_set))
 		return (EXIT_FAILURE);
 	if (!dfs(map_set, map_set->player_y, map_set->player_x))
-		return (free(map_set->visited), printf("Error: map is not closed\n"), EXIT_FAILURE);
+	{
+		free(map_set->visited);
+		return (printf("Error: map is not closed\n"), EXIT_FAILURE);
+	}
 	free(map_set->visited);
 	return (EXIT_SUCCESS);
 }
@@ -31,11 +34,7 @@ int	visited_init(t_map_set *map_set)
 	map_set->visited = malloc(sizeof(bool)
 			* map_set->height * map_set->max_width);
 	if (map_set->visited == NULL)
-	{
-		// free_map(map_set);
-		// free_visited(map_set);
-		return (printf("Error: malloc() failed\n"), EXIT_FAILURE);
-	}
+		return (print_malloc_failed());
 	ft_bzero(
 		map_set->visited, sizeof(
 			bool) * map_set->height * map_set->max_width);
@@ -49,7 +48,6 @@ bool	dfs(t_map_set *map_set, int y, int x)
 		return (false);
 	if (map_set->map[y][x] == WALL)
 		return (true);
-		// return (error, message);
 	if (is_visited(map_set, y, x))
 		return (true);
 	set_visited(map_set, y, x);

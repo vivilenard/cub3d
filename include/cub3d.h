@@ -14,11 +14,11 @@ This header file consist only shared structs.
 # include <fcntl.h>
 # include <string.h>
 # include "../libft/libft.h"
-#include <execinfo.h>
-#include <signal.h>
+# include <execinfo.h>
+# include <signal.h>
 
 # define BACKGROUND_MUSIC false
-# define MAX_ENEMIES 100 // remove later
+# define MAX_ENEMIES 100
 # define LIVES 10
 # define WALKING_SPEED 5
 # define SIDEWALK_SPEED 3
@@ -28,7 +28,7 @@ This header file consist only shared structs.
 # define HEIGTH 600
 # define PI 3.141592653589793238462643383279502884197
 # define ENEMY_LIVES 3
-# define N_TEX 10 // recount
+# define N_TEX 9
 # define VIEW_ANGLE 45
 # define RAY_ANGLE (VIEW_ANGLE * PI / 180 / WIDTH)
 # define E_TEX_ITER 8
@@ -45,7 +45,6 @@ typedef enum e_tex
 	DOOR_T,
 	ENEMY_T,
 	HEART_RED_T,
-	HEART_RED_BLACK_T,
 	HEART_BLACK_T,
 	GUN_T,
 }	t_tex;
@@ -102,10 +101,14 @@ typedef struct s_map
 typedef struct s_frame
 {
 	unsigned int	counter;
-	int	n_backstep;
-	int	e_tex;
-} t_frame;
+	int				n_backstep;
+	int				e_tex;
+}	t_frame;
 
+//	free.c
+void	free_texture(t_map *map);
+void	free_map(t_map *map);
+void	full_exit(t_map *s);
 void	print_map(t_map *map);
 
 #endif

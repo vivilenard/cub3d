@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:52:17 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/09/01 14:45:44 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/09/01 17:17:29 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	proceed_line(t_map_set *map_set, char *line)
 	}
 	else
 	{
-		if (get_map(map_set, line))
+		if (create_map(map_set, line))
 			return (EXIT_FAILURE);
 		map_set->map_start = true;
 		map_set->height++;
@@ -60,43 +60,27 @@ int	proceed_line(t_map_set *map_set, char *line)
 	return (EXIT_SUCCESS);
 }
 
-void	print_map_set(t_map_set *map_set)
+int	zero_extend(t_map_set *map_set)
 {
-	int	x;
-	int	y;
+	int			i_height;
+	t_map_char	*new_line;
 
-	x = 0;
-	printf("height: %d, width: %d\n", map_set->height, map_set->max_width);
-	printf("all width: ");
-	while (x != map_set->height)
+	i_height = 0;
+	while (i_height < map_set->height)
 	{
-		printf("%d, ", map_set->all_width[x]);
-		x++;
-	}
-	printf("\n");
-	x = 0;
-	y = 0;
-	printf("map\n");
-	while (y != map_set->height)
-	{
-		x = 0;
-		printf("[");
-		while (x != map_set->max_width)
+		if (map_set->all_width[i_height] < map_set->max_width
+			|| i_height + 1 >= map_set->height)
 		{
-			if (map_set->map[y][x] == PLAYER)
-				printf("\033[1;31mP\033[0;0m");
-			else if (map_set->map[y][x] == ENEMY)
-				printf("\033[1;35mX\033[0;0m");
-			else if (map_set->map[y][x] == CLOSED_DOOR)
-				printf("\033[1;36mH\033[0;0m");
-			// else if (map_set->map[y][x] == 0)
-			// 	printf("X");
-			else
-				printf("%d", map_set->map[y][x]);
-			x++;
+			new_line = ft_calloc(map_set->max_width + 1, sizeof(t_map_char));
+			if (new_line == NULL)
+				return (EXIT_FAILURE);
+			ft_memcpy(new_line, map_set->map[i_height],
+				map_set->all_width[i_height] * sizeof(t_map_char));
+			free(map_set->map[i_height]);
+			map_set->map[i_height] = new_line;
 		}
-		printf("]\n");
-		y++;
+		i_height++;
 	}
-	printf("player pos: y %d, x %d\n", map_set->player_y, map_set->player_x);
+	map_set->map[map_set->height - 1][map_set->max_width] = TERMINAL;
+	return (EXIT_SUCCESS);
 }

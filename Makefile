@@ -22,6 +22,7 @@ ifdef DEBUG
 endif
 
 SRC =	main.c\
+		free.c\
 		parser/color.c\
 		parser/create_map.c\
 		parser/identifiers.c\
