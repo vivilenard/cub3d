@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:41:35 by vlenard           #+#    #+#             */
-/*   Updated: 2023/09/04 14:41:36 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/04 18:17:47 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	get_shot(t_map *s)
 		return (0);
 	if (lives_tmp > s->lives)
 	{
-		system("afplay sounds/Snare.wav&");
+		if (SOUND)
+			system("afplay sounds/Snare.wav&");
 		color_full_screen(s->img, 0xFF0000FF);
 		s->frame->n_backstep = 10;
 		return (1);

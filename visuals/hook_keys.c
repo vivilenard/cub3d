@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:42:57 by vlenard           #+#    #+#             */
-/*   Updated: 2023/09/04 14:43:02 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/04 18:17:04 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	key_bindings(mlx_key_data_t keydata, void *p)
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
 		if (BACKGROUND_MUSIC)
-			kill(s->pid, SIGKILL);
+			system("killall afplay");
 		mlx_close_window(s->mlx);
 	}
 	if (mlx_is_key_down(s->mlx, MLX_KEY_SPACE))
@@ -86,7 +86,8 @@ void	key_bindings(mlx_key_data_t keydata, void *p)
 	if (mlx_is_key_down(s->mlx, MLX_KEY_ENTER))
 	{
 		s->shoot = true;
-		system("afplay sounds/GunShot.wav&");
+		if (SOUND)
+			system("afplay sounds/GunShot.wav&");
 	}
 }
 

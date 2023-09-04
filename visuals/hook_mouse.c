@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:38:45 by vlenard           #+#    #+#             */
-/*   Updated: 2023/09/04 14:38:50 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/04 18:18:17 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	mouse_bindings(mouse_key_t button, action_t action,
 	if (action == MLX_PRESS && button == MLX_MOUSE_BUTTON_LEFT)
 	{
 		s->shoot = true;
-		system("afplay sounds/GunShot.wav&");
+		if (SOUND)
+			system("afplay sounds/GunShot.wav&");
 	}
 	if (action == MLX_PRESS && button == MLX_MOUSE_BUTTON_RIGHT)
 		door_mov(s);

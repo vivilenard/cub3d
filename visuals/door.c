@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:39:56 by vlenard           #+#    #+#             */
-/*   Updated: 2023/09/04 14:42:36 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/04 18:17:21 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ void	door_mov(t_map *s)
 		s->co[s->ray->door_y][s->ray->door_x] = OPENED_DOOR;
 	else if (s->co[s->ray->door_y][s->ray->door_x] == OPENED_DOOR)
 		s->co[s->ray->door_y][s->ray->door_x] = CLOSED_DOOR;
-	system("afplay sounds/door_lock.wav&");
+	if (SOUND)
+		system("afplay sounds/door_lock.wav&");
 }

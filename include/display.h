@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:36:13 by vlenard           #+#    #+#             */
-/*   Updated: 2023/09/04 17:43:49 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/04 18:22:00 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int		display(t_map *s);
 int		setup_game(t_map *s);
 void	loop_game(void *p);
 void	put_texture_gun(t_map *s);
-void	play_music(t_map *s);
+void	play_music(void);
 
 //door
 void	door_inaccessible(t_ray *ray);

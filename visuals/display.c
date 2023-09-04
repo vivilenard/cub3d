@@ -6,32 +6,15 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:41:19 by vlenard           #+#    #+#             */
-/*   Updated: 2023/09/04 14:41:26 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/04 18:23:12 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/display.h"
 
-void	play_music(t_map *s)
+void	play_music(void)
 {
-	char	*path;
-	char	**cmd;
-
-	cmd = malloc(sizeof(char **));
-	cmd[0] = "afplay";
-	cmd[1] = "sounds/Enlightened_Mind.wav";
-	cmd[2] = NULL;
-	path = "/usr/bin/afplay";
-	s->pid = fork();
-	if (!s->pid)
-	{
-		if (!execve(path, cmd, NULL))
-		{
-			perror("Background Music process");
-			free(cmd);
-			full_exit(s);
-		}
-	}
+	system("afplay ./sounds/Enlightened_Mind.wav &");
 }
 
 int	display(t_map *s)
@@ -41,7 +24,7 @@ int	display(t_map *s)
 	mlx_key_hook(s->mlx, key_bindings, s);
 	mlx_mouse_hook(s->mlx, mouse_bindings, s);
 	if (BACKGROUND_MUSIC)
-		play_music(s);
+		play_music();
 	mlx_loop_hook(s->mlx, loop_game, s);
 	mlx_loop(s->mlx);
 	return (0);

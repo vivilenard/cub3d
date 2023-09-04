@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:42:22 by vlenard           #+#    #+#             */
-/*   Updated: 2023/09/04 18:00:59 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/04 18:09:13 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	choose_texture(t_ray *r)
 	if (r->hit_side == XSIDE)
 	{
 		if (r->rdx > 0)
-			wall_side = WEST_T;
-		else
 			wall_side = EAST_T;
+		else
+			wall_side = WEST_T;
 	}
 	else
 	{
@@ -71,7 +71,7 @@ void	take_texture(t_map *s, int p1, int p2, int px)
 	}
 	tex = s->tex[choose_texture(s->ray)];
 	mirror_tex = false;
-	if (tex == s->tex[SOUTH_T] || tex == s->tex[EAST_T])
+	if (tex == s->tex[SOUTH_T] || tex == s->tex[WEST_T])
 		mirror_tex = true;
 	while (start < end)
 	{
