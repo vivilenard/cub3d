@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:15:13 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/09/01 17:21:10 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:38:07 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ char	*iden_copy(char *src)
 
 	len = ft_strlen(src);
 	dst = malloc(sizeof(char) * (len + 1));
-	ft_memcpy(dst, src, sizeof(char) * len);
+	ft_strlcpy(dst, src, len + 1);
 	return (dst);
 }
