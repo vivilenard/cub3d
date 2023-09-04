@@ -34,7 +34,7 @@ This header file consist only shared structs.
 # define E_TEX_ITER 8
 # define ENEMY_HEIGHT 0.8f
 
-typedef uint32_t	color;
+typedef uint32_t	t_color;
 
 typedef enum e_tex
 {
@@ -79,8 +79,8 @@ typedef struct s_map
 	mlx_image_t			*img;
 	mlx_image_t			*minimap;
 	mlx_texture_t		*tex[N_TEX];
-	color				floor;
-	color				ceiling;
+	t_color				floor;
+	t_color				ceiling;
 	t_map_char			**co;
 	int					map_height;
 	int					map_width;

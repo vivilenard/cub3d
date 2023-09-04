@@ -54,7 +54,7 @@ int	raycast_enemy(t_map *s, t_character *e)
 	return (1);
 }
 
-color	color_enemy_tex(t_character *e, int py)
+t_color	color_enemy_tex(t_character *e, int py)
 {
 	int			tex_x;
 	int			tex_y;
@@ -81,7 +81,7 @@ color	color_enemy_tex(t_character *e, int py)
 
 void	draw_enemy_tex(t_map *s, int p1, int p2, t_character *e)
 {
-	color	tex_color;
+	t_color	tex_color;
 	if (p1 > p2)
 	{
 		perror("drawing enemy texture in wrong direction");
@@ -102,10 +102,10 @@ void	draw_enemy_tex(t_map *s, int p1, int p2, t_character *e)
 
 int	draw_enemy(t_map *s, t_character *e)
 {
-	int	p1;
-	int	p2;
+	int		p1;
+	int		p2;
+	double	pa;
 
-	double pa;
 	if ((e->pix_start < 0))
 		return (0);
 	if (e->pix_end < 0)
@@ -145,7 +145,7 @@ void	draw_enemies(t_map *s)
 	{
 		e_index = highest_dist_enemy(s, dist);
 		if (e_index < 0)
-			break;
+			break ;
 		if (s->enemy[e_index]->lives > 0)
 			draw_enemy(s, s->enemy[e_index]);
 		dist[e_index] = -1;

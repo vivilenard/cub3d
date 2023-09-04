@@ -4,7 +4,7 @@ void	play_music(t_map *s)
 {
 	char	*path;
 	char	**cmd;
-	
+
 	cmd = malloc(sizeof(char **));
 	cmd[0] = "afplay";
 	cmd[1] = "sounds/Enlightened_Mind.wav";

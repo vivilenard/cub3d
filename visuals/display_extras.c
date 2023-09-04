@@ -23,10 +23,10 @@ void	display_extras(t_map *s)
 	display_lives(s);
 }
 
-color	tex_color(mlx_texture_t *tex, int x, int y)
+t_color	tex_color(mlx_texture_t *tex, int x, int y)
 {
 	int		pos;
-	color	color;
+	t_color	color;
 
 	pos = (y * tex->width + x) * tex->bytes_per_pixel;
 	color = to_rgbt(tex->pixels[pos + 0], tex->pixels[pos + 1],
@@ -34,13 +34,14 @@ color	tex_color(mlx_texture_t *tex, int x, int y)
 	return (color);
 }
 
-void	put_texture_heart(t_map *s, mlx_texture_t *tex, double x_pos, double y_pos)
+void	put_texture_heart(
+	t_map *s, mlx_texture_t *tex, double x_pos, double y_pos)
 {
 	double		tex_step;
 	int			tex_radius;
 	double		x_count;
 	double		y_count;
-	color		color;
+	t_color		color;
 
 	tex_radius = WIDTH / 35;
 	tex_step = 1.0 * tex->height / tex_radius;
@@ -61,7 +62,6 @@ void	put_texture_heart(t_map *s, mlx_texture_t *tex, double x_pos, double y_pos)
 		y_count++;
 	}
 }
-
 
 void	display_lives(t_map *s)
 {

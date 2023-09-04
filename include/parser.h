@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:07:39 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/09/01 17:53:01 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/09/04 13:17:33 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 # include "cub3d.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-typedef struct s_color
+typedef struct s_color_set
 {
 	bool		is_color;
 	uint32_t	color;
-}	t_color;
+}	t_color_set;
 
 typedef struct s_textures
 {
@@ -41,8 +41,8 @@ typedef struct s_map_settings
 	int				height;
 	int				*all_width;
 	int				width_capacity;
-	t_color			floor;
-	t_color			ceiling;
+	t_color_set		floor;
+	t_color_set		ceiling;
 	t_textures		textures;
 	int				identifier;
 	int				player;
@@ -106,30 +106,3 @@ int			free_if_error(t_map_set *map_set);
 int			print_malloc_failed(void);
 
 #endif
-
-/*
-- remove gun texture
-- check why textures are invalid
-
-commit
-"fix leaks"
-
-
-		{
-			"name": "cub3D",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/cub3d/cub3d",
-			"args": ["maps/pars_test.cub"],
-			"cwd": "${workspaceFolder}/cub3d",
-			"MIMode": "lldb"
-		},
-*/
-
-// struct s_dynamic_array
-// {
-// 	void	*bufffer;
-// 	int		size;
-// 	int		capacity;
-// 	int		item_size;
-// };

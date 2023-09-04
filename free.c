@@ -6,13 +6,12 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:25:25 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/09/01 18:26:04 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:13:27 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/display.h"
 #include "include/parser.h"
-
 
 void	free_texture(t_map *map)
 {

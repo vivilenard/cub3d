@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   hook_keys.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/31 18:32:09 by karllenard       ###   ########.fr       */
+/*   Updated: 2023/09/04 13:09:25 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/display.h"
 

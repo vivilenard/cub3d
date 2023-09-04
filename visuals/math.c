@@ -10,7 +10,7 @@ int	calculate_lineheight(double distance)
 	return ((int)((HEIGTH / distance) * (90 / VIEW_ANGLE)));
 }
 
-color	to_rgbt(int r, int g, int b, int t)
+t_color	to_rgbt(int r, int g, int b, int t)
 {
 	return ((r << 24) + (g << 16) + (b << 8) + t);
 }

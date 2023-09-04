@@ -2,7 +2,6 @@
 
 # define DISPLAY_H
 
-
 # define RED_RGBT 0xff3800ff
 # define BLUE_RGBT 0xa7c5f9ff
 # define GREEN_RGBT 0x9acd32ff
@@ -12,33 +11,33 @@
 
 typedef struct s_character
 {
-	mlx_texture_t *tex;
-	int		index;
-	int		lives;
-	double	x;
-	double	y;
-	double	a;
-	double	dx;
-	double	dy;
-	double	radius;
-	double	dist;
-	bool	visible;
-	int		in_view;
-	double	a_left;
-	double	a_right;
-	double	orth_x;
-	double	orth_y;
-	double	left_x;
-	double	left_y;
-	double	right_x;
-	double	right_y;
-	double	pix_start;
-	double	pix_end;
-	int		px;
-	int		lineheight;
-	double	ray_a;
-	int		tex_iter;
-} t_character;
+	mlx_texture_t	*tex;
+	int				index;
+	int				lives;
+	double			x;
+	double			y;
+	double			a;
+	double			dx;
+	double			dy;
+	double			radius;
+	double			dist;
+	bool			visible;
+	int				in_view;
+	double			a_left;
+	double			a_right;
+	double			orth_x;
+	double			orth_y;
+	double			left_x;
+	double			left_y;
+	double			right_x;
+	double			right_y;
+	double			pix_start;
+	double			pix_end;
+	int				px;
+	int				lineheight;
+	double			ray_a;
+	int				tex_iter;
+}	t_character;
 
 typedef struct s_ray
 {
@@ -73,7 +72,7 @@ typedef enum e_wallside
 //utils
 void		full_exit(t_map *s);
 int			scan_coordinates(t_map *s, int (*f)(t_map *s, int x, int y));
-color		to_rgbt(int r, int g, int b, int t);
+t_color		to_rgbt(int r, int g, int b, int t);
 void		print_cross(t_map *s, float size, int color);
 void		door_mov(t_map *s);
 
@@ -89,7 +88,6 @@ void		print_square(t_map *s, int x, int y, uint32_t color);
 void		to_square(t_map *s, double x, double y, double p_radius);
 void		to_red_square(t_map *s, double x, double y, double p_radius);
 
-
 //key_bindings
 void		check_keys(t_map *s);
 void		move_player_vertical(t_map *s, double step);
@@ -99,7 +97,8 @@ void		change_direction_keys(t_map *s, double mv);
 void		adjust_view(t_map *s, int x, double mv);
 int			collide(t_map_char **co, int x, int y);
 void		key_bindings(mlx_key_data_t keydata, void *p);
-void		mouse_bindings(mouse_key_t button, action_t action, modifier_key_t mods, void *p);
+void		mouse_bindings(mouse_key_t button, action_t action,
+				modifier_key_t mods, void *p);
 
 //raycaster
 void		raycaster(t_map *s, t_ray *ray);
@@ -121,7 +120,7 @@ void		draw_ceiling(t_map *s, int p_end, int px);
 void		draw_floor(t_map *s, int p_start, int px);
 
 //enemies
-t_character	*create_enemy();
+t_character	*create_enemy(void);
 int			position_enemy(t_map *s, int x, int y);
 bool		continue_walk(t_map_char **co, int x, int y);
 void		get_enemies(t_map *s);
@@ -146,18 +145,19 @@ void		color_full_screen(mlx_image_t *img, uint32_t color);
 //attacks
 int			get_shot(t_map *s);
 int			attack_player(t_map *s, t_character *e);
-int 		die(t_map *s);
+int			die(t_map *s);
 
 //display_extras
 void		display_extras(t_map *s);
-color		tex_color(mlx_texture_t *tex, int x, int y);
+t_color		tex_color(mlx_texture_t *tex, int x, int y);
 //void		put_texture(t_map *s, mlx_texture_t *tex, double x_pos, double y_pos);
 void		display_lives(t_map *s);
 void		minimap_perspective(t_map *s, t_ray *ray);
 int			print_wall(t_map *s, int x, int y);
 void		draw_player(t_map	*s);
 void		door_inaccessible(t_ray *ray);
-void	put_texture_heart(t_map *s, mlx_texture_t *tex, double x_pos, double y_pos);
-void	put_texture_gun(t_map *s);
+void		put_texture_heart(
+				t_map *s, mlx_texture_t *tex, double x_pos, double y_pos);
+void		put_texture_gun(t_map *s);
 
 #endif

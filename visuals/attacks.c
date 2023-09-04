@@ -38,10 +38,10 @@ int	get_shot(t_map *s)
 
 void	put_texture(t_map *s, mlx_texture_t *tex, int size)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 	double	tex_step;
-	color	color;
+	t_color	color;
 
 	tex_step = 1.0 * tex->height / size;
 	x = 0;
@@ -61,8 +61,8 @@ void	put_texture(t_map *s, mlx_texture_t *tex, int size)
 
 int	die(t_map *s)
 {
-	mlx_image_t *i;
-	mlx_texture_t *tex;
+	mlx_image_t		*i;
+	mlx_texture_t	*tex;
 
 	if (s->lives > 0)
 		return (0);
