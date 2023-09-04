@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:36:13 by vlenard           #+#    #+#             */
-/*   Updated: 2023/09/04 14:45:10 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/04 17:43:49 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ void	raycaster(t_map *s, t_ray *ray);
 
 //texture
 int		choose_texture(t_ray *r);
-int		color_tex(t_ray *r, mlx_texture_t *tex, int py);
+int		color_tex(t_ray *r, mlx_texture_t *tex, int py, bool mirror_tex);
 void	take_texture(t_map *s, int p1, int p2, int px);
 void	draw_ceiling(t_map *s, int p_end, int px);
 void	draw_floor(t_map *s, int p_start, int px);

@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:42:22 by vlenard           #+#    #+#             */
-/*   Updated: 2023/09/04 14:42:23 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/04 18:00:59 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	choose_texture(t_ray *r)
 	return (wall_side);
 }
 
-int	color_tex(t_ray *r, mlx_texture_t *tex, int py)
+int	color_tex(t_ray *r, mlx_texture_t *tex, int py, bool mirror_tex)
 {
 	double			wall_x;
 	int				tex_x;
@@ -48,6 +48,8 @@ int	color_tex(t_ray *r, mlx_texture_t *tex, int py)
 	wall_x = r->hit_x - (int)r->hit_x;
 	if ((r->hit_side) == 0)
 		wall_x = r->hit_y - (int)r->hit_y;
+	if (mirror_tex)
+		wall_x = (1 - wall_x);
 	tex_x = (int)(wall_x * tex->width);
 	tex_y = (py - HEIGTH / 2 + r->lineheight / 2) * tex_step;
 	return (tex_color(tex, tex_x, tex_y));
@@ -58,6 +60,7 @@ void	take_texture(t_map *s, int p1, int p2, int px)
 	mlx_texture_t	*tex;
 	int				start;
 	int				end;
+	bool			mirror_tex;
 
 	start = p1;
 	end = p2;
@@ -67,9 +70,13 @@ void	take_texture(t_map *s, int p1, int p2, int px)
 		end = p1;
 	}
 	tex = s->tex[choose_texture(s->ray)];
+	mirror_tex = false;
+	if (tex == s->tex[SOUTH_T] || tex == s->tex[EAST_T])
+		mirror_tex = true;
 	while (start < end)
 	{
-		mlx_put_pixel(s->img, px, start, color_tex(s->ray, tex, start));
+		mlx_put_pixel(s->img, px, start,
+			color_tex(s->ray, tex, start, mirror_tex));
 		start++;
 	}
 }

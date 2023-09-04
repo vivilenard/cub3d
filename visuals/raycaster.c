@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:42:18 by vlenard           #+#    #+#             */
-/*   Updated: 2023/09/04 14:46:59 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/04 17:36:52 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	draw_stripe(t_map *s, t_ray *r, double dist, int px)
 		drawstart = 0;
 	drawend = HEIGTH / 2 + r->lineheight / 2;
 	if (drawend >= HEIGTH)
-		drawend = HEIGTH - 1;
+		drawend = HEIGTH;
 	draw_ceiling(s, drawstart - 1, px);
 	take_texture(s, drawstart, drawend, px);
 	draw_floor(s, drawend - 1, px);
