@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:34:49 by vlenard           #+#    #+#             */
-/*   Updated: 2023/09/04 15:00:16 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/04 15:48:25 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,5 @@ typedef struct s_frame
 void	free_texture(t_map *map);
 void	free_map(t_map *map);
 void	full_exit(t_map *s);
-void	print_map(t_map *map);
 
 #endif
