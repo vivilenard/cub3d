@@ -1,0 +1,15 @@
+NO textures/red.png
+
+EA          textures/blue.png
+SO textures/green.png
+F 220,100,0
+
+C       0,0,255
+WE textures/pink.png
+
+111111
+100001
+1011X1
+1N11X1
+11XXX1
+111111
