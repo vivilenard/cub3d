@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:58:43 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/09/01 17:50:36 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:37:04 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_map_set(t_map_set *map_set)
 	int	i;
 
 	i = 0;
-	while (i != map_set->height + 1)
+	while (i != map_set->height)
 	{
 		free(map_set->map[i]);
 		i++;

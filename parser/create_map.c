@@ -6,7 +6,7 @@
 /*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 17:23:15 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/09/01 17:25:12 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:38:12 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	create_map(t_map_set *map_set, char *line)
 		map_set->component = convert_char(
 				map_set, line[cur_width], cur_width);
 		if (map_set->component == ERROR)
-			return (ft_printf("Error: wrong map component\n"), EXIT_FAILURE);
+			return (free(map_set->map[map_set->height]),
+				ft_printf("Error: wrong map component\n"), EXIT_FAILURE);
 		map_set->map[map_set->height][cur_width] = map_set->component;
 		cur_width++;
 		map_set->all_width[map_set->height]++;
