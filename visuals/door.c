@@ -33,4 +33,5 @@ void	door_mov(t_map *s)
 		s->co[s->ray->door_y][s->ray->door_x] = OPENED_DOOR;
 	else if (s->co[s->ray->door_y][s->ray->door_x] == OPENED_DOOR)
 		s->co[s->ray->door_y][s->ray->door_x] = CLOSED_DOOR;
+	system("afplay sounds/door_lock.wav&");
 }

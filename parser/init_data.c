@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:16:18 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/09/01 18:52:44 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/09/03 14:25:51 by karllenard       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	set_textures(t_map_set *map_set, t_map *map)
 	map->tex[HEART_RED_T] = mlx_load_png("./textures/heart_red.png");
 	map->tex[HEART_BLACK_T] = mlx_load_png("./textures/heart_black.png");
 	map->tex[GUN_T] = mlx_load_png("./textures/gun.png");
+	map->gun_img = mlx_texture_to_image(map->mlx, map->tex[8]);
 	while (i != N_TEX)
 	{
 		if (map->tex[i] == NULL)

@@ -151,12 +151,13 @@ int 		die(t_map *s);
 //display_extras
 void		display_extras(t_map *s);
 color		tex_color(mlx_texture_t *tex, int x, int y);
-void		put_texture(t_map *s, mlx_texture_t *tex, double x_pos, double y_pos);
+//void		put_texture(t_map *s, mlx_texture_t *tex, double x_pos, double y_pos);
 void		display_lives(t_map *s);
 void		minimap_perspective(t_map *s, t_ray *ray);
 int			print_wall(t_map *s, int x, int y);
 void		draw_player(t_map	*s);
 void		door_inaccessible(t_ray *ray);
-
+void	put_texture_heart(t_map *s, mlx_texture_t *tex, double x_pos, double y_pos);
+void	put_texture_gun(t_map *s);
 
 #endif

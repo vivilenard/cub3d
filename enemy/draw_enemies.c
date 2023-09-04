@@ -31,7 +31,7 @@ int	raycast_enemy(t_map *s, t_character *e)
 {
 	double	ray_a;
 
-	if (e->visible == false)
+	if (e->visible == false || !e->lives)
 		return (0);
 	ray_a = s->ray->ra;
 	if (ray_a < e->a_right - 2 * PI)

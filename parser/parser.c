@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:58:58 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/09/01 18:42:57 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/09/02 19:44:48 by karllenard       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	fill_in_t_map(t_map_set *map_set, t_map *map)
 	map->ceiling = map_set->ceiling.color;
 	map->co[map_set->player_y][map_set->player_x] = SPACE;
 	map->lives = LIVES;
+	map->shoot = false;
+
 }
 
 int	file_path_check(char *argv)

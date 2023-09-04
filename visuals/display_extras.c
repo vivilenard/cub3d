@@ -1,8 +1,25 @@
 #include "../include/display.h"
 
+void	put_texture_gun(t_map *s)
+{
+	mlx_image_to_window(s->mlx, s->gun_img, 0, HEIGTH * 0.25);
+	mlx_resize_image(s->gun_img, (int)(1.05 * WIDTH), (int)(1.0 * HEIGTH));
+}
+
 void	display_extras(t_map *s)
 {
-	print_cross(s, 0.1, 0xFFFFFFAA);
+	int	i;
+
+	i = 0;
+	while (s->enemy[i])
+	{
+		if (s->enemy[i]->in_view && s->enemy[i]->lives)
+		{
+			print_cross(s, 0.07, 0xFFFFFF88);
+			break ;
+		}
+		i++;
+	}
 	display_lives(s);
 }
 
@@ -25,7 +42,7 @@ void	put_texture_heart(t_map *s, mlx_texture_t *tex, double x_pos, double y_pos)
 	double		y_count;
 	color		color;
 
-	tex_radius = 30;
+	tex_radius = WIDTH / 35;
 	tex_step = 1.0 * tex->height / tex_radius;
 	x_count = 0;
 	y_count = 0;
@@ -45,12 +62,13 @@ void	put_texture_heart(t_map *s, mlx_texture_t *tex, double x_pos, double y_pos)
 	}
 }
 
+
 void	display_lives(t_map *s)
 {
 	double				x_pos;
 	int					i;
 
-	x_pos = 0.97;
+	x_pos = 0.96;
 	i = 0;
 	while (i < LIVES && i < 15)
 	{
@@ -58,7 +76,7 @@ void	display_lives(t_map *s)
 			put_texture_heart(s, s->tex[HEART_RED_T], x_pos, 0.01);
 		else
 			put_texture_heart(s, s->tex[HEART_BLACK_T], x_pos, 0.01);
-		x_pos -= 0.03;
+		x_pos -= 0.035;
 		i++;
 	}
 }

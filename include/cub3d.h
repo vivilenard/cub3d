@@ -19,14 +19,14 @@ This header file consist only shared structs.
 
 # define BACKGROUND_MUSIC false
 # define MAX_ENEMIES 100
-# define LIVES 10
+# define LIVES 7
 # define WALKING_SPEED 5
 # define SIDEWALK_SPEED 3
 # define CHANGE_DIRECTION 3
 # define E_START_WALK_DIST 5
 # define WIDTH 1200
-# define HEIGTH 600
-# define PI 3.141592653589793238462643383279502884197
+# define HEIGTH 800
+# define PI 3.1415926
 # define ENEMY_LIVES 3
 # define N_TEX 9
 # define VIEW_ANGLE 45
@@ -96,6 +96,7 @@ typedef struct s_map
 	bool				shoot;
 	int					lives;
 	int					pid;
+	mlx_image_t			*gun_img;
 }	t_map;
 
 typedef struct s_frame

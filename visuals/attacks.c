@@ -16,13 +16,13 @@ int	get_shot(t_map *s)
 
 	mv = 0.05;
 	lives_tmp = s->lives;
-	if (s->frame->counter % 70 == 0)
+	if (s->frame->counter % 50 == 0)
 		loop_enemies(s, attack_player);
 	if (lives_tmp <= s->lives && !s->frame->n_backstep)
 		return (0);
 	if (lives_tmp > s->lives)
 	{
-		system("afplay sounds/Kick.wav&");
+		system("afplay sounds/Snare.wav&");
 		color_full_screen(s->img, 0xFF0000FF);
 		s->frame->n_backstep = 10;
 		return (1);
@@ -36,12 +36,46 @@ int	get_shot(t_map *s)
 	return (0);
 }
 
+void	put_texture(t_map *s, mlx_texture_t *tex, int size)
+{
+	int	x;
+	int	y;
+	double	tex_step;
+	color	color;
+
+	tex_step = 1.0 * tex->height / size;
+	x = 0;
+	while (x < size && size <= WIDTH)
+	{
+		y = 0;
+		while (y < size && size <= HEIGTH)
+		{
+			color = tex_color(tex, (int)(x * tex_step), (int)(y * tex_step));
+			if (color)
+				mlx_put_pixel(s->img, x + (WIDTH / 2 - size / 2), y, color);
+			y++;
+		}
+		x++;
+	}
+}
+
 int	die(t_map *s)
 {
+	mlx_image_t *i;
+	mlx_texture_t *tex;
+
 	if (s->lives > 0)
 		return (0);
 	mlx_delete_image(s->mlx, s->minimap);
+	s->gun_img->enabled = false;
 	color_full_screen(s->img, 0x00000000);
+	tex = mlx_load_png("./textures/sad_smile.png");
+	if (!tex)
+		return (0);
+	i = mlx_texture_to_image(s->mlx, tex);
+	mlx_delete_texture(tex);
+	mlx_image_to_window(s->mlx, i, WIDTH / 2 - HEIGTH / 2, 0);
+	mlx_resize_image(i, HEIGTH, HEIGTH);
 	return (1);
 }
 

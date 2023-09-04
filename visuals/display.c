@@ -15,6 +15,7 @@ void	play_music(t_map *s)
 	{
 		if (!execve(path, cmd, NULL))
 		{
+			perror("Background Music process");
 			free(cmd);
 			full_exit(s); //free all and exit child
 		}
@@ -25,7 +26,6 @@ int	display(t_map *s)
 {
 	if (setup_game(s))
 		full_exit(s);
-	s->shoot = false;
 	mlx_key_hook(s->mlx, key_bindings, s);
 	mlx_mouse_hook(s->mlx, mouse_bindings, s);
 	if (BACKGROUND_MUSIC)
@@ -46,6 +46,7 @@ int	setup_game(t_map *s)
 	get_enemies(s);
 	if (!setup_minimap(s))
 		return (3);
+	put_texture_gun(s);
 	mlx_set_cursor_mode(s->mlx, MLX_MOUSE_HIDDEN);
 	return (0);
 }

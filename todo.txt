@@ -1,2 +1,1 @@
-- make enemies smaller
-- free everything that was allocated
+- check leaks, also in child
