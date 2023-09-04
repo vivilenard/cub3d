@@ -1,58 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_enemies.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/04 14:56:14 by vlenard           #+#    #+#             */
+/*   Updated: 2023/09/04 14:56:52 by vlenard          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/display.h"
-
-void	to_vert_line(t_map *s, int p1, int p2, int px, t_character *e)
-{
-	int	color;
-	int	start = p1;
-	int	end = p2;
-
-	color = 0xff0000ff;
-	if (e->index == 1)
-		color = 0xffff00ff;
-	if (e->index == 2)
-		color = 0xa7c5f9ff;
-	if (p2 < p1)
-	{
-		start = p2;
-		end = p1;
-	}
-	if (start < 0)
-		start = 0;
-	if (end >= HEIGTH)
-		end = HEIGTH - 1;
-	while (start < end)
-	{
-		mlx_put_pixel(s->img, px, start, color);
-		start++;
-	}
-}
-
-int	raycast_enemy(t_map *s, t_character *e)
-{
-	double	ray_a;
-
-	if (e->visible == false || !e->lives)
-		return (0);
-	ray_a = s->ray->ra;
-	if (ray_a < e->a_right - 2 * PI)
-		ray_a += 2 * PI;
-	if (e->in_view == false && ((ray_a > e->a_left && ray_a < e->a_right)
-		|| ((e->a_left > e->a_right) && ((ray_a < 2 * PI && ray_a >= e->a_left)
-			|| (ray_a > 0 && ray_a <= e->a_right)))))
-	{
-		e->in_view = true;
-		e->pix_start = s->ray->x_px;
-	}
-	else if (e->in_view == true && ((((e->a_left < e->a_right) && (((ray_a > e->a_right) || ray_a < e->a_left))))
-		|| ((e->a_left > e->a_right) && (((ray_a < e->a_left && ray_a > e->a_right))))))
-	{
-		e->in_view = 2;
-		e->pix_end = s->ray->x_px;
-	}
-	if (s->ray->x_px == WIDTH / 2 && e->in_view == 1 && s->shoot == true)
-		shoot_enemy(s, e);
-	return (1);
-}
 
 t_color	color_enemy_tex(t_character *e, int py)
 {
@@ -60,28 +18,26 @@ t_color	color_enemy_tex(t_character *e, int py)
 	int			tex_y;
 	double		tex_step;
 	int			pos;
-	int			color;
 	double		x_pos;
-	int			tex_width;
 
 	if (e->ray_a < e->a_right - 2 * PI)
 		e->ray_a += 2 * PI;
 	if (!e->tex)
 		perror("no enemy texture");
-	tex_width = e->tex->width;
 	tex_step = 1.0 * e->tex->height / e->lineheight;
 	x_pos = (e->ray_a - e->a_left) / (e->a_right - e->a_left);
-	tex_x = e->tex_iter * (tex_width / E_TEX_ITER) + (int)(x_pos * (tex_width / E_TEX_ITER)); //go through parts of texture
+	tex_x = e->tex_iter * (e->tex->width / E_TEX_ITER)
+		+ (int)(x_pos * (e->tex->width / E_TEX_ITER));
 	tex_y = ((py - HEIGTH / 2 + e->lineheight / 2) * tex_step);
 	pos = ((tex_y * e->tex->width + tex_x) * e->tex->bytes_per_pixel);
-	color = to_rgbt(e->tex->pixels[pos + 0], e->tex->pixels[pos + 1],
-		e->tex->pixels[pos + 2], e->tex->pixels[pos + 3]);
-	return (color);
+	return (to_rgbt(e->tex->pixels[pos + 0], e->tex->pixels[pos + 1],
+			e->tex->pixels[pos + 2], e->tex->pixels[pos + 3]));
 }
 
 void	draw_enemy_tex(t_map *s, int p1, int p2, t_character *e)
 {
 	t_color	tex_color;
+
 	if (p1 > p2)
 	{
 		perror("drawing enemy texture in wrong direction");
@@ -100,7 +56,7 @@ void	draw_enemy_tex(t_map *s, int p1, int p2, t_character *e)
 	}
 }
 
-int	draw_enemy(t_map *s, t_character *e)
+int	draw_enemy(t_map *s, t_character *e, double ray_angle)
 {
 	int		p1;
 	int		p2;
@@ -117,13 +73,12 @@ int	draw_enemy(t_map *s, t_character *e)
 	while (e->px >= 0 && (e->px < e->pix_end && e->px < WIDTH))
 	{
 		pa = s->pa;
-		if (s->pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE <= 0)
+		if (s->pa - ray_angle * WIDTH / 2 + e->px * ray_angle <= 0)
 			pa += 2 * PI;
-		else if (s->pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE > 2 * PI)
+		else if (s->pa - ray_angle * WIDTH / 2 + e->px * ray_angle > 2 * PI)
 			pa -= 2 * PI;
-		e->ray_a = pa - RAY_ANGLE * WIDTH / 2 + e->px * RAY_ANGLE;
+		e->ray_a = pa - ray_angle * WIDTH / 2 + e->px * ray_angle;
 		draw_enemy_tex(s, p1, p2, e);
-		//to_vert_line(s, p1, p2, e->px, e);
 		e->px++;
 	}
 	return (1);
@@ -147,8 +102,7 @@ void	draw_enemies(t_map *s)
 		if (e_index < 0)
 			break ;
 		if (s->enemy[e_index]->lives > 0)
-			draw_enemy(s, s->enemy[e_index]);
+			draw_enemy(s, s->enemy[e_index], s->ray->mv_angle);
 		dist[e_index] = -1;
-		//stops drawing at distance 0.6
 	}
 }

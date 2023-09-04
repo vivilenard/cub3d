@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:36:13 by vlenard           #+#    #+#             */
-/*   Updated: 2023/09/04 14:36:14 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/04 14:45:10 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_character
 
 typedef struct s_ray
 {
+	double			mv_angle;
 	int				x_px;
 	double			ra;
 	double			rdx;

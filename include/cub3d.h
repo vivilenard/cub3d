@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:34:49 by vlenard           #+#    #+#             */
-/*   Updated: 2023/09/04 14:34:56 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/04 15:00:16 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ This header file consist only shared structs.
 # include <execinfo.h>
 # include <signal.h>
 
-# define BACKGROUND_MUSIC false
+# define BACKGROUND_MUSIC 0
 # define MAX_ENEMIES 100
 # define LIVES 7
 # define WALKING_SPEED 5
@@ -41,7 +41,6 @@ This header file consist only shared structs.
 # define ENEMY_LIVES 3
 # define N_TEX 9
 # define VIEW_ANGLE 45
-# define RAY_ANGLE (VIEW_ANGLE * PI / 180 / WIDTH)
 # define E_TEX_ITER 8
 # define ENEMY_HEIGHT 0.8f
 

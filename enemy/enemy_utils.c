@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   enemy_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/04 14:59:01 by vlenard           #+#    #+#             */
+/*   Updated: 2023/09/04 14:59:50 by vlenard          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/display.h"
 
 void	loop_enemies(t_map *s, int (*f)(t_map *s, t_character *e))
@@ -16,28 +28,19 @@ bool	continue_walk(t_map_char **co, int x, int y)
 	return (true);
 }
 
-void	check_enemy(t_map *s, t_ray *r) //problem is here
+void	check_enemy(t_map *s, t_ray *r)
 {
 	int	i;
-	// int	e_x;
-	// int	e_y;
 
 	i = -1;
 	while (s->enemy[++i])
 	{
-		// e_x = (int)s->enemy[i]->x;
-		// e_y = (int)s->enemy[i]->y;
-		// if ((int)s->enemy[i]->x - s->enemy[i]->x < 0.5)
-		// 	e_x = e_x - 1;
-		// if ((int)s->enemy[i]->y - s->enemy[i]->y < 0.5)
-		// 	e_y = e_y - 1;
-		if (s->enemy[i]->lives && (r->xmap == (int)s->enemy[i]->x) && r->ymap == (int)s->enemy[i]->y)
+		if (s->enemy[i]->lives
+			&& (r->xmap == (int)s->enemy[i]->x)
+			&& r->ymap == (int)s->enemy[i]->y)
 			s->enemy[i]->visible = true;
-		//s->enemy[i]->visible = true;
 	}
 }
-
-
 
 double	angle_of_vector(double xv, double yv)
 {

@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:42:18 by vlenard           #+#    #+#             */
-/*   Updated: 2023/09/04 14:42:19 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/04 14:46:59 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,10 @@ void	raycaster(t_map *s, t_ray *ray)
 
 	px = 0;
 	door_inaccessible(ray);
+	ray->mv_angle = (VIEW_ANGLE * PI / 180 / WIDTH);
 	while (px < WIDTH)
 	{
-		ray = init_ray(s, ray, RAY_ANGLE, px);
+		ray = init_ray(s, ray, ray->mv_angle, px);
 		dda(s, ray, px);
 		check_door(s, ray, px);
 		minimap_perspective(s, ray);
