@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:16:18 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/09/04 16:40:00 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/04 16:41:37 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	check_textures(t_map *map)
 			map->tex[i] = mlx_load_png(side[i]);
 			if (map->tex[i] == NULL)
 				return (EXIT_FAILURE);
-			printf("Default texture is used%d\n");
+			printf("Default texture is used\n");
 		}
 		i++;
 	}
