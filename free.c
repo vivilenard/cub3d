@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:25:25 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/09/04 12:13:27 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:01:37 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	free_map(t_map *map)
 
 void	full_exit(t_map *s)
 {
-	//free all
 	mlx_terminate(s->mlx);
 	free_map(s);
 	free_texture(s);

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/04 15:01:43 by vlenard           #+#    #+#             */
+/*   Updated: 2023/09/04 15:01:45 by vlenard          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "include/display.h"
 #include "include/parser.h"
@@ -24,7 +35,6 @@ int	main(int argc, char **argv)
 		return (quick_exit("Error\nread() failed\n", fd));
 	if (parser(&map_set, &map, argv, fd))
 		return (close(fd), EXIT_FAILURE);
-	//print_map(&map);
 	init_frame(&map, &frame);
 	map.mlx = mlx_init(WIDTH, HEIGTH, "cub3d", false);
 	if (map.mlx == NULL)
