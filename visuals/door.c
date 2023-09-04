@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   door.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/04 14:39:56 by vlenard           #+#    #+#             */
+/*   Updated: 2023/09/04 14:42:36 by vlenard          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/display.h"
 
-void	door_inaccessible(t_ray *ray) //deleted memset
+void	door_inaccessible(t_ray *ray)
 {
 	ray->door_x = -1;
 	ray->door_y = -1;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   help_functions.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/04 14:41:59 by vlenard           #+#    #+#             */
+/*   Updated: 2023/09/04 14:42:00 by vlenard          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/display.h"
 
 int	collide(t_map_char **co, int x, int y)
@@ -33,4 +45,15 @@ int	scan_coordinates(t_map *s, int (*f)(t_map *s, int x, int y))
 		y++;
 	}
 	return (0);
+}
+
+t_color	tex_color(mlx_texture_t *tex, int x, int y)
+{
+	int		pos;
+	t_color	color;
+
+	pos = (y * tex->width + x) * tex->bytes_per_pixel;
+	color = to_rgbt(tex->pixels[pos + 0], tex->pixels[pos + 1],
+			tex->pixels[pos + 2], tex->pixels[pos + 3]);
+	return (color);
 }

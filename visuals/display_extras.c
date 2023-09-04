@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display_extras.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/04 14:40:16 by vlenard           #+#    #+#             */
+/*   Updated: 2023/09/04 14:40:52 by vlenard          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/display.h"
 
 void	put_texture_gun(t_map *s)
@@ -21,17 +33,6 @@ void	display_extras(t_map *s)
 		i++;
 	}
 	display_lives(s);
-}
-
-t_color	tex_color(mlx_texture_t *tex, int x, int y)
-{
-	int		pos;
-	t_color	color;
-
-	pos = (y * tex->width + x) * tex->bytes_per_pixel;
-	color = to_rgbt(tex->pixels[pos + 0], tex->pixels[pos + 1],
-			tex->pixels[pos + 2], tex->pixels[pos + 3]);
-	return (color);
 }
 
 void	put_texture_heart(

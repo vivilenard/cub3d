@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_keys.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/04 13:09:25 by ekulichk         ###   ########.fr       */
+/*   Created: 2023/09/04 14:42:57 by vlenard           #+#    #+#             */
+/*   Updated: 2023/09/04 14:43:02 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ void	key_bindings(mlx_key_data_t keydata, void *p)
 	{
 		if (BACKGROUND_MUSIC)
 			kill(s->pid, SIGKILL);
-		//full_exit(s); // we shouldn't terminate here
-		// should use mlx_close_window
 		mlx_close_window(s->mlx);
 	}
 	if (mlx_is_key_down(s->mlx, MLX_KEY_SPACE))

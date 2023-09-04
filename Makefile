@@ -45,7 +45,6 @@ SRC =	main.c\
 		visuals/texture.c\
 		visuals/attacks.c\
 		visuals/display_extras.c\
-		visuals/utils.c\
 		enemy/init_enemies.c\
 		enemy/calibrate_enemies.c\
 		enemy/draw_enemies.c\

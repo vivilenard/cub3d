@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hook_mouse.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/04 14:38:45 by vlenard           #+#    #+#             */
+/*   Updated: 2023/09/04 14:38:50 by vlenard          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/display.h"
 
 void	adjust_view(t_map *s, int x, double mv)
@@ -37,9 +49,8 @@ void	mouse_bindings(mouse_key_t button, action_t action,
 {
 	t_map	*s;
 
-	(void)mods; // error: parameter 'mods' set but not used [-Werror,-Wunused-but-set-parameter]
+	(void)mods;
 	s = (t_map *) p;
-	mods = 0;
 	if (action == MLX_PRESS && button == MLX_MOUSE_BUTTON_LEFT)
 	{
 		s->shoot = true;

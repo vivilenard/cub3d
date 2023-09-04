@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/04 14:41:19 by vlenard           #+#    #+#             */
+/*   Updated: 2023/09/04 14:41:26 by vlenard          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/display.h"
 
 void	play_music(t_map *s)
@@ -17,7 +29,7 @@ void	play_music(t_map *s)
 		{
 			perror("Background Music process");
 			free(cmd);
-			full_exit(s); //free all and exit child
+			full_exit(s);
 		}
 	}
 }
