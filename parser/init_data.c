@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:16:18 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/09/04 15:39:18 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:40:00 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	check_textures(t_map *map)
 			map->tex[i] = mlx_load_png(side[i]);
 			if (map->tex[i] == NULL)
 				return (EXIT_FAILURE);
-			printf("Default texture is used for %d\n", i);
+			printf("Default texture is used%d\n");
 		}
 		i++;
 	}
