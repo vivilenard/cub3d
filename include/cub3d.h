@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:34:49 by vlenard           #+#    #+#             */
-/*   Updated: 2023/09/04 15:48:25 by ekulichk         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:20:39 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ This header file consist only shared structs.
 # include <execinfo.h>
 # include <signal.h>
 
-# define BACKGROUND_MUSIC 0
+# define BACKGROUND_MUSIC 1
 # define MAX_ENEMIES 100
 # define LIVES 7
 # define WALKING_SPEED 5
