@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:34:49 by vlenard           #+#    #+#             */
-/*   Updated: 2023/09/04 18:16:48 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/04 18:45:45 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ This header file consist only shared structs.
 # include <execinfo.h>
 # include <signal.h>
 
-# define BACKGROUND_MUSIC 1
-# define SOUND 1
+# define BACKGROUND_MUSIC 0
+# define SOUND 0
 # define MAX_ENEMIES 100
-# define LIVES 7
+# define LIVES 5
 # define WALKING_SPEED 5
 # define SIDEWALK_SPEED 3
 # define CHANGE_DIRECTION 3
