@@ -65,7 +65,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) $(SAN_LDFLAG) #$(if $(DEBUG),-fsanitize=address, )
+	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(LIBFT) -o $(NAME) #$(SAN_LDFLAG) #$(if $(DEBUG),-fsanitize=address, )
 	@printf "$(GREEN)Compiled$(RESET)\n"
 
 $(LIBFT):
