@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 15:01:43 by vlenard           #+#    #+#             */
-/*   Updated: 2023/09/04 15:01:45 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/05 14:23:33 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int	main(int argc, char **argv)
 	t_map_set		map_set;
 	t_frame			frame;
 
-	if (argc < 2)
-		return (printf("Error\nexpected a map in format *.cub\n"), EXIT_FAILURE);
+	if (argc != 2)
+		return (printf("Error: expected a map in format *.cub\n"), EXIT_FAILURE);
 	fd = open(argv[1], O_RDONLY);
 	if (read(fd, NULL, 0) < 0)
-		return (quick_exit("Error\nread() failed\n", fd));
+		return (quick_exit("Error: read() failed\n", fd));
 	if (parser(&map_set, &map, argv, fd))
 		return (close(fd), EXIT_FAILURE);
 	init_frame(&map, &frame);
