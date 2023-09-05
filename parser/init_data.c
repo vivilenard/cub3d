@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekulichk <ekulichk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:16:18 by ekulichk          #+#    #+#             */
-/*   Updated: 2023/09/04 16:41:37 by vlenard          ###   ########.fr       */
+/*   Updated: 2023/09/05 12:22:38 by ekulichk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	set_textures(t_map_set *map_set, t_map *map)
 	if (check_textures(map))
 		return (free_sides(map_set), EXIT_FAILURE);
 	map->tex[DOOR_T] = mlx_load_png("./textures/door_nebula.png");
-	map->tex[ENEMY_T] = mlx_load_png("./textures/enemy_769x110.png");
+	map->tex[ENEMY_T] = mlx_load_png("./textures/enemy_group.png");
 	map->tex[HEART_RED_T] = mlx_load_png("./textures/heart_red.png");
 	map->tex[HEART_BLACK_T] = mlx_load_png("./textures/heart_black.png");
 	map->tex[GUN_T] = mlx_load_png("./textures/gun.png");
