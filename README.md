@@ -2,6 +2,12 @@
 
 https://github.com/vivilenard/cub3d/assets/78664024/a181dbbc-7bf9-4786-8760-a2d49b082012
 
+# Resources
+
+- https://lodev.org/cgtutor/raycasting.html
+- https://www.youtube.com/watch?v=gYRrGTC7GtA&t=2s&ab_channel=3DSage
+- https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/
+
 # Install
 
 ```bash
