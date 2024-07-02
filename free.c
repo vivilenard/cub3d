@@ -49,6 +49,8 @@ void	free_map(t_map *map)
 
 void	full_exit(t_map *s)
 {
+	if (BACKGROUND_MUSIC)
+		system("killall afplay");
 	mlx_terminate(s->mlx);
 	free_map(s);
 	free_texture(s);
