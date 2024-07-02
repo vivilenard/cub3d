@@ -28,8 +28,8 @@ This header file consist only shared structs.
 # include <execinfo.h>
 # include <signal.h>
 
-# define BACKGROUND_MUSIC 0
-# define SOUND 0
+# define BACKGROUND_MUSIC 1
+# define SOUND 1
 # define MAX_ENEMIES 100
 # define LIVES 5
 # define WALKING_SPEED 5
