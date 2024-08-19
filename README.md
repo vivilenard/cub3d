@@ -10,6 +10,8 @@ https://github.com/vivilenard/cub3d/assets/78664024/a181dbbc-7bf9-4786-8760-a2d4
 
 # Install
 
+Prerequesite: You need to have glfw installed.
+
 ```bash
 git clone git@github.com:vivilenard/cub3d.git
 ```
@@ -20,7 +22,7 @@ Find the MLX variable withing the Makefile, e.g.: MLX=...-L "/opt/homebrew/Cella
 
 Now replace the path behind -L with your own path leading to your glfw directory. Then make it point to the /lib directory.
 
-Finally build the MLX library by running this command:
+Finally build the MLX library by running this command in the /cub3d directory:
 ```bash
 make build
 ```
